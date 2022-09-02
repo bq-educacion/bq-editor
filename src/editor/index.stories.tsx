@@ -1,4 +1,5 @@
 import Editor from '.';
+import { extensions } from '../types.d';
 
 export default {
   title: "Editor",
@@ -8,6 +9,22 @@ export default {
 export const Default = {
   args: {
     counter: { maximumStrategy: "characters", maximum: 10 },
+    extensions: [
+      [
+        extensions.bold,
+        extensions.italic,
+        extensions.code,
+        extensions.link
+      ],
+      [
+        extensions.heading
+      ],
+      [
+        extensions.bulletList,
+        extensions.orderedList
+      ],
+    ],
+    selection: "start",
     placeholder: "Start typing..."
   },
 };
