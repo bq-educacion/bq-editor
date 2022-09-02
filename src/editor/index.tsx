@@ -1,7 +1,7 @@
-import { Remirror, useRemirror } from "@remirror/react";
+import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
-import Component from "./Component";
 import Toolbar from "./Toolbar";
+import Wrap from "./Wrap";
 import Extensions from "./extensions";
 import {
   extCounter,
@@ -80,7 +80,9 @@ const Editor: FC<IEditorProps> = ({
           handlers.some((handler) => handler !== undefined)
         ) as JSX.Element[][]}
       />
-      <Component />
+      <Wrap>
+        <EditorComponent />
+      </Wrap>
       {editorHandlers}
     </Remirror>
   );

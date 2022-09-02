@@ -9,7 +9,7 @@ export type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   secondary?: boolean;
 };
 
-const Button = styled.button<IButtonProps>`
+export default styled.button<IButtonProps>`
   background-color: ${colors.dark};
   border: 1px solid ${colors.dark};
   border-radius: 4px;
@@ -69,5 +69,3 @@ const Button = styled.button<IButtonProps>`
       }
     `}
 `;
-
-export default Button;

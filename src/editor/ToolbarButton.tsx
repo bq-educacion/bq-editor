@@ -3,7 +3,9 @@ import Button from "../button";
 import { colors } from "../theme";
 import { height } from "./Toolbar";
 
-const ToolbarButton = styled(Button)`
+export default styled(Button)`
+  background-color: ${colors.grey2};
+  border: 1px solid ${colors.grey2};
   min-height: calc(${height}px - 10px);
   margin: 5px;
   min-width: calc(${height}px - 10px);
@@ -15,5 +17,3 @@ const ToolbarButton = styled(Button)`
     color: ${colors.orange2};
   }
 `;
-
-export default ToolbarButton;
