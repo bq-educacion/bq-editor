@@ -1,5 +1,6 @@
 {
-  "name": "editor",
+  "name": "storybq",
+  "description": "BQ component library",
   "version": "0.0.1",
   "author": "Carmen Domínguez Campillo",
   "license": "ISC",
