@@ -1,19 +1,20 @@
 import { useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { OrderedListExtension } from "remirror/extensions";
-import { Button } from "../basics";
-import { extensions, ExtensionType } from "../types.d";
+import { extensions, ExtensionType } from "../../types.d";
+import ToolbarButton from "../ToolbarButton";
 
 const OrderedListButton: FC = () => {
   const { toggleOrderedList } = useCommands();
 
   return (
-    <Button
+    <ToolbarButton
       onClick={() => toggleOrderedList()}
       disabled={!toggleOrderedList.enabled()}
+      secondary
     >
       toggleOrderedList
-    </Button>
+    </ToolbarButton>
   );
 };
 

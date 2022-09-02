@@ -2,8 +2,8 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { HeadingExtension } from "remirror/extensions";
-import { Button } from "../basics";
-import { extensions, ExtensionType } from "../types.d";
+import { extensions, ExtensionType } from "../../types.d";
+import ToolbarButton from "../ToolbarButton";
 
 const HeadingButtons: FC = () => {
   const active = useActive(true);
@@ -12,7 +12,7 @@ const HeadingButtons: FC = () => {
   return (
     <>
       {[1, 2, 3, 4, 5, 6].map((level) => (
-        <Button
+        <ToolbarButton
           className={classNames({ active: active.heading({ level }) })}
           disabled={!toggleHeading.enabled({ level })}
           onClick={() => {
@@ -20,9 +20,10 @@ const HeadingButtons: FC = () => {
             focus();
           }}
           key={level}
+          secondary
         >
           H{level}
-        </Button>
+        </ToolbarButton>
       ))}
     </>
   );

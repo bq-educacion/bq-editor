@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import React, { FC } from "react";
 import { colors } from "../theme";
 
-interface IEditorToolbarProps {
+interface IToolbarProps {
   handlers: JSX.Element[][];
 }
 
-const EditorToolbar: FC<IEditorToolbarProps> = ({ handlers }) => (
+const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
   <Wrap>
     {handlers.map((elements, index) => (
       <div key={index}>
@@ -17,9 +17,9 @@ const EditorToolbar: FC<IEditorToolbarProps> = ({ handlers }) => (
   </Wrap>
 );
 
-const height = 40; // px
+export const height = 40; // px
 
-export default EditorToolbar;
+export default Toolbar;
 
 const Divider = styled.div`
   border-right: 1px solid ${colors.grey2};
@@ -42,16 +42,14 @@ const Wrap = styled.div`
     display: flex;
     flex-wrap: wrap;
 
-    > button,
-    > select,
-    > div > button,
-    > div > select {
+    button, select {
       min-height: calc(${height}px - 10px);
       margin: 5px;
       min-width: calc(${height}px - 10px);
       padding: 5px;
 
       &.active {
+
       }
     }
   }

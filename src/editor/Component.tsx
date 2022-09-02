@@ -1,15 +1,15 @@
 import styled from "@emotion/styled";
-import { EditorComponent as RemirrorEditorComponent } from "@remirror/react";
+import { EditorComponent } from "@remirror/react";
 import React, { FC } from "react";
 import { colors } from "../theme";
 
-const EditorComponent: FC = () => (
+const Component: FC = () => (
   <Wrap>
-    <RemirrorEditorComponent />
+    <EditorComponent />
   </Wrap>
 );
 
-export default EditorComponent;
+export default Component;
 
 const Wrap = styled.div`
   .remirror-editor-wrapper > div {

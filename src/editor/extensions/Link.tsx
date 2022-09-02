@@ -18,9 +18,10 @@ import React, {
   useState,
 } from "react";
 import { LinkExtension } from "remirror/extensions";
-import { Button } from "../basics";
-import { colors } from "../theme";
-import { extensions, ExtensionType } from "../types.d";
+import Button from "../../button";
+import { colors } from "../../theme";
+import { extensions, ExtensionType } from "../../types.d";
+import ToolbarButton from "../ToolbarButton";
 
 function useFloatingLinkState() {
   const { link } = useAttrs();
@@ -79,15 +80,16 @@ const FloatingLinkButton: FC = () => {
 
   return (
     <div ref={ref}>
-      <Button
+      <ToolbarButton
         className={classNames({ active: showModal || active.link() })}
         onClick={() => {
           setShowModal(!showModal);
           focus();
         }}
+        secondary
       >
         Link
-      </Button>
+      </ToolbarButton>
       {showModal && (
         <Modal>
           <div>

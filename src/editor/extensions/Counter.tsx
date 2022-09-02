@@ -1,8 +1,8 @@
 import { CountExtension } from "@remirror/extension-count";
 import { useHelpers } from "@remirror/react";
 import React, { FC } from "react";
-import { colors } from "../theme";
-import { extensions, ExtensionType } from "../types.d";
+import { colors } from "../../theme";
+import { extensions, ExtensionType } from "../../types.d";
 
 interface ICounterProps {
   maximumStrategy: "characters" | "words";

@@ -65,6 +65,7 @@ const Button = styled.button<IButtonProps>`
       &:hover {
         background-color: ${colors.white};
         border: 1px solid ${colors.dark};
+        color: ${colors.dark};
       }
     `}
 `;

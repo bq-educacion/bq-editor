@@ -1,8 +1,8 @@
 import { Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
-import EditorComponent from "./EditorComponent";
-import EditorToolbar from "./EditorToolbar";
-import Extensions from "../extensions";
+import Component from "./Component";
+import Toolbar from "./Toolbar";
+import Extensions from "./extensions";
 import {
   extCounter,
   extensions,
@@ -18,7 +18,7 @@ type StringHandler = "default" | "html" | "markdown";
 // Place the cursor at the start of the document. This can also be set to `end`, `all` or a numbered position.
 type Selection = "start" | "end" | "all" | number;
 
-export type IEditorProps = {
+type IEditorProps = {
   counter?: { maximumStrategy?: "characters" | "words"; maximum: number };
   extensions?: extensions[][];
   initialContent?: string;
@@ -75,12 +75,12 @@ const Editor: FC<IEditorProps> = ({
 
   return (
     <Remirror manager={manager} initialContent={state}>
-      <EditorToolbar
+      <Toolbar
         handlers={toolbarHandlers.filter((handlers) =>
           handlers.some((handler) => handler !== undefined)
         ) as JSX.Element[][]}
       />
-      <EditorComponent />
+      <Component />
       {editorHandlers}
     </Remirror>
   );

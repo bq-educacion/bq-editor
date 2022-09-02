@@ -2,24 +2,25 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { ItalicExtension } from "remirror/extensions";
-import { Button } from "../basics";
-import { extensions, ExtensionType } from "../types.d";
+import { extensions, ExtensionType } from "../../types.d";
+import ToolbarButton from "../ToolbarButton";
 
 const ItalicButton: FC = () => {
   const active = useActive();
   const { toggleItalic } = useCommands();
 
   return (
-    <Button
+    <ToolbarButton
       className={classNames({ active: active.italic() })}
       disabled={!toggleItalic.enabled()}
       onClick={() => {
         toggleItalic();
         focus();
       }}
+      secondary
     >
       I
-    </Button>
+    </ToolbarButton>
   );
 };
 
