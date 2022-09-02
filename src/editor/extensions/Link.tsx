@@ -134,7 +134,7 @@ const FloatingLinkButton: FC = () => {
 };
 
 const Link: ExtensionType = {
-  extensionFunction: { func: LinkExtension, args: { autoLink: true } },
+  extensionFunction: LinkExtension,
   toolbarHandler: FloatingLinkButton,
   name: extensions.link,
 };

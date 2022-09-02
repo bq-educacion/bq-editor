@@ -6,13 +6,22 @@ export default {
 };
 
 export const Default = {
-  args: {},
+  args: {
+    counter: { maximumStrategy: "characters", maximum: 10 },
+    placeholder: "Start typing..."
+  },
 };
 
-// export const Html = {
+export const Html = {
+  args: {
+    initialContent: "<p>I love <b>HTML</b></p>",
+    stringHandler: "html"
+  },
+};
+
+// export const Markdown = {
 //   args: {
-//     counter: { maximum: 10 },
-//     initialContent: "<p>I love <b>Remirror</b></p>",
-//     stringHandler: "html"
-//   }
+//     initialContent: "**Markdown** content is the _best_",
+//     stringHandler: "markdown"
+//   },
 // };

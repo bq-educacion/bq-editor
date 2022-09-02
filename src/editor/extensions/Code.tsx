@@ -25,7 +25,7 @@ const CodeButton: FC = () => {
 };
 
 const Code: ExtensionType = {
-  extensionFunction: { func: CodeExtension },
+  extensionFunction: CodeExtension,
   toolbarHandler: CodeButton,
   name: extensions.code,
 };

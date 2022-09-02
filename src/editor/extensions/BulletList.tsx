@@ -19,7 +19,7 @@ const BulletListButton: FC = () => {
 };
 
 const BulletList: ExtensionType = {
-  extensionFunction: { func: BulletListExtension },
+  extensionFunction: BulletListExtension,
   toolbarHandler: BulletListButton,
   name: extensions.bulletList,
 };

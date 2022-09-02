@@ -19,7 +19,7 @@ const OrderedListButton: FC = () => {
 };
 
 const OrderedList: ExtensionType = {
-  extensionFunction: { func: OrderedListExtension },
+  extensionFunction: OrderedListExtension,
   toolbarHandler: OrderedListButton,
   name: extensions.orderedList,
 };

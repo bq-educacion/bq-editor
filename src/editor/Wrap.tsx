@@ -8,10 +8,22 @@ export default styled.div`
     border: 1px solid ${colors.grey4};
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    border-top: none;
     color: ${colors.dark};
     outline: none;
-    padding: 1px 10px;
+    padding: 10px;
     white-space: pre-wrap;
-    border-top: none;
+    min-height: 100px;
+
+    p.remirror-is-empty:before {
+      content: attr(data-placeholder);
+      color: ${colors.grey2};
+      display: inline-block;
+      position: absolute;
+    }
+
+    p {
+      margin: 0;
+    }
   }
 `;

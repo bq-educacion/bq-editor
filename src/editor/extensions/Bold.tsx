@@ -25,7 +25,7 @@ const BoldButton: FC = () => {
 };
 
 const Bold: ExtensionType = {
-  extensionFunction: { func: BoldExtension },
+  extensionFunction: BoldExtension,
   toolbarHandler: BoldButton,
   name: extensions.bold,
 };

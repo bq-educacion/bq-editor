@@ -30,7 +30,7 @@ const CounterComponent: FC<ICounterProps> = ({
 };
 
 const Counter: ExtensionType = {
-  extensionFunction: { func: CountExtension },
+  extensionFunction: CountExtension,
   editorHandler: CounterComponent,
   name: extensions.counter,
 };

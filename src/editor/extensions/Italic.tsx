@@ -25,7 +25,7 @@ const ItalicButton: FC = () => {
 };
 
 const Italic: ExtensionType = {
-  extensionFunction: { func: ItalicExtension },
+  extensionFunction: ItalicExtension,
   toolbarHandler: ItalicButton,
   name: extensions.italic,
 };

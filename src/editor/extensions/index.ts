@@ -6,12 +6,14 @@ import Heading from "./Heading";
 import Italic from "./Italic";
 import Link from "./Link";
 import OrderedList from "./OrderedList";
+import Placeholder from "./Placeholder";
+
+export { Counter, Placeholder };
 
 export default [
   Bold,
   BulletList,
   Code,
-  Counter,
   Heading,
   Italic,
   Link,

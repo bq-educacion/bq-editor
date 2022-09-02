@@ -2,14 +2,8 @@ import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
 import Toolbar from "./Toolbar";
 import Wrap from "./Wrap";
-import Extensions from "./extensions";
-import {
-  extCounter,
-  extensions,
-  extHeading,
-  extLists,
-  extRichText,
-} from "../types.d";
+import Extensions, { Counter, Placeholder } from "./extensions";
+import { extensions } from "../types.d";
 
 // Set the string handler which means the content provided will be automatically handled as html.
 // `markdown` is also available when the `MarkdownExtension` is added to the editor.
@@ -22,6 +16,7 @@ type IEditorProps = {
   counter?: { maximumStrategy?: "characters" | "words"; maximum: number };
   extensions?: extensions[][];
   initialContent?: string;
+  placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
 }
@@ -29,26 +24,36 @@ type IEditorProps = {
 const Editor: FC<IEditorProps> = ({
   counter,
   extensions: activeExtensions = [
-    extRichText,
-    extHeading,
-    extLists,
-    extCounter,
+    [
+      extensions.bold,
+      extensions.italic,
+      extensions.code,
+      extensions.link
+    ],
+    [
+      extensions.heading
+    ],
+    [
+      extensions.bulletList,
+      extensions.orderedList
+    ],
   ],
   initialContent,
+  placeholder,
   selection = "start",
   stringHandler = "default",
 }) => {
   const { manager, state } = useRemirror({
-    extensions: () =>
-      activeExtensions.flat().map((extension) => {
+    extensions: () => [
+      ...activeExtensions.flat().map((extension) => {
         const extensionFunction = Extensions.find(
           (ext) => ext.name === extension
         )?.extensionFunction;
-        const counterArgs = extension === extensions.counter && counter;
-        return extensionFunction && new extensionFunction.func(
-          extensionFunction?.args || counterArgs || {}
-        );
+        return extensionFunction && new extensionFunction;
       }),
+      ...(counter ? [new Counter.extensionFunction(counter)] : []),
+      ...(placeholder ? [new Placeholder.extensionFunction({ placeholder })] : [])
+    ],
     content: initialContent,
     selection,
     stringHandler: stringHandler === "default" ? undefined : stringHandler,

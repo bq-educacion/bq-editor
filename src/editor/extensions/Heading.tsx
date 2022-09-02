@@ -30,7 +30,7 @@ const HeadingButtons: FC = () => {
 };
 
 const Heading: ExtensionType = {
-  extensionFunction: { func: HeadingExtension },
+  extensionFunction: HeadingExtension,
   toolbarHandler: HeadingButtons,
   name: extensions.heading,
 };
