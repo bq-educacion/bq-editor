@@ -1,0 +1,60 @@
+{
+  "name": "editor",
+  "version": "0.0.1",
+  "author": "Carmen Domínguez Campillo",
+  "license": "ISC",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@remirror/extension-count": "^1.0.8",
+    "@remirror/react": "^1.0.43",
+    "classnames": "^2.3.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "remirror": "^1.0.89"
+  },
+  "peerDependencies": {
+    "@remirror/extension-count": "^1.0.8",
+    "@remirror/pm": "^2.0.0-beta.0",
+    "@remirror/react": "^1.0.43",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "remirror": "^1.0.89"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@remirror/pm": "^2.0.0-beta.0",
+    "@rollup/plugin-typescript": "^8.4.0",
+    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-interactions": "^6.5.10",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/builder-webpack4": "^6.5.10",
+    "@storybook/manager-webpack4": "^6.5.10",
+    "@storybook/react": "^6.5.10",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "babel-loader": "^8.2.5",
+    "prosemirror-model": "^1.7.1",
+    "prosemirror-state": "^1.2.3",
+    "prosemirror-view": "^1.9.10",
+    "require-from-string": "^2.0.2",
+    "rollup": "^2.79.0",
+    "rollup-plugin-dts": "^4.2.2",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.2",
+    "webpack": "^5.74.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
+}
