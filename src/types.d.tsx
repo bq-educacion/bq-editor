@@ -14,7 +14,7 @@ export enum extensions {
 
 export type ExtensionType = {
   extensionFunction: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-  toolbarHandler?: FC<any>;
-  editorHandler?: FC<any>;
+  toolbarHandler?: FC<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  editorHandler?: FC<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
   name: extensions;
 };

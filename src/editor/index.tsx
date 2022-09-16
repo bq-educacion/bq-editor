@@ -18,18 +18,22 @@ type StringHandler = "html" | "markdown";
 // Place the cursor at the start of the document. This can also be set to `end`, `all` or a numbered position.
 type Selection = "start" | "end" | "all" | number;
 
+type MaximumStrategy = "characters" | "words";
+
 export type IEditorProps = {
-  counter?: { maximumStrategy?: "characters" | "words"; maximum: number };
+  maximumStrategy?: MaximumStrategy;
+  maximum?: number;
   extensions?: extensions[][];
   initialContent?: string;
-  onChange?: (doc: any) => void;
+  onChange?: (doc: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
 }
 
 const Editor: FC<IEditorProps> = ({
-  counter,
+  maximumStrategy = "characters",
+  maximum,
   extensions: activeExtensions = [
     [
       extensions.bold,
@@ -59,7 +63,7 @@ const Editor: FC<IEditorProps> = ({
         )?.extensionFunction;
         return extensionFunction && new extensionFunction;
       }),
-      ...(counter ? [new Counter.extensionFunction(counter)] : []),
+      ...(maximum !== undefined ? [new Counter.extensionFunction({ maximumStrategy, maximum })] : []),
       ...(placeholder ? [new Placeholder.extensionFunction({ placeholder })] : [])
     ],
     content: initialContent,
@@ -89,7 +93,7 @@ const Editor: FC<IEditorProps> = ({
     <Remirror
       manager={manager}
       initialContent={state} 
-      onChange={(props: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(stringHandler === "html" ? prosemirrorNodeToHtml(props.state.doc) : props.state.doc)}
+      onChange={(props: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(props.state.doc)}
     >
       <Toolbar
         handlers={toolbarHandlers.filter((handlers) =>
@@ -98,7 +102,7 @@ const Editor: FC<IEditorProps> = ({
       />
       <Wrap>
         <EditorComponent />
-        {counter && <Counter.editorHandler {...counter} />}
+        {maximum !== undefined && <Counter.editorHandler maximumStrategy={maximumStrategy} maximum={maximum}  />}
       </Wrap>
       {editorHandlers}
     </Remirror>

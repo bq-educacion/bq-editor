@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Editor, { IEditorProps } from '.';
+import Editor, { editorNodeToHtml, IEditorProps } from '.';
 import { extensions } from '../types.d';
 
 export default {
@@ -8,20 +8,19 @@ export default {
 };
 
 const Template = (args: IEditorProps) => {
-  const [doc, setDoc] = useState<any>();
+  const [doc, setDoc] = useState<any>(); // eslint-disable-line @typescript-eslint/no-explicit-any
 
   return (
     <>
       <Editor onChange={setDoc} {...args} />
-      <p>{JSON.stringify(doc)}</p>
+      <p>{doc && JSON.stringify(args.stringHandler === "html" ? editorNodeToHtml(doc) : doc)}</p>
     </>
   );
 };
 
-export const Default = Template.bind({});
+export const Extensions = Template.bind({});
 
-Default.args = {
-  counter: { maximumStrategy: "characters", maximum: 10 },
+Extensions.args = {
   extensions: [
     [
       extensions.bold,
@@ -37,7 +36,6 @@ Default.args = {
       extensions.orderedList
     ],
   ],
-  selection: "start",
   placeholder: "Start typing..."
 };
 
@@ -56,3 +54,10 @@ Html.args = {
 //   stringHandler: "markdown",
 //   placeholder: "Start markdowning..."
 // };
+
+export const Counter = Template.bind({});
+
+Counter.args = {
+  maximumStrategy: "characters",
+  maximum: 10
+};
