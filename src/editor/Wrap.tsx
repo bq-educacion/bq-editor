@@ -17,22 +17,8 @@ export default styled.div`
     white-space: pre-wrap;
     min-height: 100px;
 
-    p.remirror-is-empty:before {
-      content: attr(data-placeholder);
-      color: ${colors.grey2};
-      display: inline-block;
-      position: absolute;
-    }
-
     p {
       margin: 0;
-    }
-
-    pre[class*='language-'] {
-      background-color: ${colors.dark};
-      border-radius: 5px;
-      color: ${colors.white};
-      padding: 10px;
     }
   }
 `;

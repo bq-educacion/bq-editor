@@ -4,6 +4,8 @@ import { htmlToProsemirrorNode, prosemirrorNodeToHtml, RemirrorEventListenerProp
 import { editorHandlers, toolbarHandlers, useManager } from "./lib";
 import Toolbar from "./Toolbar";
 import Wrap from "./Wrap";
+import 'remirror/styles/extension-code-block.css';
+import 'remirror/styles/extension-placeholder.css';
 
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
@@ -53,7 +55,7 @@ export type IEditorProps = {
 }
 
 const Editor: FC<IEditorProps> = ({
-  codeLanguage = "javascript",
+  codeLanguage = "typescript",
   extensions: activeExtensions = defaultExtensions,
   maximumStrategy = "characters",
   selection = "start",

@@ -20,6 +20,7 @@ const Template = (args: IEditorProps) => {
 export const Extensions = Template.bind({});
 
 Extensions.args = {
+  codeLanguage: "typescript",
   extensions: defaultExtensions,
   placeholder: "Start typing..."
 };

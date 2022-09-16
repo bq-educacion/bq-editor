@@ -148,7 +148,22 @@ const Modal = styled.div`
     display: flex;
     gap: 10px;
     justify-content: space-between;
-    margin: 20px -5px 0 -5px;
+
+    :first-of-type {
+      margin-bottom: 20px;
+    }
+
+    :last-of-type {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  input {
+    height: 40px;
+    width: 100%;
+    padding: 0 10px;
   }
 
   &::before {
@@ -161,7 +176,7 @@ const Modal = styled.div`
     display: block;
     position: absolute;
     transform: translate(-50%, 0) rotate(45deg);
-    top: -10px;
+    top: -11px;
     left: 50%;
   }
 `;
