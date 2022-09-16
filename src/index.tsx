@@ -1,4 +1,4 @@
 import Button from "./button";
-import Editor from "./editor";
+import Editor, { editorNodeToHtml, htmlToEditorNode } from "./editor";
 
-export { Button, Editor };
+export { Button, Editor, editorNodeToHtml, htmlToEditorNode };

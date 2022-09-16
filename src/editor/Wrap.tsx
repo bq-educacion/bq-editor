@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { colors } from "../theme";
 
 export default styled.div`
+  position: relative;
+
   .remirror-editor-wrapper > div {
     align-items: center;
     background-color: ${colors.white};

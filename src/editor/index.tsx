@@ -1,10 +1,15 @@
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
-import { prosemirrorNodeToHtml, RemirrorEventListenerProps } from "remirror";
+import { htmlToProsemirrorNode, prosemirrorNodeToHtml, RemirrorEventListenerProps } from "remirror";
 import { extensions } from "../types.d";
 import Extensions, { Counter, Placeholder } from "./extensions";
 import Toolbar from "./Toolbar";
 import Wrap from "./Wrap";
+
+export {
+  htmlToProsemirrorNode as htmlToEditorNode,
+  prosemirrorNodeToHtml as editorNodeToHtml
+}
 
 // Set the string handler which means the content provided will be automatically handled as html.
 // `markdown` is also available when the `MarkdownExtension` is added to the editor.
@@ -93,8 +98,8 @@ const Editor: FC<IEditorProps> = ({
       />
       <Wrap>
         <EditorComponent />
+        {counter && <Counter.editorHandler {...counter} />}
       </Wrap>
-      {counter && <Counter.editorHandler {...counter} />}
       {editorHandlers}
     </Remirror>
   );
