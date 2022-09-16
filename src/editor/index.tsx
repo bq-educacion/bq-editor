@@ -1,9 +1,10 @@
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
+import { RemirrorEventListenerProps } from "remirror";
+import { extensions } from "../types.d";
+import Extensions, { Counter, Placeholder } from "./extensions";
 import Toolbar from "./Toolbar";
 import Wrap from "./Wrap";
-import Extensions, { Counter, Placeholder } from "./extensions";
-import { extensions } from "../types.d";
 
 // Set the string handler which means the content provided will be automatically handled as html.
 // `markdown` is also available when the `MarkdownExtension` is added to the editor.
@@ -12,10 +13,11 @@ type StringHandler = "default" | "html" | "markdown";
 // Place the cursor at the start of the document. This can also be set to `end`, `all` or a numbered position.
 type Selection = "start" | "end" | "all" | number;
 
-type IEditorProps = {
+export type IEditorProps = {
   counter?: { maximumStrategy?: "characters" | "words"; maximum: number };
   extensions?: extensions[][];
   initialContent?: string;
+  onChange?: (doc: any) => void;
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
@@ -39,6 +41,7 @@ const Editor: FC<IEditorProps> = ({
     ],
   ],
   initialContent,
+  onChange,
   placeholder,
   selection = "start",
   stringHandler = "default",
@@ -79,7 +82,11 @@ const Editor: FC<IEditorProps> = ({
   );
 
   return (
-    <Remirror manager={manager} initialContent={state}>
+    <Remirror
+      manager={manager}
+      initialContent={state} 
+      onChange={(props: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(props.state.doc)}
+    >
       <Toolbar
         handlers={toolbarHandlers.filter((handlers) =>
           handlers.some((handler) => handler !== undefined)

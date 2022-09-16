@@ -9,4 +9,6 @@ dist
 
 # Configuration files
 .nvmrc
-.storybook
+
+# Storybook
+storybook-static

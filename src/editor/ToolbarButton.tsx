@@ -9,9 +9,9 @@ export default styled(Button)`
   border-color: ${colors.white};
   border-radius: 0;
   color: ${colors.dark};
-  min-height: calc(${height}px - 10px);
+  min-height: ${height}px;
+  min-width: ${height}px;
   margin: 1px;
-  min-width: calc(${height}px - 10px);
   padding: 5px;
 
   &.active, &:hover {
