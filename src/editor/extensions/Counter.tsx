@@ -3,14 +3,13 @@ import { CountExtension } from "@remirror/extension-count";
 import { useHelpers } from "@remirror/react";
 import React, { FC } from "react";
 import { colors } from "../../theme";
-import { extensions, ExtensionType } from "../../types.d";
 
 interface ICounterProps {
   maximumStrategy: "characters" | "words";
   maximum: number;
 }
 
-const CounterComponent: FC<ICounterProps> = ({
+const Counter: FC<ICounterProps> = ({
   maximumStrategy = "characters",
   maximum,
 }) => {
@@ -26,13 +25,7 @@ const CounterComponent: FC<ICounterProps> = ({
   );
 };
 
-const Counter: ExtensionType = {
-  extensionFunction: CountExtension,
-  editorHandler: CounterComponent,
-  name: extensions.counter,
-};
-
-export default Counter;
+export { Counter, CountExtension };
 
 const CounterIndicator = styled.div<{ color: string }>`
   position: absolute;

@@ -2,7 +2,6 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { HeadingExtension } from "remirror/extensions";
-import { extensions, ExtensionType } from "../../types.d";
 import ToolbarButton from "../ToolbarButton";
 
 const HeadingButtons: FC = () => {
@@ -28,10 +27,4 @@ const HeadingButtons: FC = () => {
   );
 };
 
-const Heading: ExtensionType = {
-  extensionFunction: HeadingExtension,
-  toolbarHandler: HeadingButtons,
-  name: extensions.heading,
-};
-
-export default Heading;
+export { HeadingButtons, HeadingExtension };

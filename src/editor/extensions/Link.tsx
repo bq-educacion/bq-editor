@@ -20,7 +20,6 @@ import React, {
 import { LinkExtension } from "remirror/extensions";
 import Button from "../../button";
 import { colors } from "../../theme";
-import { extensions, ExtensionType } from "../../types.d";
 import ToolbarButton from "../ToolbarButton";
 
 function useFloatingLinkState() {
@@ -60,7 +59,7 @@ function useFloatingLinkState() {
   );
 }
 
-const FloatingLinkButton: FC = () => {
+const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const active = useActive();
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
@@ -132,13 +131,7 @@ const FloatingLinkButton: FC = () => {
   );
 };
 
-const Link: ExtensionType = {
-  extensionFunction: LinkExtension,
-  toolbarHandler: FloatingLinkButton,
-  name: extensions.link,
-};
-
-export default Link;
+export { LinkButton, LinkExtension };
 
 const Modal = styled.div`
   align-items: center;
@@ -149,6 +142,7 @@ const Modal = styled.div`
   padding: 20px;
   position: absolute;
   transform: translate(calc(20px - 50%), 15px);
+  z-index: 2;
 
   > div {
     display: flex;

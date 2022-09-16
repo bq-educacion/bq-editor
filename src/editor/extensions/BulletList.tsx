@@ -1,7 +1,6 @@
 import { useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { BulletListExtension } from "remirror/extensions";
-import { extensions, ExtensionType } from "../../types.d";
 import ToolbarButton from "../ToolbarButton";
 
 const BulletListButton: FC = () => {
@@ -17,10 +16,4 @@ const BulletListButton: FC = () => {
   );
 };
 
-const BulletList: ExtensionType = {
-  extensionFunction: BulletListExtension,
-  toolbarHandler: BulletListButton,
-  name: extensions.bulletList,
-};
-
-export default BulletList;
+export { BulletListButton, BulletListExtension };

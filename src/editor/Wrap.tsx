@@ -27,5 +27,12 @@ export default styled.div`
     p {
       margin: 0;
     }
+
+    pre[class*='language-'] {
+      background-color: ${colors.dark};
+      border-radius: 5px;
+      color: ${colors.white};
+      padding: 10px;
+    }
   }
 `;

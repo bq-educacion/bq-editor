@@ -2,7 +2,6 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeExtension } from "remirror/extensions";
-import { extensions, ExtensionType } from "../../types.d";
 import ToolbarButton from "../ToolbarButton";
 
 const CodeButton: FC = () => {
@@ -23,10 +22,4 @@ const CodeButton: FC = () => {
   );
 };
 
-const Code: ExtensionType = {
-  extensionFunction: CodeExtension,
-  toolbarHandler: CodeButton,
-  name: extensions.code,
-};
-
-export default Code;
+export { CodeButton, CodeExtension };

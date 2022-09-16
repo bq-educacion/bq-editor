@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Editor, { editorNodeToHtml, IEditorProps } from '.';
-import { extensions } from '../types.d';
+import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from '.';
 
 export default {
   title: "Editor",
@@ -21,21 +20,7 @@ const Template = (args: IEditorProps) => {
 export const Extensions = Template.bind({});
 
 Extensions.args = {
-  extensions: [
-    [
-      extensions.bold,
-      extensions.italic,
-      extensions.code,
-      extensions.link
-    ],
-    [
-      extensions.heading
-    ],
-    [
-      extensions.bulletList,
-      extensions.orderedList
-    ],
-  ],
+  extensions: defaultExtensions,
   placeholder: "Start typing..."
 };
 
