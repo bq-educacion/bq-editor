@@ -17,7 +17,6 @@ const BoldButton: FC = () => {
         toggleBold();
         focus();
       }}
-      secondary
     >
       B
     </ToolbarButton>

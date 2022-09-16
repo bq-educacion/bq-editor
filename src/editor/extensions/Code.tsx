@@ -17,7 +17,6 @@ const CodeButton: FC = () => {
         toggleCode();
         focus();
       }}
-      secondary
     >
       Code
     </ToolbarButton>

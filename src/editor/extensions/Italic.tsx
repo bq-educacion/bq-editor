@@ -17,7 +17,6 @@ const ItalicButton: FC = () => {
         toggleItalic();
         focus();
       }}
-      secondary
     >
       I
     </ToolbarButton>

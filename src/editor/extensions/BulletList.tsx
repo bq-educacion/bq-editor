@@ -11,7 +11,6 @@ const BulletListButton: FC = () => {
     <ToolbarButton
       onClick={() => toggleBulletList()}
       disabled={!toggleBulletList.enabled()}
-      secondary
     >
       toggleBulletList
     </ToolbarButton>

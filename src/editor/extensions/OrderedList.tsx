@@ -11,7 +11,6 @@ const OrderedListButton: FC = () => {
     <ToolbarButton
       onClick={() => toggleOrderedList()}
       disabled={!toggleOrderedList.enabled()}
-      secondary
     >
       toggleOrderedList
     </ToolbarButton>

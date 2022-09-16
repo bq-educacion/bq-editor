@@ -5,7 +5,7 @@ export default styled.div`
   .remirror-editor-wrapper > div {
     align-items: center;
     background-color: ${colors.white};
-    border: 1px solid ${colors.grey4};
+    border: 2px solid ${colors.grey4};
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-top: none;

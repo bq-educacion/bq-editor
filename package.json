@@ -54,8 +54,8 @@
     "webpack": "^5.74.0"
   },
   "scripts": {
+    "dev": "start-storybook -p 6006",
     "build": "rollup -c",
-    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   }
 }

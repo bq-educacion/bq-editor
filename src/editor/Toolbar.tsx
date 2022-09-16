@@ -17,13 +17,10 @@ const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
   </Wrap>
 );
 
-export const height = 40; // px
-
 export default Toolbar;
 
 const Divider = styled.div`
-  border-right: 2px solid ${colors.grey2};
-  margin: ${height/2 - 5}px 5px;
+  margin: 2px;
 `;
 
 const Wrap = styled.div`
@@ -34,7 +31,7 @@ const Wrap = styled.div`
   color: ${colors.dark};
   display: flex;
   flex-wrap: wrap;
-  padding: 5px;
+  padding: 1px;
   position: relative;
 
   > div {

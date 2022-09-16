@@ -86,7 +86,6 @@ const FloatingLinkButton: FC = () => {
           setShowModal(!showModal);
           focus();
         }}
-        secondary
       >
         Link
       </ToolbarButton>

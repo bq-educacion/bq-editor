@@ -20,7 +20,6 @@ const HeadingButtons: FC = () => {
             focus();
           }}
           key={level}
-          secondary
         >
           H{level}
         </ToolbarButton>
