@@ -13,7 +13,7 @@ const Template = (args: IEditorProps) => {
   return (
     <>
       <Editor onChange={setDoc} {...args} />
-      <p>{doc && JSON.stringify(doc.content)}</p>
+      <p>{JSON.stringify(doc)}</p>
     </>
   );
 };
@@ -45,12 +45,14 @@ export const Html = Template.bind({});
 
 Html.args = {
   initialContent: "<p>I love <b>HTML</b></p>",
-  stringHandler: "html"
+  stringHandler: "html",
+  placeholder: "Start htmling..."
 };
 
-export const Markdown = Template.bind({});
+// export const Markdown = Template.bind({});
 
-Html.args = {
-  // initialContent: "**Markdown** content is the _best_",
-  stringHandler: "markdown"
-};
+// Markdown.args = {
+//   initialContent: "**Markdown** content is the _best_",
+//   stringHandler: "markdown",
+//   placeholder: "Start markdowning..."
+// };

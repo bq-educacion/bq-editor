@@ -1,6 +1,6 @@
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
-import { RemirrorEventListenerProps } from "remirror";
+import { prosemirrorNodeToHtml, RemirrorEventListenerProps } from "remirror";
 import { extensions } from "../types.d";
 import Extensions, { Counter, Placeholder } from "./extensions";
 import Toolbar from "./Toolbar";
@@ -8,7 +8,7 @@ import Wrap from "./Wrap";
 
 // Set the string handler which means the content provided will be automatically handled as html.
 // `markdown` is also available when the `MarkdownExtension` is added to the editor.
-type StringHandler = "default" | "html" | "markdown";
+type StringHandler = "html" | "markdown";
 
 // Place the cursor at the start of the document. This can also be set to `end`, `all` or a numbered position.
 type Selection = "start" | "end" | "all" | number;
@@ -44,7 +44,7 @@ const Editor: FC<IEditorProps> = ({
   onChange,
   placeholder,
   selection = "start",
-  stringHandler = "default",
+  stringHandler,
 }) => {
   const { manager, state } = useRemirror({
     extensions: () => [
@@ -59,16 +59,15 @@ const Editor: FC<IEditorProps> = ({
     ],
     content: initialContent,
     selection,
-    stringHandler: stringHandler === "default" ? undefined : stringHandler,
+    stringHandler
   });
 
   const editorHandlers = activeExtensions.flat().map((extension) => {
     const HandlerComponent = Extensions.find(
       (ext) => ext.name === extension
     )?.editorHandler;
-    const counterArgs = extension === extensions.counter && counter;
     return (
-      HandlerComponent && <HandlerComponent key={extension} {...counterArgs} />
+      HandlerComponent && <HandlerComponent key={extension} />
     );
   });
 
@@ -85,7 +84,7 @@ const Editor: FC<IEditorProps> = ({
     <Remirror
       manager={manager}
       initialContent={state} 
-      onChange={(props: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(props.state.doc)}
+      onChange={(props: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(stringHandler === "html" ? prosemirrorNodeToHtml(props.state.doc) : props.state.doc)}
     >
       <Toolbar
         handlers={toolbarHandlers.filter((handlers) =>
@@ -95,6 +94,7 @@ const Editor: FC<IEditorProps> = ({
       <Wrap>
         <EditorComponent />
       </Wrap>
+      {counter && <Counter.editorHandler {...counter} />}
       {editorHandlers}
     </Remirror>
   );
