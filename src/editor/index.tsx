@@ -1,7 +1,8 @@
-import { EditorComponent, Remirror } from "@remirror/react";
+import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
 import { htmlToProsemirrorNode, prosemirrorNodeToHtml, RemirrorEventListenerProps } from "remirror";
-import { editorHandlers, toolbarHandlers, useManager } from "./lib";
+import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
+import MarkdownDualEditor from "./MarkdownDualEditor";
 import Toolbar from "./Toolbar";
 import Wrap from "./Wrap";
 import 'remirror/styles/extension-code-block.css';
@@ -44,6 +45,7 @@ export const defaultExtensions = [
 
 export type IEditorProps = {
   codeLanguage: CodeLanguage;
+  dualEditor?: boolean;
   extensions?: string[][];
   initialContent?: string;
   maximumStrategy?: MaximumStrategy;
@@ -54,34 +56,44 @@ export type IEditorProps = {
   stringHandler?: StringHandler;
 }
 
-const Editor: FC<IEditorProps> = ({
-  codeLanguage = "typescript",
-  extensions: activeExtensions = defaultExtensions,
-  maximumStrategy = "characters",
-  selection = "start",
-  onChange,
-  ...props
-}) => {
-  const input = {
-    codeLanguage,
-    extensions: activeExtensions,
-    maximumStrategy,
-    selection,
-    ...props
+const Editor: FC<IEditorProps> = (props) => {
+  const {
+    dualEditor,
+    initialContent: content,
+    onChange,
+    selection = "start",
+    stringHandler
+  } = props;
+
+  if (stringHandler === "markdown" && dualEditor) {
+    return (
+      <MarkdownDualEditor {...props}>
+        <Toolbar handlers={toolbarHandlers(props)} />
+        <Wrap>
+          <EditorComponent />
+          {editorHandlers(props)}
+        </Wrap>
+      </MarkdownDualEditor>
+    )
   }
 
-  const { manager, state } = useManager(input);
+  const { manager, state: initialContent } = useRemirror({
+    extensions: managerExtensions(props),
+    content,
+    selection,
+    stringHandler
+  });
 
   return (
     <Remirror
       manager={manager}
-      initialContent={state} 
-      onChange={(props: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(props.state.doc)}
+      initialContent={initialContent}
+      onChange={({ state }: RemirrorEventListenerProps<Remirror.Extensions>) => onChange(state.doc)}
     >
-      <Toolbar handlers={toolbarHandlers(input)} />
+      <Toolbar handlers={toolbarHandlers(props)} />
       <Wrap>
         <EditorComponent />
-        {editorHandlers(input)}
+        {editorHandlers(props)}
       </Wrap>
     </Remirror>
   );

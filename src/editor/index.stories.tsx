@@ -33,13 +33,14 @@ Html.args = {
   placeholder: "Start htmling..."
 };
 
-// export const Markdown = Template.bind({});
+export const Markdown = Template.bind({});
 
-// Markdown.args = {
-//   initialContent: "**Markdown** content is the _best_",
-//   stringHandler: "markdown",
-//   placeholder: "Start markdowning..."
-// };
+Markdown.args = {
+  dualEditor: false,
+  initialContent: "**Markdown** content is the _best_",
+  stringHandler: "markdown",
+  placeholder: "Start markdowning..."
+};
 
 export const Counter = Template.bind({});
 

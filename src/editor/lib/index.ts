@@ -1,5 +1,5 @@
 import editorHandlers from "./editorHandlers";
+import managerExtensions from "./managerExtensions";
 import toolbarHandlers from "./toolbarHandlers";
-import useManager from "./useManager";
 
-export { editorHandlers, toolbarHandlers, useManager };
+export { editorHandlers, managerExtensions, toolbarHandlers };

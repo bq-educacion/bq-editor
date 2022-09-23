@@ -5,11 +5,11 @@ import { CodeBlockExtension } from 'remirror/extensions';
 import ToolbarButton from "../ToolbarButton";
 
 interface ICodeBlockButtonProps {
-  language: string;
+  language?: string;
   wrap?: boolean;
 }
 
-const CodeBlockButton: FC<ICodeBlockButtonProps> = ({ language, wrap }) => {
+const CodeBlockButton: FC<ICodeBlockButtonProps> = ({ language = "typescript", wrap }) => {
   const active = useActive();
   const { toggleCodeBlock } = useCommands();
 

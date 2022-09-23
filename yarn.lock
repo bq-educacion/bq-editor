@@ -5852,6 +5852,13 @@ create-context-state@^1.0.1:
   dependencies:
     "@babel/runtime" "^7.13.10"
 
+create-context-state@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/create-context-state/-/create-context-state-2.0.0.tgz#b58d33c553ef6c66958899d06fad4edf1b99ca24"
+  integrity sha512-lJsJ9XTsFLQpeXQkowyT3v2vWdxsYWoUCntUjdUCBzLqhTeGSkuCP4SrBUmkKaDDCzxJEDlmqM4HH2KD+YXVHQ==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+
 create-ecdh@^4.0.0:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.4.tgz#d6e7f4bffa66736085a0762fd3a632684dabcc4e"

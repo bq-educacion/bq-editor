@@ -1,13 +1,16 @@
 import React from "react";
 import { IEditorProps } from "..";
-import { Counter } from "../extensions";
+import { Counter, MarkdownPreview } from "../extensions";
 
 const editorHandlers = ({
+  dualEditor,
   maximumStrategy,
-  maximum
+  maximum,
+  stringHandler
 }: IEditorProps) => (
   <>
     {maximum !== undefined && <Counter maximumStrategy={maximumStrategy} maximum={maximum} />}
+    {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}
   </>
 );
 

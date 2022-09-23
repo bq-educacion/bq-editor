@@ -5,7 +5,7 @@ import React, { FC } from "react";
 import { colors } from "../../theme";
 
 interface ICounterProps {
-  maximumStrategy: "characters" | "words";
+  maximumStrategy?: "characters" | "words";
   maximum: number;
 }
 

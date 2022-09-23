@@ -6,5 +6,6 @@ export * from "./Counter";
 export * from "./Heading";
 export * from "./Italic";
 export * from "./Link";
+export * from "./Markdown";
 export * from "./OrderedList";
 export * from "./Placeholder";

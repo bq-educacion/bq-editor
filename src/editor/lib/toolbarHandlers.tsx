@@ -1,11 +1,11 @@
 import React from "react";
-import { IEditorProps } from "..";
+import { defaultExtensions, IEditorProps } from "..";
 import { BoldButton, BulletListButton, CodeBlockButton, CodeButton, HeadingButtons, ItalicButton, LinkButton, OrderedListButton } from "../extensions";
 
 const toolbarHandlers = ({
   codeLanguage,
-  extensions: activeExtensions
-}: IEditorProps) => activeExtensions.map((extensionsArray) => 
+  extensions = defaultExtensions,
+}: IEditorProps) => extensions.map((extensionsArray) => 
   extensionsArray.map((extension) => (
     <>
       {extension == "bold" && <BoldButton />}
