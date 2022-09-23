@@ -16,6 +16,7 @@ import {
   MarkdownExtension,
   OrderedListExtension,
   PlaceholderExtension,
+  TextColorExtension,
 } from "../extensions";
 import { defaultExtensions, IEditorProps } from "..";
 
@@ -67,6 +68,9 @@ const managerExtensions = ({
       ? [new OrderedListExtension({})]
       : []),
     ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
+    ...(extensionsFlat.includes("textColor")
+      ? [new TextColorExtension({})]
+      : []),
   ];
 };
 

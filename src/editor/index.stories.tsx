@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from ".";
+import { colors } from "../theme";
 
 export default {
   title: "Editor",
@@ -26,6 +27,7 @@ export const Extensions = Template.bind({});
 
 Extensions.args = {
   codeLanguage: "typescript",
+  color: colors.orange1,
   extensions: defaultExtensions,
   placeholder: "Start typing...",
 };

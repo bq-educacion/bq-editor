@@ -29,7 +29,7 @@ type Selection = "start" | "end" | "all" | number;
 type StringHandler = "html" | "markdown";
 
 export const defaultExtensions = [
-  ["bold", "italic", "code", "codeBlock"],
+  ["bold", "italic", "code", "codeBlock", "textColor"],
   ["link"],
   ["heading"],
   ["bulletList", "orderedList"],
@@ -37,6 +37,7 @@ export const defaultExtensions = [
 
 export type IEditorProps = {
   codeLanguage: CodeLanguage;
+  color: string;
   dualEditor?: boolean;
   extensions?: string[][];
   initialContent?: string;

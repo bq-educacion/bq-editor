@@ -9,3 +9,4 @@ export * from "./Link";
 export * from "./Markdown";
 export * from "./OrderedList";
 export * from "./Placeholder";
+export * from "./TextColor";

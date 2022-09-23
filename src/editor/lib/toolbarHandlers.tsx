@@ -9,10 +9,12 @@ import {
   ItalicButton,
   LinkButton,
   OrderedListButton,
+  TextColorButton,
 } from "../extensions";
 
 const toolbarHandlers = ({
   codeLanguage,
+  color,
   extensions = defaultExtensions,
 }: IEditorProps) =>
   extensions.map((extensionsArray) =>
@@ -28,6 +30,7 @@ const toolbarHandlers = ({
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}
+        {extension === "textColor" && <TextColorButton color={color} />}
       </>
     ))
   );
