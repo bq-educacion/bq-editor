@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from '.';
+import React, { useState } from "react";
+import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from ".";
 
 export default {
   title: "Editor",
-  component: Editor
+  component: Editor,
 };
 
 const Template = (args: IEditorProps) => {
@@ -12,7 +12,12 @@ const Template = (args: IEditorProps) => {
   return (
     <>
       <Editor onChange={setDoc} {...args} />
-      <p>{doc && JSON.stringify(args.stringHandler === "html" ? editorNodeToHtml(doc) : doc)}</p>
+      <p>
+        {doc &&
+          JSON.stringify(
+            args.stringHandler === "html" ? editorNodeToHtml(doc) : doc
+          )}
+      </p>
     </>
   );
 };
@@ -22,7 +27,7 @@ export const Extensions = Template.bind({});
 Extensions.args = {
   codeLanguage: "typescript",
   extensions: defaultExtensions,
-  placeholder: "Start typing..."
+  placeholder: "Start typing...",
 };
 
 export const Html = Template.bind({});
@@ -30,7 +35,7 @@ export const Html = Template.bind({});
 Html.args = {
   initialContent: "<p>I love <b>HTML</b></p>",
   stringHandler: "html",
-  placeholder: "Start htmling..."
+  placeholder: "Start htmling...",
 };
 
 export const Markdown = Template.bind({});
@@ -39,12 +44,12 @@ Markdown.args = {
   dualEditor: false,
   initialContent: "**Markdown** content is the _best_",
   stringHandler: "markdown",
-  placeholder: "Start markdowning..."
+  placeholder: "Start markdowning...",
 };
 
 export const Counter = Template.bind({});
 
 Counter.args = {
   maximumStrategy: "characters",
-  maximum: 10
+  maximum: 10,
 };

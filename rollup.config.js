@@ -1,6 +1,6 @@
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import tsConfig from './tsconfig.json';
+import tsConfig from "./tsconfig.json";
 
 const packageJson = require("./package.json");
 
@@ -21,13 +21,13 @@ export default [
     ],
     plugins: [
       typescript({
-        sourceMap: tsConfig.compilerOptions.sourceMap
+        sourceMap: tsConfig.compilerOptions.sourceMap,
       }),
     ],
   },
   {
     input: "dist/esm/index.d.ts",
     output: [{ file: "dist/types.d.ts", format: "esm" }],
-    plugins: [dts()]
-  }
+    plugins: [dts()],
+  },
 ];

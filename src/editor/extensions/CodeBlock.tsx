@@ -1,7 +1,7 @@
 import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
-import { CodeBlockExtension } from 'remirror/extensions';
+import { CodeBlockExtension } from "remirror/extensions";
 import ToolbarButton from "../ToolbarButton";
 
 interface ICodeBlockButtonProps {
@@ -9,7 +9,10 @@ interface ICodeBlockButtonProps {
   wrap?: boolean;
 }
 
-const CodeBlockButton: FC<ICodeBlockButtonProps> = ({ language = "typescript", wrap }) => {
+const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
+  language = "typescript",
+  wrap,
+}) => {
   const active = useActive();
   const { toggleCodeBlock } = useCommands();
 

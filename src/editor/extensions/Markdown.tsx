@@ -1,6 +1,6 @@
-import { useHelpers } from '@remirror/react';
-import { FC } from 'react';
-import { MarkdownExtension } from 'remirror/extensions';
+import { useHelpers } from "@remirror/react";
+import React, { FC } from "react";
+import { MarkdownExtension } from "remirror/extensions";
 
 const MarkdownPreview: FC = () => {
   const { getMarkdown } = useHelpers(true);
@@ -10,6 +10,6 @@ const MarkdownPreview: FC = () => {
       <code>{getMarkdown()}</code>
     </pre>
   );
-}
+};
 
 export { MarkdownExtension, MarkdownPreview };

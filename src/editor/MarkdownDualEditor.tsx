@@ -1,43 +1,50 @@
-import { ReactExtensions, Remirror, useRemirror, UseRemirrorReturn } from "@remirror/react";
-import { createContextState } from 'create-context-state';
-import langMarkdown from 'refractor/lang/markdown.js';
+import {
+  ReactExtensions,
+  Remirror,
+  useRemirror,
+  UseRemirrorReturn,
+} from "@remirror/react";
+import { createContextState } from "create-context-state";
+import langMarkdown from "refractor/lang/markdown.js";
 import React, { FC } from "react";
-import {  DocExtension } from "remirror/extensions";
+import { DocExtension } from "remirror/extensions";
 import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
 import { IEditorProps } from ".";
 import { RemirrorEventListenerProps } from "remirror";
-
-interface Context extends Props {
-  setMarkdown: (markdown: string) => void;
-  setVisual: (markdown: string) => void;
-}
 
 interface Props {
   visual: UseRemirrorReturn<ReactExtensions<any>[number]>;
   markdown: UseRemirrorReturn<ReactExtensions<any>>;
 }
 
-const [EditorProvider, useEditor] = createContextState<Context, Props>(({ props }) => {
-  return {
-    ...props,
-    setMarkdown: (text: string) => {
-      return props.markdown.getContext()?.setContent({
-        type: 'doc',
-        content: [
-          {
-            type: 'codeBlock',
-            attrs: { language: 'markdown' },
-            content: text ? [{ type: 'text', text }] : undefined,
-          },
-        ],
-      });
-    },
-    setVisual: (markdown: string) => {
-      return props.visual.getContext()?.setContent(markdown);
-    },
-  };
-});
+interface Context extends Props {
+  setMarkdown: (markdown: string) => void;
+  setVisual: (markdown: string) => void;
+}
+
+const [EditorProvider, useEditor] = createContextState<Context, Props>(
+  ({ props }) => {
+    return {
+      ...props,
+      setMarkdown: (text: string) => {
+        return props.markdown.getContext()?.setContent({
+          type: "doc",
+          content: [
+            {
+              type: "codeBlock",
+              attrs: { language: "markdown" },
+              content: text ? [{ type: "text", text }] : undefined,
+            },
+          ],
+        });
+      },
+      setVisual: (markdown: string) => {
+        return props.visual.getContext()?.setContent(markdown);
+      },
+    };
+  }
+);
 
 const MarkdownDualEditor: FC<IEditorProps> = ({
   children,
@@ -47,8 +54,8 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
 }) => {
   const input = {
     stringHandler,
-    ...props
-  }
+    ...props,
+  };
 
   const visual = useRemirror({
     extensions: managerExtensions(input),
@@ -58,11 +65,11 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
 
   const markdown = useRemirror({
     extensions: () => [
-      new DocExtension({ content: 'codeBlock' }),
+      new DocExtension({ content: "codeBlock" }),
       new CodeBlockExtension({
-        defaultLanguage: 'markdown',
+        defaultLanguage: "markdown",
         supportedLanguages: [langMarkdown],
-        syntaxTheme: 'base16_ateliersulphurpool_light',
+        syntaxTheme: "base16_ateliersulphurpool_light",
         defaultWrap: true,
       }),
     ],
@@ -76,12 +83,10 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
 
   return (
     <Provider visual={visual} markdown={markdown}>
-      <VisualEditor>
-        {children}
-      </VisualEditor>
+      <VisualEditor>{children}</VisualEditor>
       <MarkdownTextEditor />
     </Provider>
-  )
+  );
 };
 
 const VisualEditor: FC = ({ children }) => {
@@ -90,7 +95,10 @@ const VisualEditor: FC = ({ children }) => {
   return (
     <Remirror
       manager={visual.manager}
-      onChange={({ helpers, state }): RemirrorEventListenerProps<Remirror.Extensions> => {
+      onChange={({
+        helpers,
+        state,
+      }): RemirrorEventListenerProps<Remirror.Extensions> => {
         setMarkdown(helpers.getMarkdown(state));
         return null;
       }}
@@ -107,8 +115,11 @@ const MarkdownTextEditor: FC = () => {
   return (
     <Remirror
       manager={markdown.manager}
-      autoRender='end'
-      onChange={({ helpers, state }): RemirrorEventListenerProps<Remirror.Extensions> => {
+      autoRender="end"
+      onChange={({
+        helpers,
+        state,
+      }): RemirrorEventListenerProps<Remirror.Extensions> => {
         const text = helpers.getText({ state });
         setVisual(text);
         return null;

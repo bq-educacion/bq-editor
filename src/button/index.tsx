@@ -20,7 +20,8 @@ export default styled.button<IButtonProps>`
   padding: 10px 20px;
   transition: all 0.3s ease-out;
 
-  &.active, &:hover {
+  &.active,
+  &:hover {
     background-color: ${colors.grey1};
     border: 1px solid ${colors.grey1};
   }
@@ -38,7 +39,8 @@ export default styled.button<IButtonProps>`
       background-color: ${colors.green2};
       border: 1px solid ${colors.green2};
 
-      &.active, &:hover {
+      &.active,
+      &:hover {
         background-color: ${colors.green3};
         border: 1px solid ${colors.green3};
       }
@@ -50,7 +52,8 @@ export default styled.button<IButtonProps>`
       background-color: ${colors.red2};
       border: 1px solid ${colors.red2};
 
-      &.active, &:hover {
+      &.active,
+      &:hover {
         background-color: ${colors.red3};
         border: 1px solid ${colors.red3};
       }
@@ -62,7 +65,8 @@ export default styled.button<IButtonProps>`
       background-color: ${colors.grey3};
       border: 1px solid ${colors.grey3};
 
-      &.active, &:hover {
+      &.active,
+      &:hover {
         background-color: ${colors.white};
         border: 1px solid ${colors.dark};
         color: ${colors.dark};

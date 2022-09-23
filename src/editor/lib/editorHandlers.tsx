@@ -6,10 +6,12 @@ const editorHandlers = ({
   dualEditor,
   maximumStrategy,
   maximum,
-  stringHandler
+  stringHandler,
 }: IEditorProps) => (
   <>
-    {maximum !== undefined && <Counter maximumStrategy={maximumStrategy} maximum={maximum} />}
+    {maximum !== undefined && (
+      <Counter maximumStrategy={maximumStrategy} maximum={maximum} />
+    )}
     {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}
   </>
 );

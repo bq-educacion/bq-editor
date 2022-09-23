@@ -18,7 +18,11 @@ const Counter: FC<ICounterProps> = ({
     maximumStrategy === "characters" ? getCharacterCount() : getWordCount();
 
   return (
-    <CounterIndicator color={maximum === undefined || count <= maximum ? "inherit" : colors.red2}>
+    <CounterIndicator
+      color={
+        maximum === undefined || count <= maximum ? "inherit" : colors.red2
+      }
+    >
       {count}
       {maximum !== undefined && ` / ${maximum}`}
     </CounterIndicator>
@@ -34,5 +38,5 @@ const CounterIndicator = styled.div<{ color: string }>`
   margin: 0;
   right: 0;
   padding: 10px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;

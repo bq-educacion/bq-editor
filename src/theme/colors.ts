@@ -60,5 +60,5 @@ export default {
   yellow2,
   yellow3,
   yellow4,
-  white
+  white,
 };

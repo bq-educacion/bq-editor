@@ -14,7 +14,8 @@ export default styled(Button)`
   margin: 1px;
   padding: 5px;
 
-  &.active, &:hover {
+  &.active,
+  &:hover {
     color: ${colors.white};
   }
 `;

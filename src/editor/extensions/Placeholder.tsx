@@ -1,3 +1,3 @@
-import { PlaceholderExtension } from 'remirror/extensions';
+import { PlaceholderExtension } from "remirror/extensions";
 
 export { PlaceholderExtension };
