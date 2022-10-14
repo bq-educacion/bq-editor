@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { colors } from "../theme";
 
 interface IToolbarProps {
-  handlers: JSX.Element[][];
+  handlers: Element[][];
 }
 
 const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
@@ -25,7 +25,7 @@ const Divider = styled.div`
 
 const Wrap = styled.div`
   align-items: center;
-  background-color: ${colors.grey4};
+  background-color: ${colors.grey5};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   color: ${colors.dark};

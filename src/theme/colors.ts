@@ -7,9 +7,10 @@ const green4 = "#bfd69c";
 
 const grey1 = "#6d6c6c";
 const grey2 = "#ababab";
-const grey3 = "#e0e0e0";
-const grey4 = "#eaeae9";
-const grey5 = "#f5f5f5";
+const grey3 = "#cccccc";
+const grey4 = "#e0e0e0";
+const grey5 = "#eaeae9";
+const grey6 = "#f5f5f5";
 
 const orange1 = "#db4501";
 const orange2 = "#fe5000";
@@ -44,6 +45,7 @@ export default {
   grey3,
   grey4,
   grey5,
+  grey6,
   orange1,
   orange2,
   orange3,

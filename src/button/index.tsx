@@ -27,9 +27,9 @@ export default styled.button<IButtonProps>`
   }
 
   &:disabled {
-    background-color: ${colors.grey5};
-    border: 1px solid ${colors.grey5};
-    color: ${colors.grey4};
+    background-color: ${colors.grey6};
+    border: 1px solid ${colors.grey6};
+    color: ${colors.grey5};
     pointer-events: none;
   }
 
@@ -62,8 +62,8 @@ export default styled.button<IButtonProps>`
   ${(props) =>
     props.secondary &&
     css`
-      background-color: ${colors.grey3};
-      border: 1px solid ${colors.grey3};
+      background-color: ${colors.grey4};
+      border: 1px solid ${colors.grey4};
 
       &.active,
       &:hover {

@@ -19,6 +19,7 @@ import React, {
 } from "react";
 import { LinkExtension } from "remirror/extensions";
 import Button from "../../button";
+import Input from "../../input";
 import { colors } from "../../theme";
 import LinkIcon from "../assets/icons/Link";
 import ToolbarButton from "../ToolbarButton";
@@ -67,6 +68,10 @@ const LinkButton: FC = () => {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   useEffect(() => {
+    setHref("");
+  }, [showTooltip]);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) =>
       ref.current &&
       !ref.current.contains(event.target as Node) &&
@@ -91,7 +96,7 @@ const LinkButton: FC = () => {
       </ToolbarButton>
       {showTooltip && (
         <Tooltip>
-          <input
+          <Input
             autoFocus
             placeholder="Enter link..."
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -131,7 +136,7 @@ export { LinkButton, LinkExtension };
 const Tooltip = styled.div`
   align-items: center;
   background-color: ${colors.white};
-  border: 2px solid ${colors.grey4};
+  border: 2px solid ${colors.grey5};
   border-radius: 4px;
   color: ${colors.dark};
   padding: 20px;
@@ -142,18 +147,11 @@ const Tooltip = styled.div`
   gap: 10px;
   justify-content: space-between;
 
-  input {
-    box-sizing: border-box;
-    height: 40px;
-    width: 100%;
-    padding: 0 10px;
-  }
-
   &::before {
     content: "";
     background-color: ${colors.white};
-    border-left: 2px solid ${colors.grey4};
-    border-top: 2px solid ${colors.grey4};
+    border-left: 2px solid ${colors.grey5};
+    border-top: 2px solid ${colors.grey5};
     width: 20px;
     height: 20px;
     display: block;

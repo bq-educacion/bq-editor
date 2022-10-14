@@ -11,6 +11,7 @@ import React, {
 } from "react";
 import { ImageExtension } from "remirror/extensions";
 import Button from "../../button";
+import Input from "../../input";
 import { colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
 import ToolbarButton from "../ToolbarButton";
@@ -76,6 +77,13 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
 
   useEffect(() => {
     setError(false);
+    setImgAlign("");
+    setImgAlt("");
+    setImgHeight("");
+    setImgRotate("");
+    setImgSrc("");
+    setImgTitle("");
+    setImgWidth("");
     setShowMoreOptions(false);
   }, [showTooltip]);
 
@@ -106,7 +114,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
         <Tooltip>
           <div>
             <label>Url*</label>
-            <input
+            <Input
               autoFocus
               placeholder="Url"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -129,7 +137,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
             {onUpload && (
               <>
                 <p>o</p>
-                <input
+                <Input
                   accept={accept?.join(", ")}
                   onChange={onFile}
                   ref={imgRef}
@@ -137,6 +145,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
                   type="file"
                 />
                 <Button
+                  cta
                   onClick={(e) => (
                     e.stopPropagation(), imgRef.current?.click()
                   )}
@@ -155,7 +164,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
             <>
               <div>
                 <label>Alt</label>
-                <input
+                <Input
                   placeholder="Alt"
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     setImgAlt(event.target.value)
@@ -165,7 +174,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
               </div>
               <div>
                 <label>Title</label>
-                <input
+                <Input
                   placeholder="Title"
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     setImgTitle(event.target.value)
@@ -175,7 +184,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
               </div>
               <div>
                 <label>Height</label>
-                <input
+                <Input
                   placeholder="0"
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     setImgHeight(event.target.value)
@@ -185,7 +194,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
               </div>
               <div>
                 <label>Width</label>
-                <input
+                <Input
                   placeholder="0"
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     setImgWidth(event.target.value)
@@ -195,7 +204,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
               </div>
               <div>
                 <label>Align</label>
-                <input
+                <Input
                   placeholder="center | end | justify | left | match-parent | right | start"
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     setImgAlign(event.target.value)
@@ -205,7 +214,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
               </div>
               <div>
                 <label>Rotate</label>
-                <input
+                <Input
                   placeholder="180deg"
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     setImgRotate(event.target.value)
@@ -216,10 +225,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
             </>
           )}
           <div>
-            <Button
-              secondary
-              onClick={() => (onSubmit(), setShowTooltip(false))}
-            >
+            <Button secondary onClick={() => setShowTooltip(false)}>
               Cancelar
             </Button>
             <Button onClick={() => (onSubmit(), setShowTooltip(false))}>
@@ -236,7 +242,7 @@ export { ImageButton, ImageExtension };
 
 const Tooltip = styled.div`
   background-color: ${colors.white};
-  border: 2px solid ${colors.grey4};
+  border: 2px solid ${colors.grey5};
   border-radius: 4px;
   color: ${colors.dark};
   padding: 20px;
@@ -268,20 +274,13 @@ const Tooltip = styled.div`
       margin-bottom: -5px;
       min-width: 45px;
     }
-
-    input {
-      box-sizing: border-box;
-      height: 40px;
-      width: 100%;
-      padding: 0 10px;
-    }
   }
 
   &::before {
     content: "";
     background-color: ${colors.white};
-    border-left: 2px solid ${colors.grey4};
-    border-top: 2px solid ${colors.grey4};
+    border-left: 2px solid ${colors.grey5};
+    border-top: 2px solid ${colors.grey5};
     width: 20px;
     height: 20px;
     display: block;

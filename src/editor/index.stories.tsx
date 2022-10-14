@@ -35,7 +35,7 @@ Extensions.args = {
 export const Html = Template.bind({});
 
 Html.args = {
-  initialContent: "<p>I love <b>HTML</b></p>",
+  initialContent: "<p>I love <b>HTML</b> !</p>",
   stringHandler: "html",
   placeholder: "Start htmling...",
 };
@@ -44,7 +44,7 @@ export const Markdown = Template.bind({});
 
 Markdown.args = {
   dualEditor: false,
-  initialContent: "**Markdown** content is the _best_",
+  initialContent: "**Markdown** content is the _best_ !",
   stringHandler: "markdown",
   placeholder: "Start markdowning...",
 };
