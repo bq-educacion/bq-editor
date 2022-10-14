@@ -2,7 +2,7 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { UnderlineExtension } from "remirror/extensions";
-import ImgUnderline from "../assets/icons/Underline";
+import UnderlineIcon from "../assets/icons/Underline";
 import ToolbarButton from "../ToolbarButton";
 
 const UnderlineButton: FC = () => {
@@ -18,7 +18,7 @@ const UnderlineButton: FC = () => {
         focus();
       }}
     >
-      <ImgUnderline />
+      <UnderlineIcon />
     </ToolbarButton>
   );
 };

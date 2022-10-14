@@ -34,6 +34,7 @@ export const defaultExtensions = [
   ["textColor"],
   ["bulletList", "orderedList"],
   ["link"],
+  ["image"],
 ];
 
 export type IEditorProps = {

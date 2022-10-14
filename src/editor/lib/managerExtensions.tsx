@@ -11,6 +11,7 @@ import {
   CodeBlockExtension,
   CodeExtension,
   HeadingExtension,
+  ImageExtension,
   ItalicExtension,
   LinkExtension,
   MarkdownExtension,
@@ -62,6 +63,7 @@ const managerExtensions = ({
         ]
       : []),
     ...(extensionsFlat.includes("heading") ? [new HeadingExtension({})] : []),
+    ...(extensionsFlat.includes("image") ? [new ImageExtension()] : []),
     ...(extensionsFlat.includes("italic") ? [new ItalicExtension({})] : []),
     ...(extensionsFlat.includes("link") ? [new LinkExtension({})] : []),
     ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),

@@ -6,6 +6,7 @@ import {
   CodeBlockButton,
   CodeButton,
   HeadingButtons,
+  ImageButton,
   ItalicButton,
   LinkButton,
   OrderedListButton,
@@ -19,8 +20,8 @@ const toolbarHandlers = ({
   extensions = defaultExtensions,
 }: IEditorProps) =>
   extensions.map((extensionsArray) =>
-    extensionsArray.map((extension) => (
-      <>
+    extensionsArray.map((extension, index) => (
+      <React.Fragment key={index}>
         {extension === "bold" && <BoldButton />}
         {extension === "bulletList" && <BulletListButton />}
         {extension === "code" && <CodeButton />}
@@ -28,12 +29,13 @@ const toolbarHandlers = ({
           <CodeBlockButton language={codeLanguage} />
         )}
         {extension === "heading" && <HeadingButtons />}
+        {extension === "image" && <ImageButton />}
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}
         {extension === "textColor" && <TextColorButton color={color} />}
         {extension === "underline" && <UnderlineButton />}
-      </>
+      </React.Fragment>
     ))
   );
 

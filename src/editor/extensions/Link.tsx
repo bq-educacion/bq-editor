@@ -18,9 +18,9 @@ import React, {
   useState,
 } from "react";
 import { LinkExtension } from "remirror/extensions";
-import ImgLink from "../assets/icons/Link";
 import Button from "../../button";
 import { colors } from "../../theme";
+import LinkIcon from "../assets/icons/Link";
 import ToolbarButton from "../ToolbarButton";
 
 function useFloatingLinkState() {
@@ -64,13 +64,13 @@ const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const active = useActive();
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) =>
       ref.current &&
       !ref.current.contains(event.target as Node) &&
-      setShowModal(false);
+      setShowTooltip(false);
 
     window.addEventListener("click", handleClickOutside);
     return () => {
@@ -81,52 +81,46 @@ const LinkButton: FC = () => {
   return (
     <div ref={ref}>
       <ToolbarButton
-        className={classNames({ active: showModal || active.link() })}
+        className={classNames({ active: showTooltip || active.link() })}
         onClick={() => {
-          setShowModal(!showModal);
+          setShowTooltip(!showTooltip);
           focus();
         }}
       >
-        <ImgLink />
+        <LinkIcon />
       </ToolbarButton>
-      {showModal && (
-        <Modal>
-          <div>
-            <input
-              autoFocus
-              placeholder="Enter link..."
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setHref(event.target.value)
+      {showTooltip && (
+        <Tooltip>
+          <input
+            autoFocus
+            placeholder="Enter link..."
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setHref(event.target.value)
+            }
+            value={href}
+            onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+              const { code } = event;
+
+              if (code === "Enter") {
+                onSubmit();
+                setShowTooltip(false);
               }
-              value={href}
-              onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
-                const { code } = event;
 
-                if (code === "Enter") {
-                  onSubmit();
-                  setShowModal(false);
-                }
-
-                if (code === "Escape") {
-                  setShowModal(false);
-                }
-              }}
-            />
-            {active.link() && (
-              <Button danger onClick={() => (onRemove(), setShowModal(false))}>
-                Eliminar
-              </Button>
-            )}
-          </div>
-          <div>
-            <Button secondary onClick={() => setShowModal(false)}>
-              Cancelar
+              if (code === "Escape") {
+                setShowTooltip(false);
+              }
+            }}
+          />
+          {active.link() ? (
+            <Button danger onClick={() => (onRemove(), setShowTooltip(false))}>
+              Eliminar
             </Button>
-            <Button onClick={() => (onSubmit(), setShowModal(false))}>
+          ) : (
+            <Button onClick={() => (onSubmit(), setShowTooltip(false))}>
               Guardar
             </Button>
-          </div>
-        </Modal>
+          )}
+        </Tooltip>
       )}
     </div>
   );
@@ -134,34 +128,22 @@ const LinkButton: FC = () => {
 
 export { LinkButton, LinkExtension };
 
-const Modal = styled.div`
+const Tooltip = styled.div`
   align-items: center;
   background-color: ${colors.white};
-  border: 1px solid ${colors.grey2};
+  border: 2px solid ${colors.grey4};
   border-radius: 4px;
   color: ${colors.dark};
   padding: 20px;
   position: absolute;
-  transform: translate(calc(20px - 50%), 15px);
+  transform: translate(calc(20px - 50%), 5px);
   z-index: 2;
-
-  > div {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-
-    :first-of-type {
-      margin-bottom: 20px;
-    }
-
-    :last-of-type {
-      button {
-        width: 100%;
-      }
-    }
-  }
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
 
   input {
+    box-sizing: border-box;
     height: 40px;
     width: 100%;
     padding: 0 10px;
@@ -170,14 +152,14 @@ const Modal = styled.div`
   &::before {
     content: "";
     background-color: ${colors.white};
-    border-left: 1px solid ${colors.grey2};
-    border-top: 1px solid ${colors.grey2};
+    border-left: 2px solid ${colors.grey4};
+    border-top: 2px solid ${colors.grey4};
     width: 20px;
     height: 20px;
     display: block;
     position: absolute;
     transform: translate(-50%, 0) rotate(45deg);
-    top: -11px;
+    top: -12px;
     left: 50%;
   }
 `;

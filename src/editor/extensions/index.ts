@@ -4,6 +4,7 @@ export * from "./Code";
 export * from "./CodeBlock";
 export * from "./Counter";
 export * from "./Heading";
+export * from "./Image";
 export * from "./Italic";
 export * from "./Link";
 export * from "./Markdown";
