@@ -29,10 +29,11 @@ type Selection = "start" | "end" | "all" | number;
 type StringHandler = "html" | "markdown";
 
 export const defaultExtensions = [
-  ["bold", "italic", "code", "codeBlock", "textColor"],
-  ["link"],
-  ["heading"],
+  ["heading", "bold", "italic", "underline"],
+  ["code", "codeBlock"],
+  ["textColor"],
   ["bulletList", "orderedList"],
+  ["link"],
 ];
 
 export type IEditorProps = {

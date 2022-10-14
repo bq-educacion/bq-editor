@@ -10,6 +10,7 @@ import {
   LinkButton,
   OrderedListButton,
   TextColorButton,
+  UnderlineButton,
 } from "../extensions";
 
 const toolbarHandlers = ({
@@ -31,6 +32,7 @@ const toolbarHandlers = ({
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}
         {extension === "textColor" && <TextColorButton color={color} />}
+        {extension === "underline" && <UnderlineButton />}
       </>
     ))
   );

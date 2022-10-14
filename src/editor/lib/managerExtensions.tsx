@@ -17,6 +17,7 @@ import {
   OrderedListExtension,
   PlaceholderExtension,
   TextColorExtension,
+  UnderlineExtension,
 } from "../extensions";
 import { defaultExtensions, IEditorProps } from "..";
 
@@ -70,6 +71,9 @@ const managerExtensions = ({
     ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
     ...(extensionsFlat.includes("textColor")
       ? [new TextColorExtension({})]
+      : []),
+    ...(extensionsFlat.includes("underline")
+      ? [new UnderlineExtension({})]
       : []),
   ];
 };
