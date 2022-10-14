@@ -18,10 +18,11 @@ import ToolbarButton from "../ToolbarButton";
 
 interface IImageProps {
   accept?: string[];
+  enableResizing?: boolean;
   onUpload?: (file: File) => Promise<string>;
 }
 
-const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
+const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
   const active = useActive();
@@ -55,6 +56,7 @@ const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
   const onSubmit = () => {
     if ((imgSrc || "") === "") return;
     insertImage({
+      resizable: enableResizing,
       align:
         imgAlign === "start" ||
         imgAlign === "end" ||

@@ -44,6 +44,7 @@ export type IEditorProps = {
   codeLanguage: CodeLanguage;
   color: string;
   dualEditor?: boolean;
+  enableImageResizing?: boolean;
   extensions?: string[][];
   initialContent?: string;
   maximumStrategy?: MaximumStrategy;

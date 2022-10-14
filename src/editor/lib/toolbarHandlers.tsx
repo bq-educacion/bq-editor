@@ -16,6 +16,7 @@ import {
 
 const toolbarHandlers = ({
   acceptMedia,
+  enableImageResizing,
   codeLanguage,
   color,
   extensions = defaultExtensions,
@@ -32,7 +33,11 @@ const toolbarHandlers = ({
         )}
         {extension === "heading" && <HeadingButtons />}
         {extension === "image" && (
-          <ImageButton accept={acceptMedia?.image} onUpload={onUploadMedia} />
+          <ImageButton
+            accept={acceptMedia?.image}
+            enableResizing={enableImageResizing}
+            onUpload={onUploadMedia}
+          />
         )}
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}

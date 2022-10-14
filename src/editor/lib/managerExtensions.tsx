@@ -24,6 +24,7 @@ import { defaultExtensions, IEditorProps } from "..";
 
 const managerExtensions = ({
   codeLanguage,
+  enableImageResizing,
   extensions = defaultExtensions,
   maximumStrategy,
   maximum,
@@ -63,7 +64,9 @@ const managerExtensions = ({
         ]
       : []),
     ...(extensionsFlat.includes("heading") ? [new HeadingExtension({})] : []),
-    ...(extensionsFlat.includes("image") ? [new ImageExtension()] : []),
+    ...(extensionsFlat.includes("image")
+      ? [new ImageExtension({ enableResizing: enableImageResizing })]
+      : []),
     ...(extensionsFlat.includes("italic") ? [new ItalicExtension({})] : []),
     ...(extensionsFlat.includes("link") ? [new LinkExtension({})] : []),
     ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),

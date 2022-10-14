@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { colors } from "../theme";
 
 interface IToolbarProps {
-  handlers: Element[][];
+  handlers: JSX.Element[][];
 }
 
 const Toolbar: FC<IToolbarProps> = ({ handlers }) => (

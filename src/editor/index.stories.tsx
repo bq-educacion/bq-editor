@@ -62,6 +62,7 @@ Media.args = {
   acceptMedia: {
     image: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
   },
+  enableImageResizing: true,
   onUploadMedia: (file: File) => {
     console.log(file);
     return new Promise((resolve) =>

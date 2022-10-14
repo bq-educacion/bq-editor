@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-explicit-any": "error",
     "no-sequences": "off",
+    "no-undef": "off",
     "react/prop-types": "off",
   },
   settings: {
