@@ -38,6 +38,9 @@ export const defaultExtensions = [
 ];
 
 export type IEditorProps = {
+  acceptMedia?: {
+    image: string[];
+  };
   codeLanguage: CodeLanguage;
   color: string;
   dualEditor?: boolean;
@@ -46,6 +49,7 @@ export type IEditorProps = {
   maximumStrategy?: MaximumStrategy;
   maximum?: number;
   onChange?: (doc: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+  onUploadMedia?: (file: File) => Promise<string>;
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;

@@ -15,9 +15,11 @@ import {
 } from "../extensions";
 
 const toolbarHandlers = ({
+  acceptMedia,
   codeLanguage,
   color,
   extensions = defaultExtensions,
+  onUploadMedia,
 }: IEditorProps) =>
   extensions.map((extensionsArray) =>
     extensionsArray.map((extension, index) => (
@@ -29,7 +31,9 @@ const toolbarHandlers = ({
           <CodeBlockButton language={codeLanguage} />
         )}
         {extension === "heading" && <HeadingButtons />}
-        {extension === "image" && <ImageButton />}
+        {extension === "image" && (
+          <ImageButton accept={acceptMedia?.image} onUpload={onUploadMedia} />
+        )}
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}

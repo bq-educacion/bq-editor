@@ -55,3 +55,19 @@ Counter.args = {
   maximumStrategy: "characters",
   maximum: 10,
 };
+
+export const Media = Template.bind({});
+
+Media.args = {
+  acceptMedia: {
+    image: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
+  },
+  onUploadMedia: (file: File) => {
+    console.log(file);
+    return new Promise((resolve) =>
+      resolve(
+        "https://pixabay.com/get/g538d4371e2a7c016e36c1ae1ea4de6313df1b2fa1cd8d647e0469854072e3d7db1584ddc5f003f57a9ea6698cc201db3dd62144a7be99d31da649289ee808f61de65d01957f03d11b355c041d7fe760e_640.jpg"
+      )
+    );
+  },
+};

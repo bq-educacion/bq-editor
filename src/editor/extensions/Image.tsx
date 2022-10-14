@@ -15,11 +15,20 @@ import { colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
 import ToolbarButton from "../ToolbarButton";
 
-const ImageButton: FC = () => {
+interface IImageProps {
+  accept?: string[];
+  onUpload?: (file: File) => Promise<string>;
+}
+
+const ImageButton: FC<IImageProps> = ({ accept, onUpload }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLInputElement>(null);
   const active = useActive();
   const { insertImage } = useCommands();
+
+  const [error, setError] = useState<boolean>(false);
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
+  const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
 
   const [imgAlign, setImgAlign] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
@@ -29,7 +38,18 @@ const ImageButton: FC = () => {
   const [imgTitle, setImgTitle] = useState<string>("");
   const [imgWidth, setImgWidth] = useState<string>("");
 
-  const onRemove = () => console.log("TODO");
+  const onFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files?.[0]) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    try {
+      onUpload?.(event.target.files![0]).then(setImgSrc);
+    } catch (e) {
+      setError(true);
+    }
+  };
 
   const onSubmit = () => {
     if ((imgSrc || "") === "") return;
@@ -53,6 +73,11 @@ const ImageButton: FC = () => {
     });
     setImgSrc("");
   };
+
+  useEffect(() => {
+    setError(false);
+    setShowMoreOptions(false);
+  }, [showTooltip]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) =>
@@ -83,7 +108,7 @@ const ImageButton: FC = () => {
             <label>Url*</label>
             <input
               autoFocus
-              placeholder="Enter url..."
+              placeholder="Url"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 setImgSrc(event.target.value)
               }
@@ -101,84 +126,106 @@ const ImageButton: FC = () => {
                 }
               }}
             />
+            {onUpload && (
+              <>
+                <p>o</p>
+                <input
+                  accept={accept?.join(", ")}
+                  onChange={onFile}
+                  ref={imgRef}
+                  style={{ display: "none" }}
+                  type="file"
+                />
+                <Button
+                  onClick={(e) => (
+                    e.stopPropagation(), imgRef.current?.click()
+                  )}
+                >
+                  Archivo
+                </Button>
+              </>
+            )}
           </div>
-          <div>
-            <label>Alt</label>
-            <input
-              placeholder="Enter alt..."
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgAlt(event.target.value)
-              }
-              value={imgAlt}
-            />
-          </div>
-          <div>
-            <label>Title</label>
-            <input
-              placeholder="Enter title..."
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgTitle(event.target.value)
-              }
-              value={imgTitle}
-            />
-          </div>
-          <div>
-            <label>Height</label>
-            <input
-              placeholder="Enter height..."
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgHeight(event.target.value)
-              }
-              value={imgHeight}
-            />
-          </div>
-          <div>
-            <label>Width</label>
-            <input
-              placeholder="Enter width..."
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgWidth(event.target.value)
-              }
-              value={imgWidth}
-            />
-          </div>
-          <div>
-            <label>Align</label>
-            <input
-              placeholder="center | end | justify | left | match-parent | right | start"
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgAlign(event.target.value)
-              }
-              value={imgAlign}
-            />
-          </div>
-          <div>
-            <label>Rotate</label>
-            <input
-              placeholder="Enter rotate..."
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgRotate(event.target.value)
-              }
-              value={imgRotate}
-            />
-          </div>
-          {active.image() ? (
-            <Button danger onClick={() => (onRemove(), setShowTooltip(false))}>
-              Eliminar
-            </Button>
+          {error && <p>An error has occurred, please try again.</p>}
+          {!showMoreOptions ? (
+            <a onClick={(e) => (e.stopPropagation(), setShowMoreOptions(true))}>
+              Show more options
+            </a>
           ) : (
-            <div>
-              <Button
-                secondary
-                onClick={() => (onSubmit(), setShowTooltip(false))}
-              >
-                Cancelar
-              </Button>
-              <Button onClick={() => (onSubmit(), setShowTooltip(false))}>
-                Guardar
-              </Button>
-            </div>
+            <>
+              <div>
+                <label>Alt</label>
+                <input
+                  placeholder="Alt"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setImgAlt(event.target.value)
+                  }
+                  value={imgAlt}
+                />
+              </div>
+              <div>
+                <label>Title</label>
+                <input
+                  placeholder="Title"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setImgTitle(event.target.value)
+                  }
+                  value={imgTitle}
+                />
+              </div>
+              <div>
+                <label>Height</label>
+                <input
+                  placeholder="0"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setImgHeight(event.target.value)
+                  }
+                  value={imgHeight}
+                />
+              </div>
+              <div>
+                <label>Width</label>
+                <input
+                  placeholder="0"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setImgWidth(event.target.value)
+                  }
+                  value={imgWidth}
+                />
+              </div>
+              <div>
+                <label>Align</label>
+                <input
+                  placeholder="center | end | justify | left | match-parent | right | start"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setImgAlign(event.target.value)
+                  }
+                  value={imgAlign}
+                />
+              </div>
+              <div>
+                <label>Rotate</label>
+                <input
+                  placeholder="180deg"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setImgRotate(event.target.value)
+                  }
+                  value={imgRotate}
+                />
+              </div>
+            </>
           )}
+          <div>
+            <Button
+              secondary
+              onClick={() => (onSubmit(), setShowTooltip(false))}
+            >
+              Cancelar
+            </Button>
+            <Button onClick={() => (onSubmit(), setShowTooltip(false))}>
+              Guardar
+            </Button>
+          </div>
         </Tooltip>
       )}
     </div>
@@ -199,7 +246,12 @@ const Tooltip = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 500px;
+  width: 386px;
+
+  a {
+    cursor: pointer;
+    color: ${colors.orange1};
+  }
 
   > div {
     display: flex;
