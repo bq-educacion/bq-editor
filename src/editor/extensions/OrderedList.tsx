@@ -1,6 +1,7 @@
 import { useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { OrderedListExtension } from "remirror/extensions";
+import ImgListNumber from "../assets/icons/ListNumber";
 import ToolbarButton from "../ToolbarButton";
 
 const OrderedListButton: FC = () => {
@@ -11,7 +12,7 @@ const OrderedListButton: FC = () => {
       onClick={() => toggleOrderedList()}
       disabled={!toggleOrderedList.enabled()}
     >
-      toggleOrderedList
+      <ImgListNumber />
     </ToolbarButton>
   );
 };

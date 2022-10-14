@@ -18,6 +18,7 @@ import React, {
   useState,
 } from "react";
 import { LinkExtension } from "remirror/extensions";
+import ImgLink from "../assets/icons/Link";
 import Button from "../../button";
 import { colors } from "../../theme";
 import ToolbarButton from "../ToolbarButton";
@@ -86,7 +87,7 @@ const LinkButton: FC = () => {
           focus();
         }}
       >
-        Link
+        <ImgLink />
       </ToolbarButton>
       {showModal && (
         <Modal>

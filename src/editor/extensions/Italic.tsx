@@ -2,6 +2,7 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { ItalicExtension } from "remirror/extensions";
+import ImgItalic from "../assets/icons/Italic";
 import ToolbarButton from "../ToolbarButton";
 
 const ItalicButton: FC = () => {
@@ -17,7 +18,7 @@ const ItalicButton: FC = () => {
         focus();
       }}
     >
-      I
+      <ImgItalic />
     </ToolbarButton>
   );
 };

@@ -18,7 +18,11 @@ module.exports = {
     ecmaVersion: "latest",
   },
   plugins: ["react", "@typescript-eslint"],
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-explicit-any": "error",
+    "no-sequences": "off",
+    "react/prop-types": "off",
+  },
   settings: {
     react: {
       version: "detect",

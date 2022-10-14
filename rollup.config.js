@@ -1,8 +1,9 @@
+import json from "@rollup/plugin-json";
+import sucrase from "@rollup/plugin-sucrase";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import tsConfig from "./tsconfig.json";
-
-const packageJson = require("./package.json");
+import packageJson from "./package.json";
 
 export default [
   {
@@ -22,6 +23,11 @@ export default [
     plugins: [
       typescript({
         sourceMap: tsConfig.compilerOptions.sourceMap,
+      }),
+      json(),
+      sucrase({
+        exclude: ["node_modules/**"],
+        transforms: ["typescript", "jsx"],
       }),
     ],
   },

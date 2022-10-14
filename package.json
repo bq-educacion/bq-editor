@@ -32,6 +32,8 @@
   "devDependencies": {
     "@babel/core": "^7.18.13",
     "@remirror/pm": "^2.0.0-beta.0",
+    "@rollup/plugin-json": "^5.0.0",
+    "@rollup/plugin-sucrase": "^5.0.0",
     "@rollup/plugin-typescript": "^8.4.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",

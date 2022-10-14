@@ -1,6 +1,7 @@
 import { useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { BulletListExtension } from "remirror/extensions";
+import ImgListBullet from "../assets/icons/ListBullet";
 import ToolbarButton from "../ToolbarButton";
 
 const BulletListButton: FC = () => {
@@ -11,7 +12,7 @@ const BulletListButton: FC = () => {
       onClick={() => toggleBulletList()}
       disabled={!toggleBulletList.enabled()}
     >
-      toggleBulletList
+      <ImgListBullet />
     </ToolbarButton>
   );
 };

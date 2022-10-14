@@ -2,6 +2,7 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeExtension } from "remirror/extensions";
+import ImgCode from "../assets/icons/Code";
 import ToolbarButton from "../ToolbarButton";
 
 const CodeButton: FC = () => {
@@ -17,7 +18,7 @@ const CodeButton: FC = () => {
         focus();
       }}
     >
-      Code
+      <ImgCode />
     </ToolbarButton>
   );
 };

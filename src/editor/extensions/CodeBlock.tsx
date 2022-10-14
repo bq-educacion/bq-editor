@@ -2,6 +2,7 @@ import { useActive, useCommands } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeBlockExtension } from "remirror/extensions";
+import ImgCodeBlock from "../assets/icons/CodeBlock";
 import ToolbarButton from "../ToolbarButton";
 
 interface ICodeBlockButtonProps {
@@ -25,7 +26,7 @@ const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
         focus();
       }}
     >
-      Code Block
+      <ImgCodeBlock />
     </ToolbarButton>
   );
 };

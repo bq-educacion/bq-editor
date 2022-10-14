@@ -14,7 +14,9 @@ import { IEditorProps } from ".";
 import { RemirrorEventListenerProps } from "remirror";
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   visual: UseRemirrorReturn<ReactExtensions<any>[number]>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   markdown: UseRemirrorReturn<ReactExtensions<any>>;
 }
 
@@ -79,6 +81,7 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
     stringHandler,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Provider: any = EditorProvider;
 
   return (
@@ -120,8 +123,7 @@ const MarkdownTextEditor: FC = () => {
         helpers,
         state,
       }): RemirrorEventListenerProps<Remirror.Extensions> => {
-        const text = helpers.getText({ state });
-        setVisual(text);
+        setVisual(helpers.getText({ state }));
         return null;
       }}
     />

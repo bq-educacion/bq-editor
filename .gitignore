@@ -7,8 +7,11 @@
 # Generate output
 dist
 
-# Configuration files
-.nvmrc
-
 # Storybook
 storybook-static
+
+# Rollup cache
+.rollup.cache
+
+# TypeScript cache
+*.tsbuildinfo
