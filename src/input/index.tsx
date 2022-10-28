@@ -8,7 +8,7 @@ export type IInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 
 export default styled.input<IInputProps>`
   background-color: ${(props) =>
-    props.error ? adjustColorOpacity(colors.red3, 0.22) : "white"};
+    props.error ? adjustColorOpacity(colors.red3, 0.22) : colors.white};
   border: solid 1px ${(props) => (props.error ? colors.red3 : colors.grey3)};
   border-radius: 3px;
   box-sizing: border-box;

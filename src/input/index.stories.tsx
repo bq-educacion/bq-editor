@@ -1,7 +1,7 @@
 import Input from ".";
 
 export default {
-  title: "Input",
+  title: "atoms/Input",
   component: Input,
 };
 

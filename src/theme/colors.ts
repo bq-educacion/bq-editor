@@ -27,6 +27,11 @@ const red2 = "#e4002b";
 const red3 = "#ff1842";
 const red4 = "#ff5776";
 
+const turquoise1 = "#37948c";
+const turquoise2 = "#44b8af";
+const turquoise3 = "#69c6bf";
+const turquoise4 = "#a1dbd7";
+
 const yellow1 = "#d18800";
 const yellow2 = "#f6a001";
 const yellow3 = "#f8b333";
@@ -58,6 +63,10 @@ export default {
   red2,
   red3,
   red4,
+  turquoise1,
+  turquoise2,
+  turquoise3,
+  turquoise4,
   yellow1,
   yellow2,
   yellow3,

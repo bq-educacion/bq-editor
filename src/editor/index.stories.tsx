@@ -3,7 +3,7 @@ import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from ".";
 import { colors } from "../theme";
 
 export default {
-  title: "Editor",
+  title: "editor/Editor",
   component: Editor,
 };
 
