@@ -1,6 +1,6 @@
 import { addons } from "@storybook/addons";
-import bqTheme from "./bqTheme";
+import theme from "./theme";
 
 addons.setConfig({
-  theme: bqTheme,
+  theme,
 });
