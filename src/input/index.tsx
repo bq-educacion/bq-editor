@@ -22,12 +22,12 @@ export default styled.input<IInputProps>`
     font-style: italic;
   }
 
-  :focus {
+  &:focus {
     border-color: ${(props) => (props.error ? colors.red3 : colors.dark)};
     outline: none;
   }
 
-  :disabled {
+  &:disabled {
     background-color: ${colors.grey6};
     border-color: ${colors.grey4};
     pointer-events: none;

@@ -115,6 +115,10 @@ const Container = styled.div<{
     css`
       border-color: ${props.error ? colors.red3 : colors.grey1};
       z-index: 1;
+
+      > div {
+        border-color: ${props.error ? colors.red3 : colors.grey1};
+      }
     `}
 
   ${(props) =>
