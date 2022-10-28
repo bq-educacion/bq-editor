@@ -15,7 +15,7 @@ const Template = (args: IEditorProps) => {
   return (
     <>
       <Editor onChange={setDoc} {...args} />
-      <p>
+      <p style={{ color: colors.grey1 }}>
         {doc &&
           JSON.stringify(
             args.stringHandler === "html" ? editorNodeToHtml(doc) : doc

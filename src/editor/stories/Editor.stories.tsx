@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ProsemirrorNode } from "remirror";
 import Editor, { editorNodeToHtml, IEditorProps } from "..";
+import { colors } from "../../theme";
 import basic from "./content/basic.json";
 import html from "./content/html.js";
 import markdown from "./content/markdown.js";
@@ -16,7 +17,7 @@ const Template = (args: IEditorProps) => {
   return (
     <>
       <Editor onChange={setDoc} {...args} />
-      <p>
+      <p style={{ color: colors.grey1 }}>
         {doc &&
           JSON.stringify(
             args.stringHandler === "html" ? editorNodeToHtml(doc) : doc

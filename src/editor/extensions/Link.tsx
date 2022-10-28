@@ -23,6 +23,8 @@ import { colors } from "../../theme";
 import LinkIcon from "../assets/icons/Link";
 import ToolbarButton from "../ToolbarButton";
 
+// TODO: Control link attributes
+
 function useFloatingLinkState() {
   const { link } = useAttrs();
   const chain = useChainedCommands();
