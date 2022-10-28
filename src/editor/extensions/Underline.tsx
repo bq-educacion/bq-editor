@@ -1,4 +1,9 @@
-import { useActive, useCommands } from "@remirror/react";
+import {
+  useActive,
+  useChainedCommands,
+  useCommands,
+  useCurrentSelection,
+} from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { UnderlineExtension } from "remirror/extensions";
@@ -7,7 +12,9 @@ import ToolbarButton from "../ToolbarButton";
 
 const UnderlineButton: FC = () => {
   const active = useActive();
+  const chain = useChainedCommands();
   const { toggleUnderline } = useCommands();
+  const { to, from } = useCurrentSelection();
 
   return (
     <ToolbarButton
@@ -15,7 +22,7 @@ const UnderlineButton: FC = () => {
       disabled={!toggleUnderline.enabled()}
       onClick={() => {
         toggleUnderline();
-        focus();
+        chain.focus({ to, from }).run();
       }}
     >
       <UnderlineIcon />

@@ -43,6 +43,7 @@ export type IEditorProps = {
   acceptMedia?: {
     image: string[];
   };
+  autoLink?: boolean;
   codeLanguage?: CodeLanguage;
   color?: string;
   dualEditor?: boolean;

@@ -107,7 +107,6 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
         className={classNames({ active: showTooltip || active.image() })}
         onClick={() => {
           setShowTooltip(!showTooltip);
-          focus();
         }}
       >
         <ImageIcon />

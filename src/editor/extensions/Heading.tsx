@@ -1,4 +1,9 @@
-import { useActive, useCommands } from "@remirror/react";
+import {
+  useActive,
+  useChainedCommands,
+  useCommands,
+  useCurrentSelection,
+} from "@remirror/react";
 import React, { FC } from "react";
 import { HeadingExtension } from "remirror/extensions";
 import ToolbarSelect from "../ToolbarSelect";
@@ -8,7 +13,9 @@ interface IHeadingProps {
 }
 
 const HeadingButtons: FC<IHeadingProps> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
+  const chain = useChainedCommands();
   const { toggleHeading } = useCommands();
+  const { to, from } = useCurrentSelection();
   useActive();
 
   return (
@@ -17,7 +24,7 @@ const HeadingButtons: FC<IHeadingProps> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
       placeholder="Normal text"
       onChange={(level) => {
         toggleHeading({ level: parseInt(level) });
-        focus();
+        chain.focus({ to, from }).run();
       }}
       options={levels.map((level) => ({
         active: !toggleHeading.enabled({ level }),

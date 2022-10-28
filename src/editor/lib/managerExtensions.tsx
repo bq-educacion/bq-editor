@@ -23,6 +23,7 @@ import {
 import { IEditorProps } from "..";
 
 const managerExtensions = ({
+  autoLink = false,
   codeLanguage,
   enableImageResizing,
   extensions = [],
@@ -72,7 +73,9 @@ const managerExtensions = ({
         ? [new ImageExtension({ enableResizing: enableImageResizing })]
         : []),
       ...(extensionsFlat.includes("italic") ? [new ItalicExtension({})] : []),
-      ...(extensionsFlat.includes("link") ? [new LinkExtension({})] : []),
+      ...(extensionsFlat.includes("link")
+        ? [new LinkExtension({ autoLink })]
+        : []),
       ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
       ...(extensionsFlat.includes("orderedList")
         ? [new OrderedListExtension({})]

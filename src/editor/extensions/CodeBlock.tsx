@@ -1,4 +1,9 @@
-import { useActive, useCommands } from "@remirror/react";
+import {
+  useActive,
+  useChainedCommands,
+  useCommands,
+  useCurrentSelection,
+} from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeBlockExtension } from "remirror/extensions";
@@ -15,7 +20,9 @@ const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
   wrap,
 }) => {
   const active = useActive();
+  const chain = useChainedCommands();
   const { toggleCodeBlock } = useCommands();
+  const { to, from } = useCurrentSelection();
 
   return (
     <ToolbarButton
@@ -23,7 +30,7 @@ const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
       disabled={!toggleCodeBlock.enabled({ language, wrap })}
       onClick={() => {
         toggleCodeBlock({ language, wrap });
-        focus();
+        chain.focus({ to, from }).run();
       }}
     >
       <CodeBlockIcon />

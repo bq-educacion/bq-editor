@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { FromToProps } from "@remirror/core-types";
 import {
   useActive,
   useAttrs,
@@ -27,7 +26,7 @@ import ToolbarButton from "../ToolbarButton";
 function useFloatingLinkState() {
   const { link } = useAttrs();
   const chain = useChainedCommands();
-  const { to } = useCurrentSelection();
+  const { to, from } = useCurrentSelection();
 
   const url = (link()?.href as string) ?? "";
   const [href, setHref] = useState<string>(url);
@@ -35,15 +34,13 @@ function useFloatingLinkState() {
   const onRemove = useCallback(() => chain.removeLink().focus().run(), [chain]);
 
   const onSubmit = useCallback(() => {
-    let range: FromToProps | undefined;
-
     if (href === "") {
       chain.removeLink();
     } else {
-      chain.updateLink({ href, auto: false }, range);
+      chain.updateLink({ href, auto: false }, { to, from });
     }
 
-    chain.focus(range?.to ?? to).run();
+    chain.focus({ to, from }).run();
   }, [chain, href, to]);
 
   useEffect(() => {
@@ -68,7 +65,7 @@ const LinkButton: FC = () => {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   useEffect(() => {
-    setHref("");
+    !showTooltip && setHref("");
   }, [showTooltip]);
 
   useEffect(() => {
@@ -89,7 +86,6 @@ const LinkButton: FC = () => {
         className={classNames({ active: showTooltip || active.link() })}
         onClick={() => {
           setShowTooltip(!showTooltip);
-          focus();
         }}
       >
         <LinkIcon />
