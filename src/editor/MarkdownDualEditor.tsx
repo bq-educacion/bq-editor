@@ -11,7 +11,7 @@ import { DocExtension } from "remirror/extensions";
 import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
 import { IEditorProps } from ".";
-import { RemirrorEventListenerProps } from "remirror";
+import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -101,7 +101,7 @@ const VisualEditor: FC = ({ children }) => {
       onChange={({
         helpers,
         state,
-      }): RemirrorEventListenerProps<Remirror.Extensions> => {
+      }): RemirrorEventListenerProps<AnyExtension> => {
         setMarkdown(helpers.getMarkdown(state));
         return null;
       }}
@@ -122,7 +122,7 @@ const MarkdownTextEditor: FC = () => {
       onChange={({
         helpers,
         state,
-      }): RemirrorEventListenerProps<Remirror.Extensions> => {
+      }): RemirrorEventListenerProps<AnyExtension> => {
         setVisual(helpers.getText({ state }));
         return null;
       }}

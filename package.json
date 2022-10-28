@@ -14,13 +14,13 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@remirror/extension-count": "^1.0.8",
-    "@remirror/react": "^1.0.43",
+    "@remirror/react": "^2.0.14",
     "@storybook/theming": "^6.5.13",
     "classnames": "^2.3.1",
     "create-context-state": "^2.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "remirror": "^1.0.89"
+    "remirror": "^2.0.13"
   },
   "peerDependencies": {
     "@remirror/extension-count": "^1.0.8",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
-    "@remirror/pm": "^2.0.0-beta.0",
+    "@remirror/pm": "^2.0.1",
     "@rollup/plugin-json": "^5.0.0",
     "@rollup/plugin-sucrase": "^5.0.0",
     "@rollup/plugin-typescript": "^8.4.0",

@@ -1,6 +1,7 @@
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
 import {
+  AnyExtension,
   htmlToProsemirrorNode,
   prosemirrorNodeToHtml,
   RemirrorEventListenerProps,
@@ -88,7 +89,7 @@ const Editor: FC<IEditorProps> = (props) => {
     <Remirror
       manager={manager}
       initialContent={initialContent}
-      onChange={({ state }: RemirrorEventListenerProps<Remirror.Extensions>) =>
+      onChange={({ state }: RemirrorEventListenerProps<AnyExtension>) =>
         onChange(state.doc)
       }
     >
