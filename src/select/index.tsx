@@ -96,7 +96,6 @@ const Container = styled.div<{
     props.error ? adjustColorOpacity(colors.red3, 0.22) : colors.white};
   border-radius: 5px;
   border: solid 1px ${(props) => (props.error ? colors.red3 : colors.grey3)};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   color: ${(props) => (props.error ? colors.red3 : colors.dark)};
   cursor: pointer;

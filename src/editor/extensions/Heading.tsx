@@ -27,7 +27,7 @@ const HeadingButtons: FC<IHeadingProps> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
         chain.focus({ to, from }).run();
       }}
       options={levels.map((level) => ({
-        active: !toggleHeading.enabled({ level }),
+        active: toggleHeading.enabled() && !toggleHeading.enabled({ level }),
         label: `H${level}`,
         value: `${level}`,
       }))}
