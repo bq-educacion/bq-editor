@@ -49,6 +49,7 @@ export type IEditorProps = {
   editable?: boolean;
   enableImageResizing?: boolean;
   extensions?: string[][];
+  headingLevels?: number[];
   initialContent?: string;
   maximumStrategy?: MaximumStrategy;
   maximum?: number;

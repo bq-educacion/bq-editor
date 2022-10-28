@@ -23,6 +23,7 @@ export interface ISelectProps {
 }
 
 const Select: FC<ISelectProps> = ({
+  className,
   error,
   onChange,
   options,
@@ -56,7 +57,7 @@ const Select: FC<ISelectProps> = ({
         <DropIcon />
       </StyledSelect>
       {expanded && (
-        <Values>
+        <Values scroll={options.length > 6}>
           {options.length > 0 ? (
             <div>
               {options.map(
@@ -176,7 +177,7 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
   }
 `;
 
-const Values = styled.div<{ search?: boolean }>`
+const Values = styled.div<{ scroll?: boolean; search?: boolean }>`
   background-color: ${colors.white};
   border-radius: 5px;
   border: solid 1px ${colors.grey3};
@@ -187,8 +188,7 @@ const Values = styled.div<{ search?: boolean }>`
   top: 5px;
   transform: translateY(45px);
   z-index: 2;
-  max-height: 150px;
-  overflow-y: scroll;
+  max-height: 155px;
 
   > div {
     display: flex;
@@ -196,21 +196,27 @@ const Values = styled.div<{ search?: boolean }>`
     padding: 5px 0;
   }
 
-  ::-webkit-scrollbar:vertical {
-    display: block;
-  }
+  ${(props) =>
+    props.scroll &&
+    css`
+      overflow-y: scroll;
 
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
+      ::-webkit-scrollbar:vertical {
+        display: block;
+      }
 
-  ::-webkit-scrollbar-thumb {
-    padding: 5px;
-    background-color: ${colors.grey1};
-    border-radius: 9999px;
-    border: 5px solid transparent;
-    background-clip: padding-box;
-  }
+      ::-webkit-scrollbar {
+        width: 15px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        padding: 5px;
+        background-color: ${colors.grey1};
+        border-radius: 9999px;
+        border: 5px solid transparent;
+        background-clip: padding-box;
+      }
+    `}
 `;
 
 const ValuesEmpty = styled.div`

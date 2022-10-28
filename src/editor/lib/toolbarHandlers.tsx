@@ -20,6 +20,7 @@ const toolbarHandlers = ({
   codeLanguage,
   color,
   extensions = [],
+  headingLevels,
   onUploadMedia,
 }: IEditorProps) =>
   extensions.map((extensionsArray) =>
@@ -31,7 +32,7 @@ const toolbarHandlers = ({
         {extension === "codeBlock" && (
           <CodeBlockButton language={codeLanguage} />
         )}
-        {extension === "heading" && <HeadingButtons />}
+        {extension === "heading" && <HeadingButtons levels={headingLevels} />}
         {extension === "image" && (
           <ImageButton
             accept={acceptMedia?.image}

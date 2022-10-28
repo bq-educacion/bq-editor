@@ -26,6 +26,7 @@ const managerExtensions = ({
   codeLanguage,
   enableImageResizing,
   extensions = [],
+  headingLevels,
   maximumStrategy,
   maximum,
   placeholder,
@@ -64,7 +65,9 @@ const managerExtensions = ({
             }),
           ]
         : []),
-      ...(extensionsFlat.includes("heading") ? [new HeadingExtension({})] : []),
+      ...(extensionsFlat.includes("heading")
+        ? [new HeadingExtension(headingLevels ? { levels: headingLevels } : {})]
+        : []),
       ...(extensionsFlat.includes("image")
         ? [new ImageExtension({ enableResizing: enableImageResizing })]
         : []),

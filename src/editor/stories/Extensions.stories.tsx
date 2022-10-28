@@ -30,6 +30,7 @@ Default.args = {
   codeLanguage: "typescript",
   color: colors.orange1,
   extensions: defaultExtensions,
+  headingLevels: [1, 2, 3, 4],
   placeholder: "Start typing...",
 };
 
