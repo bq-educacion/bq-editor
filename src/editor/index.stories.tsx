@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { ProsemirrorNode } from "remirror";
 import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from ".";
 import { colors } from "../theme";
+import basic from "./assets/test-content/basic.json";
+import html from "./assets/test-content/html.js";
+import markdown from "./assets/test-content/markdown.js";
 
 export default {
   title: "editor/Editor",
@@ -8,7 +12,7 @@ export default {
 };
 
 const Template = (args: IEditorProps) => {
-  const [doc, setDoc] = useState<any>(); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [doc, setDoc] = useState<ProsemirrorNode>();
 
   return (
     <>
@@ -26,6 +30,7 @@ const Template = (args: IEditorProps) => {
 export const Extensions = Template.bind({});
 
 Extensions.args = {
+  initialContent: Object.create(basic),
   codeLanguage: "typescript",
   color: colors.orange1,
   extensions: defaultExtensions,
@@ -35,7 +40,7 @@ Extensions.args = {
 export const Html = Template.bind({});
 
 Html.args = {
-  initialContent: "<p>I love <b>HTML</b> !</p>",
+  initialContent: html,
   stringHandler: "html",
   placeholder: "Start htmling...",
 };
@@ -44,7 +49,7 @@ export const Markdown = Template.bind({});
 
 Markdown.args = {
   dualEditor: false,
-  initialContent: "**Markdown** content is the _best_ !",
+  initialContent: markdown,
   stringHandler: "markdown",
   placeholder: "Start markdowning...",
 };

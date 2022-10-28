@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import {
   AnyExtension,
   htmlToProsemirrorNode,
+  ProsemirrorNode,
   prosemirrorNodeToHtml,
   RemirrorEventListenerProps,
 } from "remirror";
@@ -47,10 +48,10 @@ export type IEditorProps = {
   dualEditor?: boolean;
   enableImageResizing?: boolean;
   extensions?: string[][];
-  initialContent?: string;
+  initialContent?: string | ProsemirrorNode;
   maximumStrategy?: MaximumStrategy;
   maximum?: number;
-  onChange?: (doc: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+  onChange?: (doc: ProsemirrorNode) => void;
   onUploadMedia?: (file: File) => Promise<string>;
   placeholder?: string;
   selection?: Selection;
