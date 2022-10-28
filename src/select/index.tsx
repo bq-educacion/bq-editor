@@ -23,7 +23,6 @@ export interface ISelectProps {
 }
 
 const Select: FC<ISelectProps> = ({
-  className,
   error,
   onChange,
   options,
