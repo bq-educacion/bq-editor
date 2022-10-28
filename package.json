@@ -1,6 +1,6 @@
 {
-  "name": "storybq",
-  "description": "BQ component library",
+  "name": "storybooq",
+  "description": "BQ Component Library",
   "version": "0.0.1",
   "author": "Carmen Domínguez Campillo",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.10.4",
     "@remirror/extension-count": "^1.0.8",
     "@remirror/react": "^1.0.43",
+    "@storybook/theming": "^6.5.13",
     "classnames": "^2.3.1",
     "create-context-state": "^2.0.0",
     "react": "^17.0.0",
