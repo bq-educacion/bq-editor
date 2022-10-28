@@ -96,7 +96,17 @@
       "content": [
         {
           "type": "text",
-          "text": "// TODO"
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://educacion.bq.com/",
+                "target": null,
+                "auto": false
+              }
+            }
+          ],
+          "text": "bq educación"
         }
       ]
     },
@@ -113,8 +123,18 @@
       "type": "paragraph",
       "content": [
         {
-          "type": "text",
-          "text": "// TODO"
+          "type": "image",
+          "attrs": {
+            "alt": "BQ Educación",
+            "crop": null,
+            "height": null,
+            "width": null,
+            "rotate": null,
+            "src": "https://educacion.bq.com/wp-content/uploads/2020/11/BQ_Educacion_versiones-logo_rgb_fondo_colores_Mesa-de-trabajo-1-copia-10-3.png.webp",
+            "title": "BQ Educación",
+            "fileName": null,
+            "resizable": false
+          }
         }
       ]
     },
