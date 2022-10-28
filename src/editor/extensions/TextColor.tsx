@@ -7,7 +7,7 @@ import { colors } from "../../theme";
 import ToolbarButton from "../ToolbarButton";
 
 interface ITextColorButtonProps {
-  color: string;
+  color?: string;
 }
 
 const TextColorButton: FC<ITextColorButtonProps> = ({

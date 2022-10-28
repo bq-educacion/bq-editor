@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { ProsemirrorNode } from "remirror";
-import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from ".";
-import { colors } from "../theme";
-import basic from "./assets/test-content/basic.json";
-import html from "./assets/test-content/html.js";
-import markdown from "./assets/test-content/markdown.js";
+import Editor, { defaultExtensions, editorNodeToHtml, IEditorProps } from "..";
+import { colors } from "../../theme";
 
 export default {
-  title: "editor/Editor",
+  title: "editor/Extensions",
   component: Editor,
 };
 
@@ -27,31 +24,13 @@ const Template = (args: IEditorProps) => {
   );
 };
 
-export const Extensions = Template.bind({});
+export const Default = Template.bind({});
 
-Extensions.args = {
-  initialContent: Object.create(basic),
+Default.args = {
   codeLanguage: "typescript",
   color: colors.orange1,
   extensions: defaultExtensions,
   placeholder: "Start typing...",
-};
-
-export const Html = Template.bind({});
-
-Html.args = {
-  initialContent: html,
-  stringHandler: "html",
-  placeholder: "Start htmling...",
-};
-
-export const Markdown = Template.bind({});
-
-Markdown.args = {
-  dualEditor: false,
-  initialContent: markdown,
-  stringHandler: "markdown",
-  placeholder: "Start markdowning...",
 };
 
 export const Counter = Template.bind({});

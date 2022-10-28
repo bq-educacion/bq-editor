@@ -136,16 +136,7 @@
       "content": [
         {
           "type": "text",
-          "text": "const a = 'asdf';\n"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "playtime is just beginning"
+          "text": "const a = 'asdf';"
         }
       ]
     },

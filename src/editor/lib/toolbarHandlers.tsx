@@ -1,5 +1,5 @@
 import React from "react";
-import { defaultExtensions, IEditorProps } from "..";
+import { IEditorProps } from "..";
 import {
   BoldButton,
   BulletListButton,
@@ -19,7 +19,7 @@ const toolbarHandlers = ({
   enableImageResizing,
   codeLanguage,
   color,
-  extensions = defaultExtensions,
+  extensions = [],
   onUploadMedia,
 }: IEditorProps) =>
   extensions.map((extensionsArray) =>

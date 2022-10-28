@@ -20,12 +20,12 @@ import {
   TextColorExtension,
   UnderlineExtension,
 } from "../extensions";
-import { defaultExtensions, IEditorProps } from "..";
+import { IEditorProps } from "..";
 
 const managerExtensions = ({
   codeLanguage,
   enableImageResizing,
-  extensions = defaultExtensions,
+  extensions = [],
   maximumStrategy,
   maximum,
   placeholder,

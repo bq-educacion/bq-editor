@@ -13,12 +13,8 @@ export default styled.div`
     border-top: none;
     color: ${colors.dark};
     outline: none;
-    padding: 10px;
+    padding: 1px 1em;
     white-space: pre-wrap;
     min-height: 100px;
-
-    p {
-      margin: 0;
-    }
   }
 `;

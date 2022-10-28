@@ -24,10 +24,7 @@ Blockquote
 
 \`\`\`ts
 const a = 'asdf';
-
 \`\`\`
-
-playtime is just beginning
 
 ## List support
 
