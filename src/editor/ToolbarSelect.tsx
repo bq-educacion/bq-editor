@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import Select from "../select";
 import { colors } from "../theme";
-
-const height = 40; // px
+import { height } from "./Toolbar";
 
 export default styled(Select)`
   background-color: ${colors.white};

@@ -6,6 +6,8 @@ interface IToolbarProps {
   handlers: JSX.Element[][];
 }
 
+export const height = 40; // px
+
 const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
   <Wrap>
     {handlers.map((elements, index) => (

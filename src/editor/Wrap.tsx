@@ -4,7 +4,7 @@ import { colors } from "../theme";
 export default styled.div`
   position: relative;
 
-  .remirror-editor-wrapper > div {
+  > div > div {
     align-items: center;
     background-color: ${colors.white};
     border: 2px solid ${colors.grey5};

@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "../button";
 import { colors } from "../theme";
-
-const height = 40; // px
+import { height } from "./Toolbar";
 
 export default styled(Button)`
   background-color: ${colors.white};
