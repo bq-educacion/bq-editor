@@ -7,7 +7,6 @@ export default {
 
 export const Active = {
   args: {
-    onChange: console.log,
     options: [
       {
         label: "Label 1",
@@ -27,7 +26,6 @@ export const Active = {
 export const Disabled = {
   args: {
     disabled: true,
-    onChange: console.log,
     options: [
       {
         label: "Label 1",
@@ -47,7 +45,6 @@ export const Disabled = {
 export const Error = {
   args: {
     error: true,
-    onChange: console.log,
     options: [
       {
         label: "Label 1",
