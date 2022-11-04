@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { FC } from "react";
 import { colors } from "../theme";
@@ -7,7 +8,7 @@ interface IToolbarProps {
 }
 
 const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
-  <Wrap>
+  <Wrap empty={handlers.length === 0}>
     {handlers.map((elements, index) => (
       <React.Fragment key={index}>
         {elements}
@@ -24,7 +25,7 @@ const Divider = styled.span`
   border-left: 1px solid ${colors.grey4};
 `;
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ empty: boolean }>`
   align-items: center;
   border: 1px solid ${colors.grey4};
   border-top-left-radius: 4px;
@@ -35,4 +36,10 @@ const Wrap = styled.div`
   position: relative;
   gap: 5px;
   padding: 5px;
+
+  ${(props) =>
+    props.empty &&
+    css`
+      padding: 0;
+    `}
 `;

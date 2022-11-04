@@ -1,16 +1,21 @@
-import { useCommands } from "@remirror/react";
+import { useActive, useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { BulletListExtension } from "remirror/extensions";
 import ListBulletIcon from "../assets/icons/ListBullet";
 import ToolbarButton from "../ToolbarButton";
 
 const BulletListButton: FC = () => {
-  const { toggleBulletList } = useCommands();
+  const { liftListItemOutOfList, toggleBulletList } = useCommands();
+  useActive();
 
   return (
     <ToolbarButton
-      onClick={() => toggleBulletList()}
-      disabled={!toggleBulletList.enabled()}
+      onClick={() =>
+        toggleBulletList.enabled()
+          ? toggleBulletList()
+          : liftListItemOutOfList()
+      }
+      disabled={!toggleBulletList.enabled() && !liftListItemOutOfList.enabled()}
     >
       <ListBulletIcon />
     </ToolbarButton>

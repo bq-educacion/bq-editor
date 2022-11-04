@@ -21,6 +21,7 @@ export default styled.button<IButtonProps>`
   font-weight: bold;
   min-height: 40px;
   padding: 10px 20px;
+  outline: none;
   transition: all 0.3s ease-out;
 
   &.active,

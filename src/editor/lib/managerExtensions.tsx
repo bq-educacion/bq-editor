@@ -10,10 +10,12 @@ import {
   BulletListExtension,
   CodeBlockExtension,
   CodeExtension,
+  HardBreakExtension,
   HeadingExtension,
   ImageExtension,
   ItalicExtension,
   LinkExtension,
+  ListItemExtension,
   MarkdownExtension,
   OrderedListExtension,
   PlaceholderExtension,
@@ -87,6 +89,11 @@ const managerExtensions = ({
       ...(stringHandler !== "markdown" && extensionsFlat.includes("underline")
         ? [new UnderlineExtension({})]
         : []),
+      ...(extensionsFlat.includes("bulletList") ||
+      extensionsFlat.includes("orderedList")
+        ? [new ListItemExtension({})]
+        : []),
+      new HardBreakExtension({}),
     ] as AnyExtension[];
 };
 

@@ -12,12 +12,10 @@ import ToolbarButton from "../ToolbarButton";
 
 interface ICodeBlockButtonProps {
   language?: string;
-  wrap?: boolean;
 }
 
 const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
   language = "typescript",
-  wrap,
 }) => {
   const active = useActive();
   const chain = useChainedCommands();
@@ -27,9 +25,9 @@ const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
   return (
     <ToolbarButton
       className={classNames({ active: active.codeBlock() })}
-      disabled={!toggleCodeBlock.enabled({ language, wrap })}
+      disabled={!toggleCodeBlock.enabled()}
       onClick={() => {
-        toggleCodeBlock({ language, wrap });
+        active.codeBlock() ? toggleCodeBlock() : toggleCodeBlock({ language });
         chain.focus({ to, from }).run();
       }}
     >
