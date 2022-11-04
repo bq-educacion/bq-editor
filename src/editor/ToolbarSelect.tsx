@@ -8,7 +8,6 @@ export default styled(Select)`
   color: ${colors.dark};
   min-height: 40px;
   min-width: 40px;
-  margin: 1px;
   padding: 5px;
   width: 165px;
 

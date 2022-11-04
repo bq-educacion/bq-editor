@@ -15,6 +15,9 @@ export default styled.button<IButtonProps>`
   border-radius: 4px;
   color: ${colors.white};
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
   font-weight: bold;
   min-height: 40px;
   padding: 10px 20px;

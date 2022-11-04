@@ -9,18 +9,19 @@ interface IToolbarProps {
 const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
   <Wrap>
     {handlers.map((elements, index) => (
-      <div key={index}>
+      <React.Fragment key={index}>
         {elements}
         {index < handlers.length - 1 && <Divider />}
-      </div>
+      </React.Fragment>
     ))}
   </Wrap>
 );
 
 export default Toolbar;
 
-const Divider = styled.div`
-  margin: 5px;
+const Divider = styled.span`
+  height: 30px;
+  border-left: 1px solid ${colors.grey4};
 `;
 
 const Wrap = styled.div`
@@ -31,11 +32,7 @@ const Wrap = styled.div`
   color: ${colors.dark};
   display: flex;
   flex-wrap: wrap;
-  padding: 1px;
   position: relative;
-
-  > div {
-    display: flex;
-    flex-wrap: wrap;
-  }
+  gap: 5px;
+  padding: 5px;
 `;

@@ -8,7 +8,6 @@ export default styled(Button)`
   color: ${colors.dark};
   min-height: 40px;
   min-width: 40px;
-  margin: 1px;
   padding: 5px;
 
   &.active,
