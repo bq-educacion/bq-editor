@@ -3,6 +3,7 @@ import { ProsemirrorNode } from "remirror";
 import Editor, { editorNodeToHtml, IEditorProps } from "..";
 import { colors } from "../../theme";
 import basic from "./content/basic.json";
+import code from "./content/code.json";
 import html from "./content/html.js";
 import markdown from "./content/markdown.js";
 
@@ -55,6 +56,7 @@ export const Code = Template.bind({});
 
 Code.args = {
   codeLanguage: "typescript",
+  initialContent: JSON.stringify(code),
   stringHandler: "code",
   placeholder: "Start coding...",
 };

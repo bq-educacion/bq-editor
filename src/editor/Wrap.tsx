@@ -12,7 +12,6 @@ export default styled.div<{ code?: boolean }>`
     border-radius: 4px;
     color: ${colors.dark};
     padding: 1px 1em;
-    overflow: hidden;
     outline: none;
     white-space: pre-wrap;
     min-height: 100px;
@@ -22,7 +21,9 @@ export default styled.div<{ code?: boolean }>`
       css`
         padding: 0;
         min-height: unset;
+
         > pre {
+          border-radius: 4px;
           margin: 0 !important;
         }
       `}

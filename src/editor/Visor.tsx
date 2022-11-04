@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import styled from "@emotion/styled";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import { defaultExtensions, IEditorProps } from ".";
 import { managerExtensions } from "./lib";
@@ -32,9 +33,20 @@ const Visor: FC<IVisorProps> = (props) => {
       manager={manager}
       initialContent={initialContent}
     >
-      <EditorComponent />
+      <Wrap>
+        <EditorComponent />
+      </Wrap>
     </Remirror>
   );
 };
 
 export default Visor;
+
+export const Wrap = styled.div`
+  display: contents;
+
+  > div > div > pre {
+    border-radius: 4px;
+    margin: 0 !important;
+  }
+`;

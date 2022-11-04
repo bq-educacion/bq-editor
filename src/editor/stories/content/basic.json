@@ -87,13 +87,39 @@
       "content": [
         {
           "type": "text",
-          "text": "Link"
+          "marks": [
+            {
+              "type": "textColor",
+              "attrs": {
+                "color": "#db4501"
+              }
+            }
+          ],
+          "text": "Text with color"
         }
       ]
     },
     {
       "type": "paragraph",
       "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "underline"
+            }
+          ],
+          "text": "Underlined text"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Link: "
+        },
         {
           "type": "text",
           "marks": [
@@ -115,7 +141,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Image"
+          "text": "Image:"
         }
       ]
     },
@@ -143,7 +169,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Blockquote"
+          "text": "Blockquote:"
         }
       ]
     },
@@ -300,37 +326,6 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "textColor",
-              "attrs": {
-                "color": "#db4501"
-              }
-            }
-          ],
-          "text": "Text with color"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "underline"
-            }
-          ],
-          "text": "Underlined text"
         }
       ]
     }

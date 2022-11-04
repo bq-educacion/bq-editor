@@ -1,19 +1,25 @@
 const html = String.raw; // Just for better editor support
 
-export default html`<p>I love <strong>HTML</strong> !</p>
+export default html` <p>I love <strong>HTML</strong> !</p>
   <h1>Heading 1</h1>
   <h2>Heading 2</h2>
   <h3>Heading 3</h3>
   <h4>Heading 4</h4>
   <h5>Heading 5</h5>
   <h6>Heading 6</h6>
-  <p>Link</p>
   <p>
+    <span style=" color:#db4501" data-text-color-mark="#db4501"
+      >Text with color</span
+    >
+  </p>
+  <p><u>Underlined text</u></p>
+  <p>
+    Link:
     <a href="https://educacion.bq.com/" rel="noopener noreferrer nofollow"
       >bq educación</a
     >
   </p>
-  <p>Image</p>
+  <p>Image:</p>
   <p>
     <img
       alt="BQ Educación"
@@ -22,7 +28,7 @@ export default html`<p>I love <strong>HTML</strong> !</p>
       resizable="false"
     />
   </p>
-  <p>Blockquote</p>
+  <p>Blockquote:</p>
   <pre
     spellcheck="false"
     class="language-ts"
@@ -45,10 +51,4 @@ export default html`<p>I love <strong>HTML</strong> !</p>
     <li><p>As is</p></li>
     <li><p>An ordered</p></li>
     <li><p>List</p></li>
-  </ol>
-  <p>
-    <span style=" color:#db4501" data-text-color-mark="#db4501"
-      >Text with color</span
-    >
-  </p>
-  <p><u>Underlined text</u></p>`;
+  </ol>`;

@@ -12,15 +12,17 @@ export default `**Markdown** content is the _best_
 
 ###### Heading 6
 
-Link
+Text with color **Unsupported**
 
-[bq educación](https://educacion.bq.com/)
+Underlined text **Unsupported**
 
-Image
+Link: [bq educación](https://educacion.bq.com/)
+
+Image:
 
 ![](https://educacion.bq.com/wp-content/uploads/2020/11/BQ_Educacion_versiones-logo_rgb_fondo_colores_Mesa-de-trabajo-1-copia-10-3.png.webp)
 
-Blockquote
+Blockquote:
 
 \`\`\`ts
 const a = 'asdf';
