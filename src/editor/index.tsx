@@ -7,10 +7,11 @@ import {
   prosemirrorNodeToHtml,
   RemirrorEventListenerProps,
 } from "remirror";
-import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
+import CodeEditor from "./CodeEditor";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Toolbar from "./Toolbar";
 import Wrap from "./Wrap";
+import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
 import "remirror/styles/extension-code-block.css";
 import "remirror/styles/extension-placeholder.css";
 
@@ -28,7 +29,7 @@ type Selection = "start" | "end" | "all" | number;
 
 // Set the string handler which means the content provided will be automatically handled as html.
 // `markdown` is also available when the `MarkdownExtension` is added to the editor.
-export type StringHandler = "html" | "markdown";
+export type StringHandler = "code" | "html" | "markdown";
 
 export const defaultExtensions = [
   ["heading", "bold", "italic", "underline"],
@@ -86,6 +87,16 @@ const Editor: FC<IEditorProps> = (props) => {
           {editorHandlers(input)}
         </Wrap>
       </MarkdownDualEditor>
+    );
+  }
+
+  if (stringHandler === "code") {
+    return (
+      <CodeEditor {...input}>
+        <Wrap code>
+          <EditorComponent />
+        </Wrap>
+      </CodeEditor>
     );
   }
 

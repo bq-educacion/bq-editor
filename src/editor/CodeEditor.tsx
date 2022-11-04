@@ -1,0 +1,44 @@
+import { Remirror, useRemirror } from "@remirror/react";
+import langTypescript from "refractor/lang/typescript.js";
+import React, { FC } from "react";
+import { DocExtension } from "remirror/extensions";
+import { CodeBlockExtension } from "./extensions";
+import { IEditorProps } from ".";
+import { AnyExtension, RemirrorEventListenerProps } from "remirror";
+
+const CodeEditor: FC<IEditorProps> = ({
+  children,
+  editable,
+  initialContent: content,
+  onChange,
+  selection,
+}) => {
+  const { manager, state: initialContent } = useRemirror({
+    extensions: () => [
+      new DocExtension({ content: "codeBlock" }),
+      new CodeBlockExtension({
+        defaultLanguage: "typescript",
+        supportedLanguages: [langTypescript],
+        syntaxTheme: "base16_ateliersulphurpool_light",
+        defaultWrap: true,
+      }),
+    ],
+    content,
+    selection,
+  });
+
+  return (
+    <Remirror
+      editable={editable}
+      manager={manager}
+      initialContent={initialContent}
+      onChange={({ state }: RemirrorEventListenerProps<AnyExtension>) =>
+        onChange?.(state.doc)
+      }
+    >
+      {children}
+    </Remirror>
+  );
+};
+
+export default CodeEditor;

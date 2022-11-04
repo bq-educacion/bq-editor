@@ -20,8 +20,10 @@ const Visor: FC<IVisorProps> = (props) => {
   const { manager, state: initialContent } = useRemirror({
     extensions: managerExtensions(input),
     content:
-      !stringHandler && content ? Object.create(JSON.parse(content)) : content,
-    stringHandler,
+      (!stringHandler || stringHandler === "code") && content
+        ? Object.create(JSON.parse(content))
+        : content,
+    stringHandler: stringHandler === "code" ? undefined : stringHandler,
   });
 
   return (

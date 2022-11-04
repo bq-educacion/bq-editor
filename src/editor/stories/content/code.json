@@ -1,0 +1,18 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": "typescript",
+        "wrap": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "const a = 'asdf';"
+        }
+      ]
+    }
+  ]
+}

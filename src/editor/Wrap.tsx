@@ -1,20 +1,36 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { colors } from "../theme";
 
-export default styled.div`
+export default styled.div<{ code?: boolean }>`
   position: relative;
 
   > div > div {
     align-items: center;
     background-color: ${colors.white};
     border: 1px solid ${colors.grey4};
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top: none;
+    border-radius: 4px;
     color: ${colors.dark};
-    outline: none;
     padding: 1px 1em;
+    overflow: hidden;
+    outline: none;
     white-space: pre-wrap;
     min-height: 100px;
+
+    ${(props) =>
+      props.code &&
+      css`
+        padding: 0;
+        min-height: unset;
+        > pre {
+          margin: 0 !important;
+        }
+      `}
+  }
+
+  :not(:first-of-type) > div > div {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
   }
 `;

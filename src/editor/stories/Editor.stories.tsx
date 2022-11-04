@@ -50,3 +50,11 @@ Markdown.args = {
   stringHandler: "markdown",
   placeholder: "Start markdowning...",
 };
+
+export const Code = Template.bind({});
+
+Code.args = {
+  codeLanguage: "typescript",
+  stringHandler: "code",
+  placeholder: "Start coding...",
+};

@@ -62,7 +62,7 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
   const visual = useRemirror({
     extensions: managerExtensions(input),
     content,
-    stringHandler,
+    stringHandler: stringHandler as "html" | "markdown",
   });
 
   const markdown = useRemirror({
@@ -78,7 +78,7 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
     builtin: {
       exitMarksOnArrowPress: false,
     },
-    stringHandler,
+    stringHandler: stringHandler as "html" | "markdown",
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
