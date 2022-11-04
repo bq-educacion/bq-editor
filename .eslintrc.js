@@ -5,9 +5,9 @@ module.exports = {
     es6: true,
   },
   extends: [
-    "plugin:react/recommended",
-    "standard",
-    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
   ],
   ignorePatterns: ["dist", ".storybook"],
   parser: "@typescript-eslint/parser",

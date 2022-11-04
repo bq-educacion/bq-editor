@@ -81,10 +81,10 @@ const managerExtensions = ({
         ? [new OrderedListExtension({})]
         : []),
       ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
-      ...(extensionsFlat.includes("textColor")
+      ...(stringHandler !== "markdown" && extensionsFlat.includes("textColor")
         ? [new TextColorExtension({})]
         : []),
-      ...(extensionsFlat.includes("underline")
+      ...(stringHandler !== "markdown" && extensionsFlat.includes("underline")
         ? [new UnderlineExtension({})]
         : []),
     ] as AnyExtension[];

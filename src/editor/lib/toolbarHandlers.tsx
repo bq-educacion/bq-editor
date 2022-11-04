@@ -22,6 +22,7 @@ const toolbarHandlers = ({
   extensions = [],
   headingLevels,
   onUploadMedia,
+  stringHandler,
 }: IEditorProps) =>
   extensions.map((extensionsArray) =>
     extensionsArray.map((extension, index) => (
@@ -43,8 +44,12 @@ const toolbarHandlers = ({
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}
-        {extension === "textColor" && <TextColorButton color={color} />}
-        {extension === "underline" && <UnderlineButton />}
+        {extension === "textColor" && stringHandler !== "markdown" && (
+          <TextColorButton color={color} />
+        )}
+        {extension === "underline" && stringHandler !== "markdown" && (
+          <UnderlineButton />
+        )}
       </React.Fragment>
     ))
   );
