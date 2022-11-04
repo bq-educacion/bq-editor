@@ -83,10 +83,10 @@ const managerExtensions = ({
         ? [new OrderedListExtension({})]
         : []),
       ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
-      ...(stringHandler !== "markdown" && extensionsFlat.includes("textColor")
+      ...(extensionsFlat.includes("textColor")
         ? [new TextColorExtension({})]
         : []),
-      ...(stringHandler !== "markdown" && extensionsFlat.includes("underline")
+      ...(extensionsFlat.includes("underline")
         ? [new UnderlineExtension({})]
         : []),
       ...(extensionsFlat.includes("bulletList") ||

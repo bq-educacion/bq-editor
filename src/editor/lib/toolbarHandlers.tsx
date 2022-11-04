@@ -44,12 +44,8 @@ const toolbarHandlers = ({
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}
-        {extension === "textColor" && stringHandler !== "markdown" && (
-          <TextColorButton color={color} />
-        )}
-        {extension === "underline" && stringHandler !== "markdown" && (
-          <UnderlineButton />
-        )}
+        {extension === "textColor" && <TextColorButton color={color} />}
+        {extension === "underline" && <UnderlineButton />}
       </React.Fragment>
     ))
   );
