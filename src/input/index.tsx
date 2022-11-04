@@ -10,7 +10,7 @@ export default styled.input<IInputProps>`
   background-color: ${(props) =>
     props.error ? adjustColorOpacity(colors.red3, 0.22) : colors.white};
   border: solid 1px ${(props) => (props.error ? colors.red3 : colors.grey3)};
-  border-radius: 3px;
+  border-radius: 4px;
   box-sizing: border-box;
   color: ${(props) => (props.error ? colors.red3 : colors.dark)};
   height: 40px;

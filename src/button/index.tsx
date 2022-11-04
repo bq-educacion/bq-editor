@@ -23,12 +23,12 @@ export default styled.button<IButtonProps>`
   &.active,
   &:hover {
     background-color: ${colors.grey1};
-    border: 1px solid ${colors.grey1};
+    border-color: ${colors.grey1};
   }
 
   &:disabled {
     background-color: ${colors.grey6};
-    border: 1px solid ${colors.grey6};
+    border-color: ${colors.grey6};
     color: ${colors.grey5};
     pointer-events: none;
   }
@@ -37,12 +37,12 @@ export default styled.button<IButtonProps>`
     props.cta &&
     css`
       background-color: ${colors.green2};
-      border: 1px solid ${colors.green2};
+      border-color: ${colors.green2};
 
       &.active,
       &:hover {
         background-color: ${colors.green3};
-        border: 1px solid ${colors.green3};
+        border-color: ${colors.green3};
       }
     `}
 
@@ -50,12 +50,12 @@ export default styled.button<IButtonProps>`
     props.danger &&
     css`
       background-color: ${colors.red2};
-      border: 1px solid ${colors.red2};
+      border-color: ${colors.red2};
 
       &.active,
       &:hover {
         background-color: ${colors.red3};
-        border: 1px solid ${colors.red3};
+        border-color: ${colors.red3};
       }
     `}
 
@@ -63,12 +63,12 @@ export default styled.button<IButtonProps>`
     props.secondary &&
     css`
       background-color: ${colors.grey4};
-      border: 1px solid ${colors.grey4};
+      border-color: ${colors.grey4};
 
       &.active,
       &:hover {
         background-color: ${colors.white};
-        border: 1px solid ${colors.dark};
+        border-color: ${colors.dark};
         color: ${colors.dark};
       }
     `}

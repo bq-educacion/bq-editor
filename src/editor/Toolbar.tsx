@@ -6,8 +6,6 @@ interface IToolbarProps {
   handlers: JSX.Element[][];
 }
 
-export const height = 40; // px
-
 const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
   <Wrap>
     {handlers.map((elements, index) => (
@@ -22,12 +20,12 @@ const Toolbar: FC<IToolbarProps> = ({ handlers }) => (
 export default Toolbar;
 
 const Divider = styled.div`
-  margin: 2px;
+  margin: 5px;
 `;
 
 const Wrap = styled.div`
   align-items: center;
-  background-color: ${colors.grey5};
+  border: 1px solid ${colors.grey4};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   color: ${colors.dark};

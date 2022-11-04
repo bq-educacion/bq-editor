@@ -12,7 +12,7 @@ import React, {
 import { ImageExtension } from "remirror/extensions";
 import Button from "../../button";
 import Input from "../../input";
-import { colors } from "../../theme";
+import { adjustColorOpacity, colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
 import ToolbarButton from "../ToolbarButton";
 
@@ -243,12 +243,13 @@ export { ImageButton, ImageExtension };
 
 const Tooltip = styled.div`
   background-color: ${colors.white};
-  border: 2px solid ${colors.grey5};
+  border: solid 1px ${colors.grey4};
   border-radius: 4px;
+  box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
   color: ${colors.dark};
   padding: 20px;
   position: absolute;
-  transform: translate(calc(20px - 50%), 5px);
+  transform: translate(calc(20px - 50%), 10px);
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -275,19 +276,5 @@ const Tooltip = styled.div`
       margin-bottom: -5px;
       min-width: 45px;
     }
-  }
-
-  &::before {
-    content: "";
-    background-color: ${colors.white};
-    border-left: 2px solid ${colors.grey5};
-    border-top: 2px solid ${colors.grey5};
-    width: 20px;
-    height: 20px;
-    display: block;
-    position: absolute;
-    transform: translate(-50%, 0) rotate(45deg);
-    top: -12px;
-    left: 50%;
   }
 `;

@@ -1,23 +1,20 @@
 import styled from "@emotion/styled";
 import Select from "../select";
 import { colors } from "../theme";
-import { height } from "./Toolbar";
 
 export default styled(Select)`
   background-color: ${colors.white};
   border: none;
-  border-radius: 0;
   color: ${colors.dark};
-  min-height: ${height}px;
-  min-width: ${height}px;
+  min-height: 40px;
+  min-width: 40px;
   margin: 1px;
   padding: 5px;
   width: 165px;
 
   &.active,
   &:hover {
-    background-color: ${colors.grey1};
-    color: ${colors.white};
+    background-color: ${colors.grey5};
 
     > div:last-of-type:not(:first-of-type) {
       background-color: ${colors.white};
@@ -26,8 +23,6 @@ export default styled(Select)`
   }
 
   > div:last-of-type:not(:first-of-type) {
-    border-radius: 0;
     border-color: ${colors.grey4};
-    top: -5px;
   }
 `;

@@ -94,7 +94,7 @@ const Container = styled.div<{
   align-items: center;
   background-color: ${(props) =>
     props.error ? adjustColorOpacity(colors.red3, 0.22) : colors.white};
-  border-radius: 5px;
+  border-radius: 4px;
   border: solid 1px ${(props) => (props.error ? colors.red3 : colors.grey3)};
   box-sizing: border-box;
   color: ${(props) => (props.error ? colors.red3 : colors.dark)};
@@ -177,7 +177,7 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
 
 const Values = styled.div<{ scroll?: boolean; search?: boolean }>`
   background-color: ${colors.white};
-  border-radius: 5px;
+  border-radius: 4px;
   border: solid 1px ${colors.grey3};
   box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
   min-width: 100%;
