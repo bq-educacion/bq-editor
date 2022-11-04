@@ -40,6 +40,6 @@ const Wrap = styled.div<{ empty: boolean }>`
   ${(props) =>
     props.empty &&
     css`
-      padding: 0;
+      border-bottom: none;
     `}
 `;

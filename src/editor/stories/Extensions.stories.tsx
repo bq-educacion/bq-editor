@@ -70,7 +70,7 @@ export const AutoLink = Template.bind({});
 
 AutoLink.args = {
   autoLink: true,
-  extensions: [],
+  extensions: [["link"]],
   placeholder: `Type "www.educacion.bq.com" to insert a link`,
   stringHandler: "html",
 };
