@@ -7,19 +7,21 @@ export default html` <p>I love <strong>HTML</strong> !</p>
   <h4>Heading 4</h4>
   <h5>Heading 5</h5>
   <h6>Heading 6</h6>
+  <h2>Color</h2>
   <p>
     <span style=" color:#db4501" data-text-color-mark="#db4501"
       >Text with color</span
     >
   </p>
+  <h2>Underline</h2>
   <p><u>Underlined text</u></p>
+  <h2>Link</h2>
   <p>
-    Link:
     <a href="https://educacion.bq.com/" rel="noopener noreferrer nofollow"
       >bq educación</a
     >
   </p>
-  <p>Image:</p>
+  <h2>Image</h2>
   <p>
     <img
       alt="BQ Educación"
@@ -28,12 +30,12 @@ export default html` <p>I love <strong>HTML</strong> !</p>
       resizable="false"
     />
   </p>
-  <p>Blockquote:</p>
+  <h2>Blockquote</h2>
   <pre
     spellcheck="false"
     class="language-ts"
-  ><code data-code-block-language="ts">const a = 'asdf';</code></pre>
-  <h2>List support</h2>
+  ><code data-code-block-language="ts">const int button = 3;</code></pre>
+  <h2>Lists</h2>
   <ul>
     <li>
       <p>an unordered</p>

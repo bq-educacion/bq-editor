@@ -83,6 +83,18 @@
       ]
     },
     {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Color"
+        }
+      ]
+    },
+    {
       "type": "paragraph",
       "content": [
         {
@@ -96,6 +108,18 @@
             }
           ],
           "text": "Text with color"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Underline"
         }
       ]
     },
@@ -114,12 +138,20 @@
       ]
     },
     {
-      "type": "paragraph",
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
       "content": [
         {
           "type": "text",
-          "text": "Link: "
-        },
+          "text": "Link"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
         {
           "type": "text",
           "marks": [
@@ -137,11 +169,14 @@
       ]
     },
     {
-      "type": "paragraph",
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
       "content": [
         {
           "type": "text",
-          "text": "Image:"
+          "text": "Image"
         }
       ]
     },
@@ -165,11 +200,14 @@
       ]
     },
     {
-      "type": "paragraph",
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
       "content": [
         {
           "type": "text",
-          "text": "Blockquote:"
+          "text": "Blockquote"
         }
       ]
     },
@@ -194,7 +232,7 @@
       "content": [
         {
           "type": "text",
-          "text": "List support"
+          "text": "Lists"
         }
       ]
     },

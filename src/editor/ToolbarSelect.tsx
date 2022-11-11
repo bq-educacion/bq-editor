@@ -18,6 +18,10 @@ export default styled(Select)`
     > div:last-of-type:not(:first-of-type) {
       background-color: ${colors.white};
       color: ${colors.dark};
+
+      > div > div:hover {
+        background-color: ${colors.grey6};
+      }
     }
   }
 
