@@ -31,7 +31,7 @@ function useFloatingLinkState() {
   const { to, from } = useCurrentSelection();
 
   const url = (link()?.href as string) ?? "";
-  const [href, setHref] = useState<string>(url);
+  const [href, setHref] = useState(url);
 
   const onRemove = useCallback(() => chain.removeLink().focus().run(), [chain]);
 
@@ -64,7 +64,7 @@ const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const active = useActive();
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     !showModal && setHref("");

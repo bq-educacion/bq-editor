@@ -28,17 +28,17 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
   const active = useActive();
   const { insertImage } = useCommands();
 
-  const [error, setError] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
+  const [error, setError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
 
-  const [imgAlign, setImgAlign] = useState<string>("");
-  const [imgAlt, setImgAlt] = useState<string>("");
-  const [imgHeight, setImgHeight] = useState<string>("");
-  const [imgRotate, setImgRotate] = useState<string>("");
-  const [imgSrc, setImgSrc] = useState<string>("");
-  const [imgTitle, setImgTitle] = useState<string>("");
-  const [imgWidth, setImgWidth] = useState<string>("");
+  const [imgAlign, setImgAlign] = useState("");
+  const [imgAlt, setImgAlt] = useState("");
+  const [imgHeight, setImgHeight] = useState("");
+  const [imgRotate, setImgRotate] = useState("");
+  const [imgSrc, setImgSrc] = useState("");
+  const [imgTitle, setImgTitle] = useState("");
+  const [imgWidth, setImgWidth] = useState("");
 
   const onFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files?.[0]) {

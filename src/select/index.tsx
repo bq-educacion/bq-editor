@@ -33,7 +33,7 @@ const Select: FC<ISelectProps> = ({
   ...props
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [expanded, setExpanded] = useState<boolean>(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) =>
