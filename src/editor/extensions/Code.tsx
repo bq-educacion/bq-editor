@@ -8,7 +8,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeExtension } from "remirror/extensions";
 import CodeIcon from "../assets/icons/Code";
-import ToolbarButton from "../ToolbarButton";
+import { ToolbarButton } from "../utils";
 
 const CodeButton: FC = () => {
   const active = useActive();

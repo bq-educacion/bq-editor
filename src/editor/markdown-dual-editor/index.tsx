@@ -7,13 +7,13 @@ import {
 import styled from "@emotion/styled";
 import { createContextState } from "create-context-state";
 import React, { FC } from "react";
-import langMarkdown from "refractor/lang/markdown.js";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
-import { CodeBlockExtension } from "./extensions";
-import { managerExtensions } from "./lib";
-import { IEditorProps } from ".";
-import Wrap from "./Wrap";
+import langMarkdown from "refractor/lang/markdown.js";
+import { IEditorProps } from "..";
+import { CodeBlockExtension } from "../extensions";
+import { managerExtensions } from "../lib";
+import { Wrap } from "../utils";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

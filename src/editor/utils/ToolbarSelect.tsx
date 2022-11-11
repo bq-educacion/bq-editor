@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import Select from "../select";
-import { colors } from "../theme";
+import Select from "../../select";
+import { colors } from "../../theme";
 
 export default styled(Select)`
   background-color: ${colors.white};

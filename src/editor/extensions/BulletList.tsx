@@ -2,7 +2,7 @@ import { useActive, useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { BulletListExtension } from "remirror/extensions";
 import ListBulletIcon from "../assets/icons/ListBullet";
-import ToolbarButton from "../ToolbarButton";
+import { ToolbarButton } from "../utils";
 
 const BulletListButton: FC = () => {
   const { liftListItemOutOfList, toggleBulletList } = useCommands();

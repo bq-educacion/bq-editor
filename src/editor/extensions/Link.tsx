@@ -21,7 +21,7 @@ import Button from "../../button";
 import Input from "../../input";
 import { adjustColorOpacity, colors } from "../../theme";
 import LinkIcon from "../assets/icons/Link";
-import ToolbarButton from "../ToolbarButton";
+import { ToolbarButton } from "../utils";
 
 // TODO: Control link attributes
 

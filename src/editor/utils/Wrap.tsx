@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { colors } from "../theme";
+import { colors } from "../../theme";
 
 export default styled.div<{ code?: boolean }>`
   position: relative;

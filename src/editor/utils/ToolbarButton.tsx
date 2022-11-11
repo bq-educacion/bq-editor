@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import Button from "../button";
-import { colors } from "../theme";
+import Button from "../../button";
+import { colors } from "../../theme";
 
 export default styled(Button)`
   background-color: ${colors.white};

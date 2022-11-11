@@ -8,7 +8,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { BoldExtension } from "remirror/extensions";
 import BoldIcon from "../assets/icons/Bold";
-import ToolbarButton from "../ToolbarButton";
+import { ToolbarButton } from "../utils";
 
 const BoldButton: FC = () => {
   const active = useActive();

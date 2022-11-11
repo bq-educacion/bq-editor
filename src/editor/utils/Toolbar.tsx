@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React, { FC } from "react";
-import { colors } from "../theme";
+import { colors } from "../../theme";
 
 interface IToolbarProps {
   handlers: JSX.Element[][];

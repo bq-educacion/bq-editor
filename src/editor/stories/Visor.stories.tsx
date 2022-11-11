@@ -1,5 +1,5 @@
 import React from "react";
-import Visor, { IVisorProps } from "../Visor";
+import Visor, { IVisorProps } from "../visor";
 import basic from "./content/basic.json";
 import code from "./content/code.json";
 import html from "./content/html.js";
@@ -15,27 +15,26 @@ const Template = (args: IVisorProps) => <Visor {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  initialContent: JSON.stringify(basic),
+  content: JSON.stringify(basic),
 };
 
 export const Html = Template.bind({});
 
 Html.args = {
-  initialContent: html,
+  content: html,
   stringHandler: "html",
 };
 
 export const Markdown = Template.bind({});
 
 Markdown.args = {
-  initialContent: markdown,
+  content: markdown,
   stringHandler: "markdown",
 };
 
 export const Code = Template.bind({});
 
 Code.args = {
-  codeLanguage: "typescript",
-  initialContent: JSON.stringify(code),
+  content: JSON.stringify(code),
   stringHandler: "code",
 };

@@ -14,7 +14,7 @@ import Button from "../../button";
 import Input from "../../input";
 import { adjustColorOpacity, colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
-import ToolbarButton from "../ToolbarButton";
+import { ToolbarButton } from "../utils";
 
 interface IImageProps {
   accept?: string[];

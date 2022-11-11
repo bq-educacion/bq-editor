@@ -7,11 +7,10 @@ import {
   prosemirrorNodeToHtml,
   RemirrorEventListenerProps,
 } from "remirror";
-import CodeEditor from "./CodeEditor";
-import MarkdownDualEditor from "./MarkdownDualEditor";
-import Toolbar from "./Toolbar";
-import Wrap from "./Wrap";
+import CodeEditor from "./code-editor";
+import MarkdownDualEditor from "./markdown-dual-editor";
 import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
+import { Toolbar, Wrap } from "./utils";
 import "remirror/styles/extension-code-block.css";
 import "remirror/styles/extension-placeholder.css";
 

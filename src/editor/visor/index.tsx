@@ -1,21 +1,17 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
-import { defaultExtensions, StringHandler } from ".";
-import { managerExtensions } from "./lib";
+import { managerExtensions } from "../lib";
+import { defaultExtensions, StringHandler } from "..";
 
 export type IVisorProps = {
   extensions?: string[][];
-  initialContent?: string;
+  content?: string;
   stringHandler?: StringHandler;
 };
 
 const Visor: FC<IVisorProps> = (props) => {
-  const {
-    extensions = defaultExtensions,
-    initialContent: content,
-    stringHandler,
-  } = props;
+  const { extensions = defaultExtensions, content, stringHandler } = props;
 
   const input = {
     extensions,
