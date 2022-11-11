@@ -10,7 +10,7 @@
       "content": [
         {
           "type": "text",
-          "text": "const a = 'asdf';"
+          "text": "const int button = 3;\nconst int button = 10;\n\nvoid setup() {\n pinMode(boton, INPUT);\n pinMode(led, OUTPUT);\n}\n\nvoid loop() {\n if ( == digitalRead(boton)) {\n digitalWrite(led, HIGH);\n }\n}"
         }
       ]
     }

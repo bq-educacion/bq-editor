@@ -64,17 +64,17 @@ const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const active = useActive();
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
-  const [showTooltip, setShowTooltip] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
-    !showTooltip && setHref("");
-  }, [showTooltip]);
+    !showModal && setHref("");
+  }, [showModal]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) =>
       ref.current &&
       !ref.current.contains(event.target as Node) &&
-      setShowTooltip(false);
+      setShowModal(false);
 
     window.addEventListener("click", handleClickOutside);
     return () => {
@@ -85,15 +85,15 @@ const LinkButton: FC = () => {
   return (
     <div ref={ref}>
       <ToolbarButton
-        className={classNames({ active: showTooltip || active.link() })}
+        className={classNames({ active: showModal || active.link() })}
         onClick={() => {
-          setShowTooltip(!showTooltip);
+          setShowModal(!showModal);
         }}
       >
         <LinkIcon />
       </ToolbarButton>
-      {showTooltip && (
-        <Tooltip>
+      {showModal && (
+        <Modal>
           <Input
             autoFocus
             placeholder="Enter link..."
@@ -106,24 +106,24 @@ const LinkButton: FC = () => {
 
               if (code === "Enter") {
                 onSubmit();
-                setShowTooltip(false);
+                setShowModal(false);
               }
 
               if (code === "Escape") {
-                setShowTooltip(false);
+                setShowModal(false);
               }
             }}
           />
           {active.link() ? (
-            <Button danger onClick={() => (onRemove(), setShowTooltip(false))}>
+            <Button danger onClick={() => (onRemove(), setShowModal(false))}>
               Eliminar
             </Button>
           ) : (
-            <Button onClick={() => (onSubmit(), setShowTooltip(false))}>
+            <Button onClick={() => (onSubmit(), setShowModal(false))}>
               Guardar
             </Button>
           )}
-        </Tooltip>
+        </Modal>
       )}
     </div>
   );
@@ -131,7 +131,7 @@ const LinkButton: FC = () => {
 
 export { LinkButton, LinkExtension };
 
-const Tooltip = styled.div`
+const Modal = styled.div`
   align-items: center;
   background-color: ${colors.white};
   border: solid 1px ${colors.grey4};
@@ -139,8 +139,10 @@ const Tooltip = styled.div`
   box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
   color: ${colors.dark};
   padding: 20px;
-  position: absolute;
-  transform: translate(calc(20px - 50%), 10px);
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
   z-index: 2;
   display: flex;
   gap: 10px;

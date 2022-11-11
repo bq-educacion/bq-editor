@@ -182,7 +182,7 @@
       "content": [
         {
           "type": "text",
-          "text": "const a = 'asdf';"
+          "text": "const int button = 3;"
         }
       ]
     },

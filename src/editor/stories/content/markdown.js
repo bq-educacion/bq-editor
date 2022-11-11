@@ -25,7 +25,7 @@ Image:
 Blockquote:
 
 \`\`\`ts
-const a = 'asdf';
+const int button = 3;
 \`\`\`
 
 ## List support

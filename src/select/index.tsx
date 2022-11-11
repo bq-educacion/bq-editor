@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import React, { FC, useEffect, useRef, useState } from "react";
 import DropIcon from "./assets/icons/Drop";
 import { adjustColorOpacity, colors } from "../theme";
+import classNames from "classnames";
 
 interface IOption {
   active?: boolean;
@@ -23,6 +24,7 @@ export interface ISelectProps {
 }
 
 const Select: FC<ISelectProps> = ({
+  className,
   error,
   onChange,
   options,
@@ -46,7 +48,16 @@ const Select: FC<ISelectProps> = ({
   }, []);
 
   return (
-    <Container error={!!error} ref={wrapperRef} expanded={expanded} {...props}>
+    <Container
+      {...props}
+      className={classNames({
+        active: !!options.find((o) => o.active)?.label,
+        [`${className}`]: true,
+      })}
+      error={!!error}
+      ref={wrapperRef}
+      expanded={expanded}
+    >
       <StyledSelect expanded={expanded} onClick={() => setExpanded(!expanded)}>
         <div>
           {options.find((o) => o.value === value)?.label ||

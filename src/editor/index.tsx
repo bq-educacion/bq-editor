@@ -73,12 +73,18 @@ const Editor: FC<IEditorProps> = (props) => {
     stringHandler,
   } = props;
 
-  const input = {
-    extensions,
-    ...props,
-  };
-
   if (stringHandler === "markdown" && dualEditor) {
+    const markdownExtensions = extensions.filter(
+      (extensionsArray) =>
+        extensionsArray.filter(
+          (extension) => extension !== "underline" && extension !== "textColor"
+        ).length > 0
+    );
+    const input = {
+      extensions: markdownExtensions,
+      ...props,
+    };
+
     return (
       <MarkdownDualEditor {...input}>
         <Toolbar handlers={toolbarHandlers(input)} />
@@ -91,6 +97,11 @@ const Editor: FC<IEditorProps> = (props) => {
   }
 
   if (stringHandler === "code") {
+    const input = {
+      extensions: [["codeBlock"]],
+      ...props,
+    };
+
     return (
       <CodeEditor {...input}>
         <Wrap code>
@@ -99,6 +110,11 @@ const Editor: FC<IEditorProps> = (props) => {
       </CodeEditor>
     );
   }
+
+  const input = {
+    extensions,
+    ...props,
+  };
 
   const { manager, state: initialContent } = useRemirror({
     extensions: managerExtensions(input),

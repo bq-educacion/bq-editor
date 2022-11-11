@@ -29,7 +29,7 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
   const { insertImage } = useCommands();
 
   const [error, setError] = useState<boolean>(false);
-  const [showTooltip, setShowTooltip] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);
 
   const [imgAlign, setImgAlign] = useState<string>("");
@@ -87,13 +87,13 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
     setImgTitle("");
     setImgWidth("");
     setShowMoreOptions(false);
-  }, [showTooltip]);
+  }, [showModal]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) =>
       ref.current &&
       !ref.current.contains(event.target as Node) &&
-      setShowTooltip(false);
+      setShowModal(false);
 
     window.addEventListener("click", handleClickOutside);
     return () => {
@@ -104,15 +104,15 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
   return (
     <div ref={ref}>
       <ToolbarButton
-        className={classNames({ active: showTooltip || active.image() })}
+        className={classNames({ active: showModal || active.image() })}
         onClick={() => {
-          setShowTooltip(!showTooltip);
+          setShowModal(!showModal);
         }}
       >
         <ImageIcon />
       </ToolbarButton>
-      {showTooltip && (
-        <Tooltip>
+      {showModal && (
+        <Modal>
           <div>
             <label>Url*</label>
             <Input
@@ -127,11 +127,11 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
 
                 if (code === "Enter") {
                   onSubmit();
-                  setShowTooltip(false);
+                  setShowModal(false);
                 }
 
                 if (code === "Escape") {
-                  setShowTooltip(false);
+                  setShowModal(false);
                 }
               }}
             />
@@ -226,14 +226,14 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
             </>
           )}
           <div>
-            <Button secondary onClick={() => setShowTooltip(false)}>
+            <Button secondary onClick={() => setShowModal(false)}>
               Cancelar
             </Button>
-            <Button onClick={() => (onSubmit(), setShowTooltip(false))}>
+            <Button onClick={() => (onSubmit(), setShowModal(false))}>
               Guardar
             </Button>
           </div>
-        </Tooltip>
+        </Modal>
       )}
     </div>
   );
@@ -241,15 +241,17 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
 
 export { ImageButton, ImageExtension };
 
-const Tooltip = styled.div`
+const Modal = styled.div`
   background-color: ${colors.white};
   border: solid 1px ${colors.grey4};
   border-radius: 4px;
   box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
   color: ${colors.dark};
   padding: 20px;
-  position: absolute;
-  transform: translate(calc(20px - 50%), 10px);
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
   z-index: 2;
   display: flex;
   flex-direction: column;

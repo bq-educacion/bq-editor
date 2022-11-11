@@ -4,14 +4,16 @@ import {
   useRemirror,
   UseRemirrorReturn,
 } from "@remirror/react";
+import styled from "@emotion/styled";
 import { createContextState } from "create-context-state";
-import langMarkdown from "refractor/lang/markdown.js";
 import React, { FC } from "react";
+import langMarkdown from "refractor/lang/markdown.js";
+import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
 import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
 import { IEditorProps } from ".";
-import { AnyExtension, RemirrorEventListenerProps } from "remirror";
+import Wrap from "./Wrap";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -116,18 +118,26 @@ const MarkdownTextEditor: FC = () => {
   const { markdown, setVisual } = useEditor();
 
   return (
-    <Remirror
-      manager={markdown.manager}
-      autoRender="end"
-      onChange={({
-        helpers,
-        state,
-      }): RemirrorEventListenerProps<AnyExtension> => {
-        setVisual(helpers.getText({ state }));
-        return null;
-      }}
-    />
+    <Margin>
+      <Wrap code>
+        <Remirror
+          manager={markdown.manager}
+          autoRender="end"
+          onChange={({
+            helpers,
+            state,
+          }): RemirrorEventListenerProps<AnyExtension> => {
+            setVisual(helpers.getText({ state }));
+            return null;
+          }}
+        />
+      </Wrap>
+    </Margin>
   );
 };
 
 export default MarkdownDualEditor;
+
+const Margin = styled.div`
+  margin-top: 20px;
+`;
