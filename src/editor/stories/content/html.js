@@ -1,6 +1,6 @@
 const html = String.raw; // Just for better editor support
 
-export default html` <p>I love <strong>HTML</strong> !</p>
+export default html` <p align="center">I love <strong>HTML</strong> !</p>
   <h1>Heading 1</h1>
   <h2>Heading 2</h2>
   <h3>Heading 3</h3>

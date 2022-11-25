@@ -4,12 +4,21 @@
     {
       "type": "paragraph",
       "attrs": {
-        "align": "right"
+        "align": "center"
       },
       "content": [
         {
           "type": "text",
-          "text": "This is default content"
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "This"
+        },
+        {
+          "type": "text",
+          "text": " is default content"
         }
       ]
     },
