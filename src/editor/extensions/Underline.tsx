@@ -21,8 +21,8 @@ const UnderlineButton: FC = () => {
       className={classNames({ active: active.underline() })}
       disabled={!toggleUnderline.enabled()}
       onClick={() => {
-        toggleUnderline();
         chain.focus({ to, from }).run();
+        toggleUnderline();
       }}
     >
       <UnderlineIcon />

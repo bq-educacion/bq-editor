@@ -21,8 +21,8 @@ const BoldButton: FC = () => {
       className={classNames({ active: active.bold() })}
       disabled={!toggleBold.enabled()}
       onClick={() => {
-        toggleBold();
         chain.focus({ to, from }).run();
+        toggleBold();
       }}
     >
       <BoldIcon />

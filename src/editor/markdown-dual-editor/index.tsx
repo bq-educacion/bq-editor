@@ -62,7 +62,7 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
   };
 
   const visual = useRemirror({
-    extensions: managerExtensions(input),
+    ...managerExtensions(input),
     content,
     stringHandler: stringHandler as "html" | "markdown",
   });

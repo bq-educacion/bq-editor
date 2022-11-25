@@ -6,7 +6,6 @@ export default styled.div<{ code?: boolean }>`
   position: relative;
 
   > div > div {
-    align-items: center;
     background-color: ${colors.white};
     border: 1px solid ${colors.grey4};
     border-radius: 4px;

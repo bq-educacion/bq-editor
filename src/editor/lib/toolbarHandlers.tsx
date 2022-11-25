@@ -1,4 +1,5 @@
 import React from "react";
+import { EditorState } from "remirror";
 import { IEditorProps } from "..";
 import {
   BoldButton,
@@ -10,20 +11,23 @@ import {
   ItalicButton,
   LinkButton,
   OrderedListButton,
+  TextAlignButtons,
   TextColorButton,
   UnderlineButton,
 } from "../extensions";
 
-const toolbarHandlers = ({
-  acceptMedia,
-  enableImageResizing,
-  codeLanguage,
-  color,
-  extensions = [],
-  headingLevels,
-  onUploadMedia,
-  stringHandler,
-}: IEditorProps) =>
+const toolbarHandlers = (
+  {
+    acceptMedia,
+    enableImageResizing,
+    codeLanguage,
+    color,
+    extensions = [],
+    headingLevels,
+    onUploadMedia,
+  }: IEditorProps,
+  setState?: (state: EditorState) => void
+) =>
   extensions.map((extensionsArray) =>
     extensionsArray.map((extension, index) => (
       <React.Fragment key={index}>
@@ -44,6 +48,9 @@ const toolbarHandlers = ({
         {extension === "italic" && <ItalicButton />}
         {extension === "link" && <LinkButton />}
         {extension === "orderedList" && <OrderedListButton />}
+        {extension === "textAlign" && setState && (
+          <TextAlignButtons setState={setState} />
+        )}
         {extension === "textColor" && <TextColorButton color={color} />}
         {extension === "underline" && <UnderlineButton />}
       </React.Fragment>

@@ -27,8 +27,8 @@ const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
       className={classNames({ active: active.codeBlock() })}
       disabled={!toggleCodeBlock.enabled()}
       onClick={() => {
-        active.codeBlock() ? toggleCodeBlock() : toggleCodeBlock({ language });
         chain.focus({ to, from }).run();
+        active.codeBlock() ? toggleCodeBlock() : toggleCodeBlock({ language });
       }}
     >
       <CodeBlockIcon />

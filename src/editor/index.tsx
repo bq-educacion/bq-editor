@@ -1,11 +1,9 @@
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
 import {
-  AnyExtension,
   htmlToProsemirrorNode,
   ProsemirrorNode,
   prosemirrorNodeToHtml,
-  RemirrorEventListenerProps,
 } from "remirror";
 import CodeEditor from "./code-editor";
 import MarkdownDualEditor from "./markdown-dual-editor";
@@ -35,6 +33,7 @@ export const defaultExtensions = [
   ["code", "codeBlock"],
   ["textColor"],
   ["bulletList", "orderedList"],
+  ["textAlign"],
   ["link"],
   ["image"],
 ];
@@ -62,25 +61,31 @@ export type IEditorProps = {
 };
 
 const Editor: FC<IEditorProps> = (props) => {
+  let extensions = props.extensions || defaultExtensions;
   const {
     dualEditor,
     editable,
-    extensions = defaultExtensions,
     initialContent: content,
     onChange,
     selection = "start",
     stringHandler,
   } = props;
 
-  if (stringHandler === "markdown" && dualEditor) {
-    const markdownExtensions = extensions.filter(
+  if (stringHandler === "markdown") {
+    extensions = extensions.filter(
       (extensionsArray) =>
         extensionsArray.filter(
-          (extension) => extension !== "underline" && extension !== "textColor"
+          (extension) =>
+            extension !== "textAlign" &&
+            extension !== "textColor" &&
+            extension !== "underline"
         ).length > 0
     );
+  }
+
+  if (stringHandler === "markdown" && dualEditor) {
     const input = {
-      extensions: markdownExtensions,
+      extensions,
       ...props,
     };
 
@@ -115,8 +120,8 @@ const Editor: FC<IEditorProps> = (props) => {
     ...props,
   };
 
-  const { manager, state: initialContent } = useRemirror({
-    extensions: managerExtensions(input),
+  const { manager, state, setState } = useRemirror({
+    ...managerExtensions(input),
     content:
       !stringHandler && content ? Object.create(JSON.parse(content)) : content,
     selection,
@@ -127,12 +132,13 @@ const Editor: FC<IEditorProps> = (props) => {
     <Remirror
       editable={editable}
       manager={manager}
-      initialContent={initialContent}
-      onChange={({ state }: RemirrorEventListenerProps<AnyExtension>) =>
-        onChange?.(state.doc)
-      }
+      state={state}
+      onChange={({ state }) => {
+        setState(state);
+        onChange?.(state.doc);
+      }}
     >
-      <Toolbar handlers={toolbarHandlers(input)} />
+      <Toolbar handlers={toolbarHandlers(input, setState)} />
       <Wrap>
         <EditorComponent />
         {editorHandlers(input)}

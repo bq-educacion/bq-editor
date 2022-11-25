@@ -21,8 +21,8 @@ const CodeButton: FC = () => {
       className={classNames({ active: active.code() })}
       disabled={!toggleCode.enabled()}
       onClick={() => {
-        toggleCode();
         chain.focus({ to, from }).run();
+        toggleCode();
       }}
     >
       <CodeIcon />

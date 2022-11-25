@@ -21,8 +21,8 @@ const ItalicButton: FC = () => {
       className={classNames({ active: active.italic() })}
       disabled={!toggleItalic.enabled()}
       onClick={() => {
-        toggleItalic();
         chain.focus({ to, from }).run();
+        toggleItalic();
       }}
     >
       <ItalicIcon />

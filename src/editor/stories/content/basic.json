@@ -3,6 +3,9 @@
   "content": [
     {
       "type": "paragraph",
+      "attrs": {
+        "align": "right"
+      },
       "content": [
         {
           "type": "text",
