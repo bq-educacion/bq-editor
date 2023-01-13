@@ -58,5 +58,4 @@ Code.args = {
   codeLanguage: "typescript",
   initialContent: JSON.stringify(code),
   stringHandler: "code",
-  placeholder: "Start coding...",
 };

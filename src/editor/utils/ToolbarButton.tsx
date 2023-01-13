@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Button from "../../button";
+import Button from "../../atoms/button";
 import { colors } from "../../theme";
 
 export default styled(Button)`

@@ -10,8 +10,8 @@ import React, {
   useState,
 } from "react";
 import { ImageExtension } from "remirror/extensions";
-import Button from "../../button";
-import Input from "../../input";
+import Button from "../../atoms/button";
+import Input from "../../atoms/input";
 import { adjustColorOpacity, colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
 import { ToolbarButton } from "../utils";

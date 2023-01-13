@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
-import { colors } from "../theme";
+import { colors } from "../../theme";
 
 export type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   cta?: boolean;

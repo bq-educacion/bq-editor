@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { adjustColorOpacity, colors } from "../theme";
+import { adjustColorOpacity, colors } from "../../theme";
 
 export type IInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: boolean;

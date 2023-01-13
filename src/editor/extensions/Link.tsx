@@ -17,8 +17,8 @@ import React, {
   useState,
 } from "react";
 import { LinkExtension } from "remirror/extensions";
-import Button from "../../button";
-import Input from "../../input";
+import Button from "../../atoms/button";
+import Input from "../../atoms/input";
 import { adjustColorOpacity, colors } from "../../theme";
 import LinkIcon from "../assets/icons/Link";
 import { ToolbarButton } from "../utils";
