@@ -20,11 +20,13 @@ const HeadingButtons: FC<IHeadingProps> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
 
   return (
     <ToolbarSelect
-      disabled={!levels.find((level) => toggleHeading.enabled({ level }))}
+      disabled={
+        !levels.find((level: number) => toggleHeading.enabled({ level }))
+      }
       placeholder="Normal text"
       onChange={(level) => {
-        toggleHeading({ level: parseInt(level) });
         chain.focus({ to, from }).run();
+        toggleHeading({ level: Number(level) });
       }}
       options={levels.map((level) => ({
         active: toggleHeading.enabled() && !toggleHeading.enabled({ level }),
