@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "keywords": [
     "prosemirror",
     "react",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-json": "^5.0.0",
     "@rollup/plugin-sucrase": "^5.0.0",
     "@rollup/plugin-typescript": "^8.4.0",
@@ -48,7 +49,7 @@
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
-    "babel-loader": "^8.2.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",

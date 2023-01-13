@@ -1,3 +1,4 @@
+import babel from "@rollup/plugin-babel";
 import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
 import typescript from "@rollup/plugin-typescript";
@@ -27,6 +28,10 @@ export default [
       warn(warning);
     },
     plugins: [
+      babel({
+        babelHelpers: "bundled",
+        plugins: ["transform-class-properties"],
+      }),
       typescript({
         sourceMap: tsConfig.compilerOptions.sourceMap,
       }),
