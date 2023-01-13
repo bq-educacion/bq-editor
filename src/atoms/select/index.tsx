@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import classNames from "classnames";
-import { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { adjustColorOpacity, colors } from "../../theme";
 import DropIcon from "./assets/icons/Drop";
 
