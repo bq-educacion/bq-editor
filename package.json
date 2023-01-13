@@ -1,11 +1,13 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Carmen Domínguez Campillo",
   "license": "ISC",
+  "main": "src/index.tsx",
   "dependencies": {
     "@remirror/extension-count": "2.0.11",
+    "@remirror/pm": "2.0.3",
     "@remirror/react": "2.0.24",
     "classnames": "^2.3.1",
     "create-context-state": "^2.0.0",
@@ -19,7 +21,6 @@
     "@babel/core": "^7.18.13",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@remirror/pm": "2.0.3",
     "@rollup/plugin-json": "^5.0.0",
     "@rollup/plugin-sucrase": "^5.0.0",
     "@rollup/plugin-typescript": "^8.4.0",
