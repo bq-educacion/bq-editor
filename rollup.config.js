@@ -1,7 +1,8 @@
-import babel from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
-import sucrase from "@rollup/plugin-sucrase";
+import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import css from "rollup-plugin-import-css";
 import dts from "rollup-plugin-dts";
 import tsConfig from "./tsconfig.json";
 import packageJson from "./package.json";
@@ -28,23 +29,23 @@ export default [
       warn(warning);
     },
     plugins: [
-      babel({
-        babelHelpers: "bundled",
-        plugins: ["transform-class-properties"],
-      }),
+      resolve(),
+      commonjs(),
       typescript({
         sourceMap: tsConfig.compilerOptions.sourceMap,
-      }),
-      json(),
-      sucrase({
         exclude: ["node_modules/**"],
-        transforms: ["typescript", "jsx"],
       }),
+      css(),
+      json(),
     ],
   },
   {
-    input: "dist/esm/index.d.ts",
-    output: [{ file: "dist/types.d.ts", format: "esm" }],
+    input: "dist/esm/types/index.d.ts",
+    output: [{ file: packageJson.types, format: "esm" }],
     plugins: [dts()],
+    external: [
+      "remirror/styles/extension-code-block.css",
+      "remirror/styles/extension-placeholder.css",
+    ],
   },
 ];

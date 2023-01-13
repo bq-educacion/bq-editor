@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "keywords": [
     "prosemirror",
     "react",
@@ -10,12 +10,12 @@
   ],
   "author": "Carmen Domínguez Campillo",
   "license": "ISC",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/bq-editor.js",
+  "module": "dist/esm/bq-editor.js",
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
+  "types": "dist/bq-editor.d.ts",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -32,10 +32,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-json": "^5.0.0",
-    "@rollup/plugin-sucrase": "^5.0.0",
-    "@rollup/plugin-typescript": "^8.4.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
@@ -49,7 +49,6 @@
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
@@ -69,6 +68,7 @@
     "require-from-string": "^2.0.2",
     "rollup": "^2.79.0",
     "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-import-css": "^3.1.0",
     "tslib": "^2.4.0",
     "typescript": "^4.8.2",
     "webpack": "^5.74.0"
