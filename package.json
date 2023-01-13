@@ -1,15 +1,9 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Carmen Domínguez Campillo",
   "license": "ISC",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "files": [
-    "dist"
-  ],
-  "types": "dist/index.d.ts",
   "dependencies": {
     "@remirror/extension-count": "2.0.11",
     "@remirror/react": "2.0.24",
