@@ -9,10 +9,10 @@ import React, { FC } from "react";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
 import langMarkdown from "refractor/lang/markdown.js";
-import { IEditorProps } from "..";
-import { CodeBlockExtension } from "../extensions";
-import { managerExtensions } from "../lib";
-import { Text, Wrapper } from "../components";
+import { IEditorProps } from ".";
+import { CodeBlockExtension } from "./extensions";
+import { managerExtensions } from "./lib";
+import { Text, Wrapper } from "./components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

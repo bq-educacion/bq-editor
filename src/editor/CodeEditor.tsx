@@ -3,8 +3,8 @@ import React, { FC } from "react";
 import langTypescript from "refractor/lang/typescript.js";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
-import { CodeBlockExtension } from "../extensions";
-import { IEditorProps } from "..";
+import { CodeBlockExtension } from "./extensions";
+import { IEditorProps } from ".";
 
 const CodeEditor: FC<IEditorProps> = ({
   children,

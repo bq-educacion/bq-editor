@@ -1,5 +1,4 @@
-import Editor, { editorNodeToHtml, htmlToEditorNode } from "./editor";
-import Visor from "./editor/visor";
+import Editor, { editorNodeToHtml, htmlToEditorNode, Visor } from "./editor";
 
 export { editorNodeToHtml, htmlToEditorNode, Visor };
 

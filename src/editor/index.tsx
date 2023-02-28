@@ -5,16 +5,19 @@ import {
   ProsemirrorNode,
   prosemirrorNodeToHtml,
 } from "remirror";
-import CodeEditor from "./code-editor";
-import MarkdownDualEditor from "./markdown-dual-editor";
-import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
+import CodeEditor from "./CodeEditor";
 import { Text, Toolbar, Wrapper } from "./components";
+import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
+import MarkdownDualEditor from "./MarkdownDualEditor";
+import Visor from "./Visor";
+
 import "remirror/styles/extension-code-block.css";
 import "remirror/styles/extension-placeholder.css";
 
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
   prosemirrorNodeToHtml as editorNodeToHtml,
+  Visor,
 };
 
 type CodeLanguage = "css" | "javascript" | "json" | "markdown" | "typescript";

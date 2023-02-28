@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
-import { managerExtensions } from "../lib";
-import { defaultExtensions, StringHandler } from "..";
+import { managerExtensions } from "./lib";
+import { defaultExtensions, StringHandler } from ".";
 
 export type IVisorProps = {
   extensions?: string[][];
