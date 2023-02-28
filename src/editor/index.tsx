@@ -1,4 +1,4 @@
-import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
+import { Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
 import {
   htmlToProsemirrorNode,
@@ -8,7 +8,7 @@ import {
 import CodeEditor from "./code-editor";
 import MarkdownDualEditor from "./markdown-dual-editor";
 import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
-import { Toolbar, Wrapper } from "./components";
+import { Text, Toolbar } from "./components";
 import "remirror/styles/extension-code-block.css";
 import "remirror/styles/extension-placeholder.css";
 
@@ -90,18 +90,15 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <div className="bq-editor">
-        <MarkdownDualEditor {...input}>
+      <MarkdownDualEditor {...input}>
+        <div className="bq-editor">
           <Toolbar
             className="bq-editor-toolbar"
             handlers={toolbarHandlers(input)}
           />
-          <Wrapper className="bq-editor-wrapper">
-            <EditorComponent />
-            {editorHandlers(input)}
-          </Wrapper>
-        </MarkdownDualEditor>
-      </div>
+          <Text className="bq-editor-text">{editorHandlers(input)}</Text>
+        </div>
+      </MarkdownDualEditor>
     );
   }
 
@@ -112,13 +109,11 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <div className="bq-editor">
-        <CodeEditor {...input}>
-          <Wrapper className="bq-editor-wrapper" code>
-            <EditorComponent />
-          </Wrapper>
-        </CodeEditor>
-      </div>
+      <CodeEditor {...input}>
+        <div className="bq-editor">
+          <Text className="bq-editor-text" code />
+        </div>
+      </CodeEditor>
     );
   }
 
@@ -136,26 +131,23 @@ const Editor: FC<IEditorProps> = (props) => {
   });
 
   return (
-    <div className="bq-editor">
-      <Remirror
-        editable={editable}
-        manager={manager}
-        state={state}
-        onChange={({ state }) => {
-          setState(state);
-          onChange?.(state.doc);
-        }}
-      >
+    <Remirror
+      editable={editable}
+      manager={manager}
+      state={state}
+      onChange={({ state }) => {
+        setState(state);
+        onChange?.(state.doc);
+      }}
+    >
+      <div className="bq-editor">
         <Toolbar
           className="bq-editor-toolbar"
           handlers={toolbarHandlers(input, setState)}
         />
-        <Wrapper className="bq-editor-wrapper">
-          <EditorComponent />
-          {editorHandlers(input)}
-        </Wrapper>
-      </Remirror>
-    </div>
+        <Text className="bq-editor-text">{editorHandlers(input)}</Text>
+      </div>
+    </Remirror>
   );
 };
 

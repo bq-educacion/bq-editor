@@ -1,11 +1,31 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { useRemirrorContext } from "@remirror/react";
+import React, { FC } from "react";
 import { colors } from "../../theme";
 
-export default styled.div<{ code?: boolean }>`
+interface ITextProps {
+  className?: string;
+  code?: boolean;
+}
+
+const Text: FC<ITextProps> = ({ children, ...props }) => {
+  const { getRootProps } = useRemirrorContext();
+
+  return (
+    <Container {...props}>
+      <div {...getRootProps()} />
+      {children}
+    </Container>
+  );
+};
+
+export default Text;
+
+const Container = styled.div<{ code?: boolean }>`
   position: relative;
 
-  > div > div {
+  .remirror-editor {
     background-color: ${colors.white};
     border: 1px solid ${colors.grey4};
     border-radius: 4px;
@@ -29,7 +49,7 @@ export default styled.div<{ code?: boolean }>`
       `}
   }
 
-  :not(:first-of-type) > div > div {
+  :not(:first-of-type) .remirror-editor {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: none;

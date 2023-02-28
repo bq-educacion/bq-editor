@@ -4,7 +4,6 @@ import {
   useRemirror,
   UseRemirrorReturn,
 } from "@remirror/react";
-import styled from "@emotion/styled";
 import { createContextState } from "create-context-state";
 import React, { FC } from "react";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
@@ -13,7 +12,7 @@ import langMarkdown from "refractor/lang/markdown.js";
 import { IEditorProps } from "..";
 import { CodeBlockExtension } from "../extensions";
 import { managerExtensions } from "../lib";
-import { Wrapper } from "../components";
+import { Text } from "../components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -118,21 +117,21 @@ const MarkdownTextEditor: FC = () => {
   const { markdown, setVisual } = useEditor();
 
   return (
-    <div className="bq-editor" style={{ marginTop: 20 }}>
-      <Wrapper code className="bq-editor-wrapper">
-        <Remirror
-          manager={markdown.manager}
-          autoRender="end"
-          onChange={({
-            helpers,
-            state,
-          }): RemirrorEventListenerProps<AnyExtension> => {
-            setVisual(helpers.getText({ state }));
-            return null;
-          }}
-        />
-      </Wrapper>
-    </div>
+    <Remirror
+      manager={markdown.manager}
+      autoRender="end"
+      onChange={({
+        helpers,
+        state,
+      }): RemirrorEventListenerProps<AnyExtension> => {
+        setVisual(helpers.getText({ state }));
+        return null;
+      }}
+    >
+      <div className="bq-editor" style={{ marginTop: 20 }}>
+        <Text code className="bq-editor-text" />
+      </div>
+    </Remirror>
   );
 };
 
