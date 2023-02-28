@@ -2,7 +2,7 @@ import { useActive, useCommands } from "@remirror/react";
 import React, { FC } from "react";
 import { OrderedListExtension } from "remirror/extensions";
 import ListNumberIcon from "../assets/icons/ListNumber";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 const OrderedListButton: FC = () => {
   const { liftListItemOutOfList, toggleOrderedList } = useCommands();

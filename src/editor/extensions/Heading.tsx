@@ -6,7 +6,7 @@ import {
 } from "@remirror/react";
 import React, { FC } from "react";
 import { HeadingExtension } from "remirror/extensions";
-import { ToolbarSelect } from "../utils";
+import { ToolbarSelect } from "../components";
 
 interface IHeadingProps {
   levels?: number[];

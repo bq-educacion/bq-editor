@@ -8,7 +8,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { UnderlineExtension } from "remirror/extensions";
 import UnderlineIcon from "../assets/icons/Underline";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 const UnderlineButton: FC = () => {
   const active = useActive();

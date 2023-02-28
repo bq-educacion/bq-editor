@@ -21,7 +21,7 @@ import Button from "../../atoms/button";
 import Input from "../../atoms/input";
 import { adjustColorOpacity, colors } from "../../theme";
 import LinkIcon from "../assets/icons/Link";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 // TODO: Control link attributes
 

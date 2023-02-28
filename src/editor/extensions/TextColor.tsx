@@ -4,7 +4,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../../theme";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 interface ITextColorButtonProps {
   color?: string;

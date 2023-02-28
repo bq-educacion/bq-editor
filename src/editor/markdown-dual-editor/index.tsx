@@ -13,7 +13,7 @@ import langMarkdown from "refractor/lang/markdown.js";
 import { IEditorProps } from "..";
 import { CodeBlockExtension } from "../extensions";
 import { managerExtensions } from "../lib";
-import { Wrap } from "../utils";
+import { Wrapper } from "../components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -118,8 +118,8 @@ const MarkdownTextEditor: FC = () => {
   const { markdown, setVisual } = useEditor();
 
   return (
-    <Margin>
-      <Wrap code>
+    <div className="bq-editor" style={{ marginTop: 20 }}>
+      <Wrapper code className="bq-editor-wrapper">
         <Remirror
           manager={markdown.manager}
           autoRender="end"
@@ -131,13 +131,9 @@ const MarkdownTextEditor: FC = () => {
             return null;
           }}
         />
-      </Wrap>
-    </Margin>
+      </Wrapper>
+    </div>
   );
 };
 
 export default MarkdownDualEditor;
-
-const Margin = styled.div`
-  margin-top: 20px;
-`;

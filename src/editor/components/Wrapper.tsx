@@ -14,6 +14,7 @@ export default styled.div<{ code?: boolean }>`
     outline: none;
     white-space: pre-wrap;
     min-height: 100px;
+    height: 100%;
 
     ${(props) =>
       props.code &&

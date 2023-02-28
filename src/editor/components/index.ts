@@ -1,6 +1,6 @@
 import Toolbar from "./Toolbar";
 import ToolbarButton from "./ToolbarButton";
 import ToolbarSelect from "./ToolbarSelect";
-import Wrap from "./Wrap";
+import Wrapper from "./Wrapper";
 
-export { Toolbar, ToolbarButton, ToolbarSelect, Wrap };
+export { Toolbar, ToolbarButton, ToolbarSelect, Wrapper };

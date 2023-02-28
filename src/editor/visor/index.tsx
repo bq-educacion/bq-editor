@@ -28,23 +28,21 @@ const Visor: FC<IVisorProps> = (props) => {
   });
 
   return (
-    <Remirror
-      editable={false}
-      manager={manager}
-      initialContent={initialContent}
-    >
-      <Wrap>
+    <Container className="bq-editor-visor">
+      <Remirror
+        editable={false}
+        manager={manager}
+        initialContent={initialContent}
+      >
         <EditorComponent />
-      </Wrap>
-    </Remirror>
+      </Remirror>
+    </Container>
   );
 };
 
 export default Visor;
 
-export const Wrap = styled.div`
-  display: contents;
-
+export const Container = styled.div`
   > div > div > pre {
     border-radius: 4px;
     margin: 0 !important;

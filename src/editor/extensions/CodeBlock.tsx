@@ -8,7 +8,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeBlockExtension } from "remirror/extensions";
 import CodeBlockIcon from "../assets/icons/CodeBlock";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 interface ICodeBlockButtonProps {
   language?: string;

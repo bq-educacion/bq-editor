@@ -3,19 +3,20 @@ import React, { FC } from "react";
 import { colors } from "../../theme";
 
 interface IToolbarProps {
+  className?: string;
   handlers: JSX.Element[][];
 }
 
-const Toolbar: FC<IToolbarProps> = ({ handlers }) =>
+const Toolbar: FC<IToolbarProps> = ({ className, handlers }) =>
   handlers.length > 0 ? (
-    <Wrap>
+    <Container className={className}>
       {handlers.map((elements, index) => (
         <React.Fragment key={index}>
           {elements}
           {index < handlers.length - 1 && <Divider />}
         </React.Fragment>
       ))}
-    </Wrap>
+    </Container>
   ) : null;
 
 export default Toolbar;
@@ -25,7 +26,7 @@ const Divider = styled.span`
   border-left: 1px solid ${colors.grey4};
 `;
 
-const Wrap = styled.div`
+const Container = styled.div`
   align-items: center;
   border: 1px solid ${colors.grey4};
   border-top-left-radius: 4px;

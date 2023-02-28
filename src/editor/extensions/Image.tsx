@@ -14,7 +14,7 @@ import Button from "../../atoms/button";
 import Input from "../../atoms/input";
 import { adjustColorOpacity, colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 interface IImageProps {
   accept?: string[];

@@ -15,7 +15,7 @@ import {
 import AlignCenter from "../assets/icons/AlignCenter";
 import AlignLeft from "../assets/icons/AlignLeft";
 import AlignRight from "../assets/icons/AlignRight";
-import { ToolbarButton } from "../utils";
+import { ToolbarButton } from "../components";
 
 const defaultAlign = "left";
 
