@@ -12,7 +12,7 @@ import langMarkdown from "refractor/lang/markdown.js";
 import { IEditorProps } from "..";
 import { CodeBlockExtension } from "../extensions";
 import { managerExtensions } from "../lib";
-import { Text } from "../components";
+import { Text, Wrapper } from "../components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -128,9 +128,9 @@ const MarkdownTextEditor: FC = () => {
         return null;
       }}
     >
-      <div className="bq-editor" style={{ marginTop: 20 }}>
+      <Wrapper className="bq-editor" style={{ marginTop: 20 }}>
         <Text code className="bq-editor-text" />
-      </div>
+      </Wrapper>
     </Remirror>
   );
 };

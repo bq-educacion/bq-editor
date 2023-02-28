@@ -1,9 +1,4 @@
-import {
-  useActive,
-  useChainedCommands,
-  useCommands,
-  useCurrentSelection,
-} from "@remirror/react";
+import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { ItalicExtension } from "remirror/extensions";
@@ -11,18 +6,16 @@ import ItalicIcon from "../assets/icons/Italic";
 import { ToolbarButton } from "../components";
 
 const ItalicButton: FC = () => {
-  const active = useActive();
-  const chain = useChainedCommands();
-  const { toggleItalic } = useCommands();
   const { to, from } = useCurrentSelection();
+  const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <ToolbarButton
       className={classNames({ active: active.italic() })}
-      disabled={!toggleItalic.enabled()}
+      disabled={!commands.toggleItalic.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
-        toggleItalic();
+        commands.toggleItalic();
       }}
     >
       <ItalicIcon />

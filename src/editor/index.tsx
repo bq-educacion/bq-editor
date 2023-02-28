@@ -8,7 +8,7 @@ import {
 import CodeEditor from "./code-editor";
 import MarkdownDualEditor from "./markdown-dual-editor";
 import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
-import { Text, Toolbar } from "./components";
+import { Text, Toolbar, Wrapper } from "./components";
 import "remirror/styles/extension-code-block.css";
 import "remirror/styles/extension-placeholder.css";
 
@@ -91,13 +91,13 @@ const Editor: FC<IEditorProps> = (props) => {
 
     return (
       <MarkdownDualEditor {...input}>
-        <div className="bq-editor">
+        <Wrapper className="bq-editor">
           <Toolbar
             className="bq-editor-toolbar"
             handlers={toolbarHandlers(input)}
           />
           <Text className="bq-editor-text">{editorHandlers(input)}</Text>
-        </div>
+        </Wrapper>
       </MarkdownDualEditor>
     );
   }
@@ -110,9 +110,9 @@ const Editor: FC<IEditorProps> = (props) => {
 
     return (
       <CodeEditor {...input}>
-        <div className="bq-editor">
+        <Wrapper className="bq-editor">
           <Text className="bq-editor-text" code />
-        </div>
+        </Wrapper>
       </CodeEditor>
     );
   }
@@ -140,13 +140,13 @@ const Editor: FC<IEditorProps> = (props) => {
         onChange?.(state.doc);
       }}
     >
-      <div className="bq-editor">
+      <Wrapper className="bq-editor">
         <Toolbar
           className="bq-editor-toolbar"
           handlers={toolbarHandlers(input, setState)}
         />
         <Text className="bq-editor-text">{editorHandlers(input)}</Text>
-      </div>
+      </Wrapper>
     </Remirror>
   );
 };

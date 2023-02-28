@@ -1,7 +1,7 @@
 import {
-  useChainedCommands,
   useCurrentSelection,
   useEditorState,
+  useRemirrorContext,
 } from "@remirror/react";
 import React, { FC } from "react";
 import {
@@ -29,9 +29,9 @@ interface ITextAlignProps {
 }
 
 const TextAlignButtons: FC<ITextAlignProps> = ({ setState }) => {
-  const chain = useChainedCommands();
   const state = useEditorState();
   const { $from, $to, empty } = useCurrentSelection();
+  const { chain } = useRemirrorContext({ autoUpdate: true });
 
   const toggleAlign = (align: string) => {
     if (empty) return;

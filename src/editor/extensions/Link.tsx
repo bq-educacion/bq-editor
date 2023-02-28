@@ -1,10 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  useActive,
-  useAttrs,
-  useChainedCommands,
-  useCurrentSelection,
-} from "@remirror/react";
+import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, {
   ChangeEvent,
@@ -26,11 +21,10 @@ import { ToolbarButton } from "../components";
 // TODO: Control link attributes
 
 function useFloatingLinkState() {
-  const { link } = useAttrs();
-  const chain = useChainedCommands();
   const { to, from } = useCurrentSelection();
+  const { chain, attrs } = useRemirrorContext({ autoUpdate: true });
 
-  const url = (link()?.href as string) ?? "";
+  const url = (attrs.link()?.href as string) ?? "";
   const [href, setHref] = useState(url);
 
   const onRemove = useCallback(() => chain.removeLink().focus().run(), [chain]);
@@ -62,9 +56,9 @@ function useFloatingLinkState() {
 
 const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const active = useActive();
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
   const [showModal, setShowModal] = useState(false);
+  const { active } = useRemirrorContext({ autoUpdate: true });
 
   useEffect(() => {
     !showModal && setHref("");

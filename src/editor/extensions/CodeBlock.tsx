@@ -1,9 +1,4 @@
-import {
-  useActive,
-  useChainedCommands,
-  useCommands,
-  useCurrentSelection,
-} from "@remirror/react";
+import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeBlockExtension } from "remirror/extensions";
@@ -17,18 +12,18 @@ interface ICodeBlockButtonProps {
 const CodeBlockButton: FC<ICodeBlockButtonProps> = ({
   language = "typescript",
 }) => {
-  const active = useActive();
-  const chain = useChainedCommands();
-  const { toggleCodeBlock } = useCommands();
   const { to, from } = useCurrentSelection();
+  const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <ToolbarButton
       className={classNames({ active: active.codeBlock() })}
-      disabled={!toggleCodeBlock.enabled()}
+      disabled={!commands.toggleCodeBlock.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
-        active.codeBlock() ? toggleCodeBlock() : toggleCodeBlock({ language });
+        active.codeBlock()
+          ? commands.toggleCodeBlock()
+          : commands.toggleCodeBlock({ language });
       }}
     >
       <CodeBlockIcon />

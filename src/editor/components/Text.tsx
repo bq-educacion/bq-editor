@@ -13,8 +13,7 @@ const Text: FC<ITextProps> = ({ children, ...props }) => {
   const { getRootProps } = useRemirrorContext();
 
   return (
-    <Container {...props}>
-      <div {...getRootProps()} />
+    <Container {...props} {...getRootProps()}>
       {children}
     </Container>
   );
@@ -24,34 +23,34 @@ export default Text;
 
 const Container = styled.div<{ code?: boolean }>`
   position: relative;
+  background-color: ${colors.white};
+  border: 1px solid ${colors.grey4};
+  border-radius: 4px;
+  color: ${colors.dark};
+  padding: 0 1em;
+  white-space: pre-wrap;
+  min-height: 100px;
+  flex: 1;
 
-  .remirror-editor {
-    background-color: ${colors.white};
-    border: 1px solid ${colors.grey4};
-    border-radius: 4px;
-    color: ${colors.dark};
-    padding: 1px 1em;
-    outline: none;
-    white-space: pre-wrap;
-    min-height: 100px;
-    height: 100%;
-
-    ${(props) =>
-      props.code &&
-      css`
-        padding: 0;
-        min-height: unset;
-
-        > pre {
-          border-radius: 4px;
-          margin: 0 !important;
-        }
-      `}
-  }
-
-  :not(:first-of-type) .remirror-editor {
+  :not(:first-of-type) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: none;
   }
+
+  .remirror-editor {
+    outline: none;
+  }
+
+  ${(props) =>
+    props.code &&
+    css`
+      padding: 0;
+      min-height: unset;
+
+      .remirror-editor > pre {
+        border-radius: 4px;
+        margin: 0 !important;
+      }
+    `}
 `;

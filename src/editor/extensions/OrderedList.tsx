@@ -1,22 +1,22 @@
-import { useActive, useCommands } from "@remirror/react";
+import { useRemirrorContext } from "@remirror/react";
 import React, { FC } from "react";
 import { OrderedListExtension } from "remirror/extensions";
 import ListNumberIcon from "../assets/icons/ListNumber";
 import { ToolbarButton } from "../components";
 
 const OrderedListButton: FC = () => {
-  const { liftListItemOutOfList, toggleOrderedList } = useCommands();
-  useActive();
+  const { commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <ToolbarButton
       onClick={() =>
-        toggleOrderedList.enabled()
-          ? toggleOrderedList()
-          : liftListItemOutOfList()
+        commands.toggleOrderedList.enabled()
+          ? commands.toggleOrderedList()
+          : commands.liftListItemOutOfList()
       }
       disabled={
-        !toggleOrderedList.enabled() && !liftListItemOutOfList.enabled()
+        !commands.toggleOrderedList.enabled() &&
+        !commands.liftListItemOutOfList.enabled()
       }
     >
       <ListNumberIcon />

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useActive, useCommands } from "@remirror/react";
+import { useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { TextColorExtension } from "remirror/extensions";
@@ -13,14 +13,15 @@ interface ITextColorButtonProps {
 const TextColorButton: FC<ITextColorButtonProps> = ({
   color = colors.orange1,
 }) => {
-  const active = useActive();
-  const { setTextColor, removeTextColor } = useCommands();
+  const { active, commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <ToolbarButton
       className={classNames({ active: active.textColor({ color }) })}
       onClick={() =>
-        active.textColor({ color }) ? removeTextColor() : setTextColor(color)
+        active.textColor({ color })
+          ? commands.removeTextColor()
+          : commands.setTextColor(color)
       }
     >
       <ColorIndicator color={color} />

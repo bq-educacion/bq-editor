@@ -1,9 +1,4 @@
-import {
-  useActive,
-  useChainedCommands,
-  useCommands,
-  useCurrentSelection,
-} from "@remirror/react";
+import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeExtension } from "remirror/extensions";
@@ -11,18 +6,16 @@ import CodeIcon from "../assets/icons/Code";
 import { ToolbarButton } from "../components";
 
 const CodeButton: FC = () => {
-  const active = useActive();
-  const chain = useChainedCommands();
-  const { toggleCode } = useCommands();
   const { to, from } = useCurrentSelection();
+  const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <ToolbarButton
       className={classNames({ active: active.code() })}
-      disabled={!toggleCode.enabled()}
+      disabled={!commands.toggleCode.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
-        toggleCode();
+        commands.toggleCode();
       }}
     >
       <CodeIcon />

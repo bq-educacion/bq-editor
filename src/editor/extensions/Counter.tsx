@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { CountExtension } from "@remirror/extension-count";
-import { useHelpers } from "@remirror/react";
+import { useRemirrorContext } from "@remirror/react";
 import React, { FC } from "react";
 import { colors } from "../../theme";
 
@@ -13,9 +13,11 @@ const Counter: FC<ICounterProps> = ({
   maximumStrategy = "characters",
   maximum,
 }) => {
-  const { getWordCount, getCharacterCount } = useHelpers(true);
+  const { helpers } = useRemirrorContext({ autoUpdate: true });
   const count =
-    maximumStrategy === "characters" ? getCharacterCount() : getWordCount();
+    maximumStrategy === "characters"
+      ? helpers.getCharacterCount()
+      : helpers.getWordCount();
 
   return (
     <CounterIndicator
@@ -34,8 +36,8 @@ export { Counter, CountExtension };
 const CounterIndicator = styled.div<{ color: string }>`
   position: absolute;
   border: 0;
-  transform: translateY(-100%);
   margin: 0;
+  bottom: 0;
   right: 0;
   padding: 10px;
   color: ${(props) => props.color};

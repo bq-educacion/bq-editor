@@ -1,9 +1,4 @@
-import {
-  useActive,
-  useChainedCommands,
-  useCommands,
-  useCurrentSelection,
-} from "@remirror/react";
+import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import React, { FC } from "react";
 import { HeadingExtension } from "remirror/extensions";
 import { ToolbarSelect } from "../components";
@@ -13,23 +8,25 @@ interface IHeadingProps {
 }
 
 const HeadingButtons: FC<IHeadingProps> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
-  const chain = useChainedCommands();
-  const { toggleHeading } = useCommands();
   const { to, from } = useCurrentSelection();
-  useActive();
+  const { chain, commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <ToolbarSelect
       disabled={
-        !levels.find((level: number) => toggleHeading.enabled({ level }))
+        !levels.find((level: number) =>
+          commands.toggleHeading.enabled({ level })
+        )
       }
       placeholder="Normal text"
       onChange={(level) => {
         chain.focus({ to, from }).run();
-        toggleHeading({ level: Number(level) });
+        commands.toggleHeading({ level: Number(level) });
       }}
       options={levels.map((level) => ({
-        active: toggleHeading.enabled() && !toggleHeading.enabled({ level }),
+        active:
+          commands.toggleHeading.enabled() &&
+          !commands.toggleHeading.enabled({ level }),
         label: `H${level}`,
         value: `${level}`,
       }))}

@@ -1,13 +1,13 @@
-import { useHelpers } from "@remirror/react";
+import { useRemirrorContext } from "@remirror/react";
 import React, { FC } from "react";
 import { MarkdownExtension } from "remirror/extensions";
 
 const MarkdownPreview: FC = () => {
-  const { getMarkdown } = useHelpers(true);
+  const { helpers } = useRemirrorContext({ autoUpdate: true });
 
   return (
     <pre>
-      <code>{getMarkdown()}</code>
+      <code>{helpers.getMarkdown()}</code>
     </pre>
   );
 };

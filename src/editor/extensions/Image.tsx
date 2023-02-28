@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useActive, useCommands } from "@remirror/react";
+import { useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, {
   ChangeEvent,
@@ -25,8 +25,7 @@ interface IImageProps {
 const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
-  const active = useActive();
-  const { insertImage } = useCommands();
+  const { active, commands } = useRemirrorContext({ autoUpdate: true });
 
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -55,7 +54,7 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
 
   const onSubmit = () => {
     if ((imgSrc || "") === "") return;
-    insertImage({
+    commands.insertImage({
       resizable: enableResizing,
       align:
         imgAlign === "start" ||
