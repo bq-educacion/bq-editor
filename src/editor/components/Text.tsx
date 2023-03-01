@@ -38,10 +38,6 @@ const Container = styled.div<{ code?: boolean }>`
     border-top: none;
   }
 
-  .remirror-editor {
-    outline: none;
-  }
-
   ${(props) =>
     props.code &&
     css`

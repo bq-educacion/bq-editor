@@ -127,11 +127,7 @@ const MarkdownTextEditor: FC = () => {
         setVisual(helpers.getText({ state }));
         return null;
       }}
-    >
-      <Wrapper className="bq-editor" style={{ marginTop: 20 }}>
-        <Text code className="bq-editor-text" />
-      </Wrapper>
-    </Remirror>
+    />
   );
 };
 

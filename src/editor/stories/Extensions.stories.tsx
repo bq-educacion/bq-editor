@@ -87,3 +87,9 @@ Image.args = {
     return new Promise((resolve) => resolve(image));
   },
 };
+
+export const TextAlign = Template.bind({});
+
+TextAlign.args = {
+  extensions: [["textAlign"]],
+};

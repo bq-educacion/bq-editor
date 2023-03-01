@@ -1,5 +1,5 @@
 import React from "react";
-import Visor, { IVisorProps } from "../visor";
+import Visor, { IVisorProps } from "../Visor";
 import basic from "./content/basic.json";
 import code from "./content/code.json";
 import html from "./content/html.js";

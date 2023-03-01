@@ -4,4 +4,8 @@ export default styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  .remirror-editor {
+    outline: none;
+  }
 `;

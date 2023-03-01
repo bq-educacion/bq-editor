@@ -7,6 +7,7 @@ import {
 } from "remirror";
 import CodeEditor from "./CodeEditor";
 import { Text, Toolbar, Wrapper } from "./components";
+import { MarkdownPreview } from "./extensions";
 import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
@@ -93,15 +94,15 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <MarkdownDualEditor {...input}>
-        <Wrapper className="bq-editor">
+      <Wrapper className="bq-editor">
+        <MarkdownDualEditor {...input}>
           <Toolbar
             className="bq-editor-toolbar"
             handlers={toolbarHandlers(input)}
           />
           <Text className="bq-editor-text">{editorHandlers(input)}</Text>
-        </Wrapper>
-      </MarkdownDualEditor>
+        </MarkdownDualEditor>
+      </Wrapper>
     );
   }
 
@@ -112,11 +113,11 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <CodeEditor {...input}>
-        <Wrapper className="bq-editor">
+      <Wrapper className="bq-editor">
+        <CodeEditor {...input}>
           <Text className="bq-editor-text" code />
-        </Wrapper>
-      </CodeEditor>
+        </CodeEditor>
+      </Wrapper>
     );
   }
 
@@ -134,23 +135,24 @@ const Editor: FC<IEditorProps> = (props) => {
   });
 
   return (
-    <Remirror
-      editable={editable}
-      manager={manager}
-      state={state}
-      onChange={({ state }) => {
-        setState(state);
-        onChange?.(state.doc);
-      }}
-    >
-      <Wrapper className="bq-editor">
+    <Wrapper className="bq-editor">
+      <Remirror
+        editable={editable}
+        manager={manager}
+        state={state}
+        onChange={({ state }) => {
+          setState(state);
+          onChange?.(state.doc);
+        }}
+      >
         <Toolbar
           className="bq-editor-toolbar"
           handlers={toolbarHandlers(input, setState)}
         />
         <Text className="bq-editor-text">{editorHandlers(input)}</Text>
-      </Wrapper>
-    </Remirror>
+        {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}
+      </Remirror>
+    </Wrapper>
   );
 };
 
