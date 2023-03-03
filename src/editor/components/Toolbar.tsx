@@ -13,7 +13,9 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers }) =>
       {handlers.map((elements, index) => (
         <React.Fragment key={index}>
           {elements}
-          {index < handlers.length - 1 && <Divider />}
+          {index < handlers.length - 1 && (
+            <Divider className="bq-editor-toolbar-divider" />
+          )}
         </React.Fragment>
       ))}
     </Container>

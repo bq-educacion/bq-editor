@@ -1,6 +1,6 @@
 import React from "react";
 import { IEditorProps } from "..";
-import { Counter, MarkdownPreview } from "../extensions";
+import { Counter } from "../extensions";
 
 const editorHandlers = ({ maximumStrategy, maximum }: IEditorProps) => (
   <>
