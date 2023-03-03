@@ -9,7 +9,6 @@ export default styled(Select)`
   min-height: 40px;
   min-width: 40px;
   padding: 5px;
-  width: 165px;
 
   &.active,
   &:hover {

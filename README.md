@@ -1,6 +1,6 @@
 # bq Editor
 
-Simple and bqeautiful React rich text editor.
+Simple and Bqeautiful React Rich Text Editor.
 
 ## Installation
 
