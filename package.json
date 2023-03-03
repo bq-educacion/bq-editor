@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "keywords": [
     "prosemirror",
     "react",
@@ -9,7 +9,7 @@
     "text editor"
   ],
   "author": "Carmen Domínguez Campillo",
-  "license": "ISC",
+  "license": "MIT",
   "main": "dist/cjs/bq-editor.js",
   "module": "dist/esm/bq-editor.js",
   "files": [

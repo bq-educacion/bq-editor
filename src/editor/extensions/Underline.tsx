@@ -5,7 +5,11 @@ import { UnderlineExtension } from "remirror/extensions";
 import UnderlineIcon from "../assets/icons/Underline";
 import { ToolbarButton } from "../components";
 
-const UnderlineButton: FC = () => {
+export const UnderlineName = "underline";
+
+export type UnderlineAttrs = Record<string, never>;
+
+const UnderlineButton: FC<UnderlineAttrs> = () => {
   const { to, from } = useCurrentSelection();
   const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 

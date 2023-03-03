@@ -1,5 +1,9 @@
 import { Remirror, useRemirror } from "@remirror/react";
 import React, { FC } from "react";
+import langCss from "refractor/lang/css.js";
+import langJavascript from "refractor/lang/javascript.js";
+import langJson from "refractor/lang/json.js";
+import langMarkdown from "refractor/lang/markdown.js";
 import langTypescript from "refractor/lang/typescript.js";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
@@ -8,6 +12,7 @@ import { IEditorProps } from ".";
 
 const CodeEditor: FC<IEditorProps> = ({
   children,
+  codeLanguage,
   editable,
   initialContent: content,
   onChange,
@@ -17,8 +22,14 @@ const CodeEditor: FC<IEditorProps> = ({
     extensions: () => [
       new DocExtension({ content: "codeBlock" }),
       new CodeBlockExtension({
-        defaultLanguage: "typescript",
-        supportedLanguages: [langTypescript],
+        defaultLanguage: codeLanguage,
+        supportedLanguages: [
+          langCss,
+          langJavascript,
+          langJson,
+          langMarkdown,
+          langTypescript,
+        ],
         syntaxTheme: "base16_ateliersulphurpool_light",
         defaultWrap: true,
       }),

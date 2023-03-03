@@ -1,13 +1,20 @@
 import React from "react";
 import { IEditorProps } from "..";
-import { Counter } from "../extensions";
+import { CounterAttrs, CounterIndicator } from "../extensions";
 
-const editorHandlers = ({ maximumStrategy, maximum }: IEditorProps) => (
-  <>
-    {maximum !== undefined && (
-      <Counter maximumStrategy={maximumStrategy} maximum={maximum} />
-    )}
-  </>
-);
+const editorHandlers = ({ extensions = [] }: IEditorProps) => {
+  const extensionsFlat = extensions.flat();
+
+  return (
+    <>
+      {extensionsFlat.some(({ name }) => name === "counter") && (
+        <CounterIndicator
+          {...(extensionsFlat.find(({ name }) => name === "counter")
+            .attrs as CounterAttrs)}
+        />
+      )}
+    </>
+  );
+};
 
 export default editorHandlers;

@@ -27,12 +27,24 @@ Extensions indicate what type of content the editor can handle.
 
 ```
 <Editor
-  extensions={[
-    ["heading", "bold", "italic", "underline"],
-    ["textColor"],
-    ["bulletList", "orderedList"],
-    ["textAlign"],
-  ]}
+  extensions: [[
+    {
+      name: "heading",
+      attrs: {
+        levels: [1, 2, 3]
+      }
+    }, {
+      name: "bold"
+    }, {
+      name: "italic"
+    }, {
+      name: "underline"
+    }
+  ], [
+    {
+      name: "text-align"
+    }
+  ]]
 />
 ```
 
@@ -46,10 +58,6 @@ Some extensions have additional parameters, run the [storybook](https://github.c
 
 Editor provides an `onChange` function to export and save the contents.
 
-There are 4 types of editors depending on how the content is handled, which can be configured through the `stringHandler` parameter:
-
-- basic
-
 ```
 export const MyEditor = () => {
   const [doc, setDoc] = useState<ProsemirrorNode>();
@@ -62,6 +70,8 @@ export const MyEditor = () => {
   );
 };
 ```
+
+The input content is of type `ProsemirrorNode`, except if a specific handler is activated, there are 2 different types:
 
 - html
 
@@ -98,21 +108,12 @@ export const MyEditor = () => {
 
 Due to the limitations of markdown some extensions do not work.
 
-- code
+### Code Editor
+
+The code editor is activated by defining the code language, there is no need to add extensions.
 
 ```
-export const MyEditor = () => {
-  const [doc, setDoc] = useState<ProsemirrorNode>();
-
-  return (
-    <Editor
-      codeLanguage="typescript"
-      initialContent={JSON.stringify(code)}
-      onChange={setDoc}
-      stringHandler="code"
-    />
-  );
-};
+<Editor codeLanguage="typescript" />
 ```
 
 ### Visor

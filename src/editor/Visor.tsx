@@ -1,30 +1,76 @@
 import React, { FC } from "react";
+import langCss from "refractor/lang/css.js";
+import langJavascript from "refractor/lang/javascript.js";
+import langJson from "refractor/lang/json.js";
+import langMarkdown from "refractor/lang/markdown.js";
+import langTypescript from "refractor/lang/typescript.js";
 import styled from "@emotion/styled";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
+import { DocExtension } from "remirror/extensions";
+import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
-import { defaultExtensions, StringHandler } from ".";
+import { CodeLanguage, StringHandler } from ".";
+import { defaultExtensions, Extension } from "./extensions";
 
 export type IVisorProps = {
-  extensions?: string[][];
+  codeLanguage?: CodeLanguage;
+  extensions?: Extension[][];
   content?: string;
   stringHandler?: StringHandler;
 };
 
 const Visor: FC<IVisorProps> = (props) => {
-  const { extensions = defaultExtensions, content, stringHandler } = props;
+  const {
+    codeLanguage,
+    extensions = defaultExtensions,
+    content,
+    stringHandler,
+  } = props;
 
-  const input = {
+  let input = {
     extensions,
     ...props,
   };
 
+  if (codeLanguage) {
+    input = {
+      ...props,
+      extensions: [
+        [
+          {
+            name: "code-block",
+            attrs: {
+              language: codeLanguage,
+            },
+          },
+        ],
+      ] as Extension[][],
+    };
+  }
+
   const { manager, state: initialContent } = useRemirror({
-    ...managerExtensions(input),
+    ...(codeLanguage
+      ? {
+          extensions: () => [
+            new DocExtension({ content: "codeBlock" }),
+            new CodeBlockExtension({
+              defaultLanguage: codeLanguage,
+              supportedLanguages: [
+                langCss,
+                langJavascript,
+                langJson,
+                langMarkdown,
+                langTypescript,
+              ],
+              syntaxTheme: "base16_ateliersulphurpool_light",
+              defaultWrap: true,
+            }),
+          ],
+        }
+      : managerExtensions(input)),
     content:
-      (!stringHandler || stringHandler === "code") && content
-        ? Object.create(JSON.parse(content))
-        : content,
-    stringHandler: stringHandler === "code" ? undefined : stringHandler,
+      !stringHandler && content ? Object.create(JSON.parse(content)) : content,
+    stringHandler,
   });
 
   return (

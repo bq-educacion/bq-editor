@@ -17,42 +17,26 @@ import {
 } from "../extensions";
 
 const toolbarHandlers = (
-  {
-    acceptMedia,
-    enableImageResizing,
-    codeLanguage,
-    color,
-    extensions = [],
-    headingLevels,
-    onUploadMedia,
-  }: IEditorProps,
+  { extensions = [] }: IEditorProps,
   setState?: (state: EditorState) => void
 ) =>
   extensions.map((extensionsArray) =>
-    extensionsArray.map((extension, index) => (
+    extensionsArray.map(({ name, attrs }, index) => (
       <React.Fragment key={index}>
-        {extension === "bold" && <BoldButton />}
-        {extension === "bulletList" && <BulletListButton />}
-        {extension === "code" && <CodeButton />}
-        {extension === "codeBlock" && (
-          <CodeBlockButton language={codeLanguage} />
-        )}
-        {extension === "heading" && <HeadingButtons levels={headingLevels} />}
-        {extension === "image" && (
-          <ImageButton
-            accept={acceptMedia?.image}
-            enableResizing={enableImageResizing}
-            onUpload={onUploadMedia}
-          />
-        )}
-        {extension === "italic" && <ItalicButton />}
-        {extension === "link" && <LinkButton />}
-        {extension === "orderedList" && <OrderedListButton />}
-        {extension === "textAlign" && setState && (
+        {name === "bold" && <BoldButton />}
+        {name === "bullet-list" && <BulletListButton />}
+        {name === "code" && <CodeButton />}
+        {name === "code-block" && <CodeBlockButton {...attrs} />}
+        {name === "heading" && <HeadingButtons levels={attrs.levels} />}
+        {name === "image" && <ImageButton {...attrs} />}
+        {name === "italic" && <ItalicButton />}
+        {name === "link" && <LinkButton />}
+        {name === "ordered-list" && <OrderedListButton />}
+        {name === "text-align" && setState && (
           <TextAlignButtons setState={setState} />
         )}
-        {extension === "textColor" && <TextColorButton color={color} />}
-        {extension === "underline" && <UnderlineButton />}
+        {name === "text-color" && <TextColorButton {...attrs} />}
+        {name === "underline" && <UnderlineButton />}
       </React.Fragment>
     ))
   );

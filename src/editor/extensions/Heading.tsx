@@ -3,11 +3,13 @@ import React, { FC } from "react";
 import { HeadingExtension } from "remirror/extensions";
 import { ToolbarSelect } from "../components";
 
-interface IHeadingProps {
-  levels?: number[];
-}
+export const HeadingName = "heading";
 
-const HeadingButtons: FC<IHeadingProps> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
+export type HeadingAttrs = {
+  levels?: number[];
+};
+
+const HeadingButtons: FC<HeadingAttrs> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
   const { to, from } = useCurrentSelection();
   const { chain, commands } = useRemirrorContext({ autoUpdate: true });
 

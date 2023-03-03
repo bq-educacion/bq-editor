@@ -5,7 +5,11 @@ import { CodeExtension } from "remirror/extensions";
 import CodeIcon from "../assets/icons/Code";
 import { ToolbarButton } from "../components";
 
-const CodeButton: FC = () => {
+export const CodeName = "code";
+
+export type CodeAttrs = Record<string, never>;
+
+const CodeButton: FC<CodeAttrs> = () => {
   const { to, from } = useCurrentSelection();
   const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 

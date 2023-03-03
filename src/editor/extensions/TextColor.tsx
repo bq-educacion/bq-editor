@@ -6,13 +6,13 @@ import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../../theme";
 import { ToolbarButton } from "../components";
 
-interface ITextColorButtonProps {
-  color?: string;
-}
+export const TextColorName = "text-color";
 
-const TextColorButton: FC<ITextColorButtonProps> = ({
-  color = colors.orange1,
-}) => {
+export type TextColorAttrs = {
+  color?: string;
+};
+
+const TextColorButton: FC<TextColorAttrs> = ({ color = colors.orange1 }) => {
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
 
   return (

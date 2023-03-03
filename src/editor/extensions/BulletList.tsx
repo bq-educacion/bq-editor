@@ -4,7 +4,11 @@ import { BulletListExtension } from "remirror/extensions";
 import ListBulletIcon from "../assets/icons/ListBullet";
 import { ToolbarButton } from "../components";
 
-const BulletListButton: FC = () => {
+export const BulletListName = "bullet-list";
+
+export type BulletListAttrs = Record<string, never>;
+
+const BulletListButton: FC<BulletListAttrs> = () => {
   const { commands } = useRemirrorContext({ autoUpdate: true });
 
   return (

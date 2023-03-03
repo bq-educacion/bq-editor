@@ -39,4 +39,9 @@ const Container = styled.div`
   position: relative;
   gap: 5px;
   padding: 5px;
+
+  &:empty {
+    border-bottom: 0;
+    padding: 1px;
+  }
 `;

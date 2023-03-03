@@ -28,49 +28,116 @@ const Template = (args: IEditorProps) => {
 export const RichText = Template.bind({});
 
 RichText.args = {
-  extensions: [["heading", "bold", "italic", "underline"]],
-  headingLevels: [1, 2, 3, 4],
+  extensions: [
+    [
+      {
+        name: "heading",
+        attrs: {
+          levels: [1, 2, 3],
+        },
+      },
+      {
+        name: "bold",
+      },
+      {
+        name: "italic",
+      },
+      {
+        name: "underline",
+      },
+    ],
+  ],
 };
 
 export const Code = Template.bind({});
 
 Code.args = {
-  codeLanguage: "typescript",
-  extensions: [["code", "codeBlock"]],
+  extensions: [
+    [
+      {
+        name: "code",
+      },
+      {
+        name: "code-block",
+        attrs: {
+          language: "css",
+        },
+      },
+    ],
+  ],
 };
 
 export const Counter = Template.bind({});
 
 Counter.args = {
-  extensions: [],
-  maximumStrategy: "characters",
-  maximum: 10,
+  extensions: [
+    [
+      {
+        name: "counter",
+        attrs: {
+          maximumStrategy: "characters",
+          maximum: 10,
+        },
+      },
+    ],
+  ],
 };
 
 export const TextColor = Template.bind({});
 
 TextColor.args = {
-  color: colors.orange1,
-  extensions: [["textColor"]],
+  extensions: [
+    [
+      {
+        name: "text-color",
+        attrs: {
+          color: colors.orange1,
+        },
+      },
+    ],
+  ],
 };
 
 export const Lists = Template.bind({});
 
 Lists.args = {
-  extensions: [["bulletList", "orderedList"]],
+  extensions: [
+    [
+      {
+        name: "bullet-list",
+      },
+      {
+        name: "ordered-list",
+      },
+    ],
+  ],
 };
 
 export const Link = Template.bind({});
 
 Link.args = {
-  extensions: [["link"]],
+  extensions: [
+    [
+      {
+        name: "link",
+      },
+    ],
+  ],
 };
 
 export const AutoLink = Template.bind({});
 
 AutoLink.args = {
-  autoLink: true,
-  extensions: [["link"]],
+  extensions: [
+    [
+      {
+        name: "link",
+        attrs: {
+          autoLink: true,
+        },
+      },
+    ],
+  ],
   placeholder: `Type "www.educacion.bq.com" to insert a link`,
   stringHandler: "html",
 };
@@ -78,18 +145,48 @@ AutoLink.args = {
 export const Image = Template.bind({});
 
 Image.args = {
-  acceptMedia: {
-    image: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
-  },
-  enableImageResizing: true,
-  extensions: [["image"]],
-  onUploadMedia: () => {
-    return new Promise((resolve) => resolve(image));
-  },
+  extensions: [
+    [
+      {
+        name: "image",
+        attrs: {
+          accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
+          onUpload: () => {
+            return new Promise((resolve) => resolve(image));
+          },
+        },
+      },
+    ],
+  ],
+};
+
+export const ImageResizable = Template.bind({});
+
+ImageResizable.args = {
+  extensions: [
+    [
+      {
+        name: "image",
+        attrs: {
+          accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
+          resizable: true,
+          onUpload: () => {
+            return new Promise((resolve) => resolve(image));
+          },
+        },
+      },
+    ],
+  ],
 };
 
 export const TextAlign = Template.bind({});
 
 TextAlign.args = {
-  extensions: [["textAlign"]],
+  extensions: [
+    [
+      {
+        name: "text-align",
+      },
+    ],
+  ],
 };

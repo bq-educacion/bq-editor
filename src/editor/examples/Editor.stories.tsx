@@ -31,25 +31,25 @@ const Template = (args: IEditorProps) => {
 export const Default = Template.bind({});
 
 Default.args = {
-  initialContent: JSON.stringify(basic),
   placeholder: "Start typing...",
+  initialContent: JSON.stringify(basic),
 };
 
 export const Html = Template.bind({});
 
 Html.args = {
-  initialContent: html,
   stringHandler: "html",
   placeholder: "Start htmling...",
+  initialContent: html,
 };
 
 export const Markdown = Template.bind({});
 
 Markdown.args = {
   dualEditor: false,
-  initialContent: markdown,
   stringHandler: "markdown",
   placeholder: "Start markdowning...",
+  initialContent: markdown,
 };
 
 export const Code = Template.bind({});
@@ -57,5 +57,4 @@ export const Code = Template.bind({});
 Code.args = {
   codeLanguage: "typescript",
   initialContent: JSON.stringify(code),
-  stringHandler: "code",
 };

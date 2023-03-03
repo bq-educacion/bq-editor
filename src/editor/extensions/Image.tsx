@@ -16,13 +16,15 @@ import { adjustColorOpacity, colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
 import { ToolbarButton } from "../components";
 
-interface IImageProps {
-  accept?: string[];
-  enableResizing?: boolean;
-  onUpload?: (file: File) => Promise<string>;
-}
+export const ImageName = "image";
 
-const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
+export type ImageAttrs = {
+  accept?: string[];
+  onUpload?: (file: File) => Promise<string>;
+  resizable?: boolean;
+};
+
+const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
@@ -55,7 +57,7 @@ const ImageButton: FC<IImageProps> = ({ accept, enableResizing, onUpload }) => {
   const onSubmit = () => {
     if ((imgSrc || "") === "") return;
     commands.insertImage({
-      resizable: enableResizing,
+      resizable,
       align:
         imgAlign === "start" ||
         imgAlign === "end" ||

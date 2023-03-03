@@ -4,7 +4,11 @@ import { OrderedListExtension } from "remirror/extensions";
 import ListNumberIcon from "../assets/icons/ListNumber";
 import { ToolbarButton } from "../components";
 
-const OrderedListButton: FC = () => {
+export const OrderedListName = "ordered-list";
+
+export type OrderedListAttrs = Record<string, never>;
+
+const OrderedListButton: FC<OrderedListAttrs> = () => {
   const { commands } = useRemirrorContext({ autoUpdate: true });
 
   return (

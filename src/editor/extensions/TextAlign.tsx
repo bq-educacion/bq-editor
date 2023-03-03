@@ -19,16 +19,20 @@ import { ToolbarButton } from "../components";
 
 const defaultAlign = "left";
 
+export const TextAlignName = "text-align";
+
+export type TextAlignAttrs = Record<string, never>;
+
 export const TextAlignExtraAttributes: IdentifierSchemaAttributes = {
   identifiers: ["paragraph", "heading"],
   attributes: { align: defaultAlign },
 };
 
-interface ITextAlignProps {
+interface ITextAlignButtonsProps {
   setState: (state: EditorState) => void;
 }
 
-const TextAlignButtons: FC<ITextAlignProps> = ({ setState }) => {
+const TextAlignButtons: FC<ITextAlignButtonsProps> = ({ setState }) => {
   const state = useEditorState();
   const { $from, $to, empty } = useCurrentSelection();
   const { chain } = useRemirrorContext({ autoUpdate: true });

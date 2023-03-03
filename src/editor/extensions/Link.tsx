@@ -20,6 +20,12 @@ import { ToolbarButton } from "../components";
 
 // TODO: Control link attributes
 
+export const LinkName = "link";
+
+export type LinkAttrs = {
+  autoLink?: boolean;
+};
+
 function useFloatingLinkState() {
   const { to, from } = useCurrentSelection();
   const { chain, attrs } = useRemirrorContext({ autoUpdate: true });

@@ -5,7 +5,11 @@ import { ItalicExtension } from "remirror/extensions";
 import ItalicIcon from "../assets/icons/Italic";
 import { ToolbarButton } from "../components";
 
-const ItalicButton: FC = () => {
+export const ItalicNname = "italic";
+
+export type ItalicAttrs = Record<string, never>;
+
+const ItalicButton: FC<ItalicAttrs> = () => {
   const { to, from } = useCurrentSelection();
   const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 

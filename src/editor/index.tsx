@@ -7,7 +7,7 @@ import {
 } from "remirror";
 import CodeEditor from "./CodeEditor";
 import { Text, Toolbar, Wrapper } from "./components";
-import { MarkdownPreview } from "./extensions";
+import { defaultExtensions, Extension, MarkdownPreview } from "./extensions";
 import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
@@ -21,44 +21,27 @@ export {
   Visor,
 };
 
-type CodeLanguage = "css" | "javascript" | "json" | "markdown" | "typescript";
-
-type MaximumStrategy = "characters" | "words";
+export type CodeLanguage =
+  | "css"
+  | "javascript"
+  | "json"
+  | "markdown"
+  | "typescript";
 
 // Place the cursor at the start of the document. This can also be set to `end`, `all` or a numbered position.
 type Selection = "start" | "end" | "all" | number;
 
 // Set the string handler which means the content provided will be automatically handled as html.
 // `markdown` is also available when the `MarkdownExtension` is added to the editor.
-export type StringHandler = "code" | "html" | "markdown";
-
-export const defaultExtensions = [
-  ["heading", "bold", "italic", "underline"],
-  ["code", "codeBlock"],
-  ["textColor"],
-  ["bulletList", "orderedList"],
-  ["textAlign"],
-  ["link"],
-  ["image"],
-];
+export type StringHandler = "html" | "markdown";
 
 export type IEditorProps = {
-  acceptMedia?: {
-    image: string[];
-  };
-  autoLink?: boolean;
   codeLanguage?: CodeLanguage;
-  color?: string;
   dualEditor?: boolean;
   editable?: boolean;
-  enableImageResizing?: boolean;
-  extensions?: string[][];
-  headingLevels?: number[];
+  extensions?: Extension[][];
   initialContent?: string;
-  maximumStrategy?: MaximumStrategy;
-  maximum?: number;
   onChange?: (doc: ProsemirrorNode) => void;
-  onUploadMedia?: (file: File) => Promise<string>;
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
@@ -67,11 +50,12 @@ export type IEditorProps = {
 const Editor: FC<IEditorProps> = (props) => {
   let extensions = props.extensions || defaultExtensions;
   const {
+    codeLanguage,
     dualEditor,
     editable,
     initialContent: content,
     onChange,
-    selection = "start",
+    selection = "end",
     stringHandler,
   } = props;
 
@@ -79,10 +63,10 @@ const Editor: FC<IEditorProps> = (props) => {
     extensions = extensions.filter(
       (extensionsArray) =>
         extensionsArray.filter(
-          (extension) =>
-            extension !== "textAlign" &&
-            extension !== "textColor" &&
-            extension !== "underline"
+          ({ name }) =>
+            name !== "text-align" &&
+            name !== "text-color" &&
+            name !== "underline"
         ).length > 0
     );
   }
@@ -106,9 +90,18 @@ const Editor: FC<IEditorProps> = (props) => {
     );
   }
 
-  if (stringHandler === "code") {
+  if (codeLanguage) {
     const input = {
-      extensions: [["codeBlock"]],
+      extensions: [
+        [
+          {
+            name: "code-block",
+            attrs: {
+              language: codeLanguage,
+            },
+          },
+        ],
+      ] as Extension[][],
       ...props,
     };
 

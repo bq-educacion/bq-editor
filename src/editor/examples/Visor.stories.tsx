@@ -35,6 +35,7 @@ Markdown.args = {
 export const Code = Template.bind({});
 
 Code.args = {
+  extensions: [],
+  codeLanguage: "typescript",
   content: JSON.stringify(code),
-  stringHandler: "code",
 };

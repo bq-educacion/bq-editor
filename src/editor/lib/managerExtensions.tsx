@@ -1,19 +1,24 @@
-import { CountExtension, CountStrategy } from "@remirror/extension-count";
 import langCss from "refractor/lang/css.js";
 import langJavascript from "refractor/lang/javascript.js";
 import langJson from "refractor/lang/json.js";
 import langMarkdown from "refractor/lang/markdown.js";
 import langTypescript from "refractor/lang/typescript.js";
-import { AnyExtension, IdentifierSchemaAttributes, Static } from "remirror";
+import { AnyExtension, IdentifierSchemaAttributes } from "remirror";
 import {
   BoldExtension,
   BulletListExtension,
+  CodeBlockAttrs,
   CodeBlockExtension,
   CodeExtension,
+  CounterAttrs,
+  CountExtension,
   HardBreakExtension,
+  HeadingAttrs,
   HeadingExtension,
+  ImageAttrs,
   ImageExtension,
   ItalicExtension,
+  LinkAttrs,
   LinkExtension,
   ListItemExtension,
   MarkdownExtension,
@@ -27,13 +32,7 @@ import {
 import { IEditorProps } from "..";
 
 const managerExtensions = ({
-  autoLink = false,
-  codeLanguage,
-  enableImageResizing,
   extensions = [],
-  headingLevels,
-  maximumStrategy,
-  maximum,
   placeholder,
   stringHandler,
 }: IEditorProps): {
@@ -42,18 +41,34 @@ const managerExtensions = ({
 } => {
   const extensionsFlat = extensions.flat();
 
+  const codeBlockAttrs = extensionsFlat.find(
+    ({ name }) => name === "code-block"
+  )?.attrs as CodeBlockAttrs;
+  const counterAttrs = extensionsFlat.find(({ name }) => name === "counter")
+    ?.attrs as CounterAttrs;
+  const headingAttrs = extensionsFlat.find(({ name }) => name === "heading")
+    ?.attrs as HeadingAttrs;
+  const imageAttrs = extensionsFlat.find(({ name }) => name === "image")
+    ?.attrs as ImageAttrs;
+  const linkAttrs = extensionsFlat.find(({ name }) => name === "code-block")
+    ?.attrs as LinkAttrs;
+
   return {
     extensions: () =>
       [
-        ...(extensionsFlat.includes("bold") ? [new BoldExtension({})] : []),
-        ...(extensionsFlat.includes("bulletList")
+        ...(extensionsFlat.some(({ name }) => name === "bold")
+          ? [new BoldExtension({})]
+          : []),
+        ...(extensionsFlat.some(({ name }) => name === "bullet-list")
           ? [new BulletListExtension({})]
           : []),
-        ...(extensionsFlat.includes("code") ? [new CodeExtension({})] : []),
-        ...(extensionsFlat.includes("codeBlock")
+        ...(extensionsFlat.some(({ name }) => name === "code")
+          ? [new CodeExtension({})]
+          : []),
+        ...(extensionsFlat.some(({ name }) => name === "code-block")
           ? [
               new CodeBlockExtension({
-                defaultLanguage: codeLanguage,
+                defaultLanguage: codeBlockAttrs?.language,
                 supportedLanguages: [
                   langCss,
                   langJavascript,
@@ -66,50 +81,43 @@ const managerExtensions = ({
               }),
             ]
           : []),
-        ...(maximum !== undefined
-          ? [
-              new CountExtension({
-                maximumStrategy: maximumStrategy as Static<CountStrategy>,
-                maximum,
-              }),
-            ]
+        ...(extensionsFlat.some(({ name }) => name === "counter")
+          ? [new CountExtension(counterAttrs)]
           : []),
-        ...(extensionsFlat.includes("heading")
-          ? [
-              new HeadingExtension(
-                headingLevels ? { levels: headingLevels } : {}
-              ),
-            ]
+        ...(extensionsFlat.some(({ name }) => name === "heading")
+          ? [new HeadingExtension(headingAttrs?.levels ? headingAttrs : {})]
           : []),
-        ...(extensionsFlat.includes("image")
-          ? [new ImageExtension({ enableResizing: enableImageResizing })]
+        ...(extensionsFlat.some(({ name }) => name === "image")
+          ? [new ImageExtension(imageAttrs)]
           : []),
-        ...(extensionsFlat.includes("italic") ? [new ItalicExtension({})] : []),
-        ...(extensionsFlat.includes("link")
-          ? [new LinkExtension({ autoLink })]
+        ...(extensionsFlat.some(({ name }) => name === "italic")
+          ? [new ItalicExtension({})]
+          : []),
+        ...(extensionsFlat.some(({ name }) => name === "link")
+          ? [new LinkExtension(linkAttrs)]
           : []),
         ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
-        ...(extensionsFlat.includes("orderedList")
+        ...(extensionsFlat.some(({ name }) => name === "ordered-list")
           ? [new OrderedListExtension({})]
           : []),
         ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
-        ...(extensionsFlat.includes("textAlign")
+        ...(extensionsFlat.some(({ name }) => name === "text-align")
           ? [new TextAlignExtension({})]
           : []),
-        ...(extensionsFlat.includes("textColor")
+        ...(extensionsFlat.some(({ name }) => name === "text-color")
           ? [new TextColorExtension({})]
           : []),
-        ...(extensionsFlat.includes("underline")
+        ...(extensionsFlat.some(({ name }) => name === "underline")
           ? [new UnderlineExtension({})]
           : []),
-        ...(extensionsFlat.includes("bulletList") ||
-        extensionsFlat.includes("orderedList")
+        ...(extensionsFlat.some(({ name }) => name === "bullet-list") ||
+        extensionsFlat.some(({ name }) => name === "ordered-list")
           ? [new ListItemExtension({})]
           : []),
         new HardBreakExtension({}),
       ] as AnyExtension[],
     extraAttributes: [
-      ...(extensionsFlat.includes("textAlign")
+      ...(extensionsFlat.some(({ name }) => name === "text-align")
         ? [TextAlignExtraAttributes]
         : []),
     ],
