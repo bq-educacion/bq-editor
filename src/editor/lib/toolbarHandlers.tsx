@@ -27,7 +27,7 @@ const toolbarHandlers = (
         {name === "bullet-list" && <BulletListButton />}
         {name === "code" && <CodeButton />}
         {name === "code-block" && <CodeBlockButton {...attrs} />}
-        {name === "heading" && <HeadingButtons levels={attrs.levels} />}
+        {name === "heading" && <HeadingButtons {...attrs} />}
         {name === "image" && <ImageButton {...attrs} />}
         {name === "italic" && <ItalicButton />}
         {name === "link" && <LinkButton />}

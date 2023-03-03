@@ -21,7 +21,7 @@ export const ImageName = "image";
 export type ImageAttrs = {
   accept?: string[];
   onUpload?: (file: File) => Promise<string>;
-  resizable?: boolean;
+  resizable?: boolean; // TODO: Not working
 };
 
 const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {

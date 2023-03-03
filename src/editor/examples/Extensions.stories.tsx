@@ -160,24 +160,24 @@ Image.args = {
   ],
 };
 
-export const ImageResizable = Template.bind({});
+// export const ImageResizable = Template.bind({});
 
-ImageResizable.args = {
-  extensions: [
-    [
-      {
-        name: "image",
-        attrs: {
-          accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
-          resizable: true,
-          onUpload: () => {
-            return new Promise((resolve) => resolve(image));
-          },
-        },
-      },
-    ],
-  ],
-};
+// ImageResizable.args = {
+//   extensions: [
+//     [
+//       {
+//         name: "image",
+//         attrs: {
+//           accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
+//           resizable: true,
+//           onUpload: () => {
+//             return new Promise((resolve) => resolve(image));
+//           },
+//         },
+//       },
+//     ],
+//   ],
+// };
 
 export const TextAlign = Template.bind({});
 
