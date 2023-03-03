@@ -196,7 +196,6 @@ const Values = styled.div<{ scroll?: boolean; search?: boolean }>`
   top: 5px;
   transform: translateY(45px);
   z-index: 2;
-  max-height: 155px;
 
   > div {
     display: flex;

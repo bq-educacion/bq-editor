@@ -71,7 +71,7 @@ export const MyEditor = () => {
 };
 ```
 
-The input content is of type `ProsemirrorNode`, except if a specific handler is activated, there are 2 different types:
+The input content is `ProsemirrorNode` type, except if a specific handler is activated:
 
 - html
 
@@ -89,7 +89,7 @@ export const MyEditor = () => {
 };
 ```
 
-Two remirror functions needed to handle html content `editorNodeToHtml` and `htmlToEditorNode` are exposed.
+Two remirror functions are exposed to handle html content: `editorNodeToHtml` and `htmlToEditorNode`.
 
 - markdown
 
@@ -124,7 +124,7 @@ To view non-editable content:
 <Visor content={JSON.stringify(basic)} />
 ```
 
-Necessary `extensions` and `stringHandler` must be added so editor can interpret the content.
+Necessary `extensions`, `stringHandler` or `codeLanguage` must be added so visor can interpret the content.
 
 ## Storybook
 
