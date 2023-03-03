@@ -23,7 +23,7 @@ const CodeEditor: FC<IEditorProps> = ({
         defaultWrap: true,
       }),
     ],
-    content: Object.create(JSON.parse(content)),
+    content: content ? Object.create(JSON.parse(content)) : content,
     selection,
   });
 
