@@ -1,6 +1,6 @@
 # bq Editor
 
-React rich text editor, implemented with [Remirror](https://remirror.io/).
+Simple and bqeautiful React rich text editor.
 
 ## Installation
 
@@ -13,7 +13,7 @@ yarn add bq-editor
 
 ## Usage
 
-### Render the editor
+### Render
 
 To render the editor with default extensions we simply do:
 
@@ -23,7 +23,7 @@ To render the editor with default extensions we simply do:
 
 ### Extensions
 
-Extensions indicate what type of content the editor can render.
+Extensions indicate what type of content the editor can handle.
 
 ```
 <Editor
@@ -40,9 +40,11 @@ Everything you type will be passed through with keybindings to the extensions.
 
 Users can even bold text via input rules: Type \*\*bold\*\* to add bold text.
 
+Some extensions have additional parameters, run the [storybook](https://github.com/bq-educacion/bq-editor#storybook) or go to the [examples](https://github.com/bq-educacion/bq-editor/tree/main/src/editor/examples) folder to see them.
+
 ### Content
 
-Editor provides an `onChange` function to save the contents.
+Editor provides an `onChange` function to export and save the contents.
 
 There are 4 types of editors depending on how the content is handled, which can be configured through the `stringHandler` parameter:
 
@@ -123,21 +125,27 @@ To view non-editable content:
 
 Necessary `extensions` and `stringHandler` must be added so editor can interpret the content.
 
-## Examples
+## Storybook
 
-To see more examples and play with them, download the project and run our storybook:
+To see more examples and play with them, download the project, install dependencies and run our storybook:
 
 ```
 yarn storybook:start
 ```
 
-## Contributing
+## Contribute
 
 First of all, thanks for using bq editor!
 
 If you run into any issues, open an issue in our [github repository](https://github.com/bq-educacion/bq-editor) or create a pull request with your improvement proposal, explaining in detail the problem and the solution.
 
-Please be patient, as this is a work in progress editor.
+Please be patient, as this is a work in progress project.
+
+## Credits
+
+This editor uses the wonderful [Remirror](https://remirror.io/) React library.
+
+All credits and applause go to the Remirror team.
 
 ## License
 
