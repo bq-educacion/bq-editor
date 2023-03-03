@@ -162,7 +162,6 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
   height: 100%;
   outline: none;
   padding: 0 15px 0 20px;
-  width: 100%;
 
   > svg {
     height: 10px;
