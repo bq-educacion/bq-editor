@@ -27,30 +27,36 @@ Extensions indicate what type of content the editor can handle.
 
 ```
 <Editor
-  extensions: [[
-    {
-      name: "heading",
-      attrs: {
-        levels: [1, 2, 3]
+  extensions={[
+    [
+      {
+        name: "heading",
+        attrs: {
+          levels: [1, 2, 3]
+        }
+      },
+      {
+        name: "bold"
+      },
+      {
+        name: "italic"
       }
-    }, {
-      name: "bold"
-    }, {
-      name: "italic"
-    }, {
-      name: "underline"
-    }
-  ], [
-    {
-      name: "text-align"
-    }
-  ]]
+    ],
+    [
+      {
+        name: "text-color",
+        attrs: {
+          color: #ffffff
+        }
+      }
+    ]
+  ]}
 />
 ```
 
-Everything you type will be passed through with keybindings to the extensions.
+It is an matrix, whose order and separations will define the toolbar.
 
-Users can even bold text via input rules: Type \*\*bold\*\* to add bold text.
+Everything you type will be passed through with keybindings to the extensions. Users can even bold text via input rules: Type \*\*bold\*\* to add bold text.
 
 Some extensions have additional parameters, run the [storybook](https://github.com/bq-educacion/bq-editor#storybook) or go to the [examples](https://github.com/bq-educacion/bq-editor/tree/main/src/editor/examples) folder to see them.
 
@@ -59,7 +65,7 @@ Some extensions have additional parameters, run the [storybook](https://github.c
 Editor provides an `onChange` function to export and save the contents.
 
 ```
-export const MyEditor = () => {
+export const MyEditor<{ basic: ProsemirrorNode }> = ({ basic }) => {
   const [doc, setDoc] = useState<ProsemirrorNode>();
 
   return (
@@ -71,12 +77,16 @@ export const MyEditor = () => {
 };
 ```
 
-The input content is `ProsemirrorNode` type, except if a specific handler is activated:
+The output content is a `ProsemirrorNode` type.
 
-- html
+The input content is a `string`, which will be handle as `ProsemirrorNode` type except if a specific string handle is activated.
+
+### Html Editor
+
+Two remirror functions are exposed to handle html content: `editorNodeToHtml` and `htmlToEditorNode`.
 
 ```
-export const MyEditor = () => {
+export const MyHtmlEditor<{ html: string }> = ({ html }) => {
   const [doc, setDoc] = useState<ProsemirrorNode>();
 
   return (
@@ -89,16 +99,17 @@ export const MyEditor = () => {
 };
 ```
 
-Two remirror functions are exposed to handle html content: `editorNodeToHtml` and `htmlToEditorNode`.
+### Markdown Editor
 
-- markdown
+Due to the limitations of markdown some extensions do not work.
 
 ```
-export const MyEditor = () => {
+export const MyMarkdownEditor<{ markdown: string }> = ({ markdown }) => {
   const [doc, setDoc] = useState<ProsemirrorNode>();
 
   return (
     <Editor
+      initialContent={markdown}
       onChange={setDoc}
       stringHandler="markdown"
     />
@@ -106,14 +117,22 @@ export const MyEditor = () => {
 };
 ```
 
-Due to the limitations of markdown some extensions do not work.
-
 ### Code Editor
 
 The code editor is activated by defining the code language, there is no need to add extensions.
 
 ```
-<Editor codeLanguage="typescript" />
+export const MyCodeEditor<{ code: ProsemirrorNode }> = ({ code }) => {
+  const [doc, setDoc] = useState<ProsemirrorNode>();
+
+  return (
+    <Editor
+      initialContent={JSON.stringify(code)}
+      codeLanguage="typescript"
+      onChange={setDoc}
+    />
+  );
+};
 ```
 
 ### Visor
@@ -121,10 +140,14 @@ The code editor is activated by defining the code language, there is no need to 
 To view non-editable content:
 
 ```
-<Visor content={JSON.stringify(basic)} />
+export const MyVisor<{ content: ProsemirrorNode }> = ({ content }) => {
+  return (
+    <Visor content={JSON.stringify(content)} />
+  );
+};
 ```
 
-Necessary `extensions`, `stringHandler` or `codeLanguage` must be added so visor can interpret the content.
+Corresponding extensions, handler or code language must be added so visor can interpret the content.
 
 ## Storybook
 
