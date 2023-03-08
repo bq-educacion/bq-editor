@@ -13,14 +13,14 @@ const OrderedListButton: FC<OrderedListAttrs> = () => {
 
   return (
     <ToolbarButton
+      disabled={
+        !commands.toggleOrderedList.enabled() &&
+        !commands.liftListItemOutOfList.enabled()
+      }
       onClick={() =>
         commands.toggleOrderedList.enabled()
           ? commands.toggleOrderedList()
           : commands.liftListItemOutOfList()
-      }
-      disabled={
-        !commands.toggleOrderedList.enabled() &&
-        !commands.liftListItemOutOfList.enabled()
       }
     >
       <ListNumberIcon />

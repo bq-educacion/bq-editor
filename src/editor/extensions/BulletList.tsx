@@ -13,14 +13,14 @@ const BulletListButton: FC<BulletListAttrs> = () => {
 
   return (
     <ToolbarButton
+      disabled={
+        !commands.toggleBulletList.enabled() &&
+        !commands.liftListItemOutOfList.enabled()
+      }
       onClick={() =>
         commands.toggleBulletList.enabled()
           ? commands.toggleBulletList()
           : commands.liftListItemOutOfList()
-      }
-      disabled={
-        !commands.toggleBulletList.enabled() &&
-        !commands.liftListItemOutOfList.enabled()
       }
     >
       <ListBulletIcon />

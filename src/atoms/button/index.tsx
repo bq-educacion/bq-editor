@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
+import React, { FC } from "react";
 import { colors } from "../../theme";
 
 export type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -9,7 +9,13 @@ export type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   secondary?: boolean;
 };
 
-export default styled.button<IButtonProps>`
+const Button: FC<IButtonProps> = ({ type = "button", ...props }) => (
+  <StyledButton type={type} {...props} />
+);
+
+export default Button;
+
+const StyledButton = styled.button<IButtonProps>`
   background-color: ${colors.dark};
   border: 1px solid ${colors.dark};
   border-radius: 4px;

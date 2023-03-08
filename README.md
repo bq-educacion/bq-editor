@@ -173,4 +173,4 @@ All credits and applause go to the Remirror team.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](https://github.com/bq-educacion/bq-editor/LICENSE) file for more details.
+This project is licensed under the MIT License. See [LICENSE](https://github.com/bq-educacion/bq-editor/blob/main/LICENSE) file for more details.
