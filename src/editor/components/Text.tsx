@@ -46,13 +46,13 @@ const Container = styled.div<{ code?: boolean }>`
   ${(props) =>
     props.code &&
     css`
-      padding: 0;
       min-height: unset;
 
       .remirror-editor {
         height: 100%;
 
         > pre {
+          padding: 1em 0;
           border-radius: 4px;
           box-sizing: border-box;
           height: 100%;

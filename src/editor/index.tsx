@@ -12,8 +12,9 @@ import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
 
-import codeBlockCss from "remirror/styles/extension-code-block.css";
-import placeholderCss from "remirror/styles/extension-placeholder.css";
+// TODO: Review
+// import codeBlockCss from "remirror/styles/extension-code-block.css";
+// import placeholderCss from "remirror/styles/extension-placeholder.css";
 
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
@@ -59,8 +60,6 @@ const Editor: FC<IEditorProps> = (props) => {
     stringHandler,
   } = props;
 
-  const className = codeBlockCss + placeholderCss;
-
   if (stringHandler === "markdown") {
     extensions = extensions.filter(
       (extensionsArray) =>
@@ -80,7 +79,7 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <Wrapper className={className + " bq-editor"}>
+      <Wrapper className="bq-editor">
         <MarkdownDualEditor {...input}>
           <Toolbar
             className="bq-editor-toolbar"
@@ -108,7 +107,7 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <Wrapper className={className + " bq-editor"}>
+      <Wrapper className="bq-editor">
         <CodeEditor {...input}>
           <Text className="bq-editor-text" code />
         </CodeEditor>
@@ -130,7 +129,7 @@ const Editor: FC<IEditorProps> = (props) => {
   });
 
   return (
-    <Wrapper className={className + " bq-editor"}>
+    <Wrapper className="bq-editor">
       <Remirror
         editable={editable}
         manager={manager}
