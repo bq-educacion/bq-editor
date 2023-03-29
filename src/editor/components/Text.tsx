@@ -38,14 +38,24 @@ const Container = styled.div<{ code?: boolean }>`
     border-top: none;
   }
 
+  .remirror-editor {
+    height: calc(100% - 1em);
+  }
+
   ${(props) =>
     props.code &&
     css`
       padding: 0;
       min-height: unset;
 
+      .remirror-editor {
+        height: 100%;
+      }
+
       .remirror-editor > pre {
         border-radius: 4px;
+        box-sizing: border-box;
+        height: 100%;
         margin: 0 !important;
       }
     `}
