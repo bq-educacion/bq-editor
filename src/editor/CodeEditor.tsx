@@ -10,7 +10,7 @@ import { DocExtension } from "remirror/extensions";
 import { CodeBlockExtension } from "./extensions";
 import { IEditorProps } from ".";
 
-const CodeEditor: FC<IEditorProps> = ({
+const CodeEditor: FC<IEditorProps & { children: React.ReactNode }> = ({
   children,
   codeLanguage,
   editable,

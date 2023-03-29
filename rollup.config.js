@@ -8,7 +8,7 @@ import packageJson from "./package.json";
 
 export default [
   {
-    input: "src/index.tsx",
+    input: "src/index.ts",
     output: [
       {
         file: packageJson.main,
@@ -35,21 +35,10 @@ export default [
       css(),
       json(),
     ],
-    external: [
-      "refractor/lang/css.js",
-      "refractor/lang/javascript.js",
-      "refractor/lang/json.js",
-      "refractor/lang/markdown.js",
-      "refractor/lang/typescript.js",
-    ],
   },
   {
     input: "dist/esm/types/index.d.ts",
     output: [{ file: packageJson.types, format: "esm" }],
     plugins: [dts()],
-    external: [
-      "remirror/styles/extension-code-block.css",
-      "remirror/styles/extension-placeholder.css",
-    ],
   },
 ];

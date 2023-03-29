@@ -5,6 +5,7 @@ import React, { FC } from "react";
 import { colors } from "../../theme";
 
 interface ITextProps {
+  children?: React.ReactNode;
   className?: string;
   code?: boolean;
 }
@@ -39,7 +40,7 @@ const Container = styled.div<{ code?: boolean }>`
   }
 
   .remirror-editor {
-    height: calc(100% - 1em);
+    outline: none;
   }
 
   ${(props) =>
@@ -50,13 +51,13 @@ const Container = styled.div<{ code?: boolean }>`
 
       .remirror-editor {
         height: 100%;
-      }
 
-      .remirror-editor > pre {
-        border-radius: 4px;
-        box-sizing: border-box;
-        height: 100%;
-        margin: 0 !important;
+        > pre {
+          border-radius: 4px;
+          box-sizing: border-box;
+          height: 100%;
+          margin: 0 !important;
+        }
       }
     `}
 `;

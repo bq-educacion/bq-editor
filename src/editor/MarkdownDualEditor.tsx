@@ -49,7 +49,7 @@ const [EditorProvider, useEditor] = createContextState<Context, Props>(
   }
 );
 
-const MarkdownDualEditor: FC<IEditorProps> = ({
+const MarkdownDualEditor: FC<IEditorProps & { children: React.ReactNode }> = ({
   children,
   initialContent: content,
   stringHandler,
@@ -93,7 +93,7 @@ const MarkdownDualEditor: FC<IEditorProps> = ({
   );
 };
 
-const VisualEditor: FC = ({ children }) => {
+const VisualEditor: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { visual, setMarkdown } = useEditor();
 
   return (
