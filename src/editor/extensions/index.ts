@@ -17,6 +17,7 @@ export * from "./BulletList";
 export * from "./Code";
 export * from "./CodeBlock";
 export * from "./Counter";
+export * from "./Events";
 export * from "./HardBreak";
 export * from "./Heading";
 export * from "./Image";

@@ -12,6 +12,7 @@ import {
   CodeExtension,
   CounterAttrs,
   CountExtension,
+  EventsExtension,
   HardBreakExtension,
   HeadingAttrs,
   HeadingExtension,
@@ -56,6 +57,7 @@ const managerExtensions = ({
   return {
     extensions: () =>
       [
+        new EventsExtension(),
         ...(extensionsFlat.some(({ name }) => name === "bold")
           ? [new BoldExtension({})]
           : []),

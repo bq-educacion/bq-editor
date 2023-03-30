@@ -1,8 +1,13 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useRemirrorContext } from "@remirror/react";
-import React, { FC } from "react";
+import {
+  useCommands,
+  useEditorEvent,
+  useRemirrorContext,
+} from "@remirror/react";
+import React, { CompositionEvent, FC, useCallback, useState } from "react";
 import { colors } from "../../theme";
+import composeText from "../lib/composeText";
 
 interface ITextProps {
   children?: React.ReactNode;
@@ -10,11 +15,52 @@ interface ITextProps {
   code?: boolean;
 }
 
+const insertCustomText = (text: string) => {
+  return ({ tr, dispatch }: { tr: any; dispatch?: any }) => {
+    // eslint-disable-line
+    dispatch?.(tr.insertText(text));
+    return true;
+  };
+};
+
 const Text: FC<ITextProps> = ({ children, ...props }) => {
   const { getRootProps } = useRemirrorContext();
+  useEditorEvent("textInput", ({ text }) => onInput(text));
+  const { customDispatch } = useCommands();
+
+  const [composition, setComposition] = useState<{
+    block: boolean;
+    text: string;
+  }>();
+
+  const handleInput = useCallback(
+    (text: string) => {
+      setComposition(undefined);
+      customDispatch(insertCustomText(text));
+    },
+    [customDispatch]
+  );
+
+  const onComposition = (e: CompositionEvent) =>
+    setComposition({
+      block: composition?.text === e.data ? false : true,
+      text: e.data,
+    });
+
+  const onInput = (text: string) => {
+    if (!composition || (composition.text === text && !composition.block))
+      return false;
+    if (composition.text === text && composition.block) return true;
+    handleInput(composeText(text, composition.text));
+    return true;
+  };
 
   return (
-    <Container {...props} {...getRootProps()}>
+    <Container
+      {...props}
+      onCompositionUpdate={onComposition}
+      {...getRootProps()}
+    >
       {children}
     </Container>
   );
