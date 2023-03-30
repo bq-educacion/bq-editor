@@ -16,8 +16,13 @@ interface ITextProps {
 }
 
 const insertCustomText = (text: string) => {
-  return ({ tr, dispatch }: { tr: any; dispatch?: any }) => {
-    // eslint-disable-line
+  return ({
+    tr,
+    dispatch,
+  }: {
+    tr: any; // eslint-disable-line
+    dispatch?: any; // eslint-disable-line
+  }) => {
     dispatch?.(tr.insertText(text));
     return true;
   };
