@@ -33,6 +33,15 @@ const Container = styled.div<{ code?: boolean }>`
   min-height: 100px;
   flex: 1;
 
+  .remirror-is-empty:first-of-type::before {
+    position: absolute;
+    color: ${colors.grey2};
+    pointer-events: none;
+    height: 0;
+    font-style: italic;
+    content: attr(data-placeholder);
+  }
+
   :not(:first-of-type) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;

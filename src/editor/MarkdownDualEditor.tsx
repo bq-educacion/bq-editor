@@ -12,7 +12,6 @@ import langMarkdown from "refractor/lang/markdown.js";
 import { IEditorProps } from ".";
 import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
-import { Text, Wrapper } from "./components";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

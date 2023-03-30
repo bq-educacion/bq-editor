@@ -30,6 +30,7 @@ export default [
       peerDepsExternal(),
       typescript({
         sourceMap: tsConfig.compilerOptions.sourceMap,
+        outputToFilesystem: true,
       }),
       json(),
     ],

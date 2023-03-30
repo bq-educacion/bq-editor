@@ -14,7 +14,6 @@ import Visor from "./Visor";
 
 // TODO: Review
 // import codeBlockCss from "remirror/styles/extension-code-block.css";
-// import placeholderCss from "remirror/styles/extension-placeholder.css";
 
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
