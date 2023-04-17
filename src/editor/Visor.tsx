@@ -1,19 +1,15 @@
 import React, { FC } from "react";
-import langCss from "refractor/lang/css.js";
-import langJavascript from "refractor/lang/javascript.js";
-import langJson from "refractor/lang/json.js";
-import langMarkdown from "refractor/lang/markdown.js";
-import langTypescript from "refractor/lang/typescript.js";
 import styled from "@emotion/styled";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import { DocExtension } from "remirror/extensions";
 import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
-import { CodeLanguage, StringHandler } from ".";
+import { StringHandler } from ".";
 import { defaultExtensions, Extension } from "./extensions";
+import { adjustColorOpacity, colors } from "../theme";
 
 export type IVisorProps = {
-  codeLanguage?: CodeLanguage;
+  codeEditor?: boolean;
   extensions?: Extension[][];
   content?: string;
   stringHandler?: StringHandler;
@@ -21,7 +17,7 @@ export type IVisorProps = {
 
 const Visor: FC<IVisorProps> = (props) => {
   const {
-    codeLanguage,
+    codeEditor,
     extensions = defaultExtensions,
     content,
     stringHandler,
@@ -32,16 +28,13 @@ const Visor: FC<IVisorProps> = (props) => {
     ...props,
   };
 
-  if (codeLanguage) {
+  if (codeEditor) {
     input = {
       ...props,
       extensions: [
         [
           {
             name: "code-block",
-            attrs: {
-              language: codeLanguage,
-            },
           },
         ],
       ] as Extension[][],
@@ -49,20 +42,11 @@ const Visor: FC<IVisorProps> = (props) => {
   }
 
   const { manager, state: initialContent } = useRemirror({
-    ...(codeLanguage
+    ...(codeEditor
       ? {
           extensions: () => [
             new DocExtension({ content: "codeBlock" }),
             new CodeBlockExtension({
-              defaultLanguage: codeLanguage,
-              supportedLanguages: [
-                langCss,
-                langJavascript,
-                langJson,
-                langMarkdown,
-                langTypescript,
-              ],
-              syntaxTheme: "base16_ateliersulphurpool_light",
               defaultWrap: true,
             }),
           ],
@@ -74,7 +58,7 @@ const Visor: FC<IVisorProps> = (props) => {
   });
 
   return (
-    <Container className="bq-editor-visor">
+    <Container className="bq-editor-visor" codeEditor={codeEditor}>
       <Remirror
         editable={false}
         manager={manager}
@@ -88,9 +72,10 @@ const Visor: FC<IVisorProps> = (props) => {
 
 export default Visor;
 
-export const Container = styled.div`
-  > div > div > pre {
-    border-radius: 4px;
+export const Container = styled.div<{ codeEditor?: boolean }>`
+  pre {
+    background-color: ${adjustColorOpacity(colors.grey6, 0.5)};
+    padding: 1em;
     margin: 0 !important;
   }
 `;

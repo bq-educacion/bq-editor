@@ -34,13 +34,6 @@ export default [
       }),
       json(),
     ],
-    external: [
-      "refractor/lang/css.js",
-      "refractor/lang/javascript.js",
-      "refractor/lang/json.js",
-      "refractor/lang/markdown.js",
-      "refractor/lang/typescript.js",
-    ],
   },
   {
     input: "dist/esm/types/index.d.ts",

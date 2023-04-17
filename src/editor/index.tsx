@@ -17,21 +17,11 @@ import {
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
 
-// TODO: Review
-// import codeBlockCss from "remirror/styles/extension-code-block.css";
-
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
   prosemirrorNodeToHtml as editorNodeToHtml,
   Visor,
 };
-
-export type CodeLanguage =
-  | "css"
-  | "javascript"
-  | "json"
-  | "markdown"
-  | "typescript";
 
 // Place the cursor at the start of the document. This can also be set to `end`, `all` or a numbered position.
 type Selection = "start" | "end" | "all" | number;
@@ -41,7 +31,7 @@ type Selection = "start" | "end" | "all" | number;
 export type StringHandler = "html" | "markdown";
 
 export type IEditorProps = {
-  codeLanguage?: CodeLanguage;
+  codeEditor?: boolean;
   dualEditor?: boolean;
   editable?: boolean;
   extensions?: Extension[][];
@@ -55,7 +45,7 @@ export type IEditorProps = {
 const Editor: FC<IEditorProps> = (props) => {
   let extensions = props.extensions || defaultExtensions;
   const {
-    codeLanguage,
+    codeEditor,
     dualEditor,
     editable,
     initialContent: content,
@@ -95,15 +85,12 @@ const Editor: FC<IEditorProps> = (props) => {
     );
   }
 
-  if (codeLanguage) {
+  if (codeEditor) {
     const input = {
       extensions: [
         [
           {
             name: "code-block",
-            attrs: {
-              language: codeLanguage,
-            },
           },
         ],
       ] as Extension[][],
@@ -113,7 +100,7 @@ const Editor: FC<IEditorProps> = (props) => {
     return (
       <Wrapper className="bq-editor">
         <CodeEditor {...input}>
-          <Text className="bq-editor-text" code />
+          <Text className="bq-editor-text" codeEditor />
         </CodeEditor>
       </Wrapper>
     );

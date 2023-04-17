@@ -43,6 +43,6 @@ const int button = 3;
 
 ## Unsupported
 
-- Text with color
+*   Text with color
 
-- Underlined text`;
+*   Underlined text`;

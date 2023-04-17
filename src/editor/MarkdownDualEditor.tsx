@@ -8,7 +8,6 @@ import { createContextState } from "create-context-state";
 import React, { FC } from "react";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
-import langMarkdown from "refractor/lang/markdown.js";
 import { IEditorProps } from ".";
 import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
@@ -69,9 +68,6 @@ const MarkdownDualEditor: FC<IEditorProps & { children: React.ReactNode }> = ({
     extensions: () => [
       new DocExtension({ content: "codeBlock" }),
       new CodeBlockExtension({
-        defaultLanguage: "markdown",
-        supportedLanguages: [langMarkdown],
-        syntaxTheme: "base16_ateliersulphurpool_light",
         defaultWrap: true,
       }),
     ],

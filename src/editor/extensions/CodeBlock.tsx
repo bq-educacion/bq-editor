@@ -2,17 +2,14 @@ import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { CodeBlockExtension } from "remirror/extensions";
-import { CodeLanguage } from "..";
 import CodeBlockIcon from "../assets/icons/CodeBlock";
 import { ToolbarButton } from "../components";
 
 export const CodeBlockName = "code-block";
 
-export type CodeBlockAttrs = {
-  language?: CodeLanguage;
-};
+export type CodeBlockAttrs = Record<string, never>;
 
-const CodeBlockButton: FC<CodeBlockAttrs> = ({ language = "typescript" }) => {
+const CodeBlockButton: FC = () => {
   const { to, from } = useCurrentSelection();
   const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 
@@ -22,9 +19,7 @@ const CodeBlockButton: FC<CodeBlockAttrs> = ({ language = "typescript" }) => {
       disabled={!commands.toggleCodeBlock.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
-        active.codeBlock()
-          ? commands.toggleCodeBlock()
-          : commands.toggleCodeBlock({ language });
+        commands.toggleCodeBlock();
       }}
     >
       <CodeBlockIcon />

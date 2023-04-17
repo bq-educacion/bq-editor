@@ -1,13 +1,7 @@
-import langCss from "refractor/lang/css.js";
-import langJavascript from "refractor/lang/javascript.js";
-import langJson from "refractor/lang/json.js";
-import langMarkdown from "refractor/lang/markdown.js";
-import langTypescript from "refractor/lang/typescript.js";
 import { AnyExtension, IdentifierSchemaAttributes } from "remirror";
 import {
   BoldExtension,
   BulletListExtension,
-  CodeBlockAttrs,
   CodeBlockExtension,
   CodeExtension,
   CounterAttrs,
@@ -42,9 +36,6 @@ const managerExtensions = ({
 } => {
   const extensionsFlat = extensions.flat();
 
-  const codeBlockAttrs = extensionsFlat.find(
-    ({ name }) => name === "code-block"
-  )?.attrs as CodeBlockAttrs;
   const counterAttrs = extensionsFlat.find(({ name }) => name === "counter")
     ?.attrs as CounterAttrs;
   const headingAttrs = extensionsFlat.find(({ name }) => name === "heading")
@@ -70,15 +61,6 @@ const managerExtensions = ({
         ...(extensionsFlat.some(({ name }) => name === "code-block")
           ? [
               new CodeBlockExtension({
-                defaultLanguage: codeBlockAttrs?.language,
-                supportedLanguages: [
-                  langCss,
-                  langJavascript,
-                  langJson,
-                  langMarkdown,
-                  langTypescript,
-                ],
-                syntaxTheme: "base16_ateliersulphurpool_light",
                 defaultWrap: true,
               }),
             ]

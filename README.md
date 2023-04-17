@@ -65,12 +65,12 @@ Some extensions have additional parameters, run the [storybook](https://github.c
 Editor provides an `onChange` function to export and save the contents.
 
 ```
-export const MyEditor<{ basic: ProsemirrorNode }> = ({ basic }) => {
+export const MyEditor<{ content: ProsemirrorNode }> = ({ content }) => {
   const [doc, setDoc] = useState<ProsemirrorNode>();
 
   return (
     <Editor
-      initialContent={JSON.stringify(basic)}
+      initialContent={JSON.stringify(content)}
       onChange={setDoc}
     />
   );
@@ -119,16 +119,16 @@ export const MyMarkdownEditor<{ markdown: string }> = ({ markdown }) => {
 
 ### Code Editor
 
-The code editor is activated by defining the code language, there is no need to add extensions.
+The code editor is activated with the codeEditor variable, there is no need to add extensions.
 
 ```
-export const MyCodeEditor<{ code: ProsemirrorNode }> = ({ code }) => {
+export const MyCodeEditor<{ content: ProsemirrorNode }> = ({ content }) => {
   const [doc, setDoc] = useState<ProsemirrorNode>();
 
   return (
     <Editor
-      initialContent={JSON.stringify(code)}
-      codeLanguage="typescript"
+      codeEditor
+      initialContent={JSON.stringify(content)}
       onChange={setDoc}
     />
   );
@@ -147,7 +147,7 @@ export const MyVisor<{ content: ProsemirrorNode }> = ({ content }) => {
 };
 ```
 
-Corresponding extensions, handler or code language must be added so visor can interpret the content.
+Corresponding extensions, handler or codeEditor must be added so visor can interpret the content.
 
 ## Storybook
 

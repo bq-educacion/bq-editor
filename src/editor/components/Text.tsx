@@ -6,13 +6,13 @@ import {
   useRemirrorContext,
 } from "@remirror/react";
 import React, { CompositionEvent, FC, useCallback, useState } from "react";
-import { colors } from "../../theme";
+import { adjustColorOpacity, colors } from "../../theme";
 import composeText from "../lib/composeText";
 
 interface ITextProps {
   children?: React.ReactNode;
   className?: string;
-  code?: boolean;
+  codeEditor?: boolean;
 }
 
 const insertCustomText = (text: string) => {
@@ -73,7 +73,7 @@ const Text: FC<ITextProps> = ({ children, ...props }) => {
 
 export default Text;
 
-const Container = styled.div<{ code?: boolean }>`
+const Container = styled.div<{ codeEditor?: boolean }>`
   position: relative;
   background-color: ${colors.white};
   border: 1px solid ${colors.grey4};
@@ -101,21 +101,23 @@ const Container = styled.div<{ code?: boolean }>`
 
   .remirror-editor {
     outline: none;
+
+    pre {
+      background-color: ${adjustColorOpacity(colors.grey6, 0.5)};
+      padding: 1em;
+    }
   }
 
   ${(props) =>
-    props.code &&
+    props.codeEditor &&
     css`
+      padding: 0;
       min-height: unset;
 
       .remirror-editor {
         height: 100%;
 
-        > pre {
-          padding: 1em 0;
-          border-radius: 4px;
-          box-sizing: border-box;
-          height: 100%;
+        pre {
           margin: 0 !important;
         }
       }
