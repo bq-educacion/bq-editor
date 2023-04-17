@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "keywords": [
     "prosemirror",
     "react",
@@ -18,7 +18,6 @@
   "types": "dist/bq-editor.d.ts",
   "dependencies": {
     "@remirror/extension-count": "2.0.12",
-    "@remirror/pm": "2.0.4",
     "@remirror/react": "2.0.27",
     "classnames": "^2.3.1",
     "create-context-state": "^2.0.0",
@@ -38,17 +37,20 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.4",
+    "@remirror/pm": "2.0.4",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-typescript": "^11.0.0",
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/manager-webpack5": "^6.5.16",
-    "@storybook/react": "^6.5.16",
-    "@storybook/testing-library": "^0.0.13",
-    "@storybook/theming": "^6.5.13",
+    "@storybook/addon-actions": "^7.0.5",
+    "@storybook/addon-essentials": "^7.0.5",
+    "@storybook/addon-interactions": "^7.0.5",
+    "@storybook/addon-links": "^7.0.5",
+    "@storybook/react": "^7.0.5",
+    "@storybook/react-webpack5": "^7.0.5",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/theming": "^7.0.5",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
@@ -61,6 +63,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-storybook": "^0.6.11",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
@@ -70,6 +73,7 @@
     "rollup": "^2.79.0",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "storybook": "next",
     "tslib": "^2.4.0",
     "typescript": "^4.8.2",
     "webpack": "^5.74.0"
@@ -83,8 +87,8 @@
   "scripts": {
     "build": "rollup -c",
     "prepare": "husky install",
-    "storybook:build": "build-storybook",
-    "storybook:start": "start-storybook -p 6006"
+    "storybook:start": "storybook dev",
+    "storybook:build": "storybook build"
   },
   "repository": {
     "type": "git",
