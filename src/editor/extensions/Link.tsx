@@ -10,8 +10,15 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { LinkExtension } from "remirror/extensions";
+import {
+  ApplySchemaAttributes,
+  isElementDomNode,
+  MarkExtensionSpec,
+  omitExtraAttributes,
+} from "remirror";
+import { LinkExtension as RemirrorLinkExtension } from "remirror/extensions";
 import Button from "../../atoms/button";
+// import Checkbox from "../../atoms/checkbox";
 import Input from "../../atoms/input";
 import LinkIcon from "../assets/icons/Link";
 import { Modal, ToolbarButton } from "../components";
@@ -61,14 +68,13 @@ function useFloatingLinkState() {
       onRemove,
       onSubmit,
     }),
-    [href, setHref, onRemove, onSubmit]
+    [href, setHref, target, setTarget, onRemove, onSubmit]
   );
 }
 
 const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { href, setHref, target, setTarget, onRemove, onSubmit } =
-    useFloatingLinkState();
+  const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
   const [showModal, setShowModal] = useState(false);
   const { active } = useRemirrorContext({ autoUpdate: true });
 
@@ -151,5 +157,47 @@ const LinkButton: FC = () => {
     </div>
   );
 };
+
+// TODO: Workaround cause _blank attr is not working
+class LinkExtension extends RemirrorLinkExtension {
+  createMarkSpec(extra: ApplySchemaAttributes): MarkExtensionSpec {
+    return {
+      attrs: {
+        ...extra.defaults(),
+        href: {},
+        auto: { default: false },
+      },
+      inclusive: false,
+      parseDOM: [
+        {
+          tag: "a[href]",
+          getAttrs: (node) => {
+            if (!isElementDomNode(node)) {
+              return false;
+            }
+
+            const href = node.getAttribute("href");
+            const auto = this.options.autoLinkRegex.test(
+              node.textContent ?? ""
+            );
+            return { ...extra.parse(node), href, auto };
+          },
+        },
+      ],
+      toDOM: (node) => {
+        const { auto: _, ...rest } = omitExtraAttributes(node.attrs, extra);
+        const rel = "noopener noreferrer nofollow";
+        const attrs = {
+          ...extra.dom(node),
+          ...rest,
+          rel,
+          target: "_blank",
+        };
+
+        return ["a", attrs, 0];
+      },
+    };
+  }
+}
 
 export { LinkButton, LinkExtension };
