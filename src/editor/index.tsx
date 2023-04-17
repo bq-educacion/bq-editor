@@ -8,7 +8,12 @@ import {
 import CodeEditor from "./CodeEditor";
 import { Text, Toolbar, Wrapper } from "./components";
 import { defaultExtensions, Extension, MarkdownPreview } from "./extensions";
-import { editorHandlers, managerExtensions, toolbarHandlers } from "./lib";
+import {
+  checkEmptyEditor,
+  editorHandlers,
+  managerExtensions,
+  toolbarHandlers,
+} from "./lib";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
 
@@ -41,7 +46,7 @@ export type IEditorProps = {
   editable?: boolean;
   extensions?: Extension[][];
   initialContent?: string;
-  onChange?: (doc: ProsemirrorNode) => void;
+  onChange?: (doc?: ProsemirrorNode) => void;
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
@@ -135,7 +140,7 @@ const Editor: FC<IEditorProps> = (props) => {
         state={state}
         onChange={({ state }) => {
           setState(state);
-          onChange?.(state.doc);
+          onChange?.(checkEmptyEditor(state) ? undefined : state.doc);
         }}
       >
         <Toolbar

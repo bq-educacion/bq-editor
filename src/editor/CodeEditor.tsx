@@ -8,6 +8,7 @@ import langTypescript from "refractor/lang/typescript.js";
 import { AnyExtension, RemirrorEventListenerProps } from "remirror";
 import { DocExtension } from "remirror/extensions";
 import { CodeBlockExtension } from "./extensions";
+import { checkEmptyEditor } from "./lib";
 import { IEditorProps } from ".";
 
 const CodeEditor: FC<IEditorProps & { children: React.ReactNode }> = ({
@@ -44,7 +45,7 @@ const CodeEditor: FC<IEditorProps & { children: React.ReactNode }> = ({
       manager={manager}
       initialContent={initialContent}
       onChange={({ state }: RemirrorEventListenerProps<AnyExtension>) =>
-        onChange?.(state.doc)
+        onChange?.(checkEmptyEditor(state) ? undefined : state.doc)
       }
     >
       {children}
