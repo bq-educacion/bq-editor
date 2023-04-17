@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, {
@@ -12,9 +11,8 @@ import React, {
 import { ImageExtension } from "remirror/extensions";
 import Button from "../../atoms/button";
 import Input from "../../atoms/input";
-import { adjustColorOpacity, colors } from "../../theme";
 import ImageIcon from "../assets/icons/Image";
-import { ToolbarButton } from "../components";
+import { Modal, ToolbarButton } from "../components";
 
 export const ImageName = "image";
 
@@ -91,16 +89,22 @@ const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {
   }, [showModal]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) =>
-      ref.current &&
-      !ref.current.contains(event.target as Node) &&
-      setShowModal(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setShowModal(false);
+      }
+    };
 
-    window.addEventListener("click", handleClickOutside);
+    if (showModal) {
+      window.addEventListener("click", handleClickOutside);
+    } else {
+      window.removeEventListener("click", handleClickOutside);
+    }
+
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [showModal]);
 
   return (
     <div ref={ref}>
@@ -158,11 +162,14 @@ const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {
             )}
           </div>
           {error && <p>An error has occurred, please try again.</p>}
-          {!showMoreOptions ? (
-            <a onClick={(e) => (e.stopPropagation(), setShowMoreOptions(true))}>
-              Show more options
-            </a>
-          ) : (
+          <a
+            onClick={(e) => (
+              e.stopPropagation(), setShowMoreOptions(!showMoreOptions)
+            )}
+          >
+            {showMoreOptions ? "Hide" : "Show"} more options
+          </a>
+          {showMoreOptions && (
             <>
               <div>
                 <label>Alt</label>
@@ -241,43 +248,3 @@ const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {
 };
 
 export { ImageButton, ImageExtension };
-
-const Modal = styled.div`
-  background-color: ${colors.white};
-  border: solid 1px ${colors.grey4};
-  border-radius: 4px;
-  box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
-  color: ${colors.dark};
-  padding: 20px;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 386px;
-
-  a {
-    cursor: pointer;
-    color: ${colors.orange1};
-  }
-
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-
-    button {
-      flex: 1;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: -5px;
-      min-width: 45px;
-    }
-  }
-`;

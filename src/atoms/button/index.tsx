@@ -4,6 +4,7 @@ import React, { FC } from "react";
 import { colors } from "../../theme";
 
 export type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  className?: string;
   cta?: boolean;
   danger?: boolean;
   secondary?: boolean;

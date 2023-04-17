@@ -42,7 +42,7 @@ const managerExtensions = ({
     ?.attrs as HeadingAttrs;
   const imageAttrs = extensionsFlat.find(({ name }) => name === "image")
     ?.attrs as ImageAttrs;
-  const linkAttrs = extensionsFlat.find(({ name }) => name === "code-block")
+  const linkAttrs = extensionsFlat.find(({ name }) => name === "link")
     ?.attrs as LinkAttrs;
 
   return {
@@ -78,7 +78,7 @@ const managerExtensions = ({
           ? [new ItalicExtension({})]
           : []),
         ...(extensionsFlat.some(({ name }) => name === "link")
-          ? [new LinkExtension(linkAttrs)]
+          ? [new LinkExtension({ defaultTarget: "_blank", ...linkAttrs })]
           : []),
         ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
         ...(extensionsFlat.some(({ name }) => name === "ordered-list")

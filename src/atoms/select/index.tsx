@@ -32,20 +32,26 @@ const Select: FC<ISelectProps> = ({
   value,
   ...props
 }) => {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) =>
-      wrapperRef.current &&
-      !wrapperRef.current.contains(event.target as Node) &&
-      setExpanded(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setExpanded(false);
+      }
+    };
 
-    window.addEventListener("click", handleClickOutside);
+    if (expanded) {
+      window.addEventListener("click", handleClickOutside);
+    } else {
+      window.removeEventListener("click", handleClickOutside);
+    }
+
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [expanded]);
 
   return (
     <Container
@@ -55,7 +61,7 @@ const Select: FC<ISelectProps> = ({
         [`${className}`]: true,
       })}
       error={!!error}
-      ref={wrapperRef}
+      ref={ref}
       expanded={expanded}
     >
       <StyledSelect expanded={expanded} onClick={() => setExpanded(!expanded)}>

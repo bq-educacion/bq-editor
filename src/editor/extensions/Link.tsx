@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, {
@@ -14,24 +13,24 @@ import React, {
 import { LinkExtension } from "remirror/extensions";
 import Button from "../../atoms/button";
 import Input from "../../atoms/input";
-import { adjustColorOpacity, colors } from "../../theme";
 import LinkIcon from "../assets/icons/Link";
-import { ToolbarButton } from "../components";
-
-// TODO: Control link attributes
+import { Modal, ToolbarButton } from "../components";
 
 export const LinkName = "link";
 
 export type LinkAttrs = {
   autoLink?: boolean;
+  defaultTarget?: string;
 };
 
 function useFloatingLinkState() {
   const { to, from } = useCurrentSelection();
   const { chain, attrs } = useRemirrorContext({ autoUpdate: true });
 
-  const url = (attrs.link()?.href as string) ?? "";
-  const [href, setHref] = useState(url);
+  const hrefLink = (attrs.link()?.href as string) ?? "";
+  const targetLink = (attrs.link()?.target as string) ?? "";
+  const [href, setHref] = useState(hrefLink);
+  const [target, setTarget] = useState(targetLink);
 
   const onRemove = useCallback(() => chain.removeLink().focus().run(), [chain]);
 
@@ -39,20 +38,26 @@ function useFloatingLinkState() {
     if (href === "") {
       chain.removeLink();
     } else {
-      chain.updateLink({ href, auto: false }, { to, from });
+      chain.updateLink({ href, target, auto: false }, { to, from });
     }
 
     chain.focus({ to, from }).run();
-  }, [chain, href, to]);
+  }, [chain, href, target, to]);
 
   useEffect(() => {
-    setHref(url);
-  }, [url]);
+    setHref(hrefLink);
+  }, [hrefLink]);
+
+  useEffect(() => {
+    setTarget(targetLink);
+  }, [targetLink]);
 
   return useMemo(
     () => ({
       href,
       setHref,
+      target,
+      setTarget,
       onRemove,
       onSubmit,
     }),
@@ -62,25 +67,28 @@ function useFloatingLinkState() {
 
 const LinkButton: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
+  const { href, setHref, target, setTarget, onRemove, onSubmit } =
+    useFloatingLinkState();
   const [showModal, setShowModal] = useState(false);
   const { active } = useRemirrorContext({ autoUpdate: true });
 
   useEffect(() => {
-    !showModal && setHref("");
-  }, [showModal]);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setShowModal(false);
+      }
+    };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) =>
-      ref.current &&
-      !ref.current.contains(event.target as Node) &&
-      setShowModal(false);
+    if (showModal) {
+      window.addEventListener("click", handleClickOutside);
+    } else {
+      window.removeEventListener("click", handleClickOutside);
+    }
 
-    window.addEventListener("click", handleClickOutside);
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [showModal]);
 
   return (
     <div ref={ref}>
@@ -94,35 +102,50 @@ const LinkButton: FC = () => {
       </ToolbarButton>
       {showModal && (
         <Modal>
-          <Input
-            autoFocus
-            placeholder="Enter link..."
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setHref(event.target.value)
-            }
-            value={href}
-            onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
-              const { code } = event;
-
-              if (code === "Enter") {
-                onSubmit();
-                setShowModal(false);
+          <div>
+            <label>Link*</label>
+            <Input
+              autoFocus
+              placeholder="Link"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setHref(event.target.value)
               }
+              value={href}
+              onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+                const { code } = event;
 
-              if (code === "Escape") {
-                setShowModal(false);
-              }
-            }}
-          />
-          {active.link() ? (
-            <Button danger onClick={() => (onRemove(), setShowModal(false))}>
-              Eliminar
-            </Button>
-          ) : (
+                if (code === "Enter") {
+                  onSubmit();
+                  setShowModal(false);
+                }
+
+                if (code === "Escape") {
+                  setShowModal(false);
+                }
+              }}
+            />
+          </div>
+          {/* <div> // TODO: Not working
+            <Checkbox
+              checked={target === "_blank"}
+              onChange={(checked) => setTarget(checked ? "_blank" : "_self")}
+            />
+            <label>Open in new tab</label>
+          </div> */}
+          <div>
+            {active.link() ? (
+              <Button danger onClick={() => (onRemove(), setShowModal(false))}>
+                Eliminar
+              </Button>
+            ) : (
+              <Button secondary onClick={() => setShowModal(false)}>
+                Cancelar
+              </Button>
+            )}
             <Button onClick={() => (onSubmit(), setShowModal(false))}>
               Guardar
             </Button>
-          )}
+          </div>
         </Modal>
       )}
     </div>
@@ -130,21 +153,3 @@ const LinkButton: FC = () => {
 };
 
 export { LinkButton, LinkExtension };
-
-const Modal = styled.div`
-  align-items: center;
-  background-color: ${colors.white};
-  border: solid 1px ${colors.grey4};
-  border-radius: 4px;
-  box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
-  color: ${colors.dark};
-  padding: 20px;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-`;
