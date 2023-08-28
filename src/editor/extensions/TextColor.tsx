@@ -33,6 +33,7 @@ export { TextColorButton, TextColorExtension };
 
 const ColorIndicator = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
+  border: 1px solid ${colors.grey3};
   border-radius: 4px;
   height: 20px;
   width: 20px;
