@@ -179,13 +179,18 @@ Image.args = {
 //   ],
 // };
 
-export const TextAlign = Template.bind({});
+export const NodeFormatting = Template.bind({});
 
-TextAlign.args = {
+NodeFormatting.args = {
   extensions: [
     [
       {
-        name: "text-align",
+        name: "ordered-list",
+      },
+    ],
+    [
+      {
+        name: "node-formatting",
       },
     ],
   ],

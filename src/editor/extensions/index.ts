@@ -7,8 +7,9 @@ import { HeadingAttrs, HeadingName } from "./Heading";
 import { ImageAttrs, ImageName } from "./Image";
 import { ItalicAttrs, ItalicNname } from "./Italic";
 import { LinkAttrs, LinkName } from "./Link";
+import { NodeFormattingAttrs, NodeFormattingName } from "./NodeFormatting";
 import { OrderedListAttrs, OrderedListName } from "./OrderedList";
-import { TextAlignAttrs, TextAlignName } from "./TextAlign";
+// import { TextAlignAttrs, TextAlignName } from "./TextAlign";
 import { TextColorAttrs, TextColorName } from "./TextColor";
 import { UnderlineAttrs, UnderlineName } from "./Underline";
 
@@ -25,9 +26,10 @@ export * from "./Italic";
 export * from "./Link";
 export * from "./ListItem";
 export * from "./Markdown";
+export * from "./NodeFormatting";
 export * from "./OrderedList";
 export * from "./Placeholder";
-export * from "./TextAlign";
+// export * from "./TextAlign";
 export * from "./TextColor";
 export * from "./Underline";
 
@@ -73,8 +75,8 @@ export type Extension =
       attrs?: OrderedListAttrs;
     }
   | {
-      name: typeof TextAlignName;
-      attrs?: TextAlignAttrs;
+      name: typeof NodeFormattingName;
+      attrs?: NodeFormattingAttrs;
     }
   | {
       name: typeof TextColorName;
@@ -123,7 +125,7 @@ export const defaultExtensions: Extension[][] = [
   ],
   [
     {
-      name: "text-align",
+      name: "node-formatting",
     },
   ],
   [

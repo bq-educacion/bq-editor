@@ -10,6 +10,11 @@ export default styled(Button)`
   min-width: 40px;
   padding: 5px;
 
+  svg {
+    height: 20px;
+    width: auto;
+  }
+
   &.active,
   &:hover {
     background-color: ${colors.grey5};

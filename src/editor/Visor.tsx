@@ -6,7 +6,7 @@ import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
 import { StringHandler } from ".";
 import { defaultExtensions, Extension } from "./extensions";
-import { adjustColorOpacity, colors } from "../theme";
+import editorStyles from "./lib/editorStyles";
 
 export type IVisorProps = {
   codeEditor?: boolean;
@@ -58,7 +58,7 @@ const Visor: FC<IVisorProps> = (props) => {
   });
 
   return (
-    <Container className="bq-editor-visor" codeEditor={codeEditor}>
+    <Container className="bq-editor-visor">
       <Remirror
         editable={false}
         manager={manager}
@@ -72,10 +72,6 @@ const Visor: FC<IVisorProps> = (props) => {
 
 export default Visor;
 
-export const Container = styled.div<{ codeEditor?: boolean }>`
-  pre {
-    background-color: ${adjustColorOpacity(colors.grey6, 0.5)};
-    padding: 1em;
-    margin: 0 !important;
-  }
+export const Container = styled.div`
+  ${editorStyles}
 `;
