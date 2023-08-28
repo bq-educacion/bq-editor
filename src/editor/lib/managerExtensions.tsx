@@ -17,10 +17,11 @@ import {
   LinkExtension,
   ListItemExtension,
   MarkdownExtension,
+  NodeFormattingExtension,
   OrderedListExtension,
   PlaceholderExtension,
-  TextAlignExtension,
-  TextAlignExtraAttributes,
+  // TextAlignExtension,
+  // TextAlignExtraAttributes,
   TextColorExtension,
   UnderlineExtension,
 } from "../extensions";
@@ -85,8 +86,8 @@ const managerExtensions = ({
           ? [new OrderedListExtension({})]
           : []),
         ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
-        ...(extensionsFlat.some(({ name }) => name === "text-align")
-          ? [new TextAlignExtension({})]
+        ...(extensionsFlat.some(({ name }) => name === "node-formatting")
+          ? [new NodeFormattingExtension({})]
           : []),
         ...(extensionsFlat.some(({ name }) => name === "text-color")
           ? [new TextColorExtension({})]
@@ -101,9 +102,9 @@ const managerExtensions = ({
         new HardBreakExtension({}),
       ] as AnyExtension[],
     extraAttributes: [
-      ...(extensionsFlat.some(({ name }) => name === "text-align")
-        ? [TextAlignExtraAttributes]
-        : []),
+      // ...(extensionsFlat.some(({ name }) => name === "text-align")
+      //   ? [TextAlignExtraAttributes]
+      //   : []),
     ],
   };
 };

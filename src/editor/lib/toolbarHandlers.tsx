@@ -10,8 +10,8 @@ import {
   ImageButton,
   ItalicButton,
   LinkButton,
+  NodeFormattingButtons,
   OrderedListButton,
-  TextAlignButtons,
   TextColorButton,
   UnderlineButton,
 } from "../extensions";
@@ -31,10 +31,8 @@ const toolbarHandlers = (
         {name === "image" && <ImageButton {...attrs} />}
         {name === "italic" && <ItalicButton />}
         {name === "link" && <LinkButton />}
+        {name === "node-formatting" && <NodeFormattingButtons />}
         {name === "ordered-list" && <OrderedListButton />}
-        {name === "text-align" && setState && (
-          <TextAlignButtons setState={setState} />
-        )}
         {name === "text-color" && <TextColorButton {...attrs} />}
         {name === "underline" && <UnderlineButton />}
       </React.Fragment>

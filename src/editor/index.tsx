@@ -59,7 +59,7 @@ const Editor: FC<IEditorProps> = (props) => {
       (extensionsArray) =>
         extensionsArray.filter(
           ({ name }) =>
-            name !== "text-align" &&
+            name !== "node-formatting" &&
             name !== "text-color" &&
             name !== "underline"
         ).length > 0

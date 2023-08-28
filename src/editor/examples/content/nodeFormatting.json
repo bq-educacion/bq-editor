@@ -1,0 +1,140 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "orderedList",
+      "attrs": {
+        "order": 1
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "attrs": {
+            "closed": false,
+            "nested": false
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "nodeIndent": null,
+                "nodeTextAlignment": null,
+                "nodeLineHeight": null,
+                "style": ""
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Item 1"
+                }
+              ]
+            },
+            {
+              "type": "orderedList",
+              "attrs": {
+                "order": 1
+              },
+              "content": [
+                {
+                  "type": "listItem",
+                  "attrs": {
+                    "closed": false,
+                    "nested": false
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "nodeIndent": null,
+                        "nodeTextAlignment": null,
+                        "nodeLineHeight": null,
+                        "style": ""
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Sub Item 1"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "attrs": {
+                    "closed": false,
+                    "nested": false
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "nodeIndent": null,
+                        "nodeTextAlignment": null,
+                        "nodeLineHeight": null,
+                        "style": ""
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Sub Item 2"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "nodeIndent": null,
+        "nodeTextAlignment": null,
+        "nodeLineHeight": null,
+        "style": ""
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Some text"
+        }
+      ]
+    },
+    {
+      "type": "orderedList",
+      "attrs": {
+        "order": 3
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "attrs": {
+            "closed": false,
+            "nested": false
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "nodeIndent": 1,
+                "nodeTextAlignment": null,
+                "nodeLineHeight": null,
+                "style": ""
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Sub Item 3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

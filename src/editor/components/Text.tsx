@@ -6,8 +6,9 @@ import {
   useRemirrorContext,
 } from "@remirror/react";
 import React, { CompositionEvent, FC, useCallback, useState } from "react";
-import { adjustColorOpacity, colors } from "../../theme";
+import { colors } from "../../theme";
 import composeText from "../lib/composeText";
+import editorStyles from "../lib/editorStyles";
 
 interface ITextProps {
   children?: React.ReactNode;
@@ -101,11 +102,7 @@ const Container = styled.div<{ codeEditor?: boolean }>`
 
   .remirror-editor {
     outline: none;
-
-    pre {
-      background-color: ${adjustColorOpacity(colors.grey6, 0.5)};
-      padding: 1em;
-    }
+    ${editorStyles}
   }
 
   ${(props) =>
