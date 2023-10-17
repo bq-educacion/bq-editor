@@ -10,7 +10,7 @@ import editorStyles from "./lib/editorStyles";
 
 export type IVisorProps = {
   codeEditor?: boolean;
-  extensions?: Extension[][];
+  extensions?: Extension[];
   content?: string;
   stringHandler?: StringHandler;
 };
@@ -32,12 +32,10 @@ const Visor: FC<IVisorProps> = (props) => {
     input = {
       ...props,
       extensions: [
-        [
-          {
-            name: "code-block",
-          },
-        ],
-      ] as Extension[][],
+        {
+          name: "code-block",
+        },
+      ] as Extension[],
     };
   }
 

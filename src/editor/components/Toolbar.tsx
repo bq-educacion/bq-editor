@@ -7,28 +7,35 @@ interface IToolbarProps {
   handlers: JSX.Element[][];
 }
 
-const Toolbar: FC<IToolbarProps> = ({ className, handlers }) =>
-  handlers.length > 0 ? (
-    <Container className={className}>
-      {handlers.map((elements, index) => (
-        <React.Fragment key={index}>
-          {elements}
-          {index < handlers.length - 1 && (
-            <Divider className="bq-editor-toolbar-divider" />
-          )}
-        </React.Fragment>
-      ))}
-    </Container>
-  ) : null;
+const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => (
+  <Bar
+    className={className}
+    empty={
+      handlers.flatMap((elements) => elements.filter((element) => element))
+        .length === 0
+    }
+  >
+    {handlers.map((elements, index) => (
+      <BarGroup key={index}>
+        {elements}
+        <Divider className="bq-editor-toolbar-divider" />
+      </BarGroup>
+    ))}
+  </Bar>
+);
 
 export default Toolbar;
 
 const Divider = styled.span`
-  height: 30px;
+  height: 40px;
   border-left: 1px solid ${colors.grey4};
+
+  &:first-child {
+    display: none;
+  }
 `;
 
-const Container = styled.div`
+const Bar = styled.div<{ empty: boolean }>`
   align-items: center;
   border: 1px solid ${colors.grey4};
   border-top-left-radius: 4px;
@@ -36,12 +43,32 @@ const Container = styled.div`
   color: ${colors.dark};
   display: flex;
   flex-wrap: wrap;
-  position: relative;
-  gap: 5px;
-  padding: 5px;
 
-  &:empty {
+  ${({ empty }) =>
+    empty &&
+    `
     border-bottom: 0;
+    border-bottom-color: transparent;
     padding: 1px;
+  `}
+`;
+
+const BarGroup = styled.div`
+  display: flex;
+
+  button {
+    position: relative;
+
+    &:not(:first-of-type) {
+      margin-left: 1px;
+
+      &::before {
+        content: "";
+        border-left: 1px solid ${colors.grey4};
+        position: absolute;
+        height: 20px;
+        left: -1px;
+      }
+    }
   }
 `;

@@ -4,15 +4,13 @@ import { NodeFormattingExtension } from "remirror/extensions";
 import AlignCenter from "../assets/icons/AlignCenter";
 import AlignLeft from "../assets/icons/AlignLeft";
 import AlignRight from "../assets/icons/AlignRight";
-import IndentLeft from "../assets/icons/IndentLeft";
-import IndentRigth from "../assets/icons/IndentRigth";
 import { ToolbarButton } from "../components";
 
-export const NodeFormattingName = "node-formatting";
+export const AlignName = "align";
 
-export type NodeFormattingAttrs = Record<string, never>;
+export type AlignAttrs = Record<string, never>;
 
-const NodeFormattingButtons: FC<NodeFormattingAttrs> = () => {
+const AlignButtons: FC<AlignAttrs> = () => {
   const { commands } = useRemirrorContext({ autoUpdate: true });
 
   return (
@@ -26,14 +24,8 @@ const NodeFormattingButtons: FC<NodeFormattingAttrs> = () => {
       <ToolbarButton onClick={() => commands.rightAlign()}>
         <AlignRight />
       </ToolbarButton>
-      <ToolbarButton onClick={() => commands.decreaseIndent()}>
-        <IndentLeft />
-      </ToolbarButton>
-      <ToolbarButton onClick={() => commands.increaseIndent()}>
-        <IndentRigth />
-      </ToolbarButton>
     </>
   );
 };
 
-export { NodeFormattingButtons, NodeFormattingExtension };
+export { AlignButtons, NodeFormattingExtension };

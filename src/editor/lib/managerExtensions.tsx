@@ -4,24 +4,20 @@ import {
   BulletListExtension,
   CodeBlockExtension,
   CodeExtension,
-  CounterAttrs,
   CountExtension,
   EventsExtension,
+  getAttrs,
+  getExtension,
   HardBreakExtension,
-  HeadingAttrs,
   HeadingExtension,
-  ImageAttrs,
   ImageExtension,
   ItalicExtension,
-  LinkAttrs,
   LinkExtension,
   ListItemExtension,
   MarkdownExtension,
   NodeFormattingExtension,
   OrderedListExtension,
   PlaceholderExtension,
-  // TextAlignExtension,
-  // TextAlignExtraAttributes,
   TextColorExtension,
   UnderlineExtension,
 } from "../extensions";
@@ -35,77 +31,50 @@ const managerExtensions = ({
   extensions: () => AnyExtension[];
   extraAttributes: IdentifierSchemaAttributes[];
 } => {
-  const extensionsFlat = extensions.flat();
-
-  const counterAttrs = extensionsFlat.find(({ name }) => name === "counter")
-    ?.attrs as CounterAttrs;
-  const headingAttrs = extensionsFlat.find(({ name }) => name === "heading")
-    ?.attrs as HeadingAttrs;
-  const imageAttrs = extensionsFlat.find(({ name }) => name === "image")
-    ?.attrs as ImageAttrs;
-  const linkAttrs = extensionsFlat.find(({ name }) => name === "link")
-    ?.attrs as LinkAttrs;
+  const bold = getExtension("bold", extensions);
+  const bulletList = getExtension("bullet-list", extensions);
+  const code = getExtension("code", extensions);
+  const codeBlock = getExtension("code-block", extensions);
+  const counter = getExtension("counter", extensions);
+  const heading = getExtension("heading", extensions);
+  const image = getExtension("image", extensions);
+  const italic = getExtension("italic", extensions);
+  const link = getExtension("link", extensions);
+  const orderedList = getExtension("ordered-list", extensions);
+  const textColor = getExtension("text-color", extensions);
+  const underline = getExtension("underline", extensions);
 
   return {
     extensions: () =>
       [
         new EventsExtension(),
-        ...(extensionsFlat.some(({ name }) => name === "bold")
-          ? [new BoldExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "bullet-list")
-          ? [new BulletListExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "code")
-          ? [new CodeExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "code-block")
+        ...(bold ? [new BoldExtension({})] : []),
+        ...(bulletList ? [new BulletListExtension({})] : []),
+        ...(code ? [new CodeExtension({})] : []),
+        ...(codeBlock
           ? [
               new CodeBlockExtension({
                 defaultWrap: true,
               }),
             ]
           : []),
-        ...(extensionsFlat.some(({ name }) => name === "counter")
-          ? [new CountExtension(counterAttrs)]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "heading")
-          ? [new HeadingExtension(headingAttrs?.levels ? headingAttrs : {})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "image")
-          ? [new ImageExtension(imageAttrs)]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "italic")
-          ? [new ItalicExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "link")
-          ? [new LinkExtension({ defaultTarget: "_blank", ...linkAttrs })]
+        ...(counter ? [new CountExtension(getAttrs(counter))] : []),
+        ...(heading ? [new HeadingExtension(getAttrs(heading))] : []),
+        ...(image ? [new ImageExtension(getAttrs(image))] : []),
+        ...(italic ? [new ItalicExtension({})] : []),
+        ...(link
+          ? [new LinkExtension({ defaultTarget: "_blank", ...getAttrs(link) })]
           : []),
         ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
-        ...(extensionsFlat.some(({ name }) => name === "ordered-list")
-          ? [new OrderedListExtension({})]
-          : []),
+        ...(orderedList ? [new OrderedListExtension({})] : []),
         ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
-        ...(extensionsFlat.some(({ name }) => name === "node-formatting")
-          ? [new NodeFormattingExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "text-color")
-          ? [new TextColorExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "underline")
-          ? [new UnderlineExtension({})]
-          : []),
-        ...(extensionsFlat.some(({ name }) => name === "bullet-list") ||
-        extensionsFlat.some(({ name }) => name === "ordered-list")
-          ? [new ListItemExtension({})]
-          : []),
+        ...(textColor ? [new TextColorExtension({})] : []),
+        ...(underline ? [new UnderlineExtension({})] : []),
+        ...(bulletList || orderedList ? [new ListItemExtension({})] : []),
         new HardBreakExtension({}),
+        new NodeFormattingExtension({}),
       ] as AnyExtension[],
-    extraAttributes: [
-      // ...(extensionsFlat.some(({ name }) => name === "text-align")
-      //   ? [TextAlignExtraAttributes]
-      //   : []),
-    ],
+    extraAttributes: [],
   };
 };
 

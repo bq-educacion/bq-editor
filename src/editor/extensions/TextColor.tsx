@@ -4,6 +4,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../../theme";
+import TextColor from "../assets/icons/TextColor";
 import { ToolbarButton } from "../components";
 
 export const TextColorName = "text-color";
@@ -24,17 +25,17 @@ const TextColorButton: FC<TextColorAttrs> = ({ color = colors.orange1 }) => {
           : commands.setTextColor(color)
       }
     >
-      <ColorIndicator color={color} />
+      <Color color={color}>
+        <TextColor />
+      </Color>
     </ToolbarButton>
   );
 };
 
 export { TextColorButton, TextColorExtension };
 
-const ColorIndicator = styled.div<{ color: string }>`
-  background-color: ${(props) => props.color};
-  border: 1px solid ${colors.grey3};
-  border-radius: 4px;
-  height: 20px;
-  width: 20px;
+const Color = styled.div<{ color: string }>`
+  svg {
+    color: ${(props) => props.color};
+  }
 `;

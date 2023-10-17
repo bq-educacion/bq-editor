@@ -29,23 +29,17 @@ export const RichText = Template.bind({});
 
 RichText.args = {
   extensions: [
-    [
-      {
-        name: "heading",
-        attrs: {
-          levels: [1, 2, 3],
-        },
+    {
+      name: "heading",
+      attrs: {
+        levels: [1, 2, 3],
+        translateFn: (label: string) =>
+          label === "p" ? "Paragraph" : `Heading ${label.slice(1)}`,
       },
-      {
-        name: "bold",
-      },
-      {
-        name: "italic",
-      },
-      {
-        name: "underline",
-      },
-    ],
+    },
+    "bold",
+    "italic",
+    "underline",
   ],
 };
 
@@ -53,17 +47,13 @@ export const Code = Template.bind({});
 
 Code.args = {
   extensions: [
-    [
-      {
-        name: "code",
+    "code",
+    {
+      name: "code-block",
+      attrs: {
+        language: "css",
       },
-      {
-        name: "code-block",
-        attrs: {
-          language: "css",
-        },
-      },
-    ],
+    },
   ],
 };
 
@@ -71,15 +61,13 @@ export const Counter = Template.bind({});
 
 Counter.args = {
   extensions: [
-    [
-      {
-        name: "counter",
-        attrs: {
-          maximumStrategy: "characters",
-          maximum: 10,
-        },
+    {
+      name: "counter",
+      attrs: {
+        maximumStrategy: "characters",
+        maximum: 10,
       },
-    ],
+    },
   ],
 };
 
@@ -87,56 +75,37 @@ export const TextColor = Template.bind({});
 
 TextColor.args = {
   extensions: [
-    [
-      {
-        name: "text-color",
-        attrs: {
-          color: colors.orange1,
-        },
+    {
+      name: "text-color",
+      attrs: {
+        color: colors.orange1,
       },
-    ],
+    },
   ],
 };
 
 export const Lists = Template.bind({});
 
 Lists.args = {
-  extensions: [
-    [
-      {
-        name: "bullet-list",
-      },
-      {
-        name: "ordered-list",
-      },
-    ],
-  ],
+  extensions: ["bullet-list", "ordered-list"],
 };
 
 export const Link = Template.bind({});
 
 Link.args = {
-  extensions: [
-    [
-      {
-        name: "link",
-      },
-    ],
-  ],
+  extensions: ["link"],
 };
 
 export const AutoLink = Template.bind({});
 
 AutoLink.args = {
   extensions: [
-    [
-      {
-        name: "link",
-        attrs: {
-          autoLink: true,
-        },
+    {
+      name: "link",
+      attrs: {
+        autoLink: true,
       },
-    ],
+    },
   ],
   placeholder: `Type "www.educacion.bq.com" to insert a link`,
   stringHandler: "html",
@@ -146,17 +115,15 @@ export const Image = Template.bind({});
 
 Image.args = {
   extensions: [
-    [
-      {
-        name: "image",
-        attrs: {
-          accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
-          onUpload: () => {
-            return new Promise((resolve) => resolve(image));
-          },
+    {
+      name: "image",
+      attrs: {
+        accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
+        onUpload: () => {
+          return new Promise((resolve) => resolve(image));
         },
       },
-    ],
+    },
   ],
 };
 
@@ -164,34 +131,27 @@ Image.args = {
 
 // ImageResizable.args = {
 //   extensions: [
-//     [
-//       {
-//         name: "image",
-//         attrs: {
-//           accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
-//           resizable: true,
-//           onUpload: () => {
-//             return new Promise((resolve) => resolve(image));
-//           },
+//     {
+//       name: "image",
+//       attrs: {
+//         accept: [".png", ".gif", ".jpg", ".jpeg", ".webp", ".svg"],
+//         resizable: true,
+//         onUpload: () => {
+//           return new Promise((resolve) => resolve(image));
 //         },
 //       },
-//     ],
+//     },
 //   ],
 // };
 
-export const NodeFormatting = Template.bind({});
+export const Align = Template.bind({});
 
-NodeFormatting.args = {
-  extensions: [
-    [
-      {
-        name: "ordered-list",
-      },
-    ],
-    [
-      {
-        name: "node-formatting",
-      },
-    ],
-  ],
+Align.args = {
+  extensions: ["align"],
+};
+
+export const Indent = Template.bind({});
+
+Indent.args = {
+  extensions: ["ordered-list", "indent"],
 };

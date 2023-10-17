@@ -7,9 +7,13 @@ export const HeadingName = "heading";
 
 export type HeadingAttrs = {
   levels?: number[];
+  translateFn?: (label: string) => string;
 };
 
-const HeadingButtons: FC<HeadingAttrs> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
+const HeadingButtons: FC<HeadingAttrs> = ({
+  levels = [1, 2, 3, 4, 5, 6],
+  translateFn,
+}) => {
   const { to, from } = useCurrentSelection();
   const { active, chain, commands } = useRemirrorContext({ autoUpdate: true });
 
@@ -20,14 +24,14 @@ const HeadingButtons: FC<HeadingAttrs> = ({ levels = [1, 2, 3, 4, 5, 6] }) => {
           commands.toggleHeading.enabled({ level: Number(level) })
         )
       }
-      placeholder="Heading"
+      placeholder={translateFn ? translateFn("p") : "p"}
       onChange={(level) => {
         chain.focus({ to, from }).run();
         commands.toggleHeading({ level: Number(level) });
       }}
       options={levels.map((level) => ({
         active: active.heading({ level: Number(level) }),
-        label: `H${level}`,
+        label: translateFn ? translateFn(`h${level}`) : `h${level}`,
         value: `${level}`,
       }))}
     />

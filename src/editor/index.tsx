@@ -34,7 +34,7 @@ export type IEditorProps = {
   codeEditor?: boolean;
   dualEditor?: boolean;
   editable?: boolean;
-  extensions?: Extension[][];
+  extensions?: Extension[];
   initialContent?: string;
   onChange?: (doc?: ProsemirrorNode) => void;
   placeholder?: string;
@@ -56,13 +56,14 @@ const Editor: FC<IEditorProps> = (props) => {
 
   if (stringHandler === "markdown") {
     extensions = extensions.filter(
-      (extensionsArray) =>
-        extensionsArray.filter(
-          ({ name }) =>
-            name !== "node-formatting" &&
-            name !== "text-color" &&
-            name !== "underline"
-        ).length > 0
+      (ext) =>
+        (typeof ext === "string" ? ext !== "align" : ext.name !== "align") &&
+        (typeof ext === "string"
+          ? ext !== "text-color"
+          : ext.name !== "text-color") &&
+        (typeof ext === "string"
+          ? ext !== "underline"
+          : ext.name !== "underline")
     );
   }
 
@@ -88,12 +89,10 @@ const Editor: FC<IEditorProps> = (props) => {
   if (codeEditor) {
     const input = {
       extensions: [
-        [
-          {
-            name: "code-block",
-          },
-        ],
-      ] as Extension[][],
+        {
+          name: "code-block",
+        },
+      ] as Extension[],
       ...props,
     };
 
@@ -132,7 +131,7 @@ const Editor: FC<IEditorProps> = (props) => {
       >
         <Toolbar
           className="bq-editor-toolbar"
-          handlers={toolbarHandlers(input, setState)}
+          handlers={toolbarHandlers(input)}
         />
         <Text className="bq-editor-text">{editorHandlers(input)}</Text>
         {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}

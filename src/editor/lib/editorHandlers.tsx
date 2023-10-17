@@ -1,18 +1,18 @@
 import React from "react";
 import { IEditorProps } from "..";
-import { CounterAttrs, CounterIndicator } from "../extensions";
+import {
+  CounterAttrs,
+  CounterIndicator,
+  getAttrs,
+  getExtension,
+} from "../extensions";
 
 const editorHandlers = ({ extensions = [] }: IEditorProps) => {
-  const extensionsFlat = extensions.flat();
+  const counter = getExtension("counter", extensions);
 
   return (
     <>
-      {extensionsFlat.some(({ name }) => name === "counter") && (
-        <CounterIndicator
-          {...(extensionsFlat.find(({ name }) => name === "counter")
-            .attrs as CounterAttrs)}
-        />
-      )}
+      {counter && <CounterIndicator {...(getAttrs(counter) as CounterAttrs)} />}
     </>
   );
 };

@@ -194,19 +194,26 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
 const Values = styled.div<{ scroll?: boolean; search?: boolean }>`
   background-color: ${colors.white};
   border-radius: 4px;
-  border: solid 1px ${colors.grey3};
-  box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
+  box-shadow: 0 3px 7px 0 ${adjustColorOpacity(colors.dark, 0.5)};
   min-width: 100%;
   position: absolute;
-  right: 0;
+  left: 0;
   top: 5px;
+  min-width: 220px;
   transform: translateY(45px);
   z-index: 2;
 
   > div {
     display: flex;
     flex-direction: column;
-    padding: 5px 0;
+
+    > * {
+      height: 35px;
+
+      &:not(:first-of-type) {
+        border-top: solid 1px ${colors.grey5};
+      }
+    }
   }
 
   ${(props) =>
@@ -252,7 +259,7 @@ const Value = styled.div<{ active: boolean; disabled?: boolean }>`
   }
 
   &:hover {
-    background-color: ${adjustColorOpacity(colors.turquoise4, 0.2)};
+    background-color: ${colors.grey5};
   }
 
   ${(props) =>

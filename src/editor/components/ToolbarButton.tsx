@@ -4,19 +4,20 @@ import { colors } from "../../theme";
 
 export default styled(Button)`
   background-color: ${colors.white};
+  border-radius: 0;
   border: none;
   color: ${colors.dark};
-  min-height: 40px;
-  min-width: 40px;
-  padding: 5px;
+  width: 38px;
+  padding: 0;
 
   svg {
-    height: 20px;
-    width: auto;
+    height: 14px;
+    max-width: 16px;
   }
 
   &.active,
   &:hover {
-    background-color: ${colors.grey5};
+    background-color: ${colors.dark};
+    color: ${colors.white};
   }
 `;
