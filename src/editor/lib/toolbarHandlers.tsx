@@ -6,7 +6,6 @@ import {
   BulletListButton,
   CodeBlockButton,
   CodeButton,
-  Extension,
   getAttrs,
   getExtension,
   HeadingAttrs,
@@ -17,8 +16,12 @@ import {
   ItalicButton,
   LinkButton,
   OrderedListButton,
+  SubButton,
+  SupButton,
   TextColorAttrs,
   TextColorButton,
+  TextHighlightAttrs,
+  TextHighlightButton,
   UnderlineButton,
 } from "../extensions";
 
@@ -34,7 +37,10 @@ const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
   const italic = getExtension("italic", extensions);
   const link = getExtension("link", extensions);
   const orderedList = getExtension("ordered-list", extensions);
+  const sub = getExtension("sub", extensions);
+  const sup = getExtension("sup", extensions);
   const textColor = getExtension("text-color", extensions);
+  const textHighlight = getExtension("text-highlight", extensions);
   const underline = getExtension("underline", extensions);
 
   return [
@@ -48,11 +54,18 @@ const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
     [align && <AlignButtons />],
     [indent && <IndentButtons />],
     [
+      textHighlight && (
+        <TextHighlightButton
+          {...(getAttrs(textHighlight) as TextHighlightAttrs)}
+        />
+      ),
       textColor && (
         <TextColorButton {...(getAttrs(textColor) as TextColorAttrs)} />
       ),
     ],
     [
+      sub && <SubButton />,
+      sup && <SupButton />,
       image && <ImageButton {...(getAttrs(image) as ImageAttrs)} />,
       link && <LinkButton />,
     ],

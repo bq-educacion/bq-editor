@@ -62,6 +62,9 @@ const Editor: FC<IEditorProps> = (props) => {
           ? ext !== "text-color"
           : ext.name !== "text-color") &&
         (typeof ext === "string"
+          ? ext !== "text-highlight"
+          : ext.name !== "text-highlight") &&
+        (typeof ext === "string"
           ? ext !== "underline"
           : ext.name !== "underline")
     );

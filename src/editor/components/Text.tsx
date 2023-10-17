@@ -80,7 +80,7 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   border: 1px solid ${colors.grey4};
   border-radius: 4px;
   color: ${colors.dark};
-  padding: 0 1em;
+  padding: 20px;
   white-space: pre-wrap;
   min-height: 100px;
   flex: 1;

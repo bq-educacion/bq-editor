@@ -10,7 +10,10 @@ import { IndentAttrs, IndentName } from "./Indent";
 import { ItalicAttrs, ItalicNname } from "./Italic";
 import { LinkAttrs, LinkName } from "./Link";
 import { OrderedListAttrs, OrderedListName } from "./OrderedList";
+import { SubAttrs, SubName } from "./Sub";
+import { SupAttrs, SupName } from "./Sup";
 import { TextColorAttrs, TextColorName } from "./TextColor";
+import { TextHighlightAttrs, TextHighlightName } from "./TextHighlight";
 import { UnderlineAttrs, UnderlineName } from "./Underline";
 
 export * from "./Align";
@@ -19,7 +22,6 @@ export * from "./BulletList";
 export * from "./Code";
 export * from "./CodeBlock";
 export * from "./Counter";
-export * from "./Events";
 export * from "./HardBreak";
 export * from "./Heading";
 export * from "./Image";
@@ -31,7 +33,10 @@ export * from "./Markdown";
 export * from "./Align";
 export * from "./OrderedList";
 export * from "./Placeholder";
+export * from "./Sub";
+export * from "./Sup";
 export * from "./TextColor";
+export * from "./TextHighlight";
 export * from "./Underline";
 
 export type Extension =
@@ -95,10 +100,25 @@ export type Extension =
       name: typeof OrderedListName;
       attrs?: OrderedListAttrs;
     }
+  | typeof SubName
+  | {
+      name: typeof SubName;
+      attrs?: SubAttrs;
+    }
+  | typeof SupName
+  | {
+      name: typeof SupName;
+      attrs?: SupAttrs;
+    }
   | typeof TextColorName
   | {
       name: typeof TextColorName;
       attrs?: TextColorAttrs;
+    }
+  | typeof TextHighlightName
+  | {
+      name: typeof TextHighlightName;
+      attrs?: TextHighlightAttrs;
     }
   | typeof UnderlineName
   | {
@@ -125,6 +145,9 @@ export const defaultExtensions: Extension[] = [
   "italic",
   "link",
   "ordered-list",
+  "sub",
+  "sup",
   "text-color",
+  "text-highlight",
   "underline",
 ];

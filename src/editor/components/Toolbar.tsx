@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { colors } from "../../theme";
 
 interface IToolbarProps {
@@ -7,32 +7,32 @@ interface IToolbarProps {
   handlers: JSX.Element[][];
 }
 
-const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => (
-  <Bar
-    className={className}
-    empty={
-      handlers.flatMap((elements) => elements.filter((element) => element))
-        .length === 0
-    }
-  >
-    {handlers.map((elements, index) => (
-      <BarGroup key={index}>
-        {elements}
-        <Divider className="bq-editor-toolbar-divider" />
-      </BarGroup>
-    ))}
-  </Bar>
-);
+const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => {
+  const filteredHandlers = useMemo(
+    () =>
+      handlers.filter(
+        (elements) => elements.filter((element) => element).length > 0
+      ),
+    [handlers]
+  );
+
+  return (
+    <Bar className={className} empty={filteredHandlers.length === 0}>
+      {filteredHandlers.map((elements, index) => (
+        <BarGroup key={index}>
+          {elements}
+          <Divider className="bq-editor-toolbar-divider" />
+        </BarGroup>
+      ))}
+    </Bar>
+  );
+};
 
 export default Toolbar;
 
 const Divider = styled.span`
   height: 40px;
   border-left: 1px solid ${colors.grey4};
-
-  &:first-child {
-    display: none;
-  }
 `;
 
 const Bar = styled.div<{ empty: boolean }>`

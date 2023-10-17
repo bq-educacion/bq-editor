@@ -71,5 +71,7 @@ const Visor: FC<IVisorProps> = (props) => {
 export default Visor;
 
 export const Container = styled.div`
-  ${editorStyles}
+  .remirror-editor {
+    ${editorStyles}
+  }
 `;

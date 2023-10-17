@@ -71,9 +71,9 @@ Counter.args = {
   ],
 };
 
-export const TextColor = Template.bind({});
+export const Text = Template.bind({});
 
-TextColor.args = {
+Text.args = {
   extensions: [
     {
       name: "text-color",
@@ -81,7 +81,19 @@ TextColor.args = {
         color: colors.orange1,
       },
     },
+    {
+      name: "text-highlight",
+      attrs: {
+        color: colors.orange1,
+      },
+    },
   ],
+};
+
+export const SubSup = Template.bind({});
+
+SubSup.args = {
+  extensions: ["sub", "sup"],
 };
 
 export const Lists = Template.bind({});
@@ -153,5 +165,5 @@ Align.args = {
 export const Indent = Template.bind({});
 
 Indent.args = {
-  extensions: ["ordered-list", "indent"],
+  extensions: ["indent"],
 };

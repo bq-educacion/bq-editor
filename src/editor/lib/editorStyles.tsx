@@ -1,6 +1,15 @@
 import { adjustColorOpacity, colors } from "../../theme";
 
 export default `
+  // All
+  > *:first-child {
+    margin-block-start: 0;
+  }
+
+  > *:last-child {
+    margin-block-end: 0;
+  }
+
   // CodeBlock
   pre {
     background-color: ${adjustColorOpacity(colors.grey6, 0.5)};
@@ -8,7 +17,7 @@ export default `
     margin: 0 !important;
   }
 
-  // NodeFormatting
+  // Indent
   li:has([data-node-indent]) {
     [data-node-indent] {
       margin-left: 0!important;
