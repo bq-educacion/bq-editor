@@ -43,7 +43,7 @@ const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
   const textHighlight = getExtension("text-highlight", extensions);
   const underline = getExtension("underline", extensions);
 
-  return [
+  const handlers = [
     [heading && <HeadingButtons {...(getAttrs(heading) as HeadingAttrs)} />],
     [bulletList && <BulletListButton />, orderedList && <OrderedListButton />],
     [
@@ -71,6 +71,10 @@ const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
     ],
     [code && <CodeButton />, codeBlock && <CodeBlockButton />],
   ];
+
+  return handlers.filter(
+    (elements) => elements.filter((element) => element).length > 0
+  );
 };
 
 export default toolbarHandlers;

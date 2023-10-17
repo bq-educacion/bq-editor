@@ -20,9 +20,15 @@ export type ImageAttrs = {
   accept?: string[];
   onUpload?: (file: File) => Promise<string>;
   resizable?: boolean; // TODO: Not working
+  translateFn?: (label: string) => string;
 };
 
-const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {
+const ImageButton: FC<ImageAttrs> = ({
+  accept,
+  onUpload,
+  resizable,
+  translateFn,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
@@ -118,127 +124,123 @@ const ImageButton: FC<ImageAttrs> = ({ accept, onUpload, resizable }) => {
       </ToolbarButton>
       {showModal && (
         <Modal>
-          <div>
-            <label>Url*</label>
-            <Input
-              autoFocus
-              placeholder="Url"
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setImgSrc(event.target.value)
+          <label>{translateFn?.("url-label") || "Url:"}</label>
+          <Input
+            autoFocus
+            placeholder={translateFn?.("url-placeholder") || "Enter a url"}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setImgSrc(event.target.value)
+            }
+            value={imgSrc}
+            onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+              const { code } = event;
+
+              if (code === "Enter") {
+                onSubmit();
+                setShowModal(false);
               }
-              value={imgSrc}
-              onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
-                const { code } = event;
 
-                if (code === "Enter") {
-                  onSubmit();
-                  setShowModal(false);
-                }
-
-                if (code === "Escape") {
-                  setShowModal(false);
-                }
-              }}
-            />
-            {onUpload && (
-              <>
-                <p>o</p>
-                <Input
-                  accept={accept?.join(", ")}
-                  onChange={onFile}
-                  ref={imgRef}
-                  style={{ display: "none" }}
-                  type="file"
-                />
-                <Button
-                  cta
-                  onClick={(e) => (
-                    e.stopPropagation(), imgRef.current?.click()
-                  )}
-                >
-                  Archivo
-                </Button>
-              </>
-            )}
-          </div>
-          {error && <p>An error has occurred, please try again.</p>}
+              if (code === "Escape") {
+                setShowModal(false);
+              }
+            }}
+          />
+          {onUpload && (
+            <>
+              <p>{translateFn?.("or") || "o"}</p>
+              <Input
+                accept={accept?.join(", ")}
+                onChange={onFile}
+                ref={imgRef}
+                style={{ display: "none" }}
+                type="file"
+              />
+              <Button
+                cta
+                onClick={(e) => (e.stopPropagation(), imgRef.current?.click())}
+              >
+                {translateFn?.("file") || "File"}
+              </Button>
+            </>
+          )}
+          {error && (
+            <p>
+              {translateFn?.("error") ||
+                "An error has occurred, please try again."}
+            </p>
+          )}
           <a
             onClick={(e) => (
               e.stopPropagation(), setShowMoreOptions(!showMoreOptions)
             )}
           >
-            {showMoreOptions ? "Hide" : "Show"} more options
+            {showMoreOptions
+              ? translateFn?.("hide-more-options") || "Hide more options"
+              : translateFn?.("show-more-options") || "Show more options"}
           </a>
           {showMoreOptions && (
             <>
-              <div>
-                <label>Alt</label>
-                <Input
-                  placeholder="Alt"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setImgAlt(event.target.value)
-                  }
-                  value={imgAlt}
-                />
-              </div>
-              <div>
-                <label>Title</label>
-                <Input
-                  placeholder="Title"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setImgTitle(event.target.value)
-                  }
-                  value={imgTitle}
-                />
-              </div>
-              <div>
-                <label>Height</label>
-                <Input
-                  placeholder="0"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setImgHeight(event.target.value)
-                  }
-                  value={imgHeight}
-                />
-              </div>
-              <div>
-                <label>Width</label>
-                <Input
-                  placeholder="0"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setImgWidth(event.target.value)
-                  }
-                  value={imgWidth}
-                />
-              </div>
-              <div>
-                <label>Align</label>
-                <Input
-                  placeholder="center | end | justify | left | match-parent | right | start"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setImgAlign(event.target.value)
-                  }
-                  value={imgAlign}
-                />
-              </div>
-              <div>
-                <label>Rotate</label>
-                <Input
-                  placeholder="180deg"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setImgRotate(event.target.value)
-                  }
-                  value={imgRotate}
-                />
-              </div>
+              <label>{translateFn?.("alt-label") || "Alt:"}</label>
+              <Input
+                placeholder={translateFn?.("alt-placeholder") || "Enter an alt"}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setImgAlt(event.target.value)
+                }
+                value={imgAlt}
+              />
+              <label>{translateFn?.("title-label") || "Title:"}</label>
+              <Input
+                placeholder={
+                  translateFn?.("title-placeholder") || "Enter a title"
+                }
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setImgTitle(event.target.value)
+                }
+                value={imgTitle}
+              />
+              <label>{translateFn?.("height-label") || "Height:"}</label>
+              <Input
+                placeholder={translateFn?.("height-placeholder") || "0"}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setImgHeight(event.target.value)
+                }
+                value={imgHeight}
+              />
+              <label>{translateFn?.("width-label") || "Width:"}</label>
+              <Input
+                placeholder={translateFn?.("width-placeholder") || "0"}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setImgWidth(event.target.value)
+                }
+                value={imgWidth}
+              />
+              <label>{translateFn?.("align-label") || "Align:"}</label>
+              <Input
+                placeholder={
+                  translateFn?.("align-placeholder") ||
+                  "center | end | justify | left | match-parent | right | start"
+                }
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setImgAlign(event.target.value)
+                }
+                value={imgAlign}
+              />
+              <label>{translateFn?.("rotate-label") || "Rotate:"}</label>
+              <Input
+                placeholder={translateFn?.("rotate-placeholder") || "180deg"}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setImgRotate(event.target.value)
+                }
+                value={imgRotate}
+              />
             </>
           )}
           <div>
-            <Button secondary onClick={() => setShowModal(false)}>
-              Cancelar
-            </Button>
             <Button onClick={() => (onSubmit(), setShowModal(false))}>
-              Guardar
+              {translateFn?.("save") || "Save"}
+            </Button>
+            <Button secondary onClick={() => setShowModal(false)}>
+              {translateFn?.("cancel") || "Cancel"}
             </Button>
           </div>
         </Modal>

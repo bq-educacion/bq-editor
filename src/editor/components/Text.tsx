@@ -85,6 +85,15 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   min-height: 100px;
   flex: 1;
 
+  &:focus-within {
+    border-color: ${colors.dark};
+  }
+
+  &:not(:first-of-type) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
   .remirror-is-empty:first-of-type::before {
     position: absolute;
     color: ${colors.grey2};
@@ -92,12 +101,6 @@ const Container = styled.div<{ codeEditor?: boolean }>`
     height: 0;
     font-style: italic;
     content: attr(data-placeholder);
-  }
-
-  :not(:first-of-type) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top: none;
   }
 
   .remirror-editor {

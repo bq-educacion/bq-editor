@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, {
@@ -28,6 +29,7 @@ export const LinkName = "link";
 export type LinkAttrs = {
   autoLink?: boolean;
   defaultTarget?: string;
+  translateFn?: (label: string) => string;
 };
 
 function useFloatingLinkState() {
@@ -72,7 +74,7 @@ function useFloatingLinkState() {
   );
 }
 
-const LinkButton: FC = () => {
+const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
   const [showModal, setShowModal] = useState(false);
@@ -107,30 +109,28 @@ const LinkButton: FC = () => {
         <LinkIcon />
       </ToolbarButton>
       {showModal && (
-        <Modal>
-          <div>
-            <label>Link*</label>
-            <Input
-              autoFocus
-              placeholder="Link"
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setHref(event.target.value)
+        <LinkModal>
+          <label>{translateFn?.("link-label") || "Link:"}</label>
+          <Input
+            autoFocus
+            placeholder={translateFn?.("link-placeholder") || "Enter a link"}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setHref(event.target.value)
+            }
+            value={href}
+            onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+              const { code } = event;
+
+              if (code === "Enter") {
+                onSubmit();
+                setShowModal(false);
               }
-              value={href}
-              onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
-                const { code } = event;
 
-                if (code === "Enter") {
-                  onSubmit();
-                  setShowModal(false);
-                }
-
-                if (code === "Escape") {
-                  setShowModal(false);
-                }
-              }}
-            />
-          </div>
+              if (code === "Escape") {
+                setShowModal(false);
+              }
+            }}
+          />
           {/* <div> // TODO: Not working
             <Checkbox
               checked={target === "_blank"}
@@ -139,20 +139,20 @@ const LinkButton: FC = () => {
             <label>Open in new tab</label>
           </div> */}
           <div>
+            <Button onClick={() => (onSubmit(), setShowModal(false))}>
+              {translateFn?.("save") || "Save"}
+            </Button>
             {active.link() ? (
               <Button danger onClick={() => (onRemove(), setShowModal(false))}>
-                Eliminar
+                {translateFn?.("delete") || "Delete"}
               </Button>
             ) : (
               <Button secondary onClick={() => setShowModal(false)}>
-                Cancelar
+                {translateFn?.("cancel") || "Cancel"}
               </Button>
             )}
-            <Button onClick={() => (onSubmit(), setShowModal(false))}>
-              Guardar
-            </Button>
           </div>
-        </Modal>
+        </LinkModal>
       )}
     </div>
   );
@@ -201,3 +201,7 @@ class LinkExtension extends RemirrorLinkExtension {
 }
 
 export { LinkButton, LinkExtension };
+
+const LinkModal = styled(Modal)`
+  width: 240px;
+`;

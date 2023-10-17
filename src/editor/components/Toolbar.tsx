@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { FC, useMemo } from "react";
+import React, { FC } from "react";
 import { colors } from "../../theme";
 
 interface IToolbarProps {
@@ -7,18 +7,10 @@ interface IToolbarProps {
   handlers: JSX.Element[][];
 }
 
-const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => {
-  const filteredHandlers = useMemo(
-    () =>
-      handlers.filter(
-        (elements) => elements.filter((element) => element).length > 0
-      ),
-    [handlers]
-  );
-
-  return (
-    <Bar className={className} empty={filteredHandlers.length === 0}>
-      {filteredHandlers.map((elements, index) => (
+const Toolbar: FC<IToolbarProps> = ({ className, handlers }) =>
+  handlers.length === 0 ? null : (
+    <Bar className={className}>
+      {handlers.map((elements, index) => (
         <BarGroup key={index}>
           {elements}
           <Divider className="bq-editor-toolbar-divider" />
@@ -26,7 +18,6 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => {
       ))}
     </Bar>
   );
-};
 
 export default Toolbar;
 
@@ -35,28 +26,21 @@ const Divider = styled.span`
   border-left: 1px solid ${colors.grey4};
 `;
 
-const Bar = styled.div<{ empty: boolean }>`
+const Bar = styled.div`
   align-items: center;
   border: 1px solid ${colors.grey4};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+  border-bottom: none;
   color: ${colors.dark};
   display: flex;
   flex-wrap: wrap;
-
-  ${({ empty }) =>
-    empty &&
-    `
-    border-bottom: 0;
-    border-bottom-color: transparent;
-    padding: 1px;
-  `}
 `;
 
 const BarGroup = styled.div`
   display: flex;
 
-  button {
+  > button {
     position: relative;
 
     &:not(:first-of-type) {

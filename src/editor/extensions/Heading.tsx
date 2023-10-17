@@ -24,14 +24,14 @@ const HeadingButtons: FC<HeadingAttrs> = ({
           commands.toggleHeading.enabled({ level: Number(level) })
         )
       }
-      placeholder={translateFn ? translateFn("p") : "p"}
+      placeholder={translateFn?.("p") || "p"}
       onChange={(level) => {
         chain.focus({ to, from }).run();
         commands.toggleHeading({ level: Number(level) });
       }}
       options={levels.map((level) => ({
         active: active.heading({ level: Number(level) }),
-        label: translateFn ? translateFn(`h${level}`) : `h${level}`,
+        label: translateFn?.(`h${level}`) || `h${level}`,
         value: `${level}`,
       }))}
     />

@@ -75,12 +75,12 @@ const StyledButton = styled.button<IButtonProps>`
     css`
       background-color: ${colors.grey4};
       border-color: ${colors.grey4};
+      color: ${colors.dark};
 
       &.active,
       &:hover {
         background-color: ${colors.white};
         border-color: ${colors.dark};
-        color: ${colors.dark};
       }
     `}
 `;

@@ -3,9 +3,8 @@ import { adjustColorOpacity, colors } from "../../theme";
 
 export default styled.div`
   background-color: ${colors.white};
-  border: solid 1px ${colors.grey4};
   border-radius: 4px;
-  box-shadow: 0 10px 20px 0 ${adjustColorOpacity(colors.dark, 0.2)};
+  box-shadow: 0 3px 7px 0 ${adjustColorOpacity(colors.dark, 0.5)};
   color: ${colors.dark};
   padding: 20px;
   position: fixed;
@@ -26,7 +25,7 @@ export default styled.div`
   > div {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 13px;
     width: 100%;
 
     button {
