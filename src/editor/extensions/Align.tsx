@@ -1,9 +1,9 @@
 import { useRemirrorContext } from "@remirror/react";
 import React, { FC } from "react";
 import { NodeFormattingExtension } from "remirror/extensions";
-import AlignCenter from "../assets/icons/AlignCenter";
-import AlignLeft from "../assets/icons/AlignLeft";
-import AlignRight from "../assets/icons/AlignRight";
+import AlignCenterIcon from "../assets/icons/AlignCenter";
+import AlignLeftIcon from "../assets/icons/AlignLeft";
+import AlignRightIcon from "../assets/icons/AlignRight";
 import { ToolbarButton } from "../components";
 
 export const AlignName = "align";
@@ -16,13 +16,13 @@ const AlignButtons: FC<AlignAttrs> = () => {
   return (
     <>
       <ToolbarButton onClick={() => commands.leftAlign()}>
-        <AlignLeft />
+        <AlignLeftIcon />
       </ToolbarButton>
       <ToolbarButton onClick={() => commands.centerAlign()}>
-        <AlignCenter />
+        <AlignCenterIcon />
       </ToolbarButton>
       <ToolbarButton onClick={() => commands.rightAlign()}>
-        <AlignRight />
+        <AlignRightIcon />
       </ToolbarButton>
     </>
   );

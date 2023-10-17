@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, { FC } from "react";
@@ -22,9 +23,18 @@ const CodeBlockButton: FC = () => {
         commands.toggleCodeBlock();
       }}
     >
-      <CodeBlockIcon />
+      <StyledIcon>
+        <CodeBlockIcon />
+      </StyledIcon>
     </ToolbarButton>
   );
 };
 
 export { CodeBlockButton, CodeBlockExtension };
+
+const StyledIcon = styled.div`
+  svg {
+    height: 12px;
+    margin-top: 4px;
+  }
+`;

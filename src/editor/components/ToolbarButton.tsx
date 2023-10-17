@@ -10,14 +10,13 @@ export default styled(Button)`
   width: 38px;
   padding: 0;
 
-  svg {
-    height: 14px;
-    max-width: 16px;
-  }
-
   &.active,
   &:hover {
     background-color: ${colors.dark};
     color: ${colors.white};
+  }
+
+  &:disabled {
+    background-color: transparent;
   }
 `;

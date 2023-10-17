@@ -1,8 +1,9 @@
+import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
 import React, { FC } from "react";
 import { NodeFormattingExtension } from "remirror/extensions";
-import IndentLeft from "../assets/icons/IndentLeft";
-import IndentRigth from "../assets/icons/IndentRigth";
+import IndentLeftIcon from "../assets/icons/IndentLeft";
+import IndentRigthIcon from "../assets/icons/IndentRigth";
 import { ToolbarButton } from "../components";
 
 export const IndentName = "indent";
@@ -15,13 +16,24 @@ const IndentButtons: FC<IndentAttrs> = () => {
   return (
     <>
       <ToolbarButton onClick={() => commands.increaseIndent()}>
-        <IndentRigth />
+        <StyledIcon>
+          <IndentRigthIcon />
+        </StyledIcon>
       </ToolbarButton>
       <ToolbarButton onClick={() => commands.decreaseIndent()}>
-        <IndentLeft />
+        <StyledIcon>
+          <IndentLeftIcon />
+        </StyledIcon>
       </ToolbarButton>
     </>
   );
 };
 
 export { IndentButtons, NodeFormattingExtension };
+
+const StyledIcon = styled.div`
+  svg {
+    height: 12px;
+    margin-top: 4px;
+  }
+`;

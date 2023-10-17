@@ -12,9 +12,9 @@ import {
   NodeExtensionSpec,
   NodeSpecOverride,
 } from "remirror";
-import AlignCenter from "../assets/icons/AlignCenter";
-import AlignLeft from "../assets/icons/AlignLeft";
-import AlignRight from "../assets/icons/AlignRight";
+import AlignCenterIcon from "../assets/icons/AlignCenter";
+import AlignLeftIcon from "../assets/icons/AlignLeft";
+import AlignRightIcon from "../assets/icons/AlignRight";
 import { ToolbarButton } from "../components";
 
 const defaultAlign = "left";
@@ -66,13 +66,13 @@ const TextAlignButtons: FC<ITextAlignButtonsProps> = ({ setState }) => {
   return (
     <>
       <ToolbarButton onClick={() => toggleAlign("left")}>
-        <AlignLeft />
+        <AlignLeftIcon />
       </ToolbarButton>
       <ToolbarButton onClick={() => toggleAlign("center")}>
-        <AlignCenter />
+        <AlignCenterIcon />
       </ToolbarButton>
       <ToolbarButton onClick={() => toggleAlign("right")}>
-        <AlignRight />
+        <AlignRightIcon />
       </ToolbarButton>
     </>
   );
