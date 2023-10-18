@@ -8,7 +8,7 @@ import {
 import React, { CompositionEvent, FC, useCallback, useState } from "react";
 import { colors } from "../../theme";
 import composeText from "../lib/composeText";
-import editorStyles from "../lib/editorStyles";
+import styles from "../lib/styles";
 
 interface ITextProps {
   children?: React.ReactNode;
@@ -78,15 +78,31 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   position: relative;
   background-color: ${colors.white};
   border: 1px solid ${colors.grey4};
+  border-top: none;
   border-radius: 4px;
   color: ${colors.dark};
   padding: 20px;
   white-space: pre-wrap;
   min-height: 100px;
   flex: 1;
+  position: relative;
+
+  &::before {
+    content: "";
+    border-top: 1px solid ${colors.grey4};
+    position: absolute;
+    height: 0;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+  }
 
   &:focus-within {
     border-color: ${colors.dark};
+
+    &::before {
+      border-color: ${colors.dark};
+    }
   }
 
   &:not(:first-of-type) {
@@ -105,7 +121,7 @@ const Container = styled.div<{ codeEditor?: boolean }>`
 
   .remirror-editor {
     outline: none;
-    ${editorStyles}
+    ${styles}
   }
 
   ${(props) =>

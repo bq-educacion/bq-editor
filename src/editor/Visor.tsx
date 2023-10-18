@@ -6,7 +6,7 @@ import { CodeBlockExtension } from "./extensions";
 import { managerExtensions } from "./lib";
 import { StringHandler } from ".";
 import { defaultExtensions, Extension } from "./extensions";
-import editorStyles from "./lib/editorStyles";
+import styles from "./lib/styles";
 
 export type IVisorProps = {
   codeEditor?: boolean;
@@ -72,6 +72,6 @@ export default Visor;
 
 export const Container = styled.div`
   .remirror-editor {
-    ${editorStyles}
+    ${styles}
   }
 `;

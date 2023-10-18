@@ -4,10 +4,18 @@ export default `
   // All
   > *:first-child {
     margin-block-start: 0;
+
+    li:first-child > * {
+      margin-block-start: 0;
+    }
   }
 
   > *:last-child {
     margin-block-end: 0;
+
+    li:last-child > * {
+      margin-block-end: 0;
+    }
   }
 
   // CodeBlock

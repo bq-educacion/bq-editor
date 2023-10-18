@@ -11,20 +11,12 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers }) =>
   handlers.length === 0 ? null : (
     <Bar className={className}>
       {handlers.map((elements, index) => (
-        <BarGroup key={index}>
-          {elements}
-          <Divider className="bq-editor-toolbar-divider" />
-        </BarGroup>
+        <BarGroup key={index}>{elements}</BarGroup>
       ))}
     </Bar>
   );
 
 export default Toolbar;
-
-const Divider = styled.span`
-  height: 40px;
-  border-left: 1px solid ${colors.grey4};
-`;
 
 const Bar = styled.div`
   align-items: center;
@@ -39,7 +31,9 @@ const Bar = styled.div`
 
 const BarGroup = styled.div`
   display: flex;
-  position: relative;
+  border: 1px solid ${colors.grey4};
+  border-top: none;
+  border-left: none;
 
   > button,
   > div {
@@ -58,16 +52,5 @@ const BarGroup = styled.div`
         transform: translateY(50%);
       }
     }
-  }
-
-  &::before {
-    content: "";
-    border-top: 1px solid ${colors.grey4};
-    position: absolute;
-    height: 0;
-    left: 0;
-    top: -1px;
-    width: 100%;
-    z-index: 1;
   }
 `;
