@@ -84,7 +84,6 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   white-space: pre-wrap;
   min-height: 100px;
   flex: 1;
-  z-index: 1;
 
   &:focus-within {
     border-color: ${colors.dark};

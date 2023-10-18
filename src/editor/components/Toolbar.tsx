@@ -62,11 +62,11 @@ const BarGroup = styled.div`
 
   &::before {
     content: "";
-    border-bottom: 1px solid ${colors.grey4};
+    border-top: 1px solid ${colors.grey4};
     position: absolute;
     height: 0;
     left: 0;
-    bottom: -1px;
+    top: -1px;
     width: 100%;
     z-index: 1;
   }
