@@ -1,19 +1,20 @@
 import { adjustColorOpacity, colors } from "../../theme";
 
 export default `
-  // All
-  > *:first-child {
+  // Margins
+  > * {
     margin-block-start: 0;
 
-    li:first-child > * {
-      margin-block-start: 0;
+    &:last-child {
+      margin-block-end: 0;
     }
-  }
 
-  > *:last-child {
-    margin-block-end: 0;
+    + * {
+      margin-block-start: 1em;
+    }
 
-    li:last-child > * {
+    li > * {
+      margin-block-start: 0;
       margin-block-end: 0;
     }
   }

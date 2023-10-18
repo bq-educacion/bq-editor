@@ -11,7 +11,11 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers }) =>
   handlers.length === 0 ? null : (
     <Bar className={className}>
       {handlers.map((elements, index) => (
-        <BarGroup key={index}>{elements}</BarGroup>
+        <BarGroup key={index}>
+          {elements.map((element, index) => (
+            <React.Fragment key={index}>{element}</React.Fragment>
+          ))}
+        </BarGroup>
       ))}
     </Bar>
   );
@@ -39,7 +43,7 @@ const BarGroup = styled.div`
   > div {
     position: relative;
 
-    &:not(:first-child) {
+    + * {
       margin-left: 1px;
 
       &::before {

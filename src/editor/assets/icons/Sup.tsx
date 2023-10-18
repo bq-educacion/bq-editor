@@ -2,7 +2,7 @@ import React from "react";
 
 const Sup = () => (
   <svg width="35" height="38" viewBox="0 0 35 38">
-    <g fill="none" fill-rule="evenodd">
+    <g fill="none" fillRule="evenodd">
       <path d="M0 0h35v38H0z" />
       <g transform="translate(11 12)">
         <path

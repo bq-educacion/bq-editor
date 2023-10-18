@@ -5,9 +5,9 @@ const IndentLeft = () => (
     <path
       d="M4 4V20M8 12H20M8 12L12 8M8 12L12 16"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
