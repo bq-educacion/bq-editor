@@ -15,7 +15,7 @@ const SupButton: FC<SupAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.sub() })}
+      className={classNames({ active: active.sup() })}
       disabled={!commands.toggleSuperscript.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();

@@ -33,8 +33,8 @@ RichText.args = {
       name: "heading",
       attrs: {
         levels: [1, 2, 3],
-        translateFn: (label: string) =>
-          label === "p" ? "Paragraph" : `Heading ${label.slice(1)}`,
+        translateFn: (key: string) =>
+          key === "p" ? "Paragraph" : `Heading ${key.slice(1)}`,
       },
     },
     "bold",
@@ -105,7 +105,15 @@ Lists.args = {
 export const Link = Template.bind({});
 
 Link.args = {
-  extensions: ["link"],
+  extensions: [
+    {
+      name: "link",
+      attrs: {
+        translateFn: (key: string) =>
+          key === "link-label" ? "Enlace:" : undefined,
+      },
+    },
+  ],
 };
 
 export const AutoLink = Template.bind({});
@@ -134,6 +142,8 @@ Image.args = {
         onUpload: () => {
           return new Promise((resolve) => resolve(image));
         },
+        translateFn: (key: string) =>
+          key === "url-label" ? "Enlace:" : undefined,
       },
     },
   ],

@@ -14,6 +14,7 @@ import {
   ImageButton,
   IndentButtons,
   ItalicButton,
+  LinkAttrs,
   LinkButton,
   OrderedListButton,
   SubButton,
@@ -67,7 +68,7 @@ const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
       sub && <SubButton />,
       sup && <SupButton />,
       image && <ImageButton {...(getAttrs(image) as ImageAttrs)} />,
-      link && <LinkButton />,
+      link && <LinkButton {...(getAttrs(link) as LinkAttrs)} />,
     ],
     [code && <CodeButton />, codeBlock && <CodeBlockButton />],
   ];

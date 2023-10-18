@@ -35,6 +35,8 @@ const TextColorButton: FC<TextColorAttrs> = ({ color = colors.orange1 }) => {
 export { TextColorButton, TextColorExtension };
 
 const Color = styled.div<{ color: string }>`
+  display: flex;
+
   svg {
     color: ${(props) => props.color};
   }

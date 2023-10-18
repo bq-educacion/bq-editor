@@ -20,7 +20,7 @@ export type ImageAttrs = {
   accept?: string[];
   onUpload?: (file: File) => Promise<string>;
   resizable?: boolean; // TODO: Not working
-  translateFn?: (label: string) => string;
+  translateFn?: (key: string) => string;
 };
 
 const ImageButton: FC<ImageAttrs> = ({

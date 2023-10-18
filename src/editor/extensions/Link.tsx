@@ -29,7 +29,7 @@ export const LinkName = "link";
 export type LinkAttrs = {
   autoLink?: boolean;
   defaultTarget?: string;
-  translateFn?: (label: string) => string;
+  translateFn?: (key: string) => string;
 };
 
 function useFloatingLinkState() {
@@ -203,5 +203,7 @@ class LinkExtension extends RemirrorLinkExtension {
 export { LinkButton, LinkExtension };
 
 const LinkModal = styled(Modal)`
+  position: absolute;
+  transform: translate(-50%, 30px);
   width: 240px;
 `;

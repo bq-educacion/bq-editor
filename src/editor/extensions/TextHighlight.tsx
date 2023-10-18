@@ -37,6 +37,8 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
 export { TextHighlightButton, TextHighlightExtension };
 
 const Color = styled.div<{ color: string }>`
+  display: flex;
+
   svg {
     color: ${(props) => props.color};
   }

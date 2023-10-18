@@ -7,7 +7,7 @@ export const HeadingName = "heading";
 
 export type HeadingAttrs = {
   levels?: number[];
-  translateFn?: (label: string) => string;
+  translateFn?: (key: string) => string;
 };
 
 const HeadingButtons: FC<HeadingAttrs> = ({

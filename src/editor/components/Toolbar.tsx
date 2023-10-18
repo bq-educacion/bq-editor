@@ -39,11 +39,13 @@ const Bar = styled.div`
 
 const BarGroup = styled.div`
   display: flex;
+  position: relative;
 
-  > button {
+  > button,
+  > div {
     position: relative;
 
-    &:not(:first-of-type) {
+    &:not(:first-child) {
       margin-left: 1px;
 
       &::before {
@@ -52,7 +54,20 @@ const BarGroup = styled.div`
         position: absolute;
         height: 20px;
         left: -1px;
+        top: 0;
+        transform: translateY(50%);
       }
     }
+  }
+
+  &::before {
+    content: "";
+    border-bottom: 1px solid ${colors.grey4};
+    position: absolute;
+    height: 0;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    z-index: 1;
   }
 `;

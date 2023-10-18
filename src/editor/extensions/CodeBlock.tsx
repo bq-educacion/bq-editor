@@ -33,6 +33,8 @@ const CodeBlockButton: FC = () => {
 export { CodeBlockButton, CodeBlockExtension };
 
 const StyledIcon = styled.div`
+  display: flex;
+
   svg {
     height: 12px;
     margin-top: 4px;
