@@ -71,9 +71,42 @@ Counter.args = {
   ],
 };
 
-export const Text = Template.bind({});
+export const TextColor = Template.bind({});
 
-Text.args = {
+TextColor.args = {
+  extensions: [
+    {
+      name: "text-color",
+      attrs: {
+        color: colors.orange1,
+      },
+    },
+    {
+      name: "text-highlight",
+      attrs: {
+        color: colors.orange1,
+      },
+    },
+  ],
+};
+
+export const TextColorPicker = Template.bind({});
+
+TextColorPicker.args = {
+  colorPicker: (onClick: (color?: string) => void) => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "baseline",
+      }}
+    >
+      <button onClick={() => onClick(colors.red1)}>Red</button>
+      <button onClick={() => onClick(colors.turquoise1)}>Turquoise</button>
+      <button onClick={() => onClick(colors.yellow1)}>Yellow</button>
+      <button onClick={() => onClick()}>No color</button>
+    </div>
+  ),
   extensions: [
     {
       name: "text-color",

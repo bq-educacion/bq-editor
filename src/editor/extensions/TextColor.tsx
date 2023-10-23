@@ -1,34 +1,59 @@
 import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../../theme";
 import TextColorIcon from "../assets/icons/TextColor";
-import { ToolbarButton } from "../components";
+import { Modal, ToolbarButton } from "../components";
 
 export const TextColorName = "text-color";
 
 export type TextColorAttrs = {
   color?: string;
+  colorPicker?: (onClick: (color?: string) => void) => JSX.Element;
 };
 
-const TextColorButton: FC<TextColorAttrs> = ({ color = colors.orange1 }) => {
+const TextColorButton: FC<TextColorAttrs> = ({
+  color = colors.orange1,
+  colorPicker,
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <ToolbarButton
-      className={classNames({ active: active.textColor({ color }) })}
-      onClick={() =>
-        active.textColor({ color })
-          ? commands.removeTextColor()
-          : commands.setTextColor(color)
-      }
-    >
-      <Color color={color}>
-        <TextColorIcon />
-      </Color>
-    </ToolbarButton>
+    <div ref={ref}>
+      <ToolbarButton
+        className={classNames({ active: active.textColor() })}
+        onClick={() => {
+          if (colorPicker) {
+            setShowModal(!showModal);
+          } else {
+            active.textColor()
+              ? commands.removeTextColor()
+              : commands.setTextColor(color);
+          }
+        }}
+      >
+        <Color color={color}>
+          <TextColorIcon />
+        </Color>
+      </ToolbarButton>
+      <ColorModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        parentRef={ref}
+      >
+        {colorPicker?.((color) => {
+          if (color) {
+            commands.setTextColor(color);
+          } else {
+            commands.removeTextColor();
+          }
+        })}
+      </ColorModal>
+    </div>
   );
 };
 
@@ -40,4 +65,10 @@ const Color = styled.div<{ color: string }>`
   svg {
     color: ${(props) => props.color};
   }
+`;
+
+const ColorModal = styled(Modal)`
+  position: absolute;
+  transform: translate(-50%, 30px);
+  width: fit-content;
 `;

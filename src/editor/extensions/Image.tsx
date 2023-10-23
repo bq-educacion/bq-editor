@@ -94,24 +94,6 @@ const ImageButton: FC<ImageAttrs> = ({
     setShowMoreOptions(false);
   }, [showModal]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setShowModal(false);
-      }
-    };
-
-    if (showModal) {
-      window.addEventListener("click", handleClickOutside);
-    } else {
-      window.removeEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [showModal]);
-
   return (
     <div ref={ref}>
       <ToolbarButton
@@ -122,129 +104,131 @@ const ImageButton: FC<ImageAttrs> = ({
       >
         <ImageIcon />
       </ToolbarButton>
-      {showModal && (
-        <Modal>
-          <label>{translateFn?.("url-label") || "Url:"}</label>
-          <Input
-            autoFocus
-            placeholder={translateFn?.("url-placeholder") || "Enter a url"}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setImgSrc(event.target.value)
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        parentRef={ref}
+      >
+        <label>{translateFn?.("url-label") || "Url:"}</label>
+        <Input
+          autoFocus
+          placeholder={translateFn?.("url-placeholder") || "Enter a url"}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setImgSrc(event.target.value)
+          }
+          value={imgSrc}
+          onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+            const { code } = event;
+
+            if (code === "Enter") {
+              onSubmit();
+              setShowModal(false);
             }
-            value={imgSrc}
-            onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
-              const { code } = event;
 
-              if (code === "Enter") {
-                onSubmit();
-                setShowModal(false);
-              }
-
-              if (code === "Escape") {
-                setShowModal(false);
-              }
-            }}
-          />
-          {onUpload && (
-            <>
-              <p>{translateFn?.("or") || "o"}</p>
-              <Input
-                accept={accept?.join(", ")}
-                onChange={onFile}
-                ref={imgRef}
-                style={{ display: "none" }}
-                type="file"
-              />
-              <Button
-                cta
-                onClick={(e) => (e.stopPropagation(), imgRef.current?.click())}
-              >
-                {translateFn?.("file") || "File"}
-              </Button>
-            </>
-          )}
-          {error && (
-            <p>
-              {translateFn?.("error") ||
-                "An error has occurred, please try again."}
-            </p>
-          )}
-          <a
-            onClick={(e) => (
-              e.stopPropagation(), setShowMoreOptions(!showMoreOptions)
-            )}
-          >
-            {showMoreOptions
-              ? translateFn?.("hide-more-options") || "Hide more options"
-              : translateFn?.("show-more-options") || "Show more options"}
-          </a>
-          {showMoreOptions && (
-            <>
-              <label>{translateFn?.("alt-label") || "Alt:"}</label>
-              <Input
-                placeholder={translateFn?.("alt-placeholder") || "Enter an alt"}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setImgAlt(event.target.value)
-                }
-                value={imgAlt}
-              />
-              <label>{translateFn?.("title-label") || "Title:"}</label>
-              <Input
-                placeholder={
-                  translateFn?.("title-placeholder") || "Enter a title"
-                }
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setImgTitle(event.target.value)
-                }
-                value={imgTitle}
-              />
-              <label>{translateFn?.("height-label") || "Height:"}</label>
-              <Input
-                placeholder={translateFn?.("height-placeholder") || "0"}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setImgHeight(event.target.value)
-                }
-                value={imgHeight}
-              />
-              <label>{translateFn?.("width-label") || "Width:"}</label>
-              <Input
-                placeholder={translateFn?.("width-placeholder") || "0"}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setImgWidth(event.target.value)
-                }
-                value={imgWidth}
-              />
-              <label>{translateFn?.("align-label") || "Align:"}</label>
-              <Input
-                placeholder={
-                  translateFn?.("align-placeholder") ||
-                  "center | end | justify | left | match-parent | right | start"
-                }
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setImgAlign(event.target.value)
-                }
-                value={imgAlign}
-              />
-              <label>{translateFn?.("rotate-label") || "Rotate:"}</label>
-              <Input
-                placeholder={translateFn?.("rotate-placeholder") || "180deg"}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setImgRotate(event.target.value)
-                }
-                value={imgRotate}
-              />
-            </>
-          )}
-          <div>
-            <Button onClick={() => (onSubmit(), setShowModal(false))}>
-              {translateFn?.("save") || "Save"}
+            if (code === "Escape") {
+              setShowModal(false);
+            }
+          }}
+        />
+        {onUpload && (
+          <>
+            <p>{translateFn?.("or") || "o"}</p>
+            <Input
+              accept={accept?.join(", ")}
+              onChange={onFile}
+              ref={imgRef}
+              style={{ display: "none" }}
+              type="file"
+            />
+            <Button
+              cta
+              onClick={(e) => (e.stopPropagation(), imgRef.current?.click())}
+            >
+              {translateFn?.("file") || "File"}
             </Button>
-            <Button secondary onClick={() => setShowModal(false)}>
-              {translateFn?.("cancel") || "Cancel"}
-            </Button>
-          </div>
-        </Modal>
-      )}
+          </>
+        )}
+        {error && (
+          <p>
+            {translateFn?.("error") ||
+              "An error has occurred, please try again."}
+          </p>
+        )}
+        <a
+          onClick={(e) => (
+            e.stopPropagation(), setShowMoreOptions(!showMoreOptions)
+          )}
+        >
+          {showMoreOptions
+            ? translateFn?.("hide-more-options") || "Hide more options"
+            : translateFn?.("show-more-options") || "Show more options"}
+        </a>
+        {showMoreOptions && (
+          <>
+            <label>{translateFn?.("alt-label") || "Alt:"}</label>
+            <Input
+              placeholder={translateFn?.("alt-placeholder") || "Enter an alt"}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setImgAlt(event.target.value)
+              }
+              value={imgAlt}
+            />
+            <label>{translateFn?.("title-label") || "Title:"}</label>
+            <Input
+              placeholder={
+                translateFn?.("title-placeholder") || "Enter a title"
+              }
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setImgTitle(event.target.value)
+              }
+              value={imgTitle}
+            />
+            <label>{translateFn?.("height-label") || "Height:"}</label>
+            <Input
+              placeholder={translateFn?.("height-placeholder") || "0"}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setImgHeight(event.target.value)
+              }
+              value={imgHeight}
+            />
+            <label>{translateFn?.("width-label") || "Width:"}</label>
+            <Input
+              placeholder={translateFn?.("width-placeholder") || "0"}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setImgWidth(event.target.value)
+              }
+              value={imgWidth}
+            />
+            <label>{translateFn?.("align-label") || "Align:"}</label>
+            <Input
+              placeholder={
+                translateFn?.("align-placeholder") ||
+                "center | end | justify | left | match-parent | right | start"
+              }
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setImgAlign(event.target.value)
+              }
+              value={imgAlign}
+            />
+            <label>{translateFn?.("rotate-label") || "Rotate:"}</label>
+            <Input
+              placeholder={translateFn?.("rotate-placeholder") || "180deg"}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setImgRotate(event.target.value)
+              }
+              value={imgRotate}
+            />
+          </>
+        )}
+        <div>
+          <Button onClick={() => (onSubmit(), setShowModal(false))}>
+            {translateFn?.("save") || "Save"}
+          </Button>
+          <Button secondary onClick={() => setShowModal(false)}>
+            {translateFn?.("cancel") || "Cancel"}
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };

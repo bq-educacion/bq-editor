@@ -32,6 +32,7 @@ export type StringHandler = "html" | "markdown";
 
 export type IEditorProps = {
   codeEditor?: boolean;
+  colorPicker?: (onClick: (color: string) => void) => JSX.Element;
   dualEditor?: boolean;
   editable?: boolean;
   extensions?: Extension[];

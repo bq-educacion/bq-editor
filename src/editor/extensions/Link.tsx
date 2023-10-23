@@ -80,24 +80,6 @@ const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
   const [showModal, setShowModal] = useState(false);
   const { active } = useRemirrorContext({ autoUpdate: true });
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setShowModal(false);
-      }
-    };
-
-    if (showModal) {
-      window.addEventListener("click", handleClickOutside);
-    } else {
-      window.removeEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [showModal]);
-
   return (
     <div ref={ref}>
       <ToolbarButton
@@ -108,52 +90,54 @@ const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
       >
         <LinkIcon />
       </ToolbarButton>
-      {showModal && (
-        <LinkModal>
-          <label>{translateFn?.("link-label") || "Link:"}</label>
-          <Input
-            autoFocus
-            placeholder={translateFn?.("link-placeholder") || "Enter a link"}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setHref(event.target.value)
+      <LinkModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        parentRef={ref}
+      >
+        <label>{translateFn?.("link-label") || "Link:"}</label>
+        <Input
+          autoFocus
+          placeholder={translateFn?.("link-placeholder") || "Enter a link"}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setHref(event.target.value)
+          }
+          value={href}
+          onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+            const { code } = event;
+
+            if (code === "Enter") {
+              onSubmit();
+              setShowModal(false);
             }
-            value={href}
-            onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
-              const { code } = event;
 
-              if (code === "Enter") {
-                onSubmit();
-                setShowModal(false);
-              }
-
-              if (code === "Escape") {
-                setShowModal(false);
-              }
-            }}
+            if (code === "Escape") {
+              setShowModal(false);
+            }
+          }}
+        />
+        {/* <div> // TODO: Not working
+          <Checkbox
+            checked={target === "_blank"}
+            onChange={(checked) => setTarget(checked ? "_blank" : "_self")}
           />
-          {/* <div> // TODO: Not working
-            <Checkbox
-              checked={target === "_blank"}
-              onChange={(checked) => setTarget(checked ? "_blank" : "_self")}
-            />
-            <label>Open in new tab</label>
-          </div> */}
-          <div>
-            <Button onClick={() => (onSubmit(), setShowModal(false))}>
-              {translateFn?.("save") || "Save"}
+          <label>Open in new tab</label>
+        </div> */}
+        <div>
+          <Button onClick={() => (onSubmit(), setShowModal(false))}>
+            {translateFn?.("save") || "Save"}
+          </Button>
+          {active.link() ? (
+            <Button danger onClick={() => (onRemove(), setShowModal(false))}>
+              {translateFn?.("delete") || "Delete"}
             </Button>
-            {active.link() ? (
-              <Button danger onClick={() => (onRemove(), setShowModal(false))}>
-                {translateFn?.("delete") || "Delete"}
-              </Button>
-            ) : (
-              <Button secondary onClick={() => setShowModal(false)}>
-                {translateFn?.("cancel") || "Cancel"}
-              </Button>
-            )}
-          </div>
-        </LinkModal>
-      )}
+          ) : (
+            <Button secondary onClick={() => setShowModal(false)}>
+              {translateFn?.("cancel") || "Cancel"}
+            </Button>
+          )}
+        </div>
+      </LinkModal>
     </div>
   );
 };

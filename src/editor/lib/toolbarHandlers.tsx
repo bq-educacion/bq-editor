@@ -26,7 +26,7 @@ import {
   UnderlineButton,
 } from "../extensions";
 
-const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
+const toolbarHandlers = ({ colorPicker, extensions = [] }: IEditorProps) => {
   const align = getExtension("align", extensions);
   const bold = getExtension("bold", extensions);
   const bulletList = getExtension("bullet-list", extensions);
@@ -58,10 +58,14 @@ const toolbarHandlers = ({ extensions = [] }: IEditorProps) => {
       textHighlight && (
         <TextHighlightButton
           {...(getAttrs(textHighlight) as TextHighlightAttrs)}
+          colorPicker={colorPicker}
         />
       ),
       textColor && (
-        <TextColorButton {...(getAttrs(textColor) as TextColorAttrs)} />
+        <TextColorButton
+          {...(getAttrs(textColor) as TextColorAttrs)}
+          colorPicker={colorPicker}
+        />
       ),
     ],
     [
