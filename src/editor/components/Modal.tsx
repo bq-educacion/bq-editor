@@ -53,9 +53,9 @@ const Container = styled.div`
   box-shadow: 0 3px 7px 0 ${adjustColorOpacity(colors.dark, 0.5)};
   color: ${colors.dark};
   padding: 20px;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
+  position: absolute;
+  transform: translate(-50%, 0);
+  top: 50px;
   left: 50%;
   z-index: 2;
   display: flex;

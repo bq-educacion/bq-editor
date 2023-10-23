@@ -187,7 +187,5 @@ class LinkExtension extends RemirrorLinkExtension {
 export { LinkButton, LinkExtension };
 
 const LinkModal = styled(Modal)`
-  position: absolute;
-  transform: translate(-50%, 30px);
   width: 240px;
 `;

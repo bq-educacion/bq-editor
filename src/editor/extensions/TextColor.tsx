@@ -11,7 +11,7 @@ export const TextColorName = "text-color";
 
 export type TextColorAttrs = {
   color?: string;
-  colorPicker?: (onClick: (color?: string) => void) => JSX.Element;
+  colorPicker?: (onChange: (color?: string) => void) => JSX.Element;
 };
 
 const TextColorButton: FC<TextColorAttrs> = ({
@@ -68,7 +68,6 @@ const Color = styled.div<{ color: string }>`
 `;
 
 const ColorModal = styled(Modal)`
-  position: absolute;
-  transform: translate(-50%, 30px);
-  width: fit-content;
+  width: unset;
+  padding: 0;
 `;

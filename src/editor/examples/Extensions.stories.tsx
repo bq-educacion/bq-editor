@@ -96,6 +96,7 @@ TextColorPicker.args = {
   colorPicker: (onClick: (color?: string) => void) => (
     <div
       style={{
+        padding: 20,
         display: "flex",
         flexDirection: "column",
         alignItems: "baseline",
