@@ -1,4 +1,8 @@
-import { AnyExtension, IdentifierSchemaAttributes } from "remirror";
+import {
+  AnyExtension,
+  CommandsExtension,
+  IdentifierSchemaAttributes,
+} from "remirror";
 import {
   BoldExtension,
   BulletListExtension,
@@ -78,6 +82,7 @@ const managerExtensions = ({
         ...(textHighlight ? [new TextHighlightExtension({})] : []),
         ...(underline ? [new UnderlineExtension({})] : []),
         ...(bulletList || orderedList ? [new ListItemExtension({})] : []),
+        new CommandsExtension({}),
         new HardBreakExtension({}),
         new NodeFormattingExtension({}),
       ] as AnyExtension[],
