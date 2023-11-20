@@ -54,38 +54,37 @@ const managerExtensions = ({
   const underline = getExtension("underline", extensions);
 
   return {
-    extensions: () =>
-      [
-        ...(bold ? [new BoldExtension({})] : []),
-        ...(bulletList ? [new BulletListExtension({})] : []),
-        ...(code ? [new CodeExtension({})] : []),
-        ...(codeBlock
-          ? [
-              new CodeBlockExtension({
-                defaultWrap: true,
-              }),
-            ]
-          : []),
-        ...(counter ? [new CountExtension(getAttrs(counter))] : []),
-        ...(heading ? [new HeadingExtension(getAttrs(heading))] : []),
-        ...(image ? [new ImageExtension(getAttrs(image))] : []),
-        ...(italic ? [new ItalicExtension({})] : []),
-        ...(link
-          ? [new LinkExtension({ defaultTarget: "_blank", ...getAttrs(link) })]
-          : []),
-        ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
-        ...(orderedList ? [new OrderedListExtension({})] : []),
-        ...(sub ? [new SubExtension({})] : []),
-        ...(sup ? [new SupExtension({})] : []),
-        ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
-        ...(textColor ? [new TextColorExtension({})] : []),
-        ...(textHighlight ? [new TextHighlightExtension({})] : []),
-        ...(underline ? [new UnderlineExtension({})] : []),
-        ...(bulletList || orderedList ? [new ListItemExtension({})] : []),
-        new CommandsExtension({}),
-        new HardBreakExtension({}),
-        new NodeFormattingExtension({}),
-      ] as AnyExtension[],
+    extensions: () => [
+      new CommandsExtension({}),
+      new HardBreakExtension({}),
+      new NodeFormattingExtension({}),
+      ...(bold ? [new BoldExtension({})] : []),
+      ...(bulletList ? [new BulletListExtension({})] : []),
+      ...(code ? [new CodeExtension({})] : []),
+      ...(codeBlock
+        ? [
+            new CodeBlockExtension({
+              defaultWrap: true,
+            }),
+          ]
+        : []),
+      ...(counter ? [new CountExtension(getAttrs(counter))] : []),
+      ...(heading ? [new HeadingExtension(getAttrs(heading))] : []),
+      ...(image ? [new ImageExtension(getAttrs(image))] : []),
+      ...(italic ? [new ItalicExtension({})] : []),
+      ...(link
+        ? [new LinkExtension({ defaultTarget: "_blank", ...getAttrs(link) })]
+        : []),
+      ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
+      ...(orderedList ? [new OrderedListExtension({})] : []),
+      ...(sub ? [new SubExtension({})] : []),
+      ...(sup ? [new SupExtension({})] : []),
+      ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
+      ...(textColor ? [new TextColorExtension({})] : []),
+      ...(textHighlight ? [new TextHighlightExtension({})] : []),
+      ...(underline ? [new UnderlineExtension({})] : []),
+      ...(bulletList || orderedList ? [new ListItemExtension({})] : []),
+    ],
     extraAttributes: [],
   };
 };

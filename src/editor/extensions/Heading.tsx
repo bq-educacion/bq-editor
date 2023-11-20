@@ -27,13 +27,22 @@ const HeadingButtons: FC<HeadingAttrs> = ({
       placeholder={translateFn?.("p") || "p"}
       onChange={(level) => {
         chain.focus({ to, from }).run();
-        commands.toggleHeading({ level: Number(level) });
+        commands.toggleHeading(
+          level === "p" ? undefined : { level: Number(level) }
+        );
       }}
-      options={levels.map((level) => ({
-        active: active.heading({ level: Number(level) }),
-        label: translateFn?.(`h${level}`) || `h${level}`,
-        value: `${level}`,
-      }))}
+      options={[
+        {
+          active: !active.heading(),
+          label: translateFn?.("p") || "p",
+          value: "p",
+        },
+        ...levels.map((level) => ({
+          active: active.heading({ level: Number(level) }),
+          label: translateFn?.(`h${level}`) || `h${level}`,
+          value: `${level}`,
+        })),
+      ]}
     />
   );
 };
