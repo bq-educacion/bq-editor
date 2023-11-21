@@ -62,6 +62,7 @@ const Dropdown: FC<IDropdownProps> = ({
         attachment={attachment}
         targetAttachment={targetAttachment}
         offset={offset}
+        style={{ zIndex: "9999" }}
         renderTarget={(ref) => (
           <div ref={ref} onClick={() => setOpen(!open)}>
             {target}
@@ -96,7 +97,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  z-index: 1000;
 
   a {
     cursor: pointer;
