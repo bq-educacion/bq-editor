@@ -72,7 +72,7 @@ const Dropdown: FC<IDropdownProps> = ({
           open ? (
             <Container
               ref={(el) => {
-                ref.current = el;
+                (ref as React.MutableRefObject<HTMLDivElement>).current = el;
                 attachmentEl.current = el;
               }}
               className={className}
