@@ -78,8 +78,7 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   position: relative;
   background-color: ${colors.white};
   border: 1px solid ${colors.grey4};
-  border-top: none;
-  border-radius: 4px;
+  border-radius: 2px;
   color: ${colors.dark};
   padding: 20px;
   white-space: pre-wrap;
