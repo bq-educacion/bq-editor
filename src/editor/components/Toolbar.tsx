@@ -76,7 +76,6 @@ const BarContainer = styled.div`
   color: ${colors.dark};
   position: relative;
   height: 40px;
-  z-index: 1;
   overflow: scroll;
 
   ::-webkit-scrollbar {
@@ -137,7 +136,7 @@ const ScrollButton = styled.div<{ left?: boolean }>`
   justify-content: center;
   width: 40px;
   height: 40px;
-  z-index: 2;
+  z-index: 1;
   cursor: pointer;
   position: absolute;
   top: 1px;

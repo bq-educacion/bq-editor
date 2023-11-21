@@ -96,6 +96,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  z-index: 1000;
 
   a {
     cursor: pointer;
