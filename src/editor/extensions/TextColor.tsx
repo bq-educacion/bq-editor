@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useState } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../../theme";
+import Dropdown from "../../atoms/dropdown";
 import TextColorIcon from "../assets/icons/TextColor";
-import { Modal, ToolbarButton } from "../components";
+import { ToolbarButton } from "../components";
 
 export const TextColorName = "text-color";
 
@@ -18,42 +19,41 @@ const TextColorButton: FC<TextColorAttrs> = ({
   color = colors.orange1,
   colorPicker,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div ref={ref}>
-      <ToolbarButton
-        className={classNames({ active: active.textColor() })}
-        onClick={() => {
-          if (colorPicker) {
-            setShowModal(!showModal);
-          } else {
-            active.textColor()
-              ? commands.removeTextColor()
-              : commands.setTextColor(color);
-          }
-        }}
-      >
-        <Color color={color}>
-          <TextColorIcon />
-        </Color>
-      </ToolbarButton>
-      <ColorModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        parentRef={ref}
-      >
-        {colorPicker?.((color) => {
-          if (color) {
-            commands.setTextColor(color);
-          } else {
-            commands.removeTextColor();
-          }
-        })}
-      </ColorModal>
-    </div>
+    <ColorDropdown
+      isOpen={showModal}
+      offset="-10 -40"
+      onClose={() => setShowModal(false)}
+      target={
+        <ToolbarButton
+          className={classNames({ active: active.textColor() })}
+          onClick={() => {
+            if (colorPicker) {
+              setShowModal(!showModal);
+            } else {
+              active.textColor()
+                ? commands.removeTextColor()
+                : commands.setTextColor(color);
+            }
+          }}
+        >
+          <Color color={color}>
+            <TextColorIcon />
+          </Color>
+        </ToolbarButton>
+      }
+    >
+      {colorPicker?.((color) => {
+        if (color) {
+          commands.setTextColor(color);
+        } else {
+          commands.removeTextColor();
+        }
+      })}
+    </ColorDropdown>
   );
 };
 
@@ -67,7 +67,7 @@ const Color = styled.div<{ color: string }>`
   }
 `;
 
-const ColorModal = styled(Modal)`
+const ColorDropdown = styled(Dropdown)`
   width: unset;
   padding: 0;
 `;

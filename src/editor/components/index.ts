@@ -1,8 +1,7 @@
-import Modal from "./Modal";
 import Text from "./Text";
 import Toolbar from "./Toolbar";
 import ToolbarButton from "./ToolbarButton";
 import ToolbarSelect from "./ToolbarSelect";
 import Wrapper from "./Wrapper";
 
-export { Modal, Text, Toolbar, ToolbarButton, ToolbarSelect, Wrapper };
+export { Text, Toolbar, ToolbarButton, ToolbarSelect, Wrapper };

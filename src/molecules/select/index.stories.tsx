@@ -1,7 +1,7 @@
 import Select from ".";
 
 export default {
-  title: "atoms/Select",
+  title: "molecules/Select",
   component: Select,
 };
 

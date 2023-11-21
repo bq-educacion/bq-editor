@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Select from "../../atoms/select";
+import Select from "../../molecules/select";
 import { colors } from "../../theme";
 
 export default styled(Select)`

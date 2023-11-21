@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useState } from "react";
 import { TextHighlightExtension } from "remirror/extensions";
 import { colors } from "../../theme";
+import Dropdown from "../../atoms/dropdown";
 import TextHighlightIcon from "../assets/icons/TextHighlight";
-import { Modal, ToolbarButton } from "../components";
+import { ToolbarButton } from "../components";
 
 export const TextHighlightName = "text-highlight";
 
@@ -18,42 +19,41 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
   color = colors.orange1,
   colorPicker,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div ref={ref}>
-      <ToolbarButton
-        className={classNames({ active: active.textHighlight() })}
-        onClick={() => {
-          if (colorPicker) {
-            setShowModal(!showModal);
-          } else {
-            active.textHighlight()
-              ? commands.removeTextHighlight()
-              : commands.setTextHighlight(color);
-          }
-        }}
-      >
-        <Color color={color}>
-          <TextHighlightIcon />
-        </Color>
-      </ToolbarButton>
-      <ColorModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        parentRef={ref}
-      >
-        {colorPicker?.((color) => {
-          if (color) {
-            commands.setTextHighlight(color);
-          } else {
-            commands.removeTextHighlight();
-          }
-        })}
-      </ColorModal>
-    </div>
+    <ColorDropdown
+      isOpen={showModal}
+      offset="-10 -40"
+      onClose={() => setShowModal(false)}
+      target={
+        <ToolbarButton
+          className={classNames({ active: active.textHighlight() })}
+          onClick={() => {
+            if (colorPicker) {
+              setShowModal(!showModal);
+            } else {
+              active.textHighlight()
+                ? commands.removeTextHighlight()
+                : commands.setTextHighlight(color);
+            }
+          }}
+        >
+          <Color color={color}>
+            <TextHighlightIcon />
+          </Color>
+        </ToolbarButton>
+      }
+    >
+      {colorPicker?.((color) => {
+        if (color) {
+          commands.setTextHighlight(color);
+        } else {
+          commands.removeTextHighlight();
+        }
+      })}
+    </ColorDropdown>
   );
 };
 
@@ -67,7 +67,7 @@ const Color = styled.div<{ color: string }>`
   }
 `;
 
-const ColorModal = styled(Modal)`
+const ColorDropdown = styled(Dropdown)`
   width: unset;
   padding: 0;
 `;

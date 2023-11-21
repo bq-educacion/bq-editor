@@ -12,21 +12,18 @@ interface IToolbarProps {
 const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [left, setLeft] = useState(0);
-  const [maxLeft, setMaxLeft] = useState(0);
+  const [scroll, setScroll] = useState(0);
   const [hasScroll, setHasScroll] = useState(false);
 
   const scrollTo = (left: number) => {
-    setLeft((prev) => Math.max(0, Math.min(prev + left, maxLeft)));
+    ref.current?.scrollBy({ left, behavior: "smooth" });
   };
 
   const onScroll = () => {
-    if (!ref.current?.parentElement) return;
-    setLeft(0);
-    setMaxLeft(ref.current.clientWidth - ref.current.parentElement.clientWidth);
-    setHasScroll(
-      ref.current.clientWidth > ref.current.parentElement.clientWidth
-    );
+    if (!ref.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = ref.current;
+    setHasScroll(scrollWidth > clientWidth);
+    setScroll(scrollLeft / (scrollWidth - clientWidth));
   };
 
   useEffect(() => {
@@ -42,33 +39,35 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers }) => {
   if (!handlers) return null;
 
   return (
-    <Bar className={className}>
-      {hasScroll && left > 0 && (
+    <BarWrapper className={className}>
+      {hasScroll && scroll > 0 && (
         <ScrollButton left onClick={() => scrollTo(-120)}>
           <Angle />
         </ScrollButton>
       )}
-      <BarContent ref={ref} hasScroll={hasScroll} left={left}>
-        {handlers.map((elements, index) => (
-          <BarGroup key={index}>
-            {elements.map((element, index) => (
-              <React.Fragment key={index}>{element}</React.Fragment>
-            ))}
-          </BarGroup>
-        ))}
-      </BarContent>
-      {hasScroll && left < maxLeft && (
+      <BarContainer ref={ref}>
+        <BarContent hasScroll={hasScroll} scroll={scroll}>
+          {handlers.map((elements, index) => (
+            <BarGroup key={index}>
+              {elements.map((element, index) => (
+                <React.Fragment key={index}>{element}</React.Fragment>
+              ))}
+            </BarGroup>
+          ))}
+        </BarContent>
+      </BarContainer>
+      {hasScroll && scroll < 1 && (
         <ScrollButton onClick={() => scrollTo(120)}>
           <Angle />
         </ScrollButton>
       )}
-    </Bar>
+    </BarWrapper>
   );
 };
 
 export default Toolbar;
 
-const Bar = styled.div`
+const BarContainer = styled.div`
   align-items: center;
   border: 1px solid ${colors.grey4};
   border-bottom: none;
@@ -78,19 +77,22 @@ const Bar = styled.div`
   position: relative;
   height: 40px;
   z-index: 1;
+  overflow: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const BarContent = styled.div<{ hasScroll?: boolean; left: number }>`
+const BarContent = styled.div<{ hasScroll?: boolean; scroll: number }>`
   position: absolute;
   display: flex;
-  transition: transform 0.2s ease-in-out;
 
-  ${({ hasScroll, left }) =>
+  ${({ hasScroll, scroll }) =>
     hasScroll &&
     css`
-      margin-left: ${left < 0 ? 40 : 0}px;
-      margin-right: 40px;
-      transform: translateX(-${left}px);
+      margin-left: ${scroll > 0 ? 40 : 0}px;
+      margin-right: ${scroll < 1 ? 40 : 0}px;
     `}
 `;
 
@@ -122,11 +124,14 @@ const BarGroup = styled.div`
   }
 `;
 
+const BarWrapper = styled.div`
+  position: relative;
+`;
+
 const ScrollButton = styled.div<{ left?: boolean }>`
   background-color: ${colors.grey5};
   border-right: 1px solid ${colors.grey4};
   border-left: 1px solid ${colors.grey4};
-  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,17 +140,17 @@ const ScrollButton = styled.div<{ left?: boolean }>`
   z-index: 2;
   cursor: pointer;
   position: absolute;
+  top: 1px;
+  right: 0;
 
   ${({ left }) =>
-    left
-      ? css`
-          left: -1px;
+    left &&
+    css`
+      left: 0;
+      right: unset;
 
-          > svg {
-            transform: rotate(180deg);
-          }
-        `
-      : css`
-          right: -1px;
-        `}
+      > svg {
+        transform: rotate(180deg);
+      }
+    `}
 `;

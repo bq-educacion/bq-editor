@@ -10,9 +10,10 @@ import React, {
 } from "react";
 import { ImageExtension } from "remirror/extensions";
 import Button from "../../atoms/button";
+import Dropdown from "../../atoms/dropdown";
 import Input from "../../atoms/input";
 import ImageIcon from "../assets/icons/Image";
-import { Modal, ToolbarButton } from "../components";
+import { ToolbarButton } from "../components";
 
 export const ImageName = "image";
 
@@ -29,7 +30,6 @@ const ImageButton: FC<ImageAttrs> = ({
   resizable,
   translateFn,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
 
@@ -52,7 +52,7 @@ const ImageButton: FC<ImageAttrs> = ({
     }
     setError(false);
     try {
-      onUpload?.(event.target.files![0]).then(setImgSrc);
+      onUpload?.(event.target.files[0]).then(setImgSrc);
     } catch (e) {
       setError(true);
     }
@@ -95,20 +95,22 @@ const ImageButton: FC<ImageAttrs> = ({
   }, [showModal]);
 
   return (
-    <div ref={ref}>
-      <ToolbarButton
-        className={classNames({ active: showModal || active.image() })}
-        onClick={() => {
-          setShowModal(!showModal);
-        }}
-      >
-        <ImageIcon />
-      </ToolbarButton>
-      <Modal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        parentRef={ref}
-      >
+    <Dropdown
+      isOpen={showModal}
+      offset="-10 -40"
+      onClose={() => setShowModal(false)}
+      target={
+        <ToolbarButton
+          className={classNames({ active: showModal || active.image() })}
+          onClick={() => {
+            setShowModal(!showModal);
+          }}
+        >
+          <ImageIcon />
+        </ToolbarButton>
+      }
+    >
+      <>
         <label>{translateFn?.("url-label") || "Url:"}</label>
         <Input
           autoFocus
@@ -228,8 +230,8 @@ const ImageButton: FC<ImageAttrs> = ({
             {translateFn?.("cancel") || "Cancel"}
           </Button>
         </div>
-      </Modal>
-    </div>
+      </>
+    </Dropdown>
   );
 };
 

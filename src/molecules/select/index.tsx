@@ -4,6 +4,7 @@ import classNames from "classnames";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { adjustColorOpacity, colors } from "../../theme";
 import DropIcon from "./assets/icons/Drop";
+import Dropdown from "../../atoms/dropdown";
 
 interface IOption {
   active?: boolean;
@@ -34,23 +35,10 @@ const Select: FC<ISelectProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setExpanded(false);
-      }
-    };
-
-    if (expanded) {
-      window.addEventListener("click", handleClickOutside);
-    } else {
-      window.removeEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
+    setWidth(ref.current?.offsetWidth || 0);
   }, [expanded]);
 
   return (
@@ -64,39 +52,50 @@ const Select: FC<ISelectProps> = ({
       ref={ref}
       expanded={expanded}
     >
-      <StyledSelect expanded={expanded} onClick={() => setExpanded(!expanded)}>
-        <div>
-          {options.find((o) => o.value === value)?.label ||
-            options.find((o) => o.active)?.label ||
-            placeholder}
-        </div>
-        <DropIcon />
-      </StyledSelect>
-      {expanded && (
-        <Values scroll={options.length > 6}>
-          {options.length > 0 ? (
+      <SelectDropdown
+        attachment="top left"
+        offset="-10 0"
+        isOpen={expanded}
+        onClose={() => setExpanded(false)}
+        target={
+          <StyledSelect
+            expanded={expanded}
+            onClick={() => setExpanded(!expanded)}
+          >
             <div>
-              {options.map(
-                (option, index) =>
-                  option.element || (
-                    <Value
-                      active={value === option.value || option.active}
-                      disabled={option.disabled}
-                      key={index}
-                      onClick={() => (
-                        setExpanded(false), onChange?.(option.value)
-                      )}
-                    >
-                      {option.label}
-                    </Value>
-                  )
-              )}
+              {options.find((o) => o.value === value)?.label ||
+                options.find((o) => o.active)?.label ||
+                placeholder}
             </div>
-          ) : (
-            <ValuesEmpty />
-          )}
-        </Values>
-      )}
+            <DropIcon />
+          </StyledSelect>
+        }
+        children={
+          <Values width={width}>
+            {options.length > 0 ? (
+              <div>
+                {options.map(
+                  (option, index) =>
+                    option.element || (
+                      <Value
+                        active={value === option.value || option.active}
+                        disabled={option.disabled}
+                        key={index}
+                        onClick={() => (
+                          setExpanded(false), onChange?.(option.value)
+                        )}
+                      >
+                        {option.label}
+                      </Value>
+                    )
+                )}
+              </div>
+            ) : (
+              <ValuesEmpty />
+            )}
+          </Values>
+        }
+      />
     </Container>
   );
 };
@@ -118,19 +117,16 @@ const Container = styled.div<{
   cursor: pointer;
   display: flex;
   height: 40px;
-  position: relative;
 
   &.active,
   &:hover {
     border-color: ${(props) => (props.error ? colors.red3 : colors.grey1)};
-    z-index: 1;
   }
 
   ${(props) =>
     props.expanded &&
     css`
       border-color: ${props.error ? colors.red3 : colors.grey1};
-      z-index: 1;
 
       > div {
         border-color: ${props.error ? colors.red3 : colors.grey1};
@@ -158,6 +154,10 @@ const Container = styled.div<{
     `}
 `;
 
+const SelectDropdown = styled(Dropdown)`
+  padding: 0;
+`;
+
 const StyledSelect = styled.div<{ expanded: boolean }>`
   align-items: center;
   background-color: transparent;
@@ -165,12 +165,17 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
   box-sizing: border-box;
   display: flex;
   flex: 1;
-  height: 100%;
+  height: 40px;
   outline: none;
   padding: 0 15px 0 20px;
 
   > svg {
     height: 10px;
+    ${(props) =>
+      props.expanded &&
+      css`
+        transform: rotate(180deg);
+      `}
   }
 
   div {
@@ -191,52 +196,23 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
   }
 `;
 
-const Values = styled.div<{ scroll?: boolean; search?: boolean }>`
-  background-color: ${colors.white};
-  border-radius: 4px;
-  box-shadow: 0 3px 7px 0 ${adjustColorOpacity(colors.dark, 0.5)};
-  min-width: 100%;
-  position: absolute;
-  left: 0;
-  top: 5px;
-  min-width: 220px;
-  transform: translateY(45px);
-  z-index: 2;
+const Values = styled.div<{ width: number }>`
+  min-width: ${(props) => props.width}px;
 
   > div {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     > * {
       height: 35px;
+      box-sizing: border-box;
 
       &:not(:first-of-type) {
         border-top: solid 1px ${colors.grey5};
       }
     }
   }
-
-  ${(props) =>
-    props.scroll &&
-    css`
-      overflow-y: scroll;
-
-      ::-webkit-scrollbar:vertical {
-        display: block;
-      }
-
-      ::-webkit-scrollbar {
-        width: 15px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        padding: 5px;
-        background-color: ${colors.grey1};
-        border-radius: 9999px;
-        border: 5px solid transparent;
-        background-clip: padding-box;
-      }
-    `}
 `;
 
 const ValuesEmpty = styled.div`
@@ -250,7 +226,6 @@ const Value = styled.div<{ active: boolean; disabled?: boolean }>`
   cursor: pointer;
   display: flex;
   padding: 3px 20px;
-  position: relative;
   white-space: nowrap;
 
   span {

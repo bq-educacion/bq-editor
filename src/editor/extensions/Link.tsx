@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import classNames from "classnames";
 import React, {
@@ -8,7 +7,6 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import {
@@ -20,9 +18,10 @@ import {
 import { LinkExtension as RemirrorLinkExtension } from "remirror/extensions";
 import Button from "../../atoms/button";
 // import Checkbox from "../../atoms/checkbox";
+import Dropdown from "../../atoms/dropdown";
 import Input from "../../atoms/input";
 import LinkIcon from "../assets/icons/Link";
-import { Modal, ToolbarButton } from "../components";
+import { ToolbarButton } from "../components";
 
 export const LinkName = "link";
 
@@ -75,26 +74,27 @@ function useFloatingLinkState() {
 }
 
 const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const { href, setHref, onRemove, onSubmit } = useFloatingLinkState();
   const [showModal, setShowModal] = useState(false);
   const { active } = useRemirrorContext({ autoUpdate: true });
 
   return (
-    <div ref={ref}>
-      <ToolbarButton
-        className={classNames({ active: showModal || active.link() })}
-        onClick={() => {
-          setShowModal(!showModal);
-        }}
-      >
-        <LinkIcon />
-      </ToolbarButton>
-      <LinkModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        parentRef={ref}
-      >
+    <Dropdown
+      isOpen={showModal}
+      offset="-10 -40"
+      onClose={() => setShowModal(false)}
+      target={
+        <ToolbarButton
+          className={classNames({ active: showModal || active.link() })}
+          onClick={() => {
+            setShowModal(!showModal);
+          }}
+        >
+          <LinkIcon />
+        </ToolbarButton>
+      }
+    >
+      <>
         <label>{translateFn?.("link-label") || "Link:"}</label>
         <Input
           autoFocus
@@ -117,12 +117,12 @@ const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
           }}
         />
         {/* <div> // TODO: Not working
-          <Checkbox
-            checked={target === "_blank"}
-            onChange={(checked) => setTarget(checked ? "_blank" : "_self")}
-          />
-          <label>Open in new tab</label>
-        </div> */}
+        <Checkbox
+          checked={target === "_blank"}
+          onChange={(checked) => setTarget(checked ? "_blank" : "_self")}
+        />
+        <label>Open in new tab</label>
+      </div> */}
         <div>
           <Button onClick={() => (onSubmit(), setShowModal(false))}>
             {translateFn?.("save") || "Save"}
@@ -137,8 +137,8 @@ const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
             </Button>
           )}
         </div>
-      </LinkModal>
-    </div>
+      </>
+    </Dropdown>
   );
 };
 
@@ -185,7 +185,3 @@ class LinkExtension extends RemirrorLinkExtension {
 }
 
 export { LinkButton, LinkExtension };
-
-const LinkModal = styled(Modal)`
-  width: 240px;
-`;
