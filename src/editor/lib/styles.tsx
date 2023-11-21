@@ -33,7 +33,7 @@ export default `
   }
 
   li:has([data-node-indent="1"]),
-  li:has([nodeindent="1"]), {
+  li:has([nodeindent="1"]) {
     margin-left: 40px;
   }
 
