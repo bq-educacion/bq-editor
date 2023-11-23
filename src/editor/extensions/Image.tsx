@@ -96,6 +96,7 @@ const ImageButton: FC<ImageAttrs> = ({
 
   return (
     <Dropdown
+      className="bq-editor-dropdown"
       isOpen={showModal}
       offset="-10 -40"
       onClose={() => setShowModal(false)}

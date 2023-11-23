@@ -80,6 +80,7 @@ const LinkButton: FC<LinkAttrs> = ({ translateFn }) => {
 
   return (
     <Dropdown
+      className="bq-editor-dropdown"
       isOpen={showModal}
       offset="-10 -40"
       onClose={() => setShowModal(false)}

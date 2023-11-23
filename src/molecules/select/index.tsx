@@ -16,6 +16,7 @@ interface IOption {
 
 export interface ISelectProps {
   className?: string;
+  classNameDropdown?: string;
   disabled?: boolean;
   error?: string;
   onChange?: (value: string) => void;
@@ -26,6 +27,7 @@ export interface ISelectProps {
 
 const Select: FC<ISelectProps> = ({
   className,
+  classNameDropdown,
   error,
   onChange,
   options,
@@ -73,7 +75,7 @@ const Select: FC<ISelectProps> = ({
         children={
           <Values width={width}>
             {options.length > 0 ? (
-              <div>
+              <div className={classNameDropdown}>
                 {options.map(
                   (option, index) =>
                     option.element || (
