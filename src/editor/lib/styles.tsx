@@ -27,6 +27,10 @@ export default `
   }
 
   // Indent
+  ol, ul {
+    padding-inline-start: 20px;
+  }
+
   li:has([data-node-indent]) [data-node-indent],
   li:has([nodeindent]) [nodeindent] {
     margin-left: 0!important;
@@ -34,51 +38,51 @@ export default `
 
   li:has([data-node-indent="1"]),
   li:has([nodeindent="1"]) {
-    margin-left: 40px;
+    margin-left: 20px;
   }
 
   li:has([data-node-indent="2"]),
   li:has([nodeindent="2"]) {
-    margin-left: 80px;
+    margin-left: 60px;
   }
 
   li:has([data-node-indent="3"]),
   li:has([nodeindent="3"]) {
-    margin-left: 120px;
+    margin-left: 100px;
   }
 
   li:has([data-node-indent="4"]),
   li:has([nodeindent="4"]) {
-    margin-left: 160px;
+    margin-left: 140px;
   }
 
   li:has([data-node-indent="5"]),
   li:has([nodeindent="5"]) {
-    margin-left: 200px;
+    margin-left: 180px;
   }
 
   li:has([data-node-indent="6"]),
   li:has([nodeindent="6"]) {
-    margin-left: 240px;
+    margin-left: 220px;
   }
 
   li:has([data-node-indent="7"]),
   li:has([nodeindent="7"]) {
-    margin-left: 280px;
+    margin-left: 260px;
   }
 
   li:has([data-node-indent="8"]),
   li:has([nodeindent="8"]) {
-    margin-left: 320px;
+    margin-left: 300px;
   }
 
   li:has([data-node-indent="9"]),
   li:has([nodeindent="9"]) {
-    margin-left: 360px;
+    margin-left: 340px;
   }
 
   li:has([data-node-indent="10"]),
   li:has([nodeindent="10"]) {
-    margin-left: 400px;
+    margin-left: 380px;
   }
 `;
