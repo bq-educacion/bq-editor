@@ -43,46 +43,46 @@ export default `
 
   li:has([data-node-indent="2"]),
   li:has([nodeindent="2"]) {
-    margin-left: 60px;
+    margin-left: 40px;
   }
 
   li:has([data-node-indent="3"]),
   li:has([nodeindent="3"]) {
-    margin-left: 100px;
+    margin-left: 60px;
   }
 
   li:has([data-node-indent="4"]),
   li:has([nodeindent="4"]) {
-    margin-left: 140px;
+    margin-left: 80px;
   }
 
   li:has([data-node-indent="5"]),
   li:has([nodeindent="5"]) {
-    margin-left: 180px;
+    margin-left: 100px;
   }
 
   li:has([data-node-indent="6"]),
   li:has([nodeindent="6"]) {
-    margin-left: 220px;
+    margin-left: 120px;
   }
 
   li:has([data-node-indent="7"]),
   li:has([nodeindent="7"]) {
-    margin-left: 260px;
+    margin-left: 140px;
   }
 
   li:has([data-node-indent="8"]),
   li:has([nodeindent="8"]) {
-    margin-left: 300px;
+    margin-left: 160px;
   }
 
   li:has([data-node-indent="9"]),
   li:has([nodeindent="9"]) {
-    margin-left: 340px;
+    margin-left: 180px;
   }
 
   li:has([data-node-indent="10"]),
   li:has([nodeindent="10"]) {
-    margin-left: 380px;
+    margin-left: 200px;
   }
 `;
