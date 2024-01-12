@@ -1,4 +1,5 @@
-import { adjustColorOpacity, colors } from "../theme";
+import colors from "./colors";
+import { adjustColorOpacity } from "./utils";
 
 export default `
   // Margins

@@ -6,6 +6,8 @@ import {
   prosemirrorNodeToHtml,
 } from "remirror";
 import CodeEditor from "./CodeEditor";
+import MarkdownDualEditor from "./MarkdownDualEditor";
+import Visor from "./Visor";
 import { Text, Toolbar, Wrapper } from "./components";
 import { defaultExtensions, Extension, MarkdownPreview } from "./extensions";
 import {
@@ -14,8 +16,6 @@ import {
   managerExtensions,
   toolbarHandlers,
 } from "./lib";
-import MarkdownDualEditor from "./MarkdownDualEditor";
-import Visor from "./Visor";
 
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
@@ -31,6 +31,7 @@ type Selection = "start" | "end" | "all" | number;
 export type StringHandler = "html" | "markdown";
 
 export type IEditorProps = {
+  className?: string;
   codeEditor?: boolean;
   colorHandler?: (
     onChange: (value?: string) => void,
@@ -126,7 +127,7 @@ const Editor: FC<IEditorProps> = (props) => {
   });
 
   return (
-    <Wrapper className="bq-editor">
+    <Wrapper className={"bq-editor" + (props.className || "")}>
       <Remirror
         editable={editable}
         manager={manager}

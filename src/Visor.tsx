@@ -2,11 +2,10 @@ import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
 import { DocExtension } from "remirror/extensions";
-import { CodeBlockExtension } from "./extensions";
-import { managerExtensions } from "./lib";
 import { StringHandler } from "./Editor";
-import { defaultExtensions, Extension } from "./extensions";
-import styles from "./lib/styles";
+import { CodeBlockExtension, defaultExtensions, Extension } from "./extensions";
+import { managerExtensions } from "./lib";
+import { styles } from "./theme";
 
 export type IVisorProps = {
   codeEditor?: boolean;

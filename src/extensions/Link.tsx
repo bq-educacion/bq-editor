@@ -80,10 +80,10 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
       }
     >
       {linkHandler?.((value) => {
-        if (value) {
-          onSubmit(value);
-        } else {
+        if ((value || "") === "") {
           onRemove();
+        } else {
+          onSubmit(value);
         }
         setShowModal(false);
       }, href)}

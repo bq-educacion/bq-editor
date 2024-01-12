@@ -94,29 +94,4 @@ const Container = styled.div`
   box-shadow: 0 3px 7px 0 ${adjustColorOpacity(colors.dark, 0.5)};
   color: ${colors.dark};
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  a {
-    cursor: pointer;
-    color: ${colors.orange1};
-  }
-
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    width: 100%;
-
-    button {
-      flex: 1;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: -5px;
-      min-width: 45px;
-    }
-  }
 `;

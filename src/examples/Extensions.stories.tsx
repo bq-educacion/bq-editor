@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProsemirrorNode } from "remirror";
+import styled from "@emotion/styled";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 import { colors } from "../theme";
 import { ImageValueAttrs } from "../extensions";
@@ -126,6 +127,9 @@ TextcolorHandler.args = {
     </div>
   ),
   extensions: [
+    "bold",
+    "italic",
+    "underline",
     {
       name: "text-color",
     },
@@ -151,25 +155,28 @@ export const Link = Template.bind({});
 
 Link.args = {
   extensions: [
+    "bold",
+    "italic",
+    "underline",
     {
       name: "link",
       attrs: {
         linkHandler: (onChange: (value?: string) => void, value?: string) => {
           const [href, setHref] = useState(value);
 
+          useEffect(() => {
+            setHref(value);
+          }, [value]);
+
           return (
-            <div
-              style={{
-                padding: 20,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "baseline",
-              }}
-            >
+            <Modal>
+              <label>Href:</label>
               <input onChange={(e) => setHref(e.target.value)} value={href} />
-              <button onClick={() => onChange(href)}>Submit</button>
-              <button onClick={() => onChange()}>Delete</button>
-            </div>
+              <button onClick={() => (onChange(href), setHref(""))}>
+                Submit
+              </button>
+              <button onClick={() => (onChange(), setHref(""))}>Delete</button>
+            </Modal>
           );
         },
       },
@@ -196,6 +203,9 @@ export const Image = Template.bind({});
 
 Image.args = {
   extensions: [
+    "bold",
+    "italic",
+    "underline",
     {
       name: "image",
       attrs: {
@@ -206,24 +216,25 @@ Image.args = {
           const [height, setHeight] = useState("");
 
           return (
-            <div
-              style={{
-                padding: 20,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "baseline",
-              }}
-            >
-              <label>Src</label>
+            <Modal>
+              <label>Src:</label>
               <input onChange={(e) => setSrc(e.target.value)} value={src} />
-              <label>Height</label>
+              <label>Height:</label>
               <input
                 onChange={(e) => setHeight(e.target.value)}
                 value={height}
               />
-              <button onClick={() => onChange(src, { height })}>Submit</button>
-              <button onClick={() => onChange()}>Cancel</button>
-            </div>
+              <button
+                onClick={() => (
+                  onChange(src, { height }), setSrc(""), setHeight("")
+                )}
+              >
+                Submit
+              </button>
+              <button onClick={() => (onChange(), setSrc(""), setHeight(""))}>
+                Cancel
+              </button>
+            </Modal>
           );
         },
       },
@@ -259,3 +270,10 @@ export const Indent = Template.bind({});
 Indent.args = {
   extensions: ["indent"],
 };
+
+const Modal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100px;
+`;

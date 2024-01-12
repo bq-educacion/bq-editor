@@ -6,9 +6,8 @@ import {
   useRemirrorContext,
 } from "@remirror/react";
 import React, { CompositionEvent, FC, useCallback, useState } from "react";
-import { colors } from "../theme";
-import composeText from "../lib/composeText";
-import styles from "../lib/styles";
+import { composeText } from "../lib";
+import { colors, styles } from "../theme";
 
 interface ITextProps {
   children?: React.ReactNode;
@@ -85,6 +84,7 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   min-height: 100px;
   flex: 1;
   position: relative;
+  overflow: auto;
 
   &::before {
     content: "";

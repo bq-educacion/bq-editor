@@ -47,8 +47,6 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   return (
     <Dropdown
       className="bq-editor-dropdown"
-      targetAttachment="bottom right"
-      attachment="top left"
       isOpen={showModal}
       offset="-10 -40"
       onClose={() => setShowModal(false)}
