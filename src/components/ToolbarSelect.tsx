@@ -110,7 +110,7 @@ const Container = styled.div<{
   cursor: pointer;
   display: flex;
   align-items: center;
-  height: 40px;
+  min-height: 40px;
 
   &.active,
   &:hover {
@@ -134,7 +134,7 @@ const Container = styled.div<{
       pointer-events: none;
 
       svg {
-        color: ${colors.grey5};
+        color: ${colors.grey5}!important;
       }
     `}
 `;
