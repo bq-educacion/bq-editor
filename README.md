@@ -58,7 +58,7 @@ It is an matrix, whose order and separations will define the toolbar.
 
 Everything you type will be passed through with keybindings to the extensions. Users can even bold text via input rules: Type \*\*bold\*\* to add bold text.
 
-Some extensions have additional parameters, run the [storybook](https://github.com/bq-educacion/bq-editor#storybook) or go to the [examples](https://github.com/bq-educacion/bq-editor/tree/main/src/editor/examples) folder to see them.
+Some extensions have additional parameters, run the [storybook](https://github.com/bq-educacion/bq-editor#storybook) or go to the [examples](https://github.com/bq-educacion/bq-editor/tree/main/src/examples) folder to see them.
 
 ### Content
 
