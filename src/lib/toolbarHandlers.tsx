@@ -9,7 +9,7 @@ import {
   getAttrs,
   getExtension,
   HeadingAttrs,
-  HeadingButtons,
+  HeadingSelect,
   ImageAttrs,
   ImageButton,
   IndentButtons,
@@ -45,7 +45,7 @@ const toolbarHandlers = ({ colorHandler, extensions = [] }: IEditorProps) => {
   const underline = getExtension("underline", extensions);
 
   const handlers = [
-    [heading && <HeadingButtons {...(getAttrs(heading) as HeadingAttrs)} />],
+    [heading && <HeadingSelect {...(getAttrs(heading) as HeadingAttrs)} />],
     [bulletList && <BulletListButton />, orderedList && <OrderedListButton />],
     [
       italic && <ItalicButton />,

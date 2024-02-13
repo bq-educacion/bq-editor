@@ -10,7 +10,7 @@ export type HeadingAttrs = {
   translateFn?: (key: string) => string;
 };
 
-const HeadingButtons: FC<HeadingAttrs> = ({
+const HeadingSelect: FC<HeadingAttrs> = ({
   levels = [1, 2, 3, 4, 5, 6],
   translateFn,
 }) => {
@@ -48,4 +48,4 @@ const HeadingButtons: FC<HeadingAttrs> = ({
   );
 };
 
-export { HeadingButtons, HeadingExtension };
+export { HeadingSelect, HeadingExtension };

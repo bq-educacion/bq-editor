@@ -42,6 +42,7 @@ export type IEditorProps = {
   extensions?: Extension[];
   initialContent?: string;
   onChange?: (doc?: ProsemirrorNode) => void;
+  onFullScreen?: () => void;
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
@@ -56,6 +57,7 @@ const Editor: FC<IEditorProps> = (props) => {
     editable,
     initialContent: content,
     onChange,
+    onFullScreen,
     selection = "end",
     stringHandler,
     style,
@@ -89,6 +91,7 @@ const Editor: FC<IEditorProps> = (props) => {
           <Toolbar
             className="bq-editor-toolbar"
             handlers={toolbarHandlers(input)}
+            onFullScreen={onFullScreen}
           />
           <Text className="bq-editor-text">{editorHandlers(input)}</Text>
         </MarkdownDualEditor>
@@ -142,6 +145,7 @@ const Editor: FC<IEditorProps> = (props) => {
         <Toolbar
           className="bq-editor-toolbar"
           handlers={toolbarHandlers(input)}
+          onFullScreen={onFullScreen}
         />
         <Text className="bq-editor-text">{editorHandlers(input)}</Text>
         {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}

@@ -20,6 +20,11 @@ export default `
     }
   }
 
+  // Color
+  mark {
+    color: inherit;
+  }
+
   // CodeBlock
   pre {
     background-color: ${adjustColorOpacity(colors.grey6, 0.5)};
