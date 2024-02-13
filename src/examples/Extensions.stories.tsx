@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProsemirrorNode } from "remirror";
 import styled from "@emotion/styled";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
-import { colors } from "../theme";
+import { adjustColorOpacity, colors } from "../theme";
 import { ImageValueAttrs } from "../extensions";
 
 export default {
@@ -61,6 +61,9 @@ Code.args = {
 export const Counter = Template.bind({});
 
 Counter.args = {
+  style: {
+    maxHeight: 183,
+  },
   extensions: [
     {
       name: "counter",
@@ -91,16 +94,20 @@ TextColor.args = {
   ],
 };
 
-export const TextcolorHandler = Template.bind({});
+export const TextColorHandler = Template.bind({});
 
-TextcolorHandler.args = {
+TextColorHandler.args = {
   colorHandler: (onChange: (value?: string) => void, value?: string) => (
     <div
       style={{
+        backgroundColor: colors.white,
+        borderRadius: 4,
+        border: `1px solid ${colors.dark}`,
         padding: 20,
         display: "flex",
         flexDirection: "column",
-        alignItems: "baseline",
+        gap: 10,
+        width: "fit-content",
       }}
     >
       <button

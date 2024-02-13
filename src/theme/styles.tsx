@@ -16,7 +16,7 @@ export default `
 
     li > * {
       margin-block-start: 0;
-      margin-block-end: 0;
+      margin-block-end: 0.5em;
     }
   }
 

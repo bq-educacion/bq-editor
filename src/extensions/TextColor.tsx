@@ -71,6 +71,6 @@ const Color = styled.div<{ color: string }>`
 `;
 
 const ColorDropdown = styled(Dropdown)`
-  width: unset;
+  width: 0;
   padding: 0;
 `;

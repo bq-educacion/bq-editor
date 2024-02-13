@@ -1,5 +1,5 @@
 import { Remirror, useRemirror } from "@remirror/react";
-import React, { FC } from "react";
+import React, { CSSProperties, FC } from "react";
 import {
   htmlToProsemirrorNode,
   ProsemirrorNode,
@@ -45,6 +45,7 @@ export type IEditorProps = {
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;
+  style?: CSSProperties;
 };
 
 const Editor: FC<IEditorProps> = (props) => {
@@ -57,6 +58,7 @@ const Editor: FC<IEditorProps> = (props) => {
     onChange,
     selection = "end",
     stringHandler,
+    style,
   } = props;
 
   if (stringHandler === "markdown") {
@@ -82,7 +84,7 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <Wrapper className="bq-editor">
+      <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
         <MarkdownDualEditor {...input}>
           <Toolbar
             className="bq-editor-toolbar"
@@ -105,7 +107,7 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <Wrapper className="bq-editor">
+      <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
         <CodeEditor {...input}>
           <Text className="bq-editor-text" codeEditor />
         </CodeEditor>
@@ -127,7 +129,7 @@ const Editor: FC<IEditorProps> = (props) => {
   });
 
   return (
-    <Wrapper className={"bq-editor" + (props.className || "")}>
+    <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
       <Remirror
         editable={editable}
         manager={manager}

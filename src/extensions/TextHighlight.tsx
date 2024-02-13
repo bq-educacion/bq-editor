@@ -50,9 +50,9 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
     >
       {colorHandler?.((value) => {
         if (value) {
-          commands.setTextColor(value);
+          commands.setTextHighlight(value);
         } else {
-          commands.removeTextColor();
+          commands.removeTextHighlight();
         }
       }, attrs.textHighlight()?.color as string)}
     </ColorDropdown>
@@ -70,6 +70,6 @@ const Color = styled.div<{ color: string }>`
 `;
 
 const ColorDropdown = styled(Dropdown)`
-  width: unset;
+  width: 0;
   padding: 0;
 `;

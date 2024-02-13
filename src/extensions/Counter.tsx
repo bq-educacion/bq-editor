@@ -28,8 +28,10 @@ const CounterIndicator: FC<CounterAttrs> = ({
         maximum === undefined || count <= maximum ? "inherit" : colors.red2
       }
     >
-      {count}
-      {maximum !== undefined && ` / ${maximum}`}
+      <span>
+        {count}
+        {maximum !== undefined && ` / ${maximum}`}
+      </span>
     </Indicator>
   );
 };
@@ -37,11 +39,13 @@ const CounterIndicator: FC<CounterAttrs> = ({
 export { CounterIndicator, CountExtension };
 
 const Indicator = styled.div<{ color: string }>`
-  position: absolute;
-  border: 0;
-  margin: 0;
-  bottom: 0;
-  right: 0;
-  padding: 10px;
-  color: ${(props) => props.color};
+  position: sticky;
+  top: 100%;
+  text-align: end;
+  line-height: 0;
+
+  > span {
+    color: ${(props) => props.color};
+    margin: 0;
+  }
 `;
