@@ -42,10 +42,6 @@ const Floating: FC<IFloatingProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(isOpenProp);
 
-  useEffect(() => {
-    setIsOpen(isOpenProp);
-  }, [isOpenProp]);
-
   const { refs, floatingStyles, context } = useFloating({
     placement,
     middleware: [
@@ -78,7 +74,8 @@ const Floating: FC<IFloatingProps> = ({
       <div ref={refs.setReference} {...getReferenceProps()}>
         {target}
       </div>
-      {isOpen &&
+      {isOpenProp &&
+        isOpen &&
         createPortal(
           <Container
             className={`${className || ""} bq-editor-floating`}

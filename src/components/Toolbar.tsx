@@ -89,10 +89,10 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               )}
               <StyledFloating
                 isOpen={isConfigOpen}
+                allowedPlacements={["bottom-start"]}
                 offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
-                onClose={() => setIsConfigOpen(false)}
                 target={
-                  <BarButton onClick={() => setIsConfigOpen(!isConfigOpen)}>
+                  <BarButton onClick={() => setIsConfigOpen(true)}>
                     <GearIcon />
                   </BarButton>
                 }

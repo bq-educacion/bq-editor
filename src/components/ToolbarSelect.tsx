@@ -52,9 +52,8 @@ const Select: FC<ISelectProps> = ({
       <Floating
         allowedPlacements={["top-start", "bottom-start"]}
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
         target={
-          <StyledSelect isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+          <StyledSelect onClick={() => setIsOpen(true)}>
             <div>
               {options.find((o) => o.value === value)?.label ||
                 options.find((o) => o.active)?.label ||
@@ -133,7 +132,7 @@ const Container = styled.div<{
     `}
 `;
 
-const StyledSelect = styled.div<{ isOpen: boolean }>`
+const StyledSelect = styled.div`
   align-items: center;
   background-color: transparent;
   border: none;
@@ -146,11 +145,6 @@ const StyledSelect = styled.div<{ isOpen: boolean }>`
 
   > svg {
     height: 10px;
-    ${(props) =>
-      props.isOpen &&
-      css`
-        transform: rotate(180deg);
-      `}
   }
 
   div {

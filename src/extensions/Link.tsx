@@ -66,13 +66,10 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
   return (
     <Floating
       isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
       target={
         <ToolbarButton
           className={classNames({ active: isOpen || active.link() })}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
+          onClick={() => setIsOpen(true)}
         >
           <LinkIcon />
         </ToolbarButton>

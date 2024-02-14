@@ -27,13 +27,12 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
   return (
     <Floating
       isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
       target={
         <ToolbarButton
           className={classNames({ active: active.textHighlight() })}
           onClick={() => {
             if (colorHandler) {
-              setIsOpen(!isOpen);
+              setIsOpen(true);
             } else {
               active.textHighlight()
                 ? commands.removeTextHighlight()
@@ -53,7 +52,8 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
         } else {
           commands.removeTextHighlight();
         }
-      }, attrs.textHighlight()?.color as string)}
+        setIsOpen(false);
+      }, attrs.textHighlight()?.highlight as string)}
     </Floating>
   );
 };

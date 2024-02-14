@@ -27,13 +27,12 @@ const TextColorButton: FC<TextColorAttrs> = ({
   return (
     <Floating
       isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
       target={
         <ToolbarButton
           className={classNames({ active: active.textColor() })}
           onClick={() => {
             if (colorHandler) {
-              setIsOpen(!isOpen);
+              setIsOpen(true);
             } else {
               active.textColor()
                 ? commands.removeTextColor()
