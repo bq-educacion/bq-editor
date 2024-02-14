@@ -8,7 +8,7 @@ interface IFloatingProps {
   children: JSX.Element;
   className?: string;
   isOpen?: boolean;
-  offset?: number;
+  offset?: number | [number, number];
   onClose?: () => void;
   placement?: "top" | "bottom" | "left" | "right";
   target: JSX.Element;
@@ -27,7 +27,15 @@ const Floating: FC<IFloatingProps> = ({
   const dropdownEl = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(isOpen);
 
-  const middleware = [offset(offsetProp), flip(), shift({ padding: 10 })];
+  const middleware = [
+    offset(
+      typeof offsetProp === "number"
+        ? offsetProp
+        : { mainAxis: offsetProp[0], crossAxis: offsetProp[1] }
+    ),
+    flip(),
+    shift({ padding: 10 }),
+  ];
 
   computePosition(targetRef.current, dropdownEl.current, {
     placement,

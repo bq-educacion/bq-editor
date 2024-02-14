@@ -15,7 +15,7 @@ const Template = (args: IEditorProps) => {
 
   return (
     <>
-      <Editor onChange={setDoc} {...args} />
+      <Editor onChange={setDoc} {...args} onFullScreen={undefined} />
       <p style={{ color: colors.grey1 }}>
         {doc &&
           JSON.stringify(

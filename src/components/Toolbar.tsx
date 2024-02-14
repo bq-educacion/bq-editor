@@ -85,10 +85,11 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               {heading ? (
                 [heading].map((elements, index) => getBarGroup(elements, index))
               ) : (
-                <div />
+                <BarGroup />
               )}
               <StyledFloating
                 isOpen={isConfigOpen}
+                offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
                 onClose={() => setIsConfigOpen(false)}
                 target={
                   <BarButton onClick={() => setIsConfigOpen(!isConfigOpen)}>
