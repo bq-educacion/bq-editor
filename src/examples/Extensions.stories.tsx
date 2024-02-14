@@ -98,18 +98,7 @@ export const TextColorHandler = Template.bind({});
 
 TextColorHandler.args = {
   colorHandler: (onChange: (value?: string) => void, value?: string) => (
-    <div
-      style={{
-        backgroundColor: colors.white,
-        borderRadius: 4,
-        border: `1px solid ${colors.dark}`,
-        padding: 20,
-        display: "flex",
-        flexDirection: "column",
-        gap: 10,
-        width: "fit-content",
-      }}
-    >
+    <Modal>
       <button
         onClick={() => onChange(colors.red1)}
         disabled={value === colors.red1}
@@ -131,7 +120,7 @@ TextColorHandler.args = {
       <button onClick={() => onChange()} disabled={value === undefined}>
         No color
       </button>
-    </div>
+    </Modal>
   ),
   extensions: [
     "bold",
@@ -283,4 +272,5 @@ const Modal = styled.div`
   flex-direction: column;
   gap: 10px;
   width: 100px;
+  padding: 10px;
 `;

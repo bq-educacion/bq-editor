@@ -9,7 +9,7 @@ import {
 } from "remirror";
 import { LinkExtension as RemirrorLinkExtension } from "remirror/extensions";
 import LinkIcon from "../icons/Link";
-import { Dropdown, ToolbarButton } from "../components";
+import { Floating, ToolbarButton } from "../components";
 
 export const LinkName = "link";
 
@@ -59,20 +59,19 @@ function useFloatingLinkState() {
 
 const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
   const { href, onRemove, onSubmit } = useFloatingLinkState();
-  const [showModal, setShowModal] = useState(false);
   const { active } = useRemirrorContext({ autoUpdate: true });
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dropdown
-      className="bq-editor-dropdown"
-      isOpen={showModal}
-      offset="-10 -40"
-      onClose={() => setShowModal(false)}
+    <Floating
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
       target={
         <ToolbarButton
-          className={classNames({ active: showModal || active.link() })}
+          className={classNames({ active: isOpen || active.link() })}
           onClick={() => {
-            setShowModal(!showModal);
+            setIsOpen(!isOpen);
           }}
         >
           <LinkIcon />
@@ -85,9 +84,9 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
         } else {
           onSubmit(value);
         }
-        setShowModal(false);
+        setIsOpen(false);
       }, href)}
-    </Dropdown>
+    </Floating>
   );
 };
 

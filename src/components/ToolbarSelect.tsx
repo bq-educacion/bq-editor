@@ -4,7 +4,7 @@ import classNames from "classnames";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { colors } from "../theme";
 import DropIcon from "../icons/Drop";
-import Dropdown from "./Dropdown";
+import Floating from "./Floating";
 
 interface IOption {
   active?: boolean;
@@ -16,7 +16,6 @@ interface IOption {
 
 export interface ISelectProps {
   className?: string;
-  classNameDropdown?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
   options: IOption[];
@@ -26,7 +25,6 @@ export interface ISelectProps {
 
 const Select: FC<ISelectProps> = ({
   className,
-  classNameDropdown,
   onChange,
   options,
   placeholder,
@@ -34,12 +32,12 @@ const Select: FC<ISelectProps> = ({
   ...props
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [expanded, setExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
     setWidth(ref.current?.offsetWidth || 0);
-  }, [expanded]);
+  }, [isOpen]);
 
   return (
     <Container
@@ -49,18 +47,13 @@ const Select: FC<ISelectProps> = ({
         [`${className}`]: true,
       })}
       ref={ref}
-      expanded={expanded}
+      isOpen={isOpen}
     >
-      <SelectDropdown
-        attachment="top left"
-        offset="-10 0"
-        isOpen={expanded}
-        onClose={() => setExpanded(false)}
+      <Floating
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
         target={
-          <StyledSelect
-            expanded={expanded}
-            onClick={() => setExpanded(!expanded)}
-          >
+          <StyledSelect isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
             <div>
               {options.find((o) => o.value === value)?.label ||
                 options.find((o) => o.active)?.label ||
@@ -72,7 +65,7 @@ const Select: FC<ISelectProps> = ({
         children={
           <Values width={width}>
             {options.length > 0 ? (
-              <div className={classNameDropdown}>
+              <div>
                 {options.map(
                   (option, index) =>
                     option.element || (
@@ -81,7 +74,7 @@ const Select: FC<ISelectProps> = ({
                         disabled={option.disabled}
                         key={index}
                         onClick={() => (
-                          setExpanded(false), onChange?.(option.value)
+                          setIsOpen(false), onChange?.(option.value)
                         )}
                       >
                         {option.label}
@@ -103,7 +96,7 @@ export default Select;
 
 const Container = styled.div<{
   disabled?: boolean;
-  expanded: boolean;
+  isOpen: boolean;
 }>`
   box-sizing: border-box;
   color: ${colors.dark};
@@ -118,7 +111,7 @@ const Container = styled.div<{
   }
 
   ${(props) =>
-    props.expanded &&
+    props.isOpen &&
     css`
       border-color: ${colors.grey1};
 
@@ -139,11 +132,7 @@ const Container = styled.div<{
     `}
 `;
 
-const SelectDropdown = styled(Dropdown)`
-  padding: 0;
-`;
-
-const StyledSelect = styled.div<{ expanded: boolean }>`
+const StyledSelect = styled.div<{ isOpen: boolean }>`
   align-items: center;
   background-color: transparent;
   border: none;
@@ -157,7 +146,7 @@ const StyledSelect = styled.div<{ expanded: boolean }>`
   > svg {
     height: 10px;
     ${(props) =>
-      props.expanded &&
+      props.isOpen &&
       css`
         transform: rotate(180deg);
       `}

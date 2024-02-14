@@ -5,7 +5,7 @@ import { colors } from "../theme";
 import AngleIcon from "../icons/Angle";
 import FullScreenIcon from "../icons/FullScreen";
 import GearIcon from "../icons/Gear";
-import Dropdown from "./Dropdown";
+import Floating from "./Floating";
 
 interface IToolbarProps {
   className?: string;
@@ -21,7 +21,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
   const [scroll, setScroll] = useState(0);
   const [hasConfig, setHasConfig] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
-  const [showConfig, setShowConfig] = useState(false);
+  const [isConfigOpen, setIsConfigOpen] = useState(false);
 
   const heading = handlers.find((elements) =>
     elements.find((element) => element?.type?.name === "HeadingSelect")
@@ -87,25 +87,21 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               ) : (
                 <div />
               )}
-              <StyledDropdown
-                attachment="top left"
-                className="bq-editor-dropdown"
-                isOpen={showConfig}
-                onClose={() => setShowConfig(false)}
-                offset="1 -10"
+              <StyledFloating
+                isOpen={isConfigOpen}
+                onClose={() => setIsConfigOpen(false)}
                 target={
-                  <BarButton onClick={() => setShowConfig(true)}>
+                  <BarButton onClick={() => setIsConfigOpen(!isConfigOpen)}>
                     <GearIcon />
                   </BarButton>
                 }
-                targetAttachment="top right"
               >
                 <>
                   {handlers.map((elements, index) =>
                     getBarGroup(elements, index, true)
                   )}
                 </>
-              </StyledDropdown>
+              </StyledFloating>
               {!!onFullScreen && (
                 <BarButton
                   onClick={onFullScreen}
@@ -272,10 +268,9 @@ const ScrollButton = styled(BarButton)<{ left?: boolean }>`
     `}
 `;
 
-const StyledDropdown = styled(Dropdown)`
+const StyledFloating = styled(Floating)`
   flex-direction: column;
   border: 1px solid ${colors.grey4};
-  box-sizing: border-box;
   box-shadow: none;
   overflow: hidden;
   padding: 0;

@@ -19,7 +19,6 @@ const HeadingSelect: FC<HeadingAttrs> = ({
 
   return (
     <ToolbarSelect
-      classNameDropdown="bq-editor-dropdown"
       disabled={
         !levels.find((level: number) =>
           commands.toggleHeading.enabled({ level: Number(level) })

@@ -3,7 +3,7 @@ import classNames from "classnames";
 import React, { FC, useState } from "react";
 import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
-import { Dropdown, ToolbarButton } from "../components";
+import { Floating, ToolbarButton } from "../components";
 
 export const ImageName = "image";
 
@@ -33,7 +33,7 @@ export type ImageAttrs = {
 
 const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
-  const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onSubmit = (src?: string, attrs?: ImageValueAttrs) => {
     if ((src || "") === "") return;
@@ -45,16 +45,14 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   };
 
   return (
-    <Dropdown
-      className="bq-editor-dropdown"
-      isOpen={showModal}
-      offset="-10 -40"
-      onClose={() => setShowModal(false)}
+    <Floating
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
       target={
         <ToolbarButton
-          className={classNames({ active: showModal || active.image() })}
+          className={classNames({ active: isOpen || active.image() })}
           onClick={() => {
-            setShowModal(!showModal);
+            setIsOpen(!isOpen);
           }}
         >
           <ImageIcon />
@@ -63,9 +61,9 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
     >
       {imageHandler?.((value, attrs) => {
         onSubmit(value, attrs);
-        setShowModal(false);
+        setIsOpen(false);
       })}
-    </Dropdown>
+    </Floating>
   );
 };
 

@@ -5,7 +5,7 @@ import React, { FC, useState } from "react";
 import { TextHighlightExtension } from "remirror/extensions";
 import { colors } from "../theme";
 import TextHighlightIcon from "../icons/TextHighlight";
-import { Dropdown, ToolbarButton } from "../components";
+import { Floating, ToolbarButton } from "../components";
 
 export const TextHighlightName = "text-highlight";
 
@@ -22,19 +22,18 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
   colorHandler,
 }) => {
   const { active, commands, attrs } = useRemirrorContext({ autoUpdate: true });
-  const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <ColorDropdown
-      isOpen={showModal}
-      offset="-10 -40"
-      onClose={() => setShowModal(false)}
+    <Floating
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
       target={
         <ToolbarButton
           className={classNames({ active: active.textHighlight() })}
           onClick={() => {
             if (colorHandler) {
-              setShowModal(!showModal);
+              setIsOpen(!isOpen);
             } else {
               active.textHighlight()
                 ? commands.removeTextHighlight()
@@ -55,7 +54,7 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
           commands.removeTextHighlight();
         }
       }, attrs.textHighlight()?.color as string)}
-    </ColorDropdown>
+    </Floating>
   );
 };
 
@@ -67,9 +66,4 @@ const Color = styled.div<{ color: string }>`
   svg {
     color: ${(props) => props.color};
   }
-`;
-
-const ColorDropdown = styled(Dropdown)`
-  width: 0;
-  padding: 0;
 `;
