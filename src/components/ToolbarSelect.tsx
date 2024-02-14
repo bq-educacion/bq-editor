@@ -50,6 +50,7 @@ const Select: FC<ISelectProps> = ({
       isOpen={isOpen}
     >
       <Floating
+        allowedPlacements={["top-start", "bottom-start"]}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         target={

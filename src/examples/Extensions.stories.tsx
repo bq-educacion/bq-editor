@@ -35,7 +35,7 @@ RichText.args = {
       attrs: {
         levels: [1, 2, 3],
         translateFn: (key: string) =>
-          key === "p" ? "Paragraph" : `Heading ${key.slice(1)}`,
+          key === "p" ? "P" : `Heading ${key.slice(1)}`,
       },
     },
     "bold",
