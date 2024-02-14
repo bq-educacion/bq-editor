@@ -37,21 +37,21 @@ const Floating: FC<IFloatingProps> = ({
     shift({ padding: 10 }),
   ];
 
-  computePosition(targetRef.current, dropdownEl.current, {
-    placement,
-    middleware,
-  }).then(({ x, y }) => {
-    Object.assign(dropdownEl.current.style, {
-      left: `${x}px`,
-      top: `${y}px`,
-    });
-  });
-
   useEffect(() => {
     setOpen(isOpen);
   }, [isOpen]);
 
   useEffect(() => {
+    computePosition(targetRef.current, dropdownEl.current, {
+      placement,
+      middleware,
+    }).then(({ x, y }) => {
+      Object.assign(dropdownEl.current.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    });
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
         !targetRef.current.contains(event.target as Node) &&
@@ -85,7 +85,7 @@ const Floating: FC<IFloatingProps> = ({
       {open &&
         createPortal(
           <Container
-            className={`${className} bq-editor-floating`}
+            className={`${className || ""} bq-editor-floating`}
             ref={dropdownEl}
           >
             {children}
@@ -106,4 +106,5 @@ const Container = styled.div`
   position: absolute;
   top: -100%;
   left: -100%;
+  z-index: 1000;
 `;
