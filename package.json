@@ -31,6 +31,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@floating-ui/dom": "^1.6.3",
+    "@floating-ui/react": "^0.26.9",
     "@remirror/extension-count": "2.0.12",
     "@remirror/pm": "2.0.4",
     "@remirror/react": "2.0.27",
