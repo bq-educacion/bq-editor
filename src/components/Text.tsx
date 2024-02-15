@@ -121,6 +121,7 @@ const Container = styled.div<{ codeEditor?: boolean }>`
   .remirror-editor {
     outline: none;
     min-height: inherit;
+    height: 100%;
     ${styles}
   }
 
