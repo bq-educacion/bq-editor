@@ -110,7 +110,10 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               </StyledFloating>
               {!!onFullScreen && (
                 <BarButton
-                  onClick={onFullScreen}
+                  onClick={() => {
+                    onFullScreen();
+                    setIsConfigOpen(false);
+                  }}
                   style={{ borderLeft: `1px solid ${colors.grey4}` }}
                 >
                   <FullScreenIcon />
