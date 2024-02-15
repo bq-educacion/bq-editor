@@ -47,12 +47,11 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   return (
     <Floating
       isOpen={isOpen}
+      setIsOpen={setIsOpen}
       target={
         <ToolbarButton
           className={classNames({ active: isOpen || active.image() })}
-          onClick={() => {
-            setIsOpen(true);
-          }}
+          onClick={() => setIsOpen(true)}
         >
           <ImageIcon />
         </ToolbarButton>

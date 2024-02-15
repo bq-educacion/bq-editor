@@ -23,6 +23,8 @@ interface IFloatingProps {
   children: JSX.Element;
   className?: string;
   isOpen?: boolean;
+  setIsOpen?: (isOpen: boolean) => void;
+  keepOpen?: boolean;
   offset?: number | [number, number];
   padding?: number;
   placement?: "top" | "bottom" | "left" | "right";
@@ -36,6 +38,8 @@ const Floating: FC<IFloatingProps> = ({
   className,
   offset: offsetProp = 10,
   isOpen: isOpenProp = false,
+  setIsOpen: setIsOpenProp,
+  keepOpen = false,
   padding = 10,
   placement = "bottom",
   target,
@@ -57,17 +61,23 @@ const Floating: FC<IFloatingProps> = ({
       shift({ padding }),
     ],
     open: isOpen,
-    onOpenChange: setIsOpen,
+    onOpenChange: (isOpen: boolean) => (
+      setIsOpen(isOpen), setIsOpenProp?.(isOpen)
+    ),
   });
 
   const click = useClick(context, { toggle: true });
 
-  const dismiss = useDismiss(context);
+  const dismiss = useDismiss(context, { enabled: !keepOpen });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
     click,
     dismiss,
   ]);
+
+  useEffect(() => {
+    setIsOpen(isOpenProp);
+  }, [isOpenProp]);
 
   return (
     <>

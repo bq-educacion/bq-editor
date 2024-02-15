@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { colors } from "../theme";
 import AngleIcon from "../icons/Angle";
+import CloseIcon from "../icons/Close";
 import FullScreenIcon from "../icons/FullScreen";
 import GearIcon from "../icons/Gear";
 import Floating from "./Floating";
@@ -36,7 +37,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
     index: number,
     dropdown?: boolean
   ) =>
-    (dropdown ? elements[0].type.name !== "HeadingSelect" : true) && (
+    (dropdown ? elements[0]?.type.name !== "HeadingSelect" : true) && (
       <BarGroup dropdown={dropdown} key={index}>
         {elements.map((element, jndex) => (
           <React.Fragment key={jndex}>{element}</React.Fragment>
@@ -89,6 +90,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               )}
               <StyledFloating
                 isOpen={isConfigOpen}
+                keepOpen
                 allowedPlacements={["bottom-start"]}
                 offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
                 target={
@@ -98,6 +100,9 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
                 }
               >
                 <>
+                  <CloseButton onClick={() => setIsConfigOpen(false)}>
+                    <CloseIcon />
+                  </CloseButton>
                   {handlers.map((elements, index) =>
                     getBarGroup(elements, index, true)
                   )}
@@ -246,6 +251,14 @@ const BarGroup = styled.div<{ dropdown?: boolean }>`
 
 const BarWrapper = styled.div`
   position: relative;
+`;
+
+const CloseButton = styled(BarButton)`
+  background-color: ${colors.grey6};
+
+  > svg {
+    color: ${colors.grey4};
+  }
 `;
 
 const ScrollButton = styled(BarButton)<{ left?: boolean }>`
