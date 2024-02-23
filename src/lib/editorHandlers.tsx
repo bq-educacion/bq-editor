@@ -1,20 +1,9 @@
 import React from "react";
 import { IEditorProps } from "../Editor";
-import {
-  CounterAttrs,
-  CounterIndicator,
-  getAttrs,
-  getExtension,
-} from "../extensions";
+import { CharacterCountIndicator } from "../extensions";
 
-const editorHandlers = ({ extensions = [] }: IEditorProps) => {
-  const counter = getExtension("counter", extensions);
-
-  return (
-    <>
-      {counter && <CounterIndicator {...(getAttrs(counter) as CounterAttrs)} />}
-    </>
-  );
+const editorHandlers = ({ maxLength }: IEditorProps) => {
+  return <>{maxLength && <CharacterCountIndicator maxLength={maxLength} />}</>;
 };
 
 export default editorHandlers;

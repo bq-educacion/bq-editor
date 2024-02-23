@@ -3,12 +3,13 @@ import {
   CommandsExtension,
   IdentifierSchemaAttributes,
 } from "remirror";
+import { CountStrategy, CountExtension } from "@remirror/extension-count";
 import {
   BoldExtension,
   BulletListExtension,
+  CharacterCountExtension,
   CodeBlockExtension,
   CodeExtension,
-  CountExtension,
   getAttrs,
   getExtension,
   HardBreakExtension,
@@ -31,6 +32,7 @@ import { IEditorProps } from "../Editor";
 
 const managerExtensions = ({
   extensions = [],
+  maxLength,
   placeholder,
   stringHandler,
 }: IEditorProps): {
@@ -41,7 +43,6 @@ const managerExtensions = ({
   const bulletList = getExtension("bullet-list", extensions);
   const code = getExtension("code", extensions);
   const codeBlock = getExtension("code-block", extensions);
-  const counter = getExtension("counter", extensions);
   const heading = getExtension("heading", extensions);
   const image = getExtension("image", extensions);
   const italic = getExtension("italic", extensions);
@@ -58,6 +59,15 @@ const managerExtensions = ({
       new CommandsExtension({}),
       new HardBreakExtension({}),
       new NodeFormattingExtension({}),
+      ...(maxLength
+        ? [
+            new CountExtension({
+              maximum: maxLength,
+              maximumStrategy: CountStrategy.CHARACTERS,
+            }),
+            new CharacterCountExtension({ maxLength }),
+          ]
+        : []),
       ...(bold ? [new BoldExtension({})] : []),
       ...(bulletList ? [new BulletListExtension({})] : []),
       ...(code ? [new CodeExtension({})] : []),
@@ -68,7 +78,6 @@ const managerExtensions = ({
             }),
           ]
         : []),
-      ...(counter ? [new CountExtension(getAttrs(counter))] : []),
       ...(heading ? [new HeadingExtension(getAttrs(heading))] : []),
       ...(image ? [new ImageExtension(getAttrs(image))] : []),
       ...(italic ? [new ItalicExtension({})] : []),

@@ -1,9 +1,9 @@
 import { AlignAttrs, AlignName } from "./Align";
 import { BoldAttrs, BoldName } from "./Bold";
 import { BulletListAttrs, BulletListName } from "./BulletList";
+import { CharacterCountAttrs, CharacterCountName } from "./CharacterCount";
 import { CodeAttrs, CodeName } from "./Code";
 import { CodeBlockAttrs, CodeBlockName } from "./CodeBlock";
-import { CounterAttrs, CounterName } from "./Counter";
 import { HeadingAttrs, HeadingName } from "./Heading";
 import { ImageAttrs, ImageName } from "./Image";
 import { IndentAttrs, IndentName } from "./Indent";
@@ -19,9 +19,9 @@ import { UnderlineAttrs, UnderlineName } from "./Underline";
 export * from "./Align";
 export * from "./Bold";
 export * from "./BulletList";
+export * from "./CharacterCount";
 export * from "./Code";
 export * from "./CodeBlock";
-export * from "./Counter";
 export * from "./HardBreak";
 export * from "./Heading";
 export * from "./Image";
@@ -55,6 +55,11 @@ export type Extension =
       name: typeof BulletListName;
       attrs?: BulletListAttrs;
     }
+  | typeof CharacterCountName
+  | {
+      name: typeof CharacterCountName;
+      attrs?: CharacterCountAttrs;
+    }
   | typeof CodeName
   | {
       name: typeof CodeName;
@@ -64,11 +69,6 @@ export type Extension =
   | {
       name: typeof CodeBlockName;
       attrs?: CodeBlockAttrs;
-    }
-  | typeof CounterName
-  | {
-      name: typeof CounterName;
-      attrs?: CounterAttrs;
     }
   | typeof HeadingName
   | {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProsemirrorNode } from "remirror";
 import styled from "@emotion/styled";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
-import { adjustColorOpacity, colors } from "../theme";
+import { colors } from "../theme";
 import { ImageValueAttrs } from "../extensions";
 
 export default {
@@ -58,21 +58,13 @@ Code.args = {
   ],
 };
 
-export const Counter = Template.bind({});
+export const characterCount = Template.bind({});
 
-Counter.args = {
+characterCount.args = {
   style: {
     maxHeight: 183,
   },
-  extensions: [
-    {
-      name: "counter",
-      attrs: {
-        maximumStrategy: "characters",
-        maximum: 10,
-      },
-    },
-  ],
+  maxLength: 100,
 };
 
 export const TextColor = Template.bind({});

@@ -34,7 +34,7 @@ export default `
 
   // Indent
   ol, ul {
-    padding-inline-start: 20px;
+    padding-inline-start: 1.4em;
   }
 
   li:has([data-node-indent]) [data-node-indent],

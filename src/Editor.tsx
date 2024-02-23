@@ -41,6 +41,7 @@ export type IEditorProps = {
   editable?: boolean;
   extensions?: Extension[];
   initialContent?: string;
+  maxLength?: number;
   onChange?: (doc?: ProsemirrorNode) => void;
   onFullScreen?: () => void;
   placeholder?: string;
