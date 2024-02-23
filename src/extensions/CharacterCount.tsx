@@ -56,10 +56,12 @@ const Indicator = styled.div<{ color: string }>`
   position: sticky;
   top: 100%;
   text-align: end;
-  line-height: 0;
+  height: 0;
 
   > span {
     color: ${(props) => props.color};
-    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 `;
