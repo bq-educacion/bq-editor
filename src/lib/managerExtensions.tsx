@@ -3,7 +3,6 @@ import {
   CommandsExtension,
   IdentifierSchemaAttributes,
 } from "remirror";
-import { CountStrategy, CountExtension } from "@remirror/extension-count";
 import {
   BoldExtension,
   BulletListExtension,
@@ -59,15 +58,7 @@ const managerExtensions = ({
       new CommandsExtension({}),
       new HardBreakExtension({}),
       new NodeFormattingExtension({}),
-      ...(maxLength
-        ? [
-            new CountExtension({
-              maximum: maxLength,
-              maximumStrategy: CountStrategy.CHARACTERS,
-            }),
-            new CharacterCountExtension({ maxLength }),
-          ]
-        : []),
+      ...(maxLength ? [new CharacterCountExtension({ maxLength })] : []),
       ...(bold ? [new BoldExtension({})] : []),
       ...(bulletList ? [new BulletListExtension({})] : []),
       ...(code ? [new CodeExtension({})] : []),

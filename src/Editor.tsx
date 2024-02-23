@@ -8,14 +8,9 @@ import {
 import CodeEditor from "./CodeEditor";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
-import { Text, Toolbar, Wrapper } from "./components";
+import { Counter, Text, Toolbar, Wrapper } from "./components";
 import { defaultExtensions, Extension, MarkdownPreview } from "./extensions";
-import {
-  checkEmptyEditor,
-  editorHandlers,
-  managerExtensions,
-  toolbarHandlers,
-} from "./lib";
+import { checkEmptyEditor, managerExtensions, toolbarHandlers } from "./lib";
 
 export {
   htmlToProsemirrorNode as htmlToEditorNode,
@@ -94,7 +89,7 @@ const Editor: FC<IEditorProps> = (props) => {
             handlers={toolbarHandlers(input)}
             onFullScreen={onFullScreen}
           />
-          <Text className="bq-editor-text">{editorHandlers(input)}</Text>
+          <Text className="bq-editor-text"></Text>
         </MarkdownDualEditor>
       </Wrapper>
     );
@@ -132,6 +127,11 @@ const Editor: FC<IEditorProps> = (props) => {
     stringHandler,
   });
 
+  const length =
+    state.doc.content.size -
+    2 -
+    ((state.doc.content["content"] || []).length - 1);
+
   return (
     <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
       <Remirror
@@ -148,7 +148,11 @@ const Editor: FC<IEditorProps> = (props) => {
           handlers={toolbarHandlers(input)}
           onFullScreen={onFullScreen}
         />
-        <Text className="bq-editor-text">{editorHandlers(input)}</Text>
+        <Text className="bq-editor-text">
+          {props.maxLength && (
+            <Counter maxLength={props.maxLength} length={length} />
+          )}
+        </Text>
         {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}
       </Remirror>
     </Wrapper>

@@ -1,7 +1,6 @@
 import { AlignAttrs, AlignName } from "./Align";
 import { BoldAttrs, BoldName } from "./Bold";
 import { BulletListAttrs, BulletListName } from "./BulletList";
-import { CharacterCountAttrs, CharacterCountName } from "./CharacterCount";
 import { CodeAttrs, CodeName } from "./Code";
 import { CodeBlockAttrs, CodeBlockName } from "./CodeBlock";
 import { HeadingAttrs, HeadingName } from "./Heading";
@@ -54,11 +53,6 @@ export type Extension =
   | {
       name: typeof BulletListName;
       attrs?: BulletListAttrs;
-    }
-  | typeof CharacterCountName
-  | {
-      name: typeof CharacterCountName;
-      attrs?: CharacterCountAttrs;
     }
   | typeof CodeName
   | {
