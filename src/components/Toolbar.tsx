@@ -24,9 +24,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
   const [hasScroll, setHasScroll] = useState(false);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
 
-  const heading = handlers.find((elements) =>
-    elements.find((element) => element?.type?.name === "HeadingSelect")
-  );
+  const visible = handlers[0];
 
   const scrollTo = (left: number) => {
     ref.current?.scrollBy({ left, behavior: "smooth" });
@@ -83,31 +81,32 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
         <BarContent hasConfig={hasConfig} hasScroll={hasScroll} scroll={scroll}>
           {hasConfig ? (
             <>
-              {heading ? (
-                [heading].map((elements, index) => getBarGroup(elements, index))
-              ) : (
-                <BarGroup />
+              {handlers.map(
+                (elements, index) => index === 0 && getBarGroup(elements, index)
               )}
-              <StyledFloating
-                isOpen={isConfigOpen}
-                keepOpen
-                allowedPlacements={["bottom-start"]}
-                offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
-                target={
-                  <BarButton onClick={() => setIsConfigOpen(true)}>
-                    <GearIcon />
-                  </BarButton>
-                }
-              >
-                <>
-                  <CloseButton onClick={() => setIsConfigOpen(false)}>
-                    <CloseIcon />
-                  </CloseButton>
-                  {handlers.map((elements, index) =>
-                    getBarGroup(elements, index, true)
-                  )}
-                </>
-              </StyledFloating>
+              {handlers.length > 1 && (
+                <StyledFloating
+                  isOpen={isConfigOpen}
+                  keepOpen
+                  allowedPlacements={["bottom-start"]}
+                  offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
+                  target={
+                    <BarButton onClick={() => setIsConfigOpen(true)}>
+                      <GearIcon />
+                    </BarButton>
+                  }
+                >
+                  <>
+                    <CloseButton onClick={() => setIsConfigOpen(false)}>
+                      <CloseIcon />
+                    </CloseButton>
+                    {handlers.map(
+                      (elements, index) =>
+                        index > 0 && getBarGroup(elements, index, true)
+                    )}
+                  </>
+                </StyledFloating>
+              )}
               {!!onFullScreen && (
                 <BarButton
                   onClick={() => {
@@ -191,6 +190,13 @@ const BarContent = styled.div<{
       margin-right: ${scroll < 1 ? 40 : 0}px;
     `}
 `;
+
+// const BarHeader = styled.div`
+//   display: flex;
+//   align-items: center;
+//   border-right: 1px solid ${colors.grey4};
+//   height: 40px;
+// `;
 
 const BarGroup = styled.div<{ dropdown?: boolean }>`
   display: flex;
