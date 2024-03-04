@@ -276,7 +276,7 @@ const ScrollButton = styled(BarButton)<{ left?: boolean }>`
   border-left: 1px solid ${colors.grey4};
   z-index: 1;
   position: absolute;
-  top: 1px;
+  top: 0;
   right: 0;
 
   ${({ left }) =>
