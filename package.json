@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "keywords": [
     "prosemirror",
     "react",
@@ -19,25 +19,25 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.3",
     "@floating-ui/react": "^0.26.9",
-    "@remirror/extension-node-formatting": "^2.0.13",
-    "@remirror/pm": "2.0.4",
-    "@remirror/react": "2.0.27",
+    "@remirror/extension-node-formatting": "2.0.13",
+    "@remirror/pm": "2.0.8",
+    "@remirror/react": "2.0.35",
     "classnames": "^2.3.1",
     "create-context-state": "^2.0.0",
-    "remirror": "2.0.26"
+    "remirror": "2.0.39"
   },
   "peerDependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@floating-ui/dom": "^1.6.3",
     "@floating-ui/react": "^0.26.9",
-    "@remirror/pm": "2.0.4",
-    "@remirror/react": "2.0.27",
+    "@remirror/pm": "2.0.8",
+    "@remirror/react": "2.0.35",
     "classnames": "^2.3.1",
     "create-context-state": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remirror": "2.0.26"
+    "remirror": "2.0.39"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
