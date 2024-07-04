@@ -26,6 +26,11 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
 
   const visible = handlers[0];
 
+  const handleConfigOpen = () => {
+    window.dispatchEvent(new CustomEvent("floating-close"));
+    setIsConfigOpen(true);
+  };
+
   const scrollTo = (left: number) => {
     ref.current?.scrollBy({ left, behavior: "smooth" });
   };
@@ -68,6 +73,14 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const handler = () => setIsConfigOpen(false);
+
+    window.addEventListener("floating-close", handler);
+
+    return () => window.removeEventListener("floating-close", handler);
+  }, []);
+
   if (!handlers) return null;
 
   return (
@@ -91,7 +104,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
                   allowedPlacements={["bottom-start"]}
                   offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
                   target={
-                    <BarButton onClick={() => setIsConfigOpen(true)}>
+                    <BarButton onClick={handleConfigOpen}>
                       <GearIcon />
                     </BarButton>
                   }
