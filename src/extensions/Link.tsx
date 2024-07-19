@@ -1,5 +1,5 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import {
   ApplySchemaAttributes,
@@ -69,7 +69,7 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
       setIsOpen={setIsOpen}
       target={
         <ToolbarButton
-          className={classNames({ active: isOpen || active.link() })}
+          className={cx({ active: isOpen || active.link() })}
           onClick={() => setIsOpen(true)}
         >
           <LinkIcon />

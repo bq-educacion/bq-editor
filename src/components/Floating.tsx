@@ -1,3 +1,4 @@
+import cx from "classnames";
 import styled from "@emotion/styled";
 import {
   Alignment,
@@ -88,7 +89,7 @@ const Floating: FC<IFloatingProps> = ({
         isOpen &&
         createPortal(
           <Container
-            className={`${className || ""} bq-editor-floating`}
+            className={cx(className, "bq-editor-floating")}
             ref={refs.setFloating}
             style={floatingStyles}
             {...getFloatingProps()}

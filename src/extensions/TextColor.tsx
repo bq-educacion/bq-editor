@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC, useState } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../theme";
@@ -29,7 +29,7 @@ const TextColorButton: FC<TextColorAttrs> = ({
       isOpen={isOpen}
       target={
         <ToolbarButton
-          className={classNames({ active: active.textColor() })}
+          className={cx({ active: active.textColor() })}
           onClick={() => {
             if (colorHandler) {
               setIsOpen(true);

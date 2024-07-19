@@ -1,5 +1,5 @@
 import { useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC, useState } from "react";
 import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
@@ -50,7 +50,7 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
       setIsOpen={setIsOpen}
       target={
         <ToolbarButton
-          className={classNames({ active: isOpen || active.image() })}
+          className={cx({ active: isOpen || active.image() })}
           onClick={() => setIsOpen(true)}
         >
           <ImageIcon />

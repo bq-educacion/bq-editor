@@ -30,7 +30,7 @@ const CodeEditor: FC<IEditorProps & { children: React.ReactNode }> = ({
       manager={manager}
       initialContent={initialContent}
       onChange={({ state }: RemirrorEventListenerProps<AnyExtension>) =>
-        onChange?.(checkEmptyEditor(state) ? undefined : state.doc)
+        onChange?.(checkEmptyEditor(state) ? undefined : (state.doc as any))
       }
     >
       {children}

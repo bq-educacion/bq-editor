@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { colors } from "../theme";
 import DropIcon from "../icons/Drop";
@@ -42,9 +42,8 @@ const Select: FC<ISelectProps> = ({
   return (
     <Container
       {...props}
-      className={classNames({
+      className={cx(className, {
         active: !!options.find((o) => o.active)?.label,
-        [`${className}`]: true,
       })}
       ref={ref}
       isOpen={isOpen}

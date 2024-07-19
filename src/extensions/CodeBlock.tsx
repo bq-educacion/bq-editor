@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { CodeBlockExtension } from "remirror/extensions";
 import CodeBlockIcon from "../icons/CodeBlock";
@@ -16,27 +15,16 @@ const CodeBlockButton: FC = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.codeBlock() })}
+      className={cx({ active: active.codeBlock() })}
       disabled={!commands.toggleCodeBlock.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
         commands.toggleCodeBlock();
       }}
     >
-      <StyledIcon>
-        <CodeBlockIcon />
-      </StyledIcon>
+      <CodeBlockIcon />
     </ToolbarButton>
   );
 };
 
 export { CodeBlockButton, CodeBlockExtension };
-
-const StyledIcon = styled.div`
-  display: flex;
-
-  svg {
-    height: 12px;
-    margin-top: 4px;
-  }
-`;

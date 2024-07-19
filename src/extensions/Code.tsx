@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { CodeExtension } from "remirror/extensions";
 import CodeIcon from "../icons/Code";
@@ -16,27 +15,16 @@ const CodeButton: FC<CodeAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.code() })}
+      className={cx({ active: active.code() })}
       disabled={!commands.toggleCode.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
         commands.toggleCode();
       }}
     >
-      <StyledIcon>
-        <CodeIcon />
-      </StyledIcon>
+      <CodeIcon />
     </ToolbarButton>
   );
 };
 
 export { CodeButton, CodeExtension };
-
-const StyledIcon = styled.div`
-  display: flex;
-
-  svg {
-    height: 12px;
-    margin-top: 4px;
-  }
-`;

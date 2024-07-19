@@ -1,5 +1,5 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { ItalicExtension } from "remirror/extensions";
 import ItalicIcon from "../icons/Italic";
@@ -15,7 +15,7 @@ const ItalicButton: FC<ItalicAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.italic() })}
+      className={cx({ active: active.italic() })}
       disabled={!commands.toggleItalic.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();

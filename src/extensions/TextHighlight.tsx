@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC, useState } from "react";
 import { TextHighlightExtension } from "remirror/extensions";
 import { colors } from "../theme";
@@ -29,7 +29,7 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
       isOpen={isOpen}
       target={
         <ToolbarButton
-          className={classNames({ active: active.textHighlight() })}
+          className={cx({ active: active.textHighlight() })}
           onClick={() => {
             if (colorHandler) {
               setIsOpen(true);

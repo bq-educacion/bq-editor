@@ -1,3 +1,4 @@
+import cx from "classnames";
 import { Remirror, useRemirror } from "@remirror/react";
 import React, { CSSProperties, FC } from "react";
 import {
@@ -48,6 +49,7 @@ export type IEditorProps = {
 const Editor: FC<IEditorProps> = (props) => {
   let extensions = props.extensions || defaultExtensions;
   const {
+    className,
     codeEditor,
     dualEditor,
     editable,
@@ -82,7 +84,7 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
+      <Wrapper className={cx(className, "bq-editor")} style={style}>
         <MarkdownDualEditor {...input}>
           <Toolbar
             className="bq-editor-toolbar"
@@ -106,7 +108,7 @@ const Editor: FC<IEditorProps> = (props) => {
     };
 
     return (
-      <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
+      <Wrapper className={cx(className, "bq-editor")} style={style}>
         <CodeEditor {...input}>
           <Text className="bq-editor-text" codeEditor />
         </CodeEditor>
@@ -133,14 +135,14 @@ const Editor: FC<IEditorProps> = (props) => {
     ((state.doc.content["content"] || []).length - 1);
 
   return (
-    <Wrapper className={"bq-editor" + (props.className || "")} style={style}>
+    <Wrapper className={cx(className, "bq-editor")} style={style}>
       <Remirror
         editable={editable}
         manager={manager}
         state={state}
         onChange={({ state }) => {
           setState(state);
-          onChange?.(checkEmptyEditor(state) ? undefined : state.doc);
+          onChange?.(checkEmptyEditor(state) ? undefined : (state.doc as any));
         }}
       >
         <Toolbar

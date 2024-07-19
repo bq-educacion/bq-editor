@@ -1,5 +1,5 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { BoldExtension } from "remirror/extensions";
 import BoldIcon from "../icons/Bold";
@@ -15,7 +15,7 @@ const BoldButton: FC<BoldAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.bold() })}
+      className={cx({ active: active.bold() })}
       disabled={!commands.toggleBold.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();

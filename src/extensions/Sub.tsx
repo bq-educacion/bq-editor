@@ -1,5 +1,5 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { SubExtension } from "remirror/extensions";
 import SubIcon from "../icons/Sub";
@@ -15,7 +15,7 @@ const SubButton: FC<SubAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.sub() })}
+      className={cx({ active: active.sub() })}
       disabled={!commands.toggleSubscript.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();

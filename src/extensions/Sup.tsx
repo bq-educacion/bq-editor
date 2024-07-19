@@ -1,5 +1,5 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { SupExtension } from "remirror/extensions";
 import SupIcon from "../icons/Sup";
@@ -15,7 +15,7 @@ const SupButton: FC<SupAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.sup() })}
+      className={cx({ active: active.sup() })}
       disabled={!commands.toggleSuperscript.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();

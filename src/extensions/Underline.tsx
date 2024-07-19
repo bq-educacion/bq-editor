@@ -1,5 +1,5 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
-import classNames from "classnames";
+import cx from "classnames";
 import React, { FC } from "react";
 import { UnderlineExtension } from "remirror/extensions";
 import UnderlineIcon from "../icons/Underline";
@@ -15,7 +15,7 @@ const UnderlineButton: FC<UnderlineAttrs> = () => {
 
   return (
     <ToolbarButton
-      className={classNames({ active: active.underline() })}
+      className={cx({ active: active.underline() })}
       disabled={!commands.toggleUnderline.enabled()}
       onClick={() => {
         chain.focus({ to, from }).run();
