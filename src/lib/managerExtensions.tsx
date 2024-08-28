@@ -13,7 +13,9 @@ import {
   getExtension,
   HardBreakExtension,
   HeadingExtension,
+  ImageAttrs,
   ImageExtension,
+  ImagePreventDropExtension,
   ItalicExtension,
   LinkExtension,
   ListItemExtension,
@@ -53,6 +55,8 @@ const managerExtensions = ({
   const textHighlight = getExtension("text-highlight", extensions);
   const underline = getExtension("underline", extensions);
 
+  const imgAttrs = image && (getAttrs(image) as ImageAttrs);
+
   return {
     extensions: () => [
       new CommandsExtension({}),
@@ -70,7 +74,13 @@ const managerExtensions = ({
           ]
         : []),
       ...(heading ? [new HeadingExtension(getAttrs(heading))] : []),
-      ...(image ? [new ImageExtension(getAttrs(image))] : []),
+      ...(image
+        ? [
+            imgAttrs.preventDrop
+              ? new ImagePreventDropExtension(imgAttrs)
+              : new ImageExtension(imgAttrs),
+          ]
+        : []),
       ...(italic ? [new ItalicExtension({})] : []),
       ...(link ? [new LinkExtension(getAttrs(link))] : []),
       ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),

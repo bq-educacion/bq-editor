@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.72",
+  "version": "0.0.73",
   "keywords": [
     "prosemirror",
     "react",
@@ -90,8 +90,8 @@
   "scripts": {
     "build": "rollup -c",
     "prepare": "husky install",
-    "storybook:start": "storybook dev",
-    "storybook:build": "storybook build"
+    "sb-start": "storybook dev",
+    "sb-build": "storybook build"
   },
   "repository": {
     "type": "git",

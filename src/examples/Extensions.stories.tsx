@@ -230,6 +230,23 @@ Image.args = {
   ],
 };
 
+export const ImagePreventDrop = Template.bind({});
+
+ImagePreventDrop.args = {
+  extensions: [
+    "bold",
+    "italic",
+    "underline",
+    {
+      name: "image",
+      attrs: {
+        preventDrop: true,
+        imageHandler: Image.args.extensions[3].attrs.imageHandler,
+      },
+    },
+  ],
+};
+
 // export const ImageResizable = Template.bind({});
 
 // ImageResizable.args = {

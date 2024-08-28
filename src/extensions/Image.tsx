@@ -1,3 +1,4 @@
+import { FilePasteRule, PasteRule } from "@remirror/pm/paste-rules";
 import { useRemirrorContext } from "@remirror/react";
 import cx from "classnames";
 import React, { FC, useState } from "react";
@@ -29,6 +30,7 @@ export type ImageAttrs = {
     value?: string
   ) => JSX.Element;
   resizable?: boolean; // TODO: Not working
+  preventDrop?: boolean;
 };
 
 const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
@@ -65,4 +67,24 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   );
 };
 
-export { ImageButton, ImageExtension };
+class ImagePreventDropExtension extends ImageExtension {
+  createPasteRules(): PasteRule[] {
+    // This is safe because ImageExtension.createPasteRules only returns a single PasteRule
+    const [parentPasteRule] = super.createPasteRules();
+
+    return [
+      {
+        type: "file",
+        regexp: /image/i,
+        fileHandler: (fileProps) => {
+          if (fileProps.type === "drop") {
+            return false;
+          }
+          return (parentPasteRule as FilePasteRule).fileHandler(fileProps);
+        },
+      },
+    ];
+  }
+}
+
+export { ImageButton, ImageExtension, ImagePreventDropExtension };

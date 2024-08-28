@@ -154,7 +154,7 @@ Corresponding extensions, handler or codeEditor must be added so visor can inter
 To see more examples and play with them, download the project, install dependencies and run our storybook:
 
 ```
-yarn storybook:start
+yarn sb-start
 ```
 
 ## Contribute
