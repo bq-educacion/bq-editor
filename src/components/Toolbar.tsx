@@ -24,8 +24,6 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
   const [hasScroll, setHasScroll] = useState(false);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
 
-  const visible = handlers[0];
-
   const handleConfigOpen = () => {
     window.dispatchEvent(new CustomEvent("floating-close"));
     setIsConfigOpen(true);
@@ -49,37 +47,40 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
     );
 
   useEffect(() => {
-    const onScroll = () => {
-      if (!ref.current) return;
-      const { scrollLeft, scrollWidth, clientWidth } = ref.current;
-      if (clientWidth <= mobile) {
-        setHasConfig(true);
-        setHasScroll(false);
-        setScroll(0);
-        return;
-      } else {
-        setHasConfig(false);
-        setHasScroll(scrollWidth > clientWidth);
-        setScroll(scrollLeft / (scrollWidth - clientWidth));
-      }
-    };
+    if (handlers && ref.current) {
+      const onScroll = () => {
+        const { scrollLeft, scrollWidth, clientWidth } = ref.current;
+        if (clientWidth <= mobile) {
+          setHasConfig(true);
+          setHasScroll(false);
+          setScroll(0);
+          return;
+        } else {
+          setHasConfig(false);
+          setHasScroll(scrollWidth > clientWidth);
+          setScroll(scrollLeft / (scrollWidth - clientWidth));
+        }
+      };
 
-    ref.current?.addEventListener("scroll", onScroll);
-    ref.current?.addEventListener("resize", onScroll);
-    onScroll();
-    return () => {
-      ref.current?.removeEventListener("scroll", onScroll);
-      ref.current?.removeEventListener("resize", onScroll);
-    };
-  }, [visible]);
+      onScroll();
+      ref.current.addEventListener("scroll", onScroll);
+      ref.current.addEventListener("resize", onScroll);
+      return () => {
+        ref.current.removeEventListener("scroll", onScroll);
+        ref.current.removeEventListener("resize", onScroll);
+      };
+    }
+  }, [handlers, ref.current]);
 
   useEffect(() => {
-    const handler = () => setIsConfigOpen(false);
+    if (handlers) {
+      const onFloatingClose = () => setIsConfigOpen(false);
 
-    window.addEventListener("floating-close", handler);
-
-    return () => window.removeEventListener("floating-close", handler);
-  }, []);
+      window.addEventListener("floating-close", onFloatingClose);
+      return () =>
+        window.removeEventListener("floating-close", onFloatingClose);
+    }
+  }, [handlers]);
 
   if (!handlers) return null;
 
