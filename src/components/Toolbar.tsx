@@ -47,8 +47,9 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
     );
 
   useEffect(() => {
-    if (handlers && ref.current) {
+    if (handlers) {
       const onScroll = () => {
+        if (!ref.current) return;
         const { scrollLeft, scrollWidth, clientWidth } = ref.current;
         if (clientWidth <= mobile) {
           setHasConfig(true);
@@ -63,11 +64,11 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
       };
 
       onScroll();
-      ref.current.addEventListener("scroll", onScroll);
-      ref.current.addEventListener("resize", onScroll);
+      ref.current?.addEventListener("scroll", onScroll);
+      ref.current?.addEventListener("resize", onScroll);
       return () => {
-        ref.current.removeEventListener("scroll", onScroll);
-        ref.current.removeEventListener("resize", onScroll);
+        ref.current?.removeEventListener("scroll", onScroll);
+        ref.current?.removeEventListener("resize", onScroll);
       };
     }
   }, [handlers, ref.current]);
