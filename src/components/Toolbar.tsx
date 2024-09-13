@@ -71,7 +71,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
       ref.current?.removeEventListener("scroll", onScroll);
       ref.current?.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [visible]);
 
   useEffect(() => {
     const handler = () => setIsConfigOpen(false);
