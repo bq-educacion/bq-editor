@@ -65,11 +65,11 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
     };
 
     ref.current?.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", onScroll);
+    ref.current?.addEventListener("resize", onScroll);
     onScroll();
     return () => {
       ref.current?.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      ref.current?.removeEventListener("resize", onScroll);
     };
   }, []);
 
@@ -154,7 +154,8 @@ const BarButton = styled.div`
   justify-content: center;
   width: 40px;
   min-width: 40px;
-  height: 100%;
+  height: 40px;
+  min-height: 40px;
   cursor: pointer;
 `;
 
