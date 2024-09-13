@@ -74,6 +74,7 @@ const Text: FC<ITextProps> = ({ children, ...props }) => {
 export default Text;
 
 const Container = styled.div<{ codeEditor?: boolean }>`
+  cursor: text;
   position: relative;
   background-color: ${colors.white};
   border: 1px solid ${colors.grey4};
@@ -91,8 +92,8 @@ const Container = styled.div<{ codeEditor?: boolean }>`
     border-top: 1px solid ${colors.grey4};
     position: absolute;
     height: 0;
-    left: -1px;
-    right: -1px;
+    left: 0;
+    right: 0;
     top: -1px;
   }
 

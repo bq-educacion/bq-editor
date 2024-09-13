@@ -154,7 +154,7 @@ const BarButton = styled.div`
   justify-content: center;
   width: 40px;
   min-width: 40px;
-  height: 40px;
+  height: 100%;
   cursor: pointer;
 `;
 
@@ -167,6 +167,7 @@ const BarContainer = styled.div`
   color: ${colors.dark};
   position: relative;
   height: 40px;
+  box-sizing: border-box;
   overflow: scroll;
 
   ::-webkit-scrollbar {

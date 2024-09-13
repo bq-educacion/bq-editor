@@ -23,8 +23,10 @@ const Indicator = styled.div<{ color: string }>`
 
   > span {
     color: ${(props) => props.color};
+    background-color: ${colors.white};
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     right: 0;
+    padding-left: 5px;
   }
 `;
