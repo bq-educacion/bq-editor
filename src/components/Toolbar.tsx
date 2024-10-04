@@ -11,7 +11,7 @@ import ToolbarFloating from "./ToolbarFloating";
 interface IToolbarProps {
   className?: string;
   handlers: JSX.Element[][];
-  onFullScreen?: () => void;
+  onFullScreen?: (e: React.MouseEvent) => void;
 }
 
 const mobile = 300;
@@ -126,8 +126,8 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               )}
               {hasFullScreen && (
                 <BarButton
-                  onClick={() => {
-                    onFullScreen();
+                  onClick={(e: React.MouseEvent) => {
+                    onFullScreen(e);
                     setIsConfigOpen(false);
                   }}
                   style={{ borderLeft: `1px solid ${colors.grey4}` }}

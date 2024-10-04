@@ -39,7 +39,7 @@ export type IEditorProps = {
   initialContent?: string;
   maxLength?: number;
   onChange?: (doc?: ProsemirrorNode) => void;
-  onFullScreen?: () => void;
+  onFullScreen?: (e: React.MouseEvent) => void;
   placeholder?: string;
   selection?: Selection;
   stringHandler?: StringHandler;

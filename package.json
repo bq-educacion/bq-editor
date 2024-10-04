@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.78",
+  "version": "0.0.80",
   "keywords": [
     "prosemirror",
     "react",
