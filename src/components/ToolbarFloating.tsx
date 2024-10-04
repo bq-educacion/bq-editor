@@ -18,7 +18,7 @@ import React, { FC, useEffect, useState } from "react";
 import { adjustColorOpacity, colors } from "../theme";
 import { createPortal } from "react-dom";
 
-interface IFloatingProps {
+interface IToolbarFloatingProps {
   alignment?: Alignment;
   allowedPlacements?: Placement[];
   children: JSX.Element;
@@ -32,7 +32,7 @@ interface IFloatingProps {
   target: JSX.Element;
 }
 
-const Floating: FC<IFloatingProps> = ({
+const ToolbarFloating: FC<IToolbarFloatingProps> = ({
   alignment,
   allowedPlacements,
   children,
@@ -96,13 +96,13 @@ const Floating: FC<IFloatingProps> = ({
           >
             {children}
           </Container>,
-          document.body
+          document.getElementsByClassName("bq-editor-toolbar")[0]
         )}
     </>
   );
 };
 
-export default Floating;
+export default ToolbarFloating;
 
 const Container = styled.div`
   background-color: ${colors.white};

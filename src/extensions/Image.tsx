@@ -4,7 +4,7 @@ import cx from "classnames";
 import React, { FC, useState } from "react";
 import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
-import { Floating, ToolbarButton } from "../components";
+import { ToolbarButton, ToolbarFloating } from "../components";
 
 export const ImageName = "image";
 
@@ -47,7 +47,7 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   };
 
   return (
-    <Floating
+    <ToolbarFloating
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       target={
@@ -63,7 +63,7 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
         onSubmit(value, attrs);
         setIsOpen(false);
       })}
-    </Floating>
+    </ToolbarFloating>
   );
 };
 

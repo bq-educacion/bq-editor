@@ -4,7 +4,7 @@ import cx from "classnames";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { colors } from "../theme";
 import DropIcon from "../icons/Drop";
-import Floating from "./Floating";
+import ToolbarFloating from "./ToolbarFloating";
 
 interface IOption {
   active?: boolean;
@@ -48,7 +48,7 @@ const Select: FC<ISelectProps> = ({
       ref={ref}
       isOpen={isOpen}
     >
-      <Floating
+      <ToolbarFloating
         allowedPlacements={["top-start", "bottom-start"]}
         isOpen={isOpen}
         target={

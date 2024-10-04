@@ -5,7 +5,7 @@ import React, { FC, useState } from "react";
 import { TextHighlightExtension } from "remirror/extensions";
 import { colors } from "../theme";
 import TextHighlightIcon from "../icons/TextHighlight";
-import { Floating, ToolbarButton } from "../components";
+import { ToolbarButton, ToolbarFloating } from "../components";
 
 export const TextHighlightName = "text-highlight";
 
@@ -25,7 +25,7 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Floating
+    <ToolbarFloating
       isOpen={isOpen}
       target={
         <ToolbarButton
@@ -54,7 +54,7 @@ const TextHighlightButton: FC<TextHighlightAttrs> = ({
         }
         setIsOpen(false);
       }, attrs.textHighlight()?.highlight as string)}
-    </Floating>
+    </ToolbarFloating>
   );
 };
 

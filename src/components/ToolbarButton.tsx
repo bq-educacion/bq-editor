@@ -24,7 +24,7 @@ const StyledButton = styled.button<IButtonProps>`
   justify-content: center;
   display: flex;
   min-height: 40px;
-  width: 38px;
+  width: 35px;
   padding: 0;
   outline: none;
   transition: all 0.3s ease-out;

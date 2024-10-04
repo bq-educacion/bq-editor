@@ -5,7 +5,7 @@ import React, { FC, useState } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../theme";
 import TextColorIcon from "../icons/TextColor";
-import { Floating, ToolbarButton } from "../components";
+import { ToolbarButton, ToolbarFloating } from "../components";
 
 export const TextColorName = "text-color";
 
@@ -25,7 +25,7 @@ const TextColorButton: FC<TextColorAttrs> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Floating
+    <ToolbarFloating
       isOpen={isOpen}
       target={
         <ToolbarButton
@@ -54,7 +54,7 @@ const TextColorButton: FC<TextColorAttrs> = ({
         }
         setIsOpen(false);
       }, attrs.textColor()?.color as string)}
-    </Floating>
+    </ToolbarFloating>
   );
 };
 

@@ -6,7 +6,7 @@ import AngleIcon from "../icons/Angle";
 import CloseIcon from "../icons/Close";
 import FullScreenIcon from "../icons/FullScreen";
 import GearIcon from "../icons/Gear";
-import Floating from "./Floating";
+import ToolbarFloating from "./ToolbarFloating";
 
 interface IToolbarProps {
   className?: string;
@@ -19,9 +19,9 @@ const mobile = 300;
 const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [scroll, setScroll] = useState(0);
   const [hasConfig, setHasConfig] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
+  const hasFullScreen = !!onFullScreen;
   const [isConfigOpen, setIsConfigOpen] = useState(false);
 
   const handleConfigOpen = () => {
@@ -50,16 +50,14 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
     if (handlers) {
       const onScroll = () => {
         if (!ref.current) return;
-        const { scrollLeft, scrollWidth, clientWidth } = ref.current;
+        const { scrollWidth, clientWidth } = ref.current;
         if (clientWidth <= mobile) {
           setHasConfig(true);
           setHasScroll(false);
-          setScroll(0);
           return;
         } else {
           setHasConfig(false);
           setHasScroll(scrollWidth > clientWidth);
-          setScroll(scrollLeft / (scrollWidth - clientWidth));
         }
       };
 
@@ -87,24 +85,28 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
 
   return (
     <BarWrapper className={className}>
-      {hasScroll && scroll > 0 && (
-        <ScrollButton left onClick={() => scrollTo(-220)}>
+      {hasScroll && (
+        <ScrollButton start onClick={() => scrollTo(-220)}>
           <AngleIcon />
         </ScrollButton>
       )}
       <BarContainer ref={ref}>
-        <BarContent hasConfig={hasConfig} hasScroll={hasScroll} scroll={scroll}>
+        <BarContent
+          hasConfig={hasConfig}
+          hasScroll={hasScroll}
+          hasFullScreen={hasFullScreen}
+        >
           {hasConfig ? (
             <>
               {handlers.map(
                 (elements, index) => index === 0 && getBarGroup(elements, index)
               )}
               {handlers.length > 1 && (
-                <StyledFloating
+                <Floating
                   isOpen={isConfigOpen}
                   keepOpen
                   allowedPlacements={["bottom-start"]}
-                  offset={[-41, 50 + (onFullScreen ? 40 : 0)]}
+                  offset={[-41, 50 + (hasFullScreen ? 40 : 0)]}
                   target={
                     <BarButton onClick={handleConfigOpen}>
                       <GearIcon />
@@ -120,9 +122,9 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
                         index > 0 && getBarGroup(elements, index, true)
                     )}
                   </>
-                </StyledFloating>
+                </Floating>
               )}
-              {!!onFullScreen && (
+              {hasFullScreen && (
                 <BarButton
                   onClick={() => {
                     onFullScreen();
@@ -135,14 +137,23 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
               )}
             </>
           ) : (
-            handlers.map((elements, index) => getBarGroup(elements, index))
+            <>
+              {handlers.map((elements, index) => getBarGroup(elements, index))}
+            </>
           )}
         </BarContent>
       </BarContainer>
-      {hasScroll && scroll < 1 && (
-        <ScrollButton onClick={() => scrollTo(220)}>
-          <AngleIcon />
-        </ScrollButton>
+      {hasScroll && (
+        <>
+          {hasFullScreen && (
+            <ScrollButton onClick={onFullScreen} offset={40}>
+              <FullScreenIcon />
+            </ScrollButton>
+          )}
+          <ScrollButton onClick={() => scrollTo(220)}>
+            <AngleIcon />
+          </ScrollButton>
+        </>
       )}
     </BarWrapper>
   );
@@ -181,7 +192,7 @@ const BarContainer = styled.div`
 const BarContent = styled.div<{
   hasConfig?: boolean;
   hasScroll?: boolean;
-  scroll?: number;
+  hasFullScreen?: boolean;
 }>`
   position: absolute;
   display: flex;
@@ -200,11 +211,11 @@ const BarContent = styled.div<{
       }
     `}
 
-  ${({ hasScroll, scroll }) =>
+  ${({ hasScroll, hasFullScreen }) =>
     hasScroll &&
     css`
-      margin-left: ${scroll > 0 ? 40 : 0}px;
-      margin-right: ${scroll < 1 ? 40 : 0}px;
+      padding-left: 40px;
+      padding-right: ${hasFullScreen ? 80 : 40}px;
     `}
 `;
 
@@ -287,17 +298,17 @@ const CloseButton = styled(BarButton)`
   }
 `;
 
-const ScrollButton = styled(BarButton)<{ left?: boolean }>`
+const ScrollButton = styled(BarButton)<{ start?: boolean; offset?: number }>`
   background-color: ${colors.grey5};
   border-right: 1px solid ${colors.grey4};
   border-left: 1px solid ${colors.grey4};
   z-index: 1;
   position: absolute;
   top: 0;
-  right: 0;
+  right: ${({ offset }) => offset || 0}px;
 
-  ${({ left }) =>
-    left &&
+  ${({ start }) =>
+    start &&
     css`
       left: 0;
       right: unset;
@@ -308,7 +319,7 @@ const ScrollButton = styled(BarButton)<{ left?: boolean }>`
     `}
 `;
 
-const StyledFloating = styled(Floating)`
+const Floating = styled(ToolbarFloating)`
   flex-direction: column;
   border: 1px solid ${colors.grey4};
   box-shadow: none;

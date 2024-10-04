@@ -9,7 +9,7 @@ import {
 } from "remirror";
 import { LinkExtension as RemirrorLinkExtension } from "remirror/extensions";
 import LinkIcon from "../icons/Link";
-import { Floating, ToolbarButton } from "../components";
+import { ToolbarButton, ToolbarFloating } from "../components";
 
 export const LinkName = "link";
 
@@ -64,7 +64,7 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Floating
+    <ToolbarFloating
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       target={
@@ -84,7 +84,7 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
         }
         setIsOpen(false);
       }, href)}
-    </Floating>
+    </ToolbarFloating>
   );
 };
 
