@@ -44,6 +44,7 @@ export type IEditorProps = {
   selection?: Selection;
   stringHandler?: StringHandler;
   style?: CSSProperties;
+  styleText?: CSSProperties;
 };
 
 const Editor: FC<IEditorProps> = (props) => {
@@ -59,6 +60,7 @@ const Editor: FC<IEditorProps> = (props) => {
     selection = "end",
     stringHandler,
     style,
+    styleText,
   } = props;
 
   if (stringHandler === "markdown") {
@@ -135,7 +137,11 @@ const Editor: FC<IEditorProps> = (props) => {
     ((state.doc.content["content"] || []).length - 1);
 
   return (
-    <Wrapper className={cx(className, "bq-editor")} style={style}>
+    <Wrapper
+      className={cx(className, "bq-editor")}
+      style={style}
+      styleText={styleText}
+    >
       <Remirror
         editable={editable}
         manager={manager}

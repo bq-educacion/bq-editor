@@ -86,7 +86,7 @@ const Toolbar: FC<IToolbarProps> = ({ className, handlers, onFullScreen }) => {
   return (
     <BarWrapper className={className}>
       {hasScroll && (
-        <ScrollButton start onClick={() => scrollTo(-220)}>
+        <ScrollButton start={1} onClick={() => scrollTo(-220)}>
           <AngleIcon />
         </ScrollButton>
       )}
@@ -298,7 +298,7 @@ const CloseButton = styled(BarButton)`
   }
 `;
 
-const ScrollButton = styled(BarButton)<{ start?: boolean; offset?: number }>`
+const ScrollButton = styled(BarButton)<{ start?: number; offset?: number }>`
   background-color: ${colors.grey5};
   border-right: 1px solid ${colors.grey4};
   border-left: 1px solid ${colors.grey4};
