@@ -62,7 +62,9 @@ const managerExtensions = ({
       new CommandsExtension({}),
       new HardBreakExtension({}),
       new NodeFormattingExtension({}),
-      ...(maxLength ? [new CharacterCountExtension({ maxLength })] : []),
+      ...(maxLength?.truncate
+        ? [new CharacterCountExtension({ maxLength: maxLength.value })]
+        : []),
       ...(bold ? [new BoldExtension({})] : []),
       ...(bulletList ? [new BulletListExtension({})] : []),
       ...(code ? [new CodeExtension({})] : []),

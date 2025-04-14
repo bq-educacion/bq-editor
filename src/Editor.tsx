@@ -37,7 +37,8 @@ export type IEditorProps = {
   editable?: boolean;
   extensions?: Extension[];
   initialContent?: string;
-  maxLength?: number;
+  maxLength?: { value: number; truncate?: boolean };
+  counter?: boolean;
   onChange?: (doc?: ProsemirrorNode) => void;
   onFullScreen?: (e: React.MouseEvent) => void;
   placeholder?: string;
@@ -52,6 +53,7 @@ const Editor: FC<IEditorProps> = (props) => {
   const {
     className,
     codeEditor,
+    counter,
     dualEditor,
     editable,
     initialContent: content,
@@ -157,7 +159,7 @@ const Editor: FC<IEditorProps> = (props) => {
           onFullScreen={onFullScreen}
         />
         <Text className="bq-editor-text">
-          {props.maxLength && (
+          {(counter || props.maxLength) && (
             <Counter maxLength={props.maxLength} length={length} />
           )}
         </Text>

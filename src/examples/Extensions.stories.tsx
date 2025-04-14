@@ -64,7 +64,16 @@ characterCount.args = {
   style: {
     maxHeight: 183,
   },
-  maxLength: 10,
+  counter: true,
+};
+
+export const characterMaxLength = Template.bind({});
+
+characterMaxLength.args = {
+  style: {
+    maxHeight: 183,
+  },
+  maxLength: { value: 10, truncate: true },
 };
 
 export const TextColor = Template.bind({});
