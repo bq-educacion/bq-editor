@@ -38,6 +38,80 @@ const composeText = (text: string, composition: string): string => {
           break;
       }
       break;
+    case "`":
+      switch (text) {
+        case "a":
+          compose = "à";
+          break;
+        case "e":
+          compose = "è";
+          break;
+        case "i":
+          compose = "ì";
+          break;
+        case "o":
+          compose = "ò";
+          break;
+        case "u":
+          compose = "ù";
+          break;
+        case "A":
+          compose = "À";
+          break;
+        case "E":
+          compose = "È";
+          break;
+        case "I":
+          compose = "Ì";
+          break;
+        case "O":
+          compose = "Ò";
+          break;
+        case "U":
+          compose = "Ù";
+          break;
+        default:
+          compose = composition + text;
+          break;
+      }
+      break;
+    case "~":
+      switch (text) {
+        case "a":
+          compose = "ã";
+          break;
+        case "e":
+          compose = "ẽ";
+          break;
+        case "i":
+          compose = "ĩ";
+          break;
+        case "o":
+          compose = "õ";
+          break;
+        case "u":
+          compose = "ũ";
+          break;
+        case "A":
+          compose = "Ã";
+          break;
+        case "E":
+          compose = "Ẽ";
+          break;
+        case "I":
+          compose = "Ĩ";
+          break;
+        case "O":
+          compose = "Õ";
+          break;
+        case "U":
+          compose = "Ũ";
+          break;
+        default:
+          compose = composition + text;
+          break;
+      }
+      break;
     case "^":
       switch (text) {
         case "a":
