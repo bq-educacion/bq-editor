@@ -8,7 +8,6 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:storybook/recommended",
   ],
   ignorePatterns: ["dist", ".storybook"],
   parser: "@typescript-eslint/parser",

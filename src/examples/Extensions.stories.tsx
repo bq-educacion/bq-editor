@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ProsemirrorNode } from "remirror";
 import styled from "@emotion/styled";
+import { fn } from "@storybook/test";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 import { colors } from "../theme";
 import { ImageValueAttrs } from "../extensions";
@@ -42,6 +43,7 @@ RichText.args = {
     "italic",
     "underline",
   ],
+  onChange: fn(),
 };
 
 export const Code = Template.bind({});
@@ -56,6 +58,7 @@ Code.args = {
       },
     },
   ],
+  onChange: fn(),
 };
 
 export const characterCount = Template.bind({});
@@ -65,6 +68,7 @@ characterCount.args = {
     maxHeight: 183,
   },
   counter: true,
+  onChange: fn(),
 };
 
 export const characterMaxLength = Template.bind({});
@@ -74,6 +78,7 @@ characterMaxLength.args = {
     maxHeight: 183,
   },
   maxLength: { value: 10, truncate: true },
+  onChange: fn(),
 };
 
 export const TextColor = Template.bind({});
@@ -93,6 +98,7 @@ TextColor.args = {
       },
     },
   ],
+  onChange: fn(),
 };
 
 export const TextColorHandler = Template.bind({});
@@ -134,18 +140,21 @@ TextColorHandler.args = {
       name: "text-highlight",
     },
   ],
+  onChange: fn(),
 };
 
 export const SubSup = Template.bind({});
 
 SubSup.args = {
   extensions: ["sub", "sup"],
+  onChange: fn(),
 };
 
 export const Lists = Template.bind({});
 
 Lists.args = {
   extensions: ["bullet-list", "ordered-list"],
+  onChange: fn(),
 };
 
 export const Link = Template.bind({});
@@ -179,6 +188,7 @@ Link.args = {
       },
     },
   ],
+  onChange: fn(),
 };
 
 export const AutoLink = Template.bind({});
@@ -194,6 +204,7 @@ AutoLink.args = {
   ],
   placeholder: `Type "www.educacion.bq.com" to insert a link`,
   stringHandler: "html",
+  onChange: fn(),
 };
 
 export const Image = Template.bind({});
@@ -237,6 +248,7 @@ Image.args = {
       },
     },
   ],
+  onChange: fn(),
 };
 
 export const ImagePreventDrop = Template.bind({});
@@ -254,6 +266,7 @@ ImagePreventDrop.args = {
       },
     },
   ],
+  onChange: fn(),
 };
 
 // export const ImageResizable = Template.bind({});
@@ -271,18 +284,21 @@ ImagePreventDrop.args = {
 //       },
 //     },
 //   ],
+//   onChange: fn(),
 // };
 
 export const Align = Template.bind({});
 
 Align.args = {
   extensions: ["align"],
+  onChange: fn(),
 };
 
 export const Indent = Template.bind({});
 
 Indent.args = {
   extensions: ["indent"],
+  onChange: fn(),
 };
 
 const Modal = styled.div`

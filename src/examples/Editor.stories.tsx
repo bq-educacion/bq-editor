@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ProsemirrorNode } from "remirror";
+import { fn } from "@storybook/test";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 import { colors } from "../theme";
 import basic from "./content/basic.json";
@@ -33,6 +34,7 @@ export const Default = Template.bind({});
 Default.args = {
   placeholder: "Start typing...",
   initialContent: JSON.stringify(basic),
+  onChange: fn(),
 };
 
 export const Html = Template.bind({});
@@ -41,6 +43,7 @@ Html.args = {
   stringHandler: "html",
   placeholder: "Start htmling...",
   initialContent: html,
+  onChange: fn(),
 };
 
 export const Markdown = Template.bind({});
@@ -50,6 +53,7 @@ Markdown.args = {
   stringHandler: "markdown",
   placeholder: "Start markdowning...",
   initialContent: markdown,
+  onChange: fn(),
 };
 
 export const Code = Template.bind({});
@@ -57,4 +61,5 @@ export const Code = Template.bind({});
 Code.args = {
   codeEditor: true,
   initialContent: JSON.stringify(code),
+  onChange: fn(),
 };
