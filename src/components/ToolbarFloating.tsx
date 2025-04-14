@@ -80,9 +80,6 @@ const ToolbarFloating: FC<IToolbarFloatingProps> = ({
     setIsOpen(isOpenProp);
   }, [isOpenProp]);
 
-  const toolbar =
-    refs.domReference.current?.parentElement.closest(".bq-editor-toolbar");
-
   return (
     <>
       <div ref={refs.setReference} {...getReferenceProps()}>
@@ -99,7 +96,7 @@ const ToolbarFloating: FC<IToolbarFloatingProps> = ({
           >
             {children}
           </Container>,
-          toolbar || document.body
+          document.body
         )}
     </>
   );
