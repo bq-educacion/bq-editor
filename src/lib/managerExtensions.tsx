@@ -6,7 +6,6 @@ import {
 import {
   BoldExtension,
   BulletListExtension,
-  CharacterCountExtension,
   CodeBlockExtension,
   CodeExtension,
   getAttrs,
@@ -27,6 +26,7 @@ import {
   SupExtension,
   TextColorExtension,
   TextHighlightExtension,
+  TextPlainExtension,
   UnderlineExtension,
 } from "../extensions";
 import { IEditorProps } from "../Editor";
@@ -62,9 +62,10 @@ const managerExtensions = ({
       new CommandsExtension({}),
       new HardBreakExtension({}),
       new NodeFormattingExtension({}),
-      ...(maxLength?.truncate
-        ? [new CharacterCountExtension({ maxLength: maxLength.value })]
-        : []),
+      new TextPlainExtension({
+        maxLength: maxLength?.truncate && maxLength?.value,
+        preventDropImage: imgAttrs?.preventDrop,
+      }),
       ...(bold ? [new BoldExtension({})] : []),
       ...(bulletList ? [new BulletListExtension({})] : []),
       ...(code ? [new CodeExtension({})] : []),

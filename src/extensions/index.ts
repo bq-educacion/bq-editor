@@ -18,7 +18,6 @@ import { UnderlineAttrs, UnderlineName } from "./Underline";
 export * from "./Align";
 export * from "./Bold";
 export * from "./BulletList";
-export * from "./CharacterCount";
 export * from "./Code";
 export * from "./CodeBlock";
 export * from "./HardBreak";
@@ -36,6 +35,7 @@ export * from "./Sub";
 export * from "./Sup";
 export * from "./TextColor";
 export * from "./TextHighlight";
+export * from "./TextPlain";
 export * from "./Underline";
 
 export type Extension =
