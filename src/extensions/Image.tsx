@@ -5,8 +5,8 @@ import React, { FC, useState } from "react";
 import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
 import { ToolbarButton, ToolbarFloating } from "../components";
-import type { CreateExtensionPlugin, Fragment as IFragment } from "remirror";
-import { Fragment, Node, Slice } from "prosemirror-model";
+import { Node, Slice, Fragment } from "@remirror/pm/model";
+import { CreateExtensionPlugin } from "remirror";
 
 export const ImageName = "image";
 
@@ -94,8 +94,8 @@ class ImagePreventDropExtension extends ImageExtension {
   createPlugin(): CreateExtensionPlugin {
     return {
       props: {
-        transformPasted(slice) {
-          const stripImages = (frag: IFragment): IFragment => {
+        transformPasted(slice: Slice) {
+          const stripImages = (frag: Fragment): Fragment => {
             const children: Node[] = [];
             frag.forEach((node) => {
               if (node.type.name !== "image") {
@@ -105,10 +105,10 @@ class ImagePreventDropExtension extends ImageExtension {
             return Fragment.fromArray(children);
           };
           return new Slice(
-            stripImages(slice.content as unknown as IFragment),
+            stripImages(slice.content as Fragment),
             slice.openStart,
             slice.openEnd
-          ) as any;
+          ) as Slice;
         },
       },
     };
