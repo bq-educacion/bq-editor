@@ -15,15 +15,6 @@ class TextPlainExtension extends PlainExtension<{
       filterTransaction: (transaction, state) => {
         const size = transaction.doc.content.size;
         const nodes = transaction.doc.content["content"] || [];
-        if (preventDropImage) {
-          // Check if the transaction has any images
-          const hasImages = nodes.some((node) =>
-            node.content.content.some((child) => child.type.name === "image")
-          );
-          if (hasImages) {
-            return false;
-          }
-        }
         if (maxLength !== undefined) {
           // Check if the transaction exceeds the maximum length
           const length = size - 2 - (nodes.length - 1);

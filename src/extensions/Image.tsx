@@ -5,6 +5,8 @@ import React, { FC, useState } from "react";
 import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
 import { ToolbarButton, ToolbarFloating } from "../components";
+import { Node, Slice, Fragment } from "@remirror/pm/model";
+import { CreateExtensionPlugin } from "remirror";
 
 export const ImageName = "image";
 
@@ -78,12 +80,38 @@ class ImagePreventDropExtension extends ImageExtension {
         regexp: /image/i,
         fileHandler: (fileProps) => {
           if (fileProps.type === "drop") {
-            return false;
+            return false; // block drops
+          }
+          if (fileProps.type === "paste") {
+            return false; // block pastes
           }
           return (parentPasteRule as FilePasteRule).fileHandler(fileProps);
         },
       },
     ];
+  }
+
+  createPlugin(): CreateExtensionPlugin {
+    return {
+      props: {
+        transformPasted(slice: Slice) {
+          const stripImages = (frag: Fragment): Fragment => {
+            const children: Node[] = [];
+            frag.forEach((node) => {
+              if (node.type.name !== "image") {
+                children.push(node.copy(stripImages(node.content)));
+              }
+            });
+            return Fragment.fromArray(children);
+          };
+          return new Slice(
+            stripImages(slice.content as Fragment),
+            slice.openStart,
+            slice.openEnd
+          ) as Slice;
+        },
+      },
+    };
   }
 }
 

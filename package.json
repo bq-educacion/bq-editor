@@ -1,7 +1,7 @@
 {
   "name": "bq-editor",
   "description": "BQ Remirror Editor",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "keywords": [
     "prosemirror",
     "react",
@@ -81,6 +81,12 @@
     "tslib": "^2.4.0",
     "typescript": "^4.8.2",
     "webpack": "^5.74.0"
+  },
+  "resolutions": {
+    "prosemirror-model": "1.21.3",
+    "prosemirror-state": "1.4.3",
+    "prosemirror-view": "1.33.8",
+    "prosemirror-transform": "1.9.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
