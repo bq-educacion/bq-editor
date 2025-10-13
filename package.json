@@ -19,25 +19,21 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.3",
     "@floating-ui/react": "^0.26.9",
-    "@remirror/extension-node-formatting": "2.0.13",
-    "@remirror/pm": "2.0.8",
-    "@remirror/react": "2.0.35",
+    "@remirror/core":"3.0.2",
     "classnames": "^2.3.1",
-    "create-context-state": "^2.0.0",
-    "remirror": "2.0.39"
+    "create-context-state": "^2.0.0"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@floating-ui/dom": "^1.6.3",
-    "@floating-ui/react": "^0.26.9",
-    "@remirror/pm": "2.0.8",
-    "@remirror/react": "2.0.35",
-    "classnames": "^2.3.1",
-    "create-context-state": "^2.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "remirror": "2.0.39"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "remirror": "^3.0.3",
+    "@remirror/core":"3.0.2",
+
+    "@remirror/react": "^3.0.3",
+    "@remirror/pm": "^3.0.1",
+    "@remirror/extension-node-formatting": "^3.0.2",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -55,8 +51,8 @@
     "@storybook/react-webpack5": "^8.6.12",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/theming": "^8.6.12",
-    "@types/react": "^18.0.18",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
     "eslint": "^8.0.1",
@@ -71,8 +67,12 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "remirror": "^3.0.3",
+    "@remirror/react": "^3.0.3",
+    "@remirror/pm": "^3.0.1",
+    "@remirror/extension-node-formatting": "^3.0.0",
     "require-from-string": "^2.0.2",
     "rollup": "^2.79.0",
     "rollup-plugin-dts": "^4.2.2",
@@ -81,12 +81,6 @@
     "tslib": "^2.4.0",
     "typescript": "^4.8.2",
     "webpack": "^5.74.0"
-  },
-  "resolutions": {
-    "prosemirror-model": "1.21.3",
-    "prosemirror-state": "1.4.3",
-    "prosemirror-view": "1.33.8",
-    "prosemirror-transform": "1.9.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -107,6 +101,5 @@
   "bugs": {
     "url": "https://github.com/bq-educacion/editor/issues"
   },
-  "homepage": "https://github.com/bq-educacion/editor#readme",
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "homepage": "https://github.com/bq-educacion/editor#readme"
 }
