@@ -5,7 +5,13 @@ import {
   useEditorEvent,
   useRemirrorContext,
 } from "@remirror/react";
-import React, { CompositionEvent, FC, useCallback, useState } from "react";
+import React, {
+  CompositionEvent,
+  FC,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import { composeText } from "../lib";
 import { colors, styles } from "../theme";
 
@@ -30,6 +36,12 @@ const insertCustomText = (text: string) => {
 
 const Text: FC<ITextProps> = ({ children, ...props }) => {
   const { getRootProps } = useRemirrorContext();
+
+  const rootPropsRef = useRef<ReturnType<typeof getRootProps>>();
+  if (!rootPropsRef.current) {
+    rootPropsRef.current = getRootProps();
+  }
+
   useEditorEvent("textInput", ({ text }) => onInput(text));
   const { customDispatch } = useCommands();
 
@@ -64,7 +76,7 @@ const Text: FC<ITextProps> = ({ children, ...props }) => {
     <Container
       {...props}
       onCompositionUpdate={onComposition}
-      {...getRootProps()}
+      {...rootPropsRef.current}
     >
       {children}
     </Container>
@@ -99,7 +111,6 @@ const Container = styled.div<{ codeEditor?: boolean }>`
 
   &:focus-within {
     border-color: ${colors.dark};
-
     &::before {
       border-color: ${colors.dark};
     }
@@ -126,15 +137,13 @@ const Container = styled.div<{ codeEditor?: boolean }>`
     ${styles}
   }
 
-  ${(props) =>
-    props.codeEditor &&
+  ${(p) =>
+    p.codeEditor &&
     css`
       padding: 0;
       min-height: unset;
-
       .remirror-editor {
         height: 100%;
-
         pre {
           margin: 0 !important;
         }
