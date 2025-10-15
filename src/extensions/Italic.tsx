@@ -1,12 +1,19 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import cx from "classnames";
 import React, { FC } from "react";
-import { ItalicExtension } from "remirror/extensions";
+import { ItalicExtension as BaseItalicExtension } from "remirror/extensions";
 import ItalicIcon from "../icons/Italic";
 import { ToolbarButton } from "../components";
 
-export const ItalicNname = "italic";
+// Custom ItalicExtension without *...* rule
+export class ItalicExtension extends BaseItalicExtension {
+  createInputRules() {
+    const rules = super.createInputRules();
+    return [rules[1] || [...rules]];
+  }
+}
 
+export const ItalicNname = "italic";
 export type ItalicAttrs = Record<string, never>;
 
 const ItalicButton: FC<ItalicAttrs> = () => {
@@ -27,4 +34,4 @@ const ItalicButton: FC<ItalicAttrs> = () => {
   );
 };
 
-export { ItalicButton, ItalicExtension };
+export { ItalicButton };
