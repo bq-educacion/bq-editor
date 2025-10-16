@@ -13,7 +13,7 @@ export class ItalicExtension extends BaseItalicExtension {
   }
 }
 
-export const ItalicNname = "italic";
+export const ItalicName = "italic";
 export type ItalicAttrs = Record<string, never>;
 
 const ItalicButton: FC<ItalicAttrs> = () => {

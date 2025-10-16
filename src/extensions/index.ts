@@ -6,7 +6,7 @@ import { CodeBlockAttrs, CodeBlockName } from "./CodeBlock";
 import { HeadingAttrs, HeadingName } from "./Heading";
 import { ImageAttrs, ImageName } from "./Image";
 import { IndentAttrs, IndentName } from "./Indent";
-import { ItalicAttrs, ItalicNname } from "./Italic";
+import { ItalicAttrs, ItalicName } from "./Italic";
 import { LinkAttrs, LinkName } from "./Link";
 import { OrderedListAttrs, OrderedListName } from "./OrderedList";
 import { SubAttrs, SubName } from "./Sub";
@@ -79,9 +79,9 @@ export type Extension =
       name: typeof IndentName;
       attrs?: IndentAttrs;
     }
-  | typeof ItalicNname
+  | typeof ItalicName
   | {
-      name: typeof ItalicNname;
+      name: typeof ItalicName;
       attrs?: ItalicAttrs;
     }
   | typeof LinkName
