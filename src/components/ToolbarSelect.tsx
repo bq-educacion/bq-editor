@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import cx from "classnames";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState, JSX } from "react";
 import { colors } from "../theme";
 import DropIcon from "../icons/Drop";
 import ToolbarFloating from "./ToolbarFloating";
@@ -189,7 +189,7 @@ const ValuesEmpty = styled.div`
   white-space: nowrap;
 `;
 
-const Value = styled.div<{ active: boolean; disabled?: boolean }>`
+const Value = styled.div<{ active?: boolean; disabled?: boolean }>`
   align-items: center;
   cursor: pointer;
   display: flex;

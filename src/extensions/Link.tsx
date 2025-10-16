@@ -1,6 +1,13 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import cx from "classnames";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  JSX,
+} from "react";
 import {
   ApplySchemaAttributes,
   isElementDomNode,
@@ -80,7 +87,7 @@ const LinkButton: FC<LinkAttrs> = ({ linkHandler }) => {
         if ((value || "") === "") {
           onRemove();
         } else {
-          onSubmit(value);
+          onSubmit(value || "");
         }
         setIsOpen(false);
       }, href)}

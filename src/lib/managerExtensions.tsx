@@ -55,7 +55,9 @@ const managerExtensions = ({
   const textHighlight = getExtension("text-highlight", extensions);
   const underline = getExtension("underline", extensions);
 
-  const imgAttrs = image && (getAttrs(image) as ImageAttrs);
+  const imgAttrs = image ? (getAttrs(image) as ImageAttrs) : undefined;
+  const headingAttrs = heading ? getAttrs(heading) : undefined;
+  const linkAttrs = link ? getAttrs(link) : undefined;
 
   return {
     extensions: () => [
@@ -63,7 +65,7 @@ const managerExtensions = ({
       new HardBreakExtension({}),
       new NodeFormattingExtension({}),
       new TextPlainExtension({
-        maxLength: maxLength?.truncate && maxLength?.value,
+        maxLength: maxLength?.truncate ? maxLength?.value : undefined,
         preventDropImage: imgAttrs?.preventDrop,
       }),
       ...(bold ? [new BoldExtension({})] : []),
@@ -76,8 +78,8 @@ const managerExtensions = ({
             }),
           ]
         : []),
-      ...(heading ? [new HeadingExtension(getAttrs(heading))] : []),
-      ...(image
+      ...(headingAttrs ? [new HeadingExtension(headingAttrs)] : []),
+      ...(imgAttrs
         ? [
             imgAttrs.preventDrop
               ? new ImagePreventDropExtension(imgAttrs)
@@ -85,7 +87,7 @@ const managerExtensions = ({
           ]
         : []),
       ...(italic ? [new ItalicExtension({})] : []),
-      ...(link ? [new LinkExtension(getAttrs(link))] : []),
+      ...(linkAttrs ? [new LinkExtension(linkAttrs)] : []),
       ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
       ...(orderedList ? [new OrderedListExtension({})] : []),
       ...(sub ? [new SubExtension({})] : []),

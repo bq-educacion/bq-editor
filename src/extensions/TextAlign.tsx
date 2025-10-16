@@ -42,7 +42,8 @@ const TextAlignButtons: FC<ITextAlignButtonsProps> = ({ setState }) => {
     const tr = state.tr;
 
     const firstPos = $from.pos - 1;
-    let lastPos: number, pos: number;
+    let lastPos = 0;
+    let pos: number;
     pos = firstPos;
     do {
       pos++;

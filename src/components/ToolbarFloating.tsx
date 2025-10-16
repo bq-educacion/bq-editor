@@ -14,14 +14,14 @@ import {
   useFloating,
   useInteractions,
 } from "@floating-ui/react";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, JSX } from "react";
 import { adjustColorOpacity, colors } from "../theme";
 import { createPortal } from "react-dom";
 
 interface IToolbarFloatingProps {
   alignment?: Alignment;
   allowedPlacements?: Placement[];
-  children: JSX.Element;
+  children?: JSX.Element;
   className?: string;
   isOpen?: boolean;
   setIsOpen?: (isOpen: boolean) => void;
