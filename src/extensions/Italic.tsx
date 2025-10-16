@@ -9,7 +9,7 @@ import { ToolbarButton } from "../components";
 export class ItalicExtension extends BaseItalicExtension {
   createInputRules() {
     const rules = super.createInputRules();
-    return [rules[1] || [...rules]];
+    return [...(rules[1] ? [rules[1]] : rules)];
   }
 }
 
