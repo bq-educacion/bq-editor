@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { Remirror, useRemirror } from "@remirror/react";
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, JSX } from "react";
 import {
   htmlToProsemirrorNode,
   ProsemirrorNode,

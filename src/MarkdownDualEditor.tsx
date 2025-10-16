@@ -97,7 +97,7 @@ const VisualEditor: FC<{ children: React.ReactNode }> = ({ children }) => {
       onChange={({
         helpers,
         state,
-      }): RemirrorEventListenerProps<AnyExtension> => {
+      }): RemirrorEventListenerProps<AnyExtension> | null => {
         setMarkdown(helpers.getMarkdown(state));
         return null;
       }}
@@ -118,7 +118,7 @@ const MarkdownTextEditor: FC = () => {
       onChange={({
         helpers,
         state,
-      }): RemirrorEventListenerProps<AnyExtension> => {
+      }): RemirrorEventListenerProps<AnyExtension> | null => {
         setVisual(helpers.getText({ state }));
         return null;
       }}

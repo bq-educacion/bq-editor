@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import { IEditorProps } from "../Editor";
 import {
   AlignButtons,
@@ -26,7 +26,10 @@ import {
   UnderlineButton,
 } from "../extensions";
 
-const toolbarHandlers = ({ colorHandler, extensions = [] }: IEditorProps) => {
+const toolbarHandlers = ({
+  colorHandler,
+  extensions = [],
+}: IEditorProps): JSX.Element[][] => {
   const align = getExtension("align", extensions);
   const bold = getExtension("bold", extensions);
   const bulletList = getExtension("bullet-list", extensions);
@@ -78,8 +81,8 @@ const toolbarHandlers = ({ colorHandler, extensions = [] }: IEditorProps) => {
   ];
 
   return handlers.filter(
-    (elements) => elements.filter((element) => element).length > 0
-  );
+    (elements) => elements.filter((element) => element !== undefined).length > 0
+  ) as JSX.Element[][];
 };
 
 export default toolbarHandlers;

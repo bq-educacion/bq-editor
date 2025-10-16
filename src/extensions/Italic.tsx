@@ -4,13 +4,14 @@ import React, { FC } from "react";
 import { ItalicExtension as BaseItalicExtension } from "remirror/extensions";
 import ItalicIcon from "../icons/Italic";
 import { ToolbarButton } from "../components";
+import { InputRule } from "remirror";
 
 // Custom ItalicExtension without *...* rule
 export class ItalicExtension extends BaseItalicExtension {
-  createInputRules() {
+  createInputRules: () => InputRule[] = () => {
     const rules = super.createInputRules();
     return [...(rules[1] ? [rules[1]] : rules)];
-  }
+  };
 }
 
 export const ItalicName = "italic";

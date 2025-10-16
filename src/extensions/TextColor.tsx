@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useRemirrorContext } from "@remirror/react";
 import cx from "classnames";
-import React, { FC, useState } from "react";
+import React, { FC, useState, JSX } from "react";
 import { TextColorExtension } from "remirror/extensions";
 import { colors } from "../theme";
 import TextColorIcon from "../icons/TextColor";

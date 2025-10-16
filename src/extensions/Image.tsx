@@ -1,7 +1,7 @@
 import { FilePasteRule, PasteRule } from "@remirror/pm/paste-rules";
 import { useRemirrorContext } from "@remirror/react";
 import cx from "classnames";
-import React, { FC, useState } from "react";
+import React, { FC, useState, JSX } from "react";
 import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
 import { ToolbarButton, ToolbarFloating } from "../components";
@@ -39,7 +39,7 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
   const { active, commands } = useRemirrorContext({ autoUpdate: true });
   const [isOpen, setIsOpen] = useState(false);
 
-  const onSubmit = (src?: string, attrs?: ImageValueAttrs) => {
+  const onSubmit = (src: string, attrs?: ImageValueAttrs) => {
     if ((src || "") === "") return;
     commands.insertImage({
       resizable,
@@ -62,7 +62,7 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
       }
     >
       {imageHandler?.((value, attrs) => {
-        onSubmit(value, attrs);
+        onSubmit(value || "", attrs);
         setIsOpen(false);
       })}
     </ToolbarFloating>

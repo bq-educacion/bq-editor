@@ -37,7 +37,7 @@ const insertCustomText = (text: string) => {
 const Text: FC<ITextProps> = ({ children, ...props }) => {
   const { getRootProps } = useRemirrorContext();
 
-  const rootPropsRef = useRef<ReturnType<typeof getRootProps>>();
+  const rootPropsRef = useRef<ReturnType<typeof getRootProps>>(null);
   if (!rootPropsRef.current) {
     rootPropsRef.current = getRootProps();
   }

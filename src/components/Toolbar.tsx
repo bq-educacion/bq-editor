@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState, JSX } from "react";
 import { colors } from "../theme";
 import AngleIcon from "../icons/Angle";
 import CloseIcon from "../icons/Close";
