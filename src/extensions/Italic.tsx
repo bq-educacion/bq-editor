@@ -4,14 +4,23 @@ import React, { FC } from "react";
 import { ItalicExtension as BaseItalicExtension } from "remirror/extensions";
 import ItalicIcon from "../icons/Italic";
 import { ToolbarButton } from "../components";
-import { InputRule } from "remirror";
+import { InputRule } from "@remirror/pm/inputrules";
+import { MarkPasteRule } from "@remirror/pm/paste-rules";
 
 // Custom ItalicExtension without *...* rule
 export class ItalicExtension extends BaseItalicExtension {
   createInputRules: () => InputRule[] = () => {
-    const rules = super.createInputRules();
-    return [...(rules[1] ? [rules[1]] : rules)];
+    const rules: (InputRule & { match?: RegExp })[] = super.createInputRules();
+    return rules.filter((rule) => {
+      return !(rule.match?.source || "").includes("*");
+    });
   };
+  createPasteRules(): MarkPasteRule[] {
+    const rules = super.createPasteRules();
+    return rules.filter((rule) => {
+      return !rule.regexp.source.includes("*");
+    });
+  }
 }
 
 export const ItalicName = "italic";
