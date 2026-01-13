@@ -46,6 +46,7 @@ export type IEditorProps = {
   stringHandler?: StringHandler;
   style?: CSSProperties;
   styleText?: CSSProperties;
+  getImageUrl?: (id: string) => Promise<string>;
 };
 
 const Editor: FC<IEditorProps> = (props) => {
