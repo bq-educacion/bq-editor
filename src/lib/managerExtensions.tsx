@@ -36,6 +36,7 @@ const managerExtensions = ({
   maxLength,
   placeholder,
   stringHandler,
+  getImageUrl,
 }: IEditorProps): {
   extensions: () => AnyExtension[];
   extraAttributes: IdentifierSchemaAttributes[];
@@ -82,7 +83,10 @@ const managerExtensions = ({
       ...(imgAttrs
         ? [
             imgAttrs.preventDrop
-              ? new ImagePreventDropExtension(imgAttrs)
+              ? new ImagePreventDropExtension({
+                  ...imgAttrs,
+                  getImageUrl,
+                } as any)
               : new ImageExtension(imgAttrs),
           ]
         : []),
