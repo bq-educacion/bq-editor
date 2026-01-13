@@ -80,7 +80,7 @@ class ImagePreventDropExtension extends ImageExtension {
 
   createNodeViews() {
     return {
-      image: (node: Node, view: any, getPos: any) => {
+      image: (node: Node) => {
         const dom = document.createElement("img");
 
         Object.entries(node.attrs).forEach(([key, value]) => {
@@ -97,8 +97,24 @@ class ImagePreventDropExtension extends ImageExtension {
           dom.setAttribute("data-image-id", node.attrs.imageId);
 
           const cachedUrl = this.urlCache.get(node.attrs.imageId);
+          const hasSrc = node.attrs.src && node.attrs.src.trim() !== "";
+
           if (cachedUrl) {
             dom.src = cachedUrl;
+          } else if (!hasSrc) {
+            const getImageUrl = (this.options as any).getImageUrl;
+            if (getImageUrl && typeof getImageUrl === "function") {
+              getImageUrl(node.attrs.imageId)
+                .then((url: string) => {
+                  if (url) {
+                    this.urlCache.set(node.attrs.imageId, url);
+                    dom.src = url;
+                  }
+                })
+                .catch((err: any) => {
+                  console.error("Failed to load image URL:", err);
+                });
+            }
           }
 
           dom.onerror = () => {
