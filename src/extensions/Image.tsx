@@ -24,6 +24,7 @@ export type ImageValueAttrs = {
   rotate?: string;
   title?: string;
   width?: string;
+  imageId?: string;
 };
 
 export type ImageAttrs = {
@@ -33,6 +34,7 @@ export type ImageAttrs = {
   ) => JSX.Element;
   resizable?: boolean; // TODO: Not working
   preventDrop?: boolean;
+  getImageUrl?: (id: string) => Promise<string>;
 };
 
 const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
@@ -70,6 +72,73 @@ const ImageButton: FC<ImageAttrs> = ({ imageHandler, resizable }) => {
 };
 
 class ImagePreventDropExtension extends ImageExtension {
+  private urlCache = new Map<string, string>();
+
+  get name() {
+    return "image" as const;
+  }
+
+  createNodeViews() {
+    return {
+      image: (node: Node) => {
+        const dom = document.createElement("img");
+
+        Object.entries(node.attrs).forEach(([key, value]) => {
+          if (value && key !== "imageId") {
+            if (key === "src") {
+              dom.src = value as string;
+            } else {
+              dom.setAttribute(key, String(value));
+            }
+          }
+        });
+
+        if (node.attrs.imageId) {
+          dom.setAttribute("data-image-id", node.attrs.imageId);
+
+          const cachedUrl = this.urlCache.get(node.attrs.imageId);
+          const hasSrc = node.attrs.src && node.attrs.src.trim() !== "";
+
+          if (cachedUrl) {
+            dom.src = cachedUrl;
+          } else if (!hasSrc) {
+            const getImageUrl = (this.options as any).getImageUrl;
+            if (getImageUrl && typeof getImageUrl === "function") {
+              getImageUrl(node.attrs.imageId)
+                .then((url: string) => {
+                  if (url) {
+                    this.urlCache.set(node.attrs.imageId, url);
+                    dom.src = url;
+                  }
+                })
+                .catch((err: any) => {
+                  console.error("Failed to load image URL:", err);
+                });
+            }
+          }
+
+          dom.onerror = () => {
+            const getImageUrl = (this.options as any).getImageUrl;
+            if (getImageUrl && typeof getImageUrl === "function") {
+              getImageUrl(node.attrs.imageId)
+                .then((url: string) => {
+                  if (url) {
+                    this.urlCache.set(node.attrs.imageId, url);
+                    dom.src = url;
+                  }
+                })
+                .catch((err: any) => {
+                  console.error("Failed to load image URL:", err);
+                });
+            }
+          };
+        }
+
+        return { dom };
+      },
+    };
+  }
+
   createPasteRules(): PasteRule[] {
     // This is safe because ImageExtension.createPasteRules only returns a single PasteRule
     const [parentPasteRule] = super.createPasteRules();
@@ -111,6 +180,42 @@ class ImagePreventDropExtension extends ImageExtension {
           ) as Slice;
         },
       },
+    };
+  }
+
+  createNodeSpec(extra: any, override: any) {
+    const spec = super.createNodeSpec(extra, override);
+
+    return {
+      ...spec,
+      attrs: {
+        ...spec.attrs,
+        imageId: { default: null },
+      },
+      toDOM: (node: any) => {
+        const domSpec = spec.toDOM!(node);
+        const [tag, attrs, ...rest] = domSpec as [string, any, ...any[]];
+
+        const newAttrs = {
+          ...attrs,
+          ...(node.attrs.imageId && { "data-image-id": node.attrs.imageId }),
+        };
+
+        return [tag, newAttrs, ...rest] as any;
+      },
+      parseDOM: [
+        {
+          tag: "img[data-image-id]",
+          getAttrs: (dom: any) => {
+            const baseAttrs = spec.parseDOM?.[0]?.getAttrs?.(dom) || {};
+            return {
+              ...(typeof baseAttrs === "object" ? baseAttrs : {}),
+              imageId: (dom as HTMLElement).dataset.imageId,
+            };
+          },
+        },
+        ...(spec.parseDOM ?? []),
+      ],
     };
   }
 }
