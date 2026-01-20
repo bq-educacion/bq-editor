@@ -86,7 +86,7 @@ const managerExtensions = ({
               ? new ImagePreventDropExtension({
                   ...imgAttrs,
                   getImageUrl,
-                } as any)
+                } as unknown as ImageAttrs)
               : new ImageExtension(imgAttrs),
           ]
         : []),

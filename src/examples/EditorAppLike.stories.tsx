@@ -5,29 +5,21 @@ import { ProsemirrorNode } from "remirror";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 
 /* helpers (debounce + mock upload) */
-function useDebounced<T extends (...args: any[]) => void>(fn: T, wait = 200) {
+function useDebounced<A extends unknown[]>(
+  fn: (...args: A) => void,
+  wait = 200
+): (...args: A) => void {
   const fnRef = useRef(fn);
   fnRef.current = fn;
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   return useCallback(
-    (...args: Parameters<T>) => {
+    (...args: A) => {
       if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(() => fnRef.current(...args), wait);
     },
     [wait]
   );
 }
-type IResourceUpload = { url: string };
-const uploadResource = async (file?: File): Promise<IResourceUpload> => {
-  await new Promise((r) => setTimeout(r, 150));
-  return { url: file ? URL.createObjectURL(file) : "" };
-};
-const resourcesConfig = {
-  image: {
-    formats: [".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"],
-    maxSize: 8_000_000,
-  },
-};
 
 /* utils */
 const toHtml = (val: string | ProsemirrorNode | undefined) =>
@@ -36,13 +28,7 @@ const toHtml = (val: string | ProsemirrorNode | undefined) =>
 /* sección */
 type SectionEditorProps = Omit<
   IEditorProps,
-  | "initialContent"
-  | "extensions"
-  | "onChange"
-  | "onUploadImage"
-  | "imageFormats"
-  | "imageMaxSize"
-  | "stringHandler"
+  "initialContent" | "extensions" | "onChange" | "stringHandler"
 > & {
   label: string;
   value?: string;
@@ -58,10 +44,6 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
   ...props
 }) => {
   const [full, setFull] = useState(false);
-  const onUploadImage = useCallback(async (file?: File) => {
-    const resource = file && (await uploadResource(file));
-    return resource || { url: "" };
-  }, []);
 
   const debouncedOnChange = useDebounced(
     (html: string) => onValue?.(html),
@@ -92,9 +74,6 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
       className="h-full min-h-[182px]"
       stringHandler="html"
       initialContent={value}
-      imageFormats={resourcesConfig.image.formats}
-      imageMaxSize={resourcesConfig.image.maxSize}
-      onUploadImage={onUploadImage}
       onChange={(newValue) => {
         const newHtml = toHtml(newValue);
         const oldHtml = value;

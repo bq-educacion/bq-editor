@@ -151,7 +151,7 @@ const Editor: FC<IEditorProps> = (props) => {
         state={state}
         onChange={({ state }) => {
           setState(state);
-          onChange?.(checkEmptyEditor(state) ? undefined : (state.doc as any));
+          onChange?.(checkEmptyEditor(state) ? undefined : state.doc);
         }}
       >
         <Toolbar
