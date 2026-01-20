@@ -1,6 +1,6 @@
 // src/examples/EditorAppLike.stories.tsx
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import { ProsemirrorNode } from "remirror";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 

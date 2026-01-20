@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ProsemirrorNode } from "remirror";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 import { colors } from "../theme";
 import basic from "./content/basic.json";
