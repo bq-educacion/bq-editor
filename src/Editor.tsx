@@ -1,5 +1,6 @@
 import cx from "classnames";
-import { Remirror, useRemirror } from "@remirror/react";
+import "remirror/styles/all.css";
+import { Remirror, ThemeProvider, useRemirror } from "@remirror/react";
 import React, { CSSProperties, FC, JSX } from "react";
 import {
   htmlToProsemirrorNode,
@@ -9,8 +10,20 @@ import {
 import CodeEditor from "./CodeEditor";
 import MarkdownDualEditor from "./MarkdownDualEditor";
 import Visor from "./Visor";
-import { Counter, Text, Toolbar, Wrapper } from "./components";
-import { defaultExtensions, Extension, MarkdownPreview } from "./extensions";
+import {
+  Counter,
+  Text,
+  Toolbar,
+  Wrapper,
+  TableCellMenuCustom,
+} from "./components";
+import {
+  defaultExtensions,
+  Extension,
+  getExtension,
+  MarkdownPreview,
+} from "./extensions";
+import { TableComponents } from "@remirror/extension-react-tables";
 import { checkEmptyEditor, managerExtensions, toolbarHandlers } from "./lib";
 
 export {
@@ -139,33 +152,45 @@ const Editor: FC<IEditorProps> = (props) => {
     2 -
     ((state.doc.content["content"] || []).length - 1);
 
+  const hasTable = !!getExtension("table", extensions);
+
   return (
     <Wrapper
       className={cx(className, "bq-editor")}
       style={style}
       styleText={styleText}
     >
-      <Remirror
-        editable={editable}
-        manager={manager}
-        state={state}
-        onChange={({ state }) => {
-          setState(state);
-          onChange?.(checkEmptyEditor(state) ? undefined : state.doc);
-        }}
-      >
-        <Toolbar
-          className="bq-editor-toolbar"
-          handlers={toolbarHandlers(input)}
-          onFullScreen={onFullScreen}
-        />
-        <Text className="bq-editor-text">
-          {(counter || props.maxLength) && (
-            <Counter maxLength={props.maxLength} length={length} />
-          )}
-        </Text>
-        {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}
-      </Remirror>
+      <ThemeProvider>
+        <Remirror
+          editable={editable}
+          manager={manager}
+          state={state}
+          onChange={({ state }) => {
+            setState(state);
+            onChange?.(checkEmptyEditor(state) ? undefined : state.doc);
+          }}
+        >
+          <Toolbar
+            className="bq-editor-toolbar"
+            handlers={toolbarHandlers(input)}
+            onFullScreen={onFullScreen}
+          />
+          <Text className="bq-editor-text">
+            {hasTable && (
+              <TableComponents
+                enableTableCellMenu={false}
+                enableTableDeleteButton={false}
+                enableTableDeleteRowColumnButton={false}
+              />
+            )}
+            {hasTable && <TableCellMenuCustom />}
+            {(counter || props.maxLength) && (
+              <Counter maxLength={props.maxLength} length={length} />
+            )}
+          </Text>
+          {stringHandler === "markdown" && !dualEditor && <MarkdownPreview />}
+        </Remirror>
+      </ThemeProvider>
     </Wrapper>
   );
 };

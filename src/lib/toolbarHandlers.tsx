@@ -23,6 +23,8 @@ import {
   TextColorButton,
   TextHighlightAttrs,
   TextHighlightButton,
+  TableAttrs,
+  TableButton,
   UnderlineButton,
 } from "../extensions";
 
@@ -45,6 +47,7 @@ const toolbarHandlers = ({
   const sup = getExtension("sup", extensions);
   const textColor = getExtension("text-color", extensions);
   const textHighlight = getExtension("text-highlight", extensions);
+  const table = getExtension("table", extensions);
   const underline = getExtension("underline", extensions);
 
   const handlers = [
@@ -71,6 +74,7 @@ const toolbarHandlers = ({
         />
       ),
     ],
+    [table && <TableButton {...(getAttrs(table) as TableAttrs)} />],
     [
       sub && <SubButton />,
       sup && <SupButton />,
