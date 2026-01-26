@@ -98,19 +98,10 @@ const TableCellMenuCustom = () => {
     const { selection } = state;
     const { $from } = selection;
 
-    console.log("🔍 DEBUG applyBorderPreset:", {
-      preset,
-      borderCss,
-      selection,
-      $from,
-      depth: $from.depth,
-    });
-
     // Find the table cell node by traversing up the tree
     let cellDepth = -1;
     for (let d = $from.depth; d > 0; d--) {
       const node = $from.node(d);
-      console.log(`🔍 Checking depth ${d}:`, node.type.name, node.attrs);
       if (
         node.type.name === "tableCell" ||
         node.type.name === "tableHeaderCell"
@@ -121,26 +112,12 @@ const TableCellMenuCustom = () => {
     }
 
     if (cellDepth === -1) {
-      console.error("❌ No table cell found in selection!");
       setIsOpen(false);
       setActivePanel(null);
       return;
     }
 
     const cellNode = $from.node(cellDepth);
-    console.log("🔍 DEBUG cellNode found at depth", cellDepth, ":", {
-      cellNode,
-      type: cellNode.type.name,
-      attrs: cellNode.attrs,
-      background: cellNode.attrs.background,
-    });
-
-    console.log(
-      "🔍 DEBUG applying border preset:",
-      preset,
-      "with CSS:",
-      borderCss
-    );
 
     // Encode border preset in background attribute using special prefix
     const currentBg = cellNode.attrs.background || null;
@@ -157,14 +134,7 @@ const TableCellMenuCustom = () => {
       ? `border:${preset}|${actualBgColor}`
       : `border:${preset}`;
 
-    console.log("🔍 Encoding background as:", encodedValue);
-
     chain.focus().setTableCellBackground(encodedValue).run();
-
-    console.log(
-      "✅ Command executed, border preset encoded in background:",
-      preset
-    );
 
     setIsOpen(false);
     setActivePanel(null);
