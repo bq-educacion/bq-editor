@@ -224,7 +224,7 @@ const TableCellMenuCustom = () => {
           setIsOpen(v);
           if (!v) setActivePanel(null);
         }}
-        allowedPlacements={["bottom-end"]}
+        allowedPlacements={["left-start", "left-end"]}
         target={
           <button
             type="button"
@@ -260,7 +260,7 @@ const TableCellMenuCustom = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              minWidth: 180,
+              minWidth: 160,
               borderRight: "1px solid rgba(0,0,0,0.08)",
               background: "#fff",
             }}
@@ -358,29 +358,28 @@ const TableCellMenuCustom = () => {
           {activePanel === "fill" && (
             <div
               style={{
-                width: 320,
-                padding: 12,
+                padding: 8,
                 background: "#fff",
               }}
             >
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(6, 1fr)",
-                  gap: 8,
+                  gridTemplateColumns: "repeat(3, 0.1fr)",
+                  gap: 0,
                 }}
               >
-                {fillColors.map((c) => (
+                {fillColors.map((c, idx) => (
                   <button
-                    key={c}
+                    key={`${c}-${idx}`}
                     type="button"
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={() => run(() => applyBackgroundColor(c))}
                     style={{
-                      width: 36,
-                      height: 28,
+                      width: 32,
+                      height: 24,
                       borderRadius: 2,
-                      border: "1px solid rgba(0,0,0,0.08)",
+                      border: "1px solid #fff",
                       background: c,
                       cursor: "pointer",
                     }}
@@ -391,7 +390,7 @@ const TableCellMenuCustom = () => {
 
               <div
                 style={{
-                  marginTop: 12,
+                  marginTop: 8,
                   display: "flex",
                   justifyContent: "flex-end",
                   gap: 8,
@@ -411,10 +410,10 @@ const TableCellMenuCustom = () => {
           {activePanel === "borders" && (
             <div
               style={{
-                padding: 12,
+                padding: 8,
                 display: "grid",
-                gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-                gap: 8,
+                gridTemplateColumns: "repeat(3, 0.1fr)",
+                gap: 2,
               }}
             >
               {(
