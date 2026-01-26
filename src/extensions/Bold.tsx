@@ -1,9 +1,40 @@
 import { useCurrentSelection, useRemirrorContext } from "@remirror/react";
 import cx from "classnames";
 import React, { FC } from "react";
-import { BoldExtension } from "remirror/extensions";
+import { BoldExtension as BaseBoldExtension } from "remirror/extensions";
 import BoldIcon from "../icons/Bold";
 import { ToolbarButton } from "../components";
+import { InputRule } from "@remirror/pm/inputrules";
+import { MarkPasteRule } from "@remirror/pm/paste-rules";
+
+type AutoFormattingOptions = {
+  disableAutoFormatting?: boolean;
+};
+
+export class BoldExtension extends BaseBoldExtension {
+  private readonly disableAutoFormatting: boolean;
+
+  constructor(options: AutoFormattingOptions = {}) {
+    super(options as any);
+    this.disableAutoFormatting = !!options.disableAutoFormatting;
+  }
+
+  createInputRules: () => InputRule[] = () => {
+    if (this.disableAutoFormatting) {
+      return [];
+    }
+
+    return super.createInputRules();
+  };
+
+  createPasteRules(): MarkPasteRule[] {
+    if (this.disableAutoFormatting) {
+      return [];
+    }
+
+    return super.createPasteRules?.() ?? [];
+  }
+}
 
 export const BoldName = "bold";
 
@@ -27,4 +58,4 @@ const BoldButton: FC<BoldAttrs> = () => {
   );
 };
 
-export { BoldButton, BoldExtension };
+export { BoldButton };
