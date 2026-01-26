@@ -122,7 +122,8 @@ class LinkExtension extends RemirrorLinkExtension {
         },
       ],
       toDOM: (node) => {
-        const { auto: _, ...rest } = omitExtraAttributes(node.attrs, extra);
+        const rest = omitExtraAttributes(node.attrs, extra);
+        delete (rest as { auto?: unknown }).auto;
         const rel = "noopener noreferrer nofollow";
         const attrs = {
           ...extra.dom(node),

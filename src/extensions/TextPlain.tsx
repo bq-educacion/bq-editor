@@ -9,7 +9,7 @@ class TextPlainExtension extends PlainExtension<{
   }
 
   createPlugin(): CreateExtensionPlugin {
-    const { maxLength, preventDropImage } = this.options;
+    const { maxLength } = this.options;
 
     return {
       filterTransaction: (transaction, state) => {

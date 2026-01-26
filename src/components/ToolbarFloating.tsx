@@ -59,7 +59,7 @@ const ToolbarFloating: FC<IToolbarFloatingProps> = ({
           : { mainAxis: offsetProp[0], crossAxis: offsetProp[1] }
       ),
       flip(),
-      shift({ padding }),
+      shift({ padding, crossAxis: true }),
     ],
     open: isOpen,
     onOpenChange: (isOpen: boolean) => (

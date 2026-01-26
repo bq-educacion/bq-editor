@@ -13,6 +13,7 @@ import { SubAttrs, SubName } from "./Sub";
 import { SupAttrs, SupName } from "./Sup";
 import { TextColorAttrs, TextColorName } from "./TextColor";
 import { TextHighlightAttrs, TextHighlightName } from "./TextHighlight";
+import { TableAttrs, TableName } from "./Table";
 import { UnderlineAttrs, UnderlineName } from "./Underline";
 
 export * from "./Align";
@@ -36,6 +37,7 @@ export * from "./Sup";
 export * from "./TextColor";
 export * from "./TextHighlight";
 export * from "./TextPlain";
+export * from "./Table";
 export * from "./Underline";
 
 export type Extension =
@@ -114,6 +116,11 @@ export type Extension =
       name: typeof TextHighlightName;
       attrs?: TextHighlightAttrs;
     }
+  | typeof TableName
+  | {
+      name: typeof TableName;
+      attrs?: TableAttrs;
+    }
   | typeof UnderlineName
   | {
       name: typeof UnderlineName;
@@ -141,5 +148,6 @@ export const defaultExtensions: Extension[] = [
   "sup",
   "text-color",
   "text-highlight",
+  "table",
   "underline",
 ];

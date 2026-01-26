@@ -5,6 +5,7 @@ import ToolbarButton from "./ToolbarButton";
 import ToolbarFloating from "./ToolbarFloating";
 import ToolbarSelect from "./ToolbarSelect";
 import Wrapper from "./Wrapper";
+import TableCellMenuCustom from "./TableCellMenuCustom";
 
 export {
   Counter,
@@ -14,4 +15,5 @@ export {
   ToolbarFloating,
   ToolbarSelect,
   Wrapper,
+  TableCellMenuCustom,
 };

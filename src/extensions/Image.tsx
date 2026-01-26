@@ -6,7 +6,17 @@ import { ImageExtension } from "remirror/extensions";
 import ImageIcon from "../icons/Image";
 import { ToolbarButton, ToolbarFloating } from "../components";
 import { Node, Slice, Fragment } from "@remirror/pm/model";
+import type {
+  ApplySchemaAttributes,
+  DOMOutputSpec,
+  NodeExtensionSpec,
+  NodeSpecOverride,
+} from "@remirror/core";
 import { CreateExtensionPlugin } from "remirror";
+
+type GetImageUrlOptions = {
+  getImageUrl?: (id: string) => Promise<string>;
+};
 
 export const ImageName = "image";
 
@@ -102,7 +112,8 @@ class ImagePreventDropExtension extends ImageExtension {
           if (cachedUrl) {
             dom.src = cachedUrl;
           } else if (!hasSrc) {
-            const getImageUrl = (this.options as any).getImageUrl;
+            const getImageUrl = (this.options as unknown as GetImageUrlOptions)
+              .getImageUrl;
             if (getImageUrl && typeof getImageUrl === "function") {
               getImageUrl(node.attrs.imageId)
                 .then((url: string) => {
@@ -111,14 +122,15 @@ class ImagePreventDropExtension extends ImageExtension {
                     dom.src = url;
                   }
                 })
-                .catch((err: any) => {
+                .catch((err: unknown) => {
                   console.error("Failed to load image URL:", err);
                 });
             }
           }
 
           dom.onerror = () => {
-            const getImageUrl = (this.options as any).getImageUrl;
+            const getImageUrl = (this.options as unknown as GetImageUrlOptions)
+              .getImageUrl;
             if (getImageUrl && typeof getImageUrl === "function") {
               getImageUrl(node.attrs.imageId)
                 .then((url: string) => {
@@ -127,7 +139,7 @@ class ImagePreventDropExtension extends ImageExtension {
                     dom.src = url;
                   }
                 })
-                .catch((err: any) => {
+                .catch((err: unknown) => {
                   console.error("Failed to load image URL:", err);
                 });
             }
@@ -183,7 +195,10 @@ class ImagePreventDropExtension extends ImageExtension {
     };
   }
 
-  createNodeSpec(extra: any, override: any) {
+  createNodeSpec(
+    extra: ApplySchemaAttributes,
+    override: NodeSpecOverride
+  ): NodeExtensionSpec {
     const spec = super.createNodeSpec(extra, override);
 
     return {
@@ -192,21 +207,29 @@ class ImagePreventDropExtension extends ImageExtension {
         ...spec.attrs,
         imageId: { default: null },
       },
-      toDOM: (node: any) => {
+      toDOM: (node) => {
         const domSpec = spec.toDOM!(node);
-        const [tag, attrs, ...rest] = domSpec as [string, any, ...any[]];
+        const [tag, attrs, ...rest] = domSpec as [
+          string,
+          unknown,
+          ...unknown[]
+        ];
 
-        const newAttrs = {
-          ...attrs,
+        const baseAttrs =
+          typeof attrs === "object" && attrs !== null
+            ? (attrs as Record<string, unknown>)
+            : {};
+        const newAttrs: Record<string, unknown> = {
+          ...baseAttrs,
           ...(node.attrs.imageId && { "data-image-id": node.attrs.imageId }),
         };
 
-        return [tag, newAttrs, ...rest] as any;
+        return [tag, newAttrs, ...rest] as unknown as DOMOutputSpec;
       },
       parseDOM: [
         {
           tag: "img[data-image-id]",
-          getAttrs: (dom: any) => {
+          getAttrs: (dom: HTMLElement) => {
             const baseAttrs = spec.parseDOM?.[0]?.getAttrs?.(dom) || {};
             return {
               ...(typeof baseAttrs === "object" ? baseAttrs : {}),
