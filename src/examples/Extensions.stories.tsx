@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ProsemirrorNode } from "remirror";
 import styled from "@emotion/styled";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 import Editor, { editorNodeToHtml, IEditorProps } from "../Editor";
 import { colors } from "../theme";
 import { ImageValueAttrs } from "../extensions";

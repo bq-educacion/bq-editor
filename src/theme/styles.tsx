@@ -91,4 +91,114 @@ export default `
   li:has([nodeindent="10"]) {
     margin-left: 200px;
   }
+
+  // Force border-collapse: separate for tables with custom cell borders
+  table:has(td[data-background-color^="border:"]),
+  table:has(th[data-background-color^="border:"]) {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+
+  // Table cell border presets (encoded in data-background-color)
+  // Supports both "border:preset" and "border:preset|color" formats
+  td[data-background-color^="border:all"],
+  th[data-background-color^="border:all"] {
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    border-top-color: #000 !important;
+    border-right-width: 1px !important;
+    border-right-style: solid !important;
+    border-right-color: #000 !important;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #000 !important;
+    border-left-width: 1px !important;
+    border-left-style: solid !important;
+    border-left-color: #000 !important;
+  }
+
+  td[data-background-color^="border:outer"],
+  th[data-background-color^="border:outer"] {
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    border-top-color: #000 !important;
+    border-right-width: 1px !important;
+    border-right-style: solid !important;
+    border-right-color: #000 !important;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #000 !important;
+    border-left-width: 1px !important;
+    border-left-style: solid !important;
+    border-left-color: #000 !important;
+  }
+
+  td[data-background-color^="border:inner"],
+  th[data-background-color^="border:inner"] {
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    border-top-color: #000 !important;
+    border-right-width: 1px !important;
+    border-right-style: solid !important;
+    border-right-color: #000 !important;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #000 !important;
+    border-left-width: 1px !important;
+    border-left-style: solid !important;
+    border-left-color: #000 !important;
+  }
+
+  td[data-background-color^="border:inner-horizontal"],
+  th[data-background-color^="border:inner-horizontal"] {
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    border-top-color: #000 !important;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #000 !important;
+  }
+
+  td[data-background-color^="border:inner-vertical"],
+  th[data-background-color^="border:inner-vertical"] {
+    border-left-width: 1px !important;
+    border-left-style: solid !important;
+    border-left-color: #000 !important;
+    border-right-width: 1px !important;
+    border-right-style: solid !important;
+    border-right-color: #000 !important;
+  }
+
+  td[data-background-color^="border:top"],
+  th[data-background-color^="border:top"] {
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    border-top-color: #000 !important;
+  }
+
+  td[data-background-color^="border:bottom"],
+  th[data-background-color^="border:bottom"] {
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #000 !important;
+  }
+
+  td[data-background-color^="border:left"],
+  th[data-background-color^="border:left"] {
+    border-left-width: 1px !important;
+    border-left-style: solid !important;
+    border-left-color: #000 !important;
+  }
+
+  td[data-background-color^="border:right"],
+  th[data-background-color^="border:right"] {
+    border-right-width: 1px !important;
+    border-right-style: solid !important;
+    border-right-color: #000 !important;
+  }
+
+  td[data-background-color^="border:none"],
+  th[data-background-color^="border:none"] {
+    border: none !important;
+  }
 `;

@@ -3,6 +3,8 @@ import {
   CommandsExtension,
   IdentifierSchemaAttributes,
 } from "remirror";
+import { PositionerExtension } from "remirror/extensions";
+import { ReactComponentExtension } from "@remirror/react";
 import {
   BoldExtension,
   BulletListExtension,
@@ -27,6 +29,8 @@ import {
   TextColorExtension,
   TextHighlightExtension,
   TextPlainExtension,
+  TableAttrs,
+  TableExtension,
   UnderlineExtension,
 } from "../extensions";
 import { IEditorProps } from "../Editor";
@@ -55,11 +59,13 @@ const managerExtensions = ({
   const sup = getExtension("sup", extensions);
   const textColor = getExtension("text-color", extensions);
   const textHighlight = getExtension("text-highlight", extensions);
+  const table = getExtension("table", extensions);
   const underline = getExtension("underline", extensions);
 
   const imgAttrs = image ? (getAttrs(image) as ImageAttrs) : undefined;
   const headingAttrs = heading ? getAttrs(heading) : undefined;
   const linkAttrs = link ? getAttrs(link) : undefined;
+  const tableAttrs = table ? (getAttrs(table) as TableAttrs) : undefined;
 
   return {
     extensions: () => [
@@ -70,6 +76,7 @@ const managerExtensions = ({
         maxLength: maxLength?.truncate ? maxLength?.value : undefined,
         preventDropImage: imgAttrs?.preventDrop,
       }),
+      ...(tableAttrs ? [new ReactComponentExtension({})] : []),
       ...(bold ? [new BoldExtension({ disableAutoFormatting })] : []),
       ...(bulletList ? [new BulletListExtension({})] : []),
       ...(code ? [new CodeExtension({ disableAutoFormatting })] : []),
@@ -87,7 +94,7 @@ const managerExtensions = ({
               ? new ImagePreventDropExtension({
                   ...imgAttrs,
                   getImageUrl,
-                } as any)
+                } as unknown as ImageAttrs)
               : new ImageExtension(imgAttrs),
           ]
         : []),
@@ -100,6 +107,8 @@ const managerExtensions = ({
       ...(placeholder ? [new PlaceholderExtension({ placeholder })] : []),
       ...(textColor ? [new TextColorExtension({})] : []),
       ...(textHighlight ? [new TextHighlightExtension({})] : []),
+      ...(tableAttrs ? [new TableExtension(tableAttrs)] : []),
+      ...(tableAttrs ? [new PositionerExtension({})] : []),
       ...(underline ? [new UnderlineExtension({})] : []),
       ...(bulletList || orderedList ? [new ListItemExtension({})] : []),
     ],
