@@ -42,6 +42,7 @@ export type StringHandler = "html" | "markdown";
 export type IEditorProps = {
   className?: string;
   codeEditor?: boolean;
+  disableAutoFormatting?: boolean;
   colorHandler?: (
     onChange: (value?: string) => void,
     value?: string

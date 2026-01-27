@@ -7,19 +7,33 @@ import { ToolbarButton } from "../components";
 import { InputRule } from "@remirror/pm/inputrules";
 import { MarkPasteRule } from "@remirror/pm/paste-rules";
 
+type AutoFormattingOptions = {
+  disableAutoFormatting?: boolean;
+};
+
 // Custom ItalicExtension without *...* rule
 export class ItalicExtension extends BaseItalicExtension {
+  private readonly disableAutoFormatting: boolean;
+
+  constructor(options: AutoFormattingOptions = {}) {
+    super(options as any);
+    this.disableAutoFormatting = !!options.disableAutoFormatting;
+  }
+
   createInputRules: () => InputRule[] = () => {
-    const rules: (InputRule & { match?: RegExp })[] = super.createInputRules();
-    return rules.filter((rule) => {
-      return !(rule.match?.source || "").includes("*");
-    });
+    if (this.disableAutoFormatting) {
+      return [];
+    }
+
+    return super.createInputRules();
   };
+
   createPasteRules(): MarkPasteRule[] {
-    const rules = super.createPasteRules();
-    return rules.filter((rule) => {
-      return !rule.regexp.source.includes("*");
-    });
+    if (this.disableAutoFormatting) {
+      return [];
+    }
+
+    return super.createPasteRules?.() ?? [];
   }
 }
 

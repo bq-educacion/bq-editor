@@ -37,6 +37,7 @@ import { IEditorProps } from "../Editor";
 
 const managerExtensions = ({
   extensions = [],
+  disableAutoFormatting,
   maxLength,
   placeholder,
   stringHandler,
@@ -76,9 +77,9 @@ const managerExtensions = ({
         preventDropImage: imgAttrs?.preventDrop,
       }),
       ...(tableAttrs ? [new ReactComponentExtension({})] : []),
-      ...(bold ? [new BoldExtension({})] : []),
+      ...(bold ? [new BoldExtension({ disableAutoFormatting })] : []),
       ...(bulletList ? [new BulletListExtension({})] : []),
-      ...(code ? [new CodeExtension({})] : []),
+      ...(code ? [new CodeExtension({ disableAutoFormatting })] : []),
       ...(codeBlock
         ? [
             new CodeBlockExtension({
@@ -97,7 +98,7 @@ const managerExtensions = ({
               : new ImageExtension(imgAttrs),
           ]
         : []),
-      ...(italic ? [new ItalicExtension({})] : []),
+      ...(italic ? [new ItalicExtension({ disableAutoFormatting })] : []),
       ...(linkAttrs ? [new LinkExtension(linkAttrs)] : []),
       ...(stringHandler === "markdown" ? [new MarkdownExtension({})] : []),
       ...(orderedList ? [new OrderedListExtension({})] : []),
