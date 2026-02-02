@@ -734,3 +734,74 @@ export const BorderIcon = ({ preset }: { preset: BorderPreset }) => {
 
   return icons[preset] ?? icons.all;
 };
+
+export const IconDeleteTable = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <mask
+      id="mask0_2049_29047"
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="16"
+      height="16"
+    >
+      <rect width="16" height="16" fill="#D9D9D9" />
+    </mask>
+    <g mask="url(#mask0_2049_29047)">
+      <path
+        d="M4.66675 14C4.30008 14 3.98619 13.8694 3.72508 13.6083C3.46397 13.3472 3.33341 13.0333 3.33341 12.6667V4H2.66675V2.66667H6.00008V2H10.0001V2.66667H13.3334V4H12.6667V12.6667C12.6667 13.0333 12.5362 13.3472 12.2751 13.6083C12.014 13.8694 11.7001 14 11.3334 14H4.66675ZM11.3334 4H4.66675V12.6667H11.3334V4ZM6.00008 11.3333H7.33342V5.33333H6.00008V11.3333ZM8.66675 11.3333H10.0001V5.33333H8.66675V11.3333Z"
+        fill="currentColor"
+      />
+    </g>
+  </svg>
+);
+
+export const IconDeleteRow = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0 1C0 0.447715 0.447715 0 1 0H13C13.5523 0 14 0.447715 14 1V4C14 4.55228 13.5523 5 13 5H1C0.447715 5 0 4.55228 0 4V1ZM1.5 1.5V3.5H5.5V1.5H1.5ZM6.5 1.5V3.5H12.5V1.5H6.5Z"
+      fill="currentColor"
+    />
+    <path
+      d="M0 10C0 9.44772 0.447715 9 1 9H13C13.5523 9 14 9.44772 14 10V13C14 13.5523 13.5523 14 13 14H1C0.447715 14 0 13.5523 0 13V10Z"
+      fill="currentColor"
+      fillOpacity="0.3"
+    />
+    <path
+      d="M4 7L10 7"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+export const IconDeleteColumn = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0 1C0 0.447715 0.447715 0 1 0H4C4.55228 0 5 0.447715 5 1V13C5 13.5523 4.55228 14 4 14H1C0.447715 14 0 13.5523 0 13V1ZM1.5 1.5V5.5H3.5V1.5H1.5ZM3.5 6.5H1.5V12.5H3.5V6.5Z"
+      fill="currentColor"
+    />
+    <path
+      d="M9 1C9 0.447715 9.44772 0 10 0H13C13.5523 0 14 0.447715 14 1V13C14 13.5523 13.5523 14 13 14H10C9.44772 14 9 13.5523 9 13V1Z"
+      fill="currentColor"
+      fillOpacity="0.3"
+    />
+    <path
+      d="M7 4L7 10"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
