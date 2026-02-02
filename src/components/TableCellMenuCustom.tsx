@@ -95,6 +95,54 @@ const TableCellMenuCustom = () => {
     return false;
   };
 
+  // Helper to check if entire table is selected
+  const isEntireTableSelected = (): boolean => {
+    const { state } = view;
+    const { selection } = state;
+
+    // Find the table node
+    const { $from } = selection;
+    let tableNode = null;
+
+    for (let d = $from.depth; d > 0; d--) {
+      const node = $from.node(d);
+      if (node.type.name === "table") {
+        tableNode = node;
+        break;
+      }
+    }
+
+    if (!tableNode) return false;
+
+    // Count total cells in the table
+    let totalCells = 0;
+    tableNode.descendants((node) => {
+      if (
+        node.type.name === "tableCell" ||
+        node.type.name === "tableHeaderCell"
+      ) {
+        totalCells++;
+      }
+      return true;
+    });
+
+    // Check if selection spans all cells (CellSelection)
+    // @ts-expect-error - CellSelection has $anchorCell and $headCell
+    if (selection.$anchorCell && selection.$headCell) {
+      // Count selected cells
+      let selectedCells = 0;
+      // @ts-expect-error - CellSelection has forEachCell method
+      selection.forEachCell(() => {
+        selectedCells++;
+      });
+
+      // If all cells are selected, the entire table is selected
+      if (selectedCells >= totalCells) return true;
+    }
+
+    return false;
+  };
+
   // Helper to get current cell's background and border preset
   const getCurrentCellAttrs = () => {
     const { state } = view;
@@ -377,7 +425,13 @@ const TableCellMenuCustom = () => {
                 paddingLeft: 12,
               }}
               disabled={!commands.deleteTableRow.enabled()}
-              onClick={() => run(() => commands.deleteTableRow())}
+              onClick={() => {
+                if (isEntireTableSelected()) {
+                  run(() => commands.deleteTable());
+                } else {
+                  run(() => commands.deleteTableRow());
+                }
+              }}
             >
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <IconDeleteRow />
@@ -393,7 +447,13 @@ const TableCellMenuCustom = () => {
                 paddingLeft: 12,
               }}
               disabled={!commands.deleteTableColumn.enabled()}
-              onClick={() => run(() => commands.deleteTableColumn())}
+              onClick={() => {
+                if (isEntireTableSelected()) {
+                  run(() => commands.deleteTable());
+                } else {
+                  run(() => commands.deleteTableColumn());
+                }
+              }}
             >
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <IconDeleteColumn />
