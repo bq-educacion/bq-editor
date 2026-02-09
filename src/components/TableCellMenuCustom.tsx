@@ -37,28 +37,72 @@ const TableCellMenuCustom = () => {
     setIsOpen(false);
   };
 
+  // Force-delete the table by removing the ProseMirror node
+  const forceDeleteTable = () => {
+    const { state, dispatch } = view;
+    let deleted = false;
+    state.doc.descendants((node, pos) => {
+      if (deleted) return false;
+      if (node.type.name === "table") {
+        dispatch(state.tr.delete(pos, pos + node.nodeSize));
+        deleted = true;
+        return false;
+      }
+      return true;
+    });
+    setIsOpen(false);
+  };
+
+  // Run a delete command, then check if the table is broken/empty and remove it
+  const runDeleteOrRemoveTable = (deleteFn: () => void) => {
+    chain.focus().run();
+    deleteFn();
+    setIsOpen(false);
+
+    // Use requestAnimationFrame to ensure ProseMirror state has settled
+    requestAnimationFrame(() => {
+      const currentState = view.state;
+      let shouldDelete = false;
+      let tablePos = -1;
+      let tableSize = 0;
+
+      currentState.doc.descendants((node, pos) => {
+        if (shouldDelete) return false;
+        if (node.type.name === "table") {
+          const rowCount = node.childCount;
+
+          let maxCellsInRow = 0;
+          for (let i = 0; i < rowCount; i++) {
+            const cellCount = node.child(i).childCount;
+            if (cellCount > maxCellsInRow) maxCellsInRow = cellCount;
+          }
+
+          // No rows, or only controller row, or all rows have only controller cell
+          if (rowCount <= 1 || maxCellsInRow <= 1) {
+            shouldDelete = true;
+            tablePos = pos;
+            tableSize = node.nodeSize;
+          }
+          return false;
+        }
+        return true;
+      });
+
+      if (shouldDelete && tablePos >= 0) {
+        const freshState = view.state;
+        view.dispatch(freshState.tr.delete(tablePos, tablePos + tableSize));
+      }
+    });
+  };
+
   // Helper to check if merging would result in a single cell (entire table)
   const wouldMergeEntireTable = (): boolean => {
     const { state } = view;
     const { selection } = state;
 
-    // Find the table node
-    const { $from } = selection;
-    let tableNode = null;
-
-    for (let d = $from.depth; d > 0; d--) {
-      const node = $from.node(d);
-      if (node.type.name === "table") {
-        tableNode = node;
-        break;
-      }
-    }
-
-    if (!tableNode) return false;
-
-    // Count total cells in the table
+    // Count total cells in the document's table
     let totalCells = 0;
-    tableNode.descendants((node) => {
+    state.doc.descendants((node) => {
       if (
         node.type.name === "tableCell" ||
         node.type.name === "tableHeaderCell"
@@ -68,75 +112,16 @@ const TableCellMenuCustom = () => {
       return true;
     });
 
-    // If table has only 1 cell, don't allow merge
     if (totalCells <= 1) return true;
 
-    // Check if selection spans all cells (CellSelection)
     // @ts-expect-error - CellSelection has $anchorCell and $headCell
     if (selection.$anchorCell && selection.$headCell) {
-      // Count selected cells
       let selectedCells = 0;
       // @ts-expect-error - CellSelection has forEachCell method
       selection.forEachCell(() => {
         selectedCells++;
       });
 
-      // If all cells are selected, merging would create a single cell
-      if (selectedCells >= totalCells) return true;
-
-      // Check if merging an entire row or column would leave table with only 1 row/column
-      const rowCount = tableNode.childCount;
-      const colCount = tableNode.firstChild?.childCount || 0;
-
-      // If selecting entire row(s) and only 1 row remains, or entire column(s) and only 1 column remains
-      if (rowCount === 1 || colCount === 1) return true;
-    }
-
-    return false;
-  };
-
-  // Helper to check if entire table is selected
-  const isEntireTableSelected = (): boolean => {
-    const { state } = view;
-    const { selection } = state;
-
-    // Find the table node
-    const { $from } = selection;
-    let tableNode = null;
-
-    for (let d = $from.depth; d > 0; d--) {
-      const node = $from.node(d);
-      if (node.type.name === "table") {
-        tableNode = node;
-        break;
-      }
-    }
-
-    if (!tableNode) return false;
-
-    // Count total cells in the table
-    let totalCells = 0;
-    tableNode.descendants((node) => {
-      if (
-        node.type.name === "tableCell" ||
-        node.type.name === "tableHeaderCell"
-      ) {
-        totalCells++;
-      }
-      return true;
-    });
-
-    // Check if selection spans all cells (CellSelection)
-    // @ts-expect-error - CellSelection has $anchorCell and $headCell
-    if (selection.$anchorCell && selection.$headCell) {
-      // Count selected cells
-      let selectedCells = 0;
-      // @ts-expect-error - CellSelection has forEachCell method
-      selection.forEachCell(() => {
-        selectedCells++;
-      });
-
-      // If all cells are selected, the entire table is selected
       if (selectedCells >= totalCells) return true;
     }
 
@@ -425,13 +410,9 @@ const TableCellMenuCustom = () => {
                 paddingLeft: 12,
               }}
               disabled={!commands.deleteTableRow.enabled()}
-              onClick={() => {
-                if (isEntireTableSelected()) {
-                  run(() => commands.deleteTable());
-                } else {
-                  run(() => commands.deleteTableRow());
-                }
-              }}
+              onClick={() =>
+                runDeleteOrRemoveTable(() => commands.deleteTableRow())
+              }
             >
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <IconDeleteRow />
@@ -447,13 +428,9 @@ const TableCellMenuCustom = () => {
                 paddingLeft: 12,
               }}
               disabled={!commands.deleteTableColumn.enabled()}
-              onClick={() => {
-                if (isEntireTableSelected()) {
-                  run(() => commands.deleteTable());
-                } else {
-                  run(() => commands.deleteTableColumn());
-                }
-              }}
+              onClick={() =>
+                runDeleteOrRemoveTable(() => commands.deleteTableColumn())
+              }
             >
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <IconDeleteColumn />
@@ -469,7 +446,7 @@ const TableCellMenuCustom = () => {
                 paddingLeft: 12,
               }}
               disabled={!commands.deleteTable.enabled()}
-              onClick={() => run(() => commands.deleteTable())}
+              onClick={() => forceDeleteTable()}
             >
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <IconDeleteTable />
